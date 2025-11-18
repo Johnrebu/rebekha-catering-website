@@ -124,7 +124,7 @@ const CustomMenu = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        placeholder="+91 98765 43210"
+                        placeholder="+91 89254 77007"
                         className="mt-2"
                       />
                     </div>

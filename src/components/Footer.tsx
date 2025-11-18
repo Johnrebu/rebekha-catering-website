@@ -10,10 +10,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-bold font-serif mb-2">Rebekha Catering</h3>
+            <h3 className="text-2xl font-bold font-serif mb-2">
+              Rebekha Catering
+            </h3>
             <p className="text-sm italic mb-4">Serving Love Since 1998</p>
             <p className="text-sm opacity-90">
-              Authentic veg & non-veg catering services for all your special occasions.
+              Authentic veg & non-veg catering services for all your special
+              occasions.
             </p>
           </div>
 
@@ -27,27 +30,42 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-accent transition-colors">
+                <Link
+                  to="/about"
+                  className="hover:text-accent transition-colors"
+                >
                   About Us
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="hover:text-accent transition-colors">
+                <Link
+                  to="/services"
+                  className="hover:text-accent transition-colors"
+                >
                   Services
                 </Link>
               </li>
               <li>
-                <Link to="/menu" className="hover:text-accent transition-colors">
+                <Link
+                  to="/menu"
+                  className="hover:text-accent transition-colors"
+                >
                   Menu
                 </Link>
               </li>
               <li>
-                <Link to="/gallery" className="hover:text-accent transition-colors">
+                <Link
+                  to="/gallery"
+                  className="hover:text-accent transition-colors"
+                >
                   Gallery
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="hover:text-accent transition-colors">
+                <Link
+                  to="/contact"
+                  className="hover:text-accent transition-colors"
+                >
                   Contact
                 </Link>
               </li>
@@ -60,14 +78,17 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
                 <Phone className="h-4 w-4 mt-1 flex-shrink-0" />
-                <a href="tel:+919445435102" className="hover:text-accent transition-colors">
+                <a
+                  href="tel:+919445435102"
+                  className="hover:text-accent transition-colors"
+                >
                   +91 94454 35102
                 </a>
               </li>
               <li className="flex items-start gap-2">
                 <Mail className="h-4 w-4 mt-1 flex-shrink-0" />
                 <a
-                  href="mailto:info@rebekhacatering.com"
+                  href="mailto: reburr94@gmail.com"
                   className="hover:text-accent transition-colors"
                 >
                   reburr94@gmail.com
@@ -75,7 +96,10 @@ const Footer = () => {
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 mt-1 flex-shrink-0" />
-                <span>19, Perumal koil street, Irumbuliyur, West Tambaram, Chennai, Tamil Nadu, India</span>
+                <span>
+                  19, Perumal koil street, Irumbuliyur, West Tambaram, Chennai,
+                  Tamil Nadu, India
+                </span>
               </li>
               <li className="flex items-start gap-2">
                 <MessageCircle className="h-4 w-4 mt-1 flex-shrink-0" />
@@ -111,8 +135,8 @@ const Footer = () => {
 
         <div className="border-t border-secondary-foreground/20 mt-8 pt-6 text-center text-sm">
           <p>
-            &copy; {currentYear} Rebekha Catering Services. All rights reserved. | Serving Love
-            Since 1998
+            &copy; {currentYear} Rebekha Catering Services. All rights reserved.
+            | Serving Love Since 1998
           </p>
         </div>
       </div>

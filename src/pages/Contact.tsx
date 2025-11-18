@@ -70,7 +70,9 @@ const Contact = () => {
           <div className="grid lg:grid-cols-2 gap-12">
             {/* Contact Form */}
             <div>
-              <h2 className="text-3xl font-bold font-serif mb-6">Send Us a Message</h2>
+              <h2 className="text-3xl font-bold font-serif mb-6">
+                Send Us a Message
+              </h2>
               <Card>
                 <CardContent className="pt-6">
                   <form onSubmit={handleSubmit} className="space-y-6">
@@ -96,7 +98,7 @@ const Contact = () => {
                         value={formData.phone}
                         onChange={handleChange}
                         required
-                        placeholder="+91 98765 43210"
+                        placeholder="+91 89254 77007"
                         className="mt-2"
                       />
                     </div>
@@ -139,12 +141,18 @@ const Contact = () => {
                       />
                     </div>
 
-                    <Button type="submit" variant="hero" size="lg" className="w-full">
+                    <Button
+                      type="submit"
+                      variant="hero"
+                      size="lg"
+                      className="w-full"
+                    >
                       Send Message via WhatsApp
                     </Button>
 
                     <p className="text-sm text-muted-foreground text-center">
-                      By submitting this form, your inquiry will be sent to us via WhatsApp
+                      By submitting this form, your inquiry will be sent to us
+                      via WhatsApp
                     </p>
                   </form>
                 </CardContent>
@@ -153,7 +161,9 @@ const Contact = () => {
 
             {/* Contact Information */}
             <div>
-              <h2 className="text-3xl font-bold font-serif mb-6">Contact Information</h2>
+              <h2 className="text-3xl font-bold font-serif mb-6">
+                Contact Information
+              </h2>
 
               <div className="space-y-6">
                 <Card className="hover:shadow-elegant transition-shadow">
@@ -168,7 +178,7 @@ const Contact = () => {
                           href="tel:+918925477007"
                           className="text-muted-foreground hover:text-primary transition-colors"
                         >
-                          +91 98765 43210
+                          +91 89254 77007
                         </a>
                       </div>
                     </div>
@@ -205,10 +215,10 @@ const Contact = () => {
                       <div>
                         <h3 className="font-semibold mb-2">Email</h3>
                         <a
-                          href="mailto:info@rebekhacatering.com"
+                          href="mailto: reburr94@gmail.com"
                           className="text-muted-foreground hover:text-primary transition-colors"
                         >
-                          info@rebekhacatering.com
+                          reburr94@gmail.com
                         </a>
                       </div>
                     </div>
@@ -224,7 +234,7 @@ const Contact = () => {
                       <div>
                         <h3 className="font-semibold mb-2">Location</h3>
                         <p className="text-muted-foreground">
-                          West Tambaram
+                          19, Perumal koil street, Irumbuliyur, West Tambaram,
                           <br />
                           Chennai, Tamil Nadu
                           <br />
@@ -246,7 +256,9 @@ const Contact = () => {
                         <p className="text-muted-foreground">
                           Monday - Sunday: 8:00 AM - 10:00 PM
                           <br />
-                          <span className="text-sm italic">Available for consultations and bookings</span>
+                          <span className="text-sm italic">
+                            Available for consultations and bookings
+                          </span>
                         </p>
                       </div>
                     </div>
@@ -261,7 +273,9 @@ const Contact = () => {
       {/* Map Section */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl font-bold font-serif mb-8 text-center">Find Us</h2>
+          <h2 className="text-3xl font-bold font-serif mb-8 text-center">
+            Find Us
+          </h2>
           <div className="max-w-5xl mx-auto rounded-lg overflow-hidden shadow-warm">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62686.89288283826!2d80.09476717910156!3d12.922915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525f637c4d7b3f%3A0x2ac0d82f8a7c0b95!2sWest%20Tambaram%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1234567890"
