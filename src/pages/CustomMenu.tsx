@@ -40,7 +40,7 @@ const CustomMenu = () => {
       `Special Requests: ${formData.specialRequests || 'None'}`;
     
     // Open WhatsApp
-    window.open(`https://wa.me/919876543210?text=${message}`, "_blank");
+    window.open(`https://wa.me/918925477007?text=${message}`, "_blank");
     
     toast.success("Opening WhatsApp...", {
       description: "We'll create a custom menu just for you!",

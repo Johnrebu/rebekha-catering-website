@@ -78,7 +78,7 @@ const Home = () => {
                 Get Free Quote
               </Button>
             </Link>
-            <a href="tel:+919876543210">
+            <a href="tel:+918925477007">
               <Button variant="secondary" size="lg">
                 <Phone className="h-5 w-5" />
                 Call Now
@@ -234,7 +234,7 @@ const Home = () => {
               </Button>
             </Link>
             <a
-              href="https://wa.me/919876543210"
+              href="https://wa.me/918925477007"
               target="_blank"
               rel="noopener noreferrer"
             >

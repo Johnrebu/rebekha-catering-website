@@ -25,7 +25,7 @@ const Contact = () => {
     const whatsappMessage = `New Inquiry from Website:%0A%0AName: ${formData.name}%0APhone: ${formData.phone}%0AEmail: ${formData.email}%0AOccasion: ${formData.occasion}%0AMessage: ${formData.message}`;
     
     // Open WhatsApp
-    window.open(`https://wa.me/919876543210?text=${whatsappMessage}`, "_blank");
+    window.open(`https://wa.me/918925477007?text=${whatsappMessage}`, "_blank");
     
     toast.success("Opening WhatsApp...", {
       description: "We'll get back to you shortly!",
@@ -165,7 +165,7 @@ const Contact = () => {
                       <div>
                         <h3 className="font-semibold mb-2">Phone</h3>
                         <a
-                          href="tel:+919876543210"
+                          href="tel:+918925477007"
                           className="text-muted-foreground hover:text-primary transition-colors"
                         >
                           +91 98765 43210
@@ -184,7 +184,7 @@ const Contact = () => {
                       <div>
                         <h3 className="font-semibold mb-2">WhatsApp</h3>
                         <a
-                          href="https://wa.me/919876543210"
+                          href="https://wa.me/918925477007"
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-muted-foreground hover:text-primary transition-colors"
