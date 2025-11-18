@@ -60,8 +60,8 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
                 <Phone className="h-4 w-4 mt-1 flex-shrink-0" />
-                <a href="tel:+919876543210" className="hover:text-accent transition-colors">
-                  +91 98765 43210
+                <a href="tel:+919445435102" className="hover:text-accent transition-colors">
+                  +91 94454 35102
                 </a>
               </li>
               <li className="flex items-start gap-2">
@@ -70,17 +70,17 @@ const Footer = () => {
                   href="mailto:info@rebekhacatering.com"
                   className="hover:text-accent transition-colors"
                 >
-                  info@rebekhacatering.com
+                  reburr94@gmail.com
                 </a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin className="h-4 w-4 mt-1 flex-shrink-0" />
-                <span>West Tambaram, Chennai, Tamil Nadu, India</span>
+                <span>19, Perumal koil street, Irumbuliyur, West Tambaram, Chennai, Tamil Nadu, India</span>
               </li>
               <li className="flex items-start gap-2">
                 <MessageCircle className="h-4 w-4 mt-1 flex-shrink-0" />
                 <a
-                  href="https://wa.me/919876543210"
+                  href="https://wa.me/918925477007"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-accent transition-colors"

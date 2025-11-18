@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
+
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
@@ -43,7 +44,7 @@ const Navigation = () => {
                 {link.label}
               </Link>
             ))}
-            <a href="tel:+919876543210">
+            <a href="tel:+918925477007">
               <Button variant="hero" size="sm">
                 <Phone className="h-4 w-4" />
                 Call Now
@@ -77,13 +78,14 @@ const Navigation = () => {
                   {link.label}
                 </Link>
               ))}
-              <a href="tel:+919876543210">
+              <a href="tel:+918925477007">
                 <Button variant="hero" size="sm" className="w-full">
                   <Phone className="h-4 w-4" />
                   Call Now
                 </Button>
               </a>
             </div>
+         
           </div>
         )}
       </div>

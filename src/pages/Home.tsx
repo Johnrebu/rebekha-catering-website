@@ -9,6 +9,7 @@ import corporateImage from "@/assets/corporate-catering.jpg";
 import privateDinnerImage from "@/assets/private-dinner.jpg";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Home = () => {
   const highlights = [
@@ -59,10 +60,12 @@ const Home = () => {
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold font-serif mb-4">
             Rebekha Catering Services
           </h1>
-          <p className="text-2xl md:text-3xl mb-6 italic">Serving Love for Every Occasion</p>
+          <p className="text-2xl md:text-3xl mb-6 italic">
+            Serving Love for Every Occasion
+          </p>
           <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-            Homemade, hygienic veg & non-veg catering from West Tambaram since 1998, blending
-            traditional recipes with modern culinary love.
+            Homemade, hygienic veg & non-veg catering from West Tambaram since
+            1998, blending traditional recipes with modern culinary love.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/menu">
@@ -95,7 +98,9 @@ const Home = () => {
                 className="text-center hover:shadow-warm transition-all duration-300 hover:-translate-y-1"
               >
                 <CardContent className="pt-8 pb-6">
-                  <div className="text-primary mb-4 flex justify-center">{item.icon}</div>
+                  <div className="text-primary mb-4 flex justify-center">
+                    {item.icon}
+                  </div>
                   <h3 className="font-semibold text-lg">{item.title}</h3>
                 </CardContent>
               </Card>
@@ -107,11 +112,14 @@ const Home = () => {
       {/* About Preview */}
       <section className="py-20 bg-background">
         <div className="container mx-auto px-4 max-w-4xl text-center animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold font-serif mb-6">Our Story</h2>
+          <h2 className="text-3xl md:text-4xl font-bold font-serif mb-6">
+            Our Story
+          </h2>
           <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-            Founded in 1998 by Christopher Durairaj & Nancy Navaneetham, Rebekha Catering Services
-            started in a small home kitchen at West Tambaram — driven by love, passion, and
-            authentic recipes passed down through generations.
+            Founded in 1998 by Christopher Durairaj & Nancy Navaneetham, Rebekha
+            Catering Services started in a small home kitchen at West Tambaram —
+            driven by love, passion, and authentic recipes passed down through
+            generations.
           </p>
           <Link to="/about">
             <Button variant="default" size="lg">
@@ -171,18 +179,27 @@ const Home = () => {
             <h2 className="text-3xl md:text-4xl font-bold font-serif mb-4">
               What Our Clients Say
             </h2>
-            <p className="text-lg text-muted-foreground">Serving love, creating memories</p>
+            <p className="text-lg text-muted-foreground">
+              Serving love, creating memories
+            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {testimonials.map((testimonial, index) => (
-              <Card key={index} className="hover:shadow-elegant transition-shadow">
+              <Card
+                key={index}
+                className="hover:shadow-elegant transition-shadow"
+              >
                 <CardContent className="pt-6">
                   <div className="text-primary text-4xl mb-4">"</div>
-                  <p className="text-muted-foreground mb-4 italic">{testimonial.text}</p>
+                  <p className="text-muted-foreground mb-4 italic">
+                    {testimonial.text}
+                  </p>
                   <div className="border-t border-border pt-4">
                     <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.event}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {testimonial.event}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -206,8 +223,9 @@ const Home = () => {
             Let Us Serve Love at Your Next Event
           </h2>
           <p className="text-lg mb-8 max-w-2xl mx-auto">
-            Experience the perfect blend of tradition and taste. Contact us today for a customized
-            menu that will make your celebration unforgettable.
+            Experience the perfect blend of tradition and taste. Contact us
+            today for a customized menu that will make your celebration
+            unforgettable.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">
@@ -220,7 +238,11 @@ const Home = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button variant="outline" size="lg" className="bg-transparent border-white text-white hover:bg-white hover:text-primary">
+              <Button
+                variant="outline"
+                size="lg"
+                className="bg-transparent border-white text-white hover:bg-white hover:text-primary"
+              >
                 <MessageCircle className="h-5 w-5" />
                 WhatsApp Us
               </Button>
@@ -230,6 +252,7 @@ const Home = () => {
       </section>
 
       <Footer />
+      <WhatsAppButton />
     </div>
   );
 };
