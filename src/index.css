@@ -1,5 +1,10 @@
 /* If you are not using Tailwind CSS, remove these lines. If you are, ensure your build process supports Tailwind directives. */
 
+/* Tailwind core layers – MUST come before any @layer usage */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
 */
@@ -84,7 +89,12 @@ All colors MUST be HSL.
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: serif;
   }
 }
