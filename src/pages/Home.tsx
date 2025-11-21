@@ -115,7 +115,7 @@ const Home = () => {
                 Get Free Quote
               </Button>
             </Link>
-            <a href="tel:+918925477007">
+            <a href="tel:+919445435102">
               <Button variant="secondary" size="lg">
                 <Phone className="h-5 w-5" />
                 Call Now
