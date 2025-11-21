@@ -1,20 +1,39 @@
+import * as React from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
+import { motion, easeOut } from "framer-motion";
+import {
+  Card,
+  CardContent,
+} from "@/components/ui/card";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import { Heart, Users, Utensils, Award, Phone, MessageCircle } from "lucide-react";
-import { easeOut } from "framer-motion";
 import heroImage from "@/assets/hero-catering.jpg";
 import weddingImage from "@/assets/wedding-catering.jpg";
 import birthdayImage from "@/assets/birthday-catering.jpg";
 import corporateImage from "@/assets/corporate-catering.jpg";
+import aboutImage from "@/assets/hero-catering.jpg"; // Assuming you have an image like this
 import privateDinnerImage from "@/assets/private-dinner.jpg";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Home = () => {
+  const plugin = React.useRef(
+    Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true })
+  );
+
   const highlights = [
+    // Placeholder image for the 'About' section. Replace with your own image in src/assets.
+    // Using the imported aboutImage from assets instead of declaring it inline here.
+
     { icon: <Utensils className="h-8 w-8" />, title: "Veg & Non-Veg Catering" },
     { icon: <Users className="h-8 w-8" />, title: "Custom Menu Options" },
     { icon: <Award className="h-8 w-8" />, title: "Serving Love Since 1998" },
@@ -73,9 +92,9 @@ const Home = () => {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative h-[90vh] flex items-center justify-center overflow-hidden mt-16">
+      <section className="relative h-screen flex items-center justify-center overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center bg-fixed"
           style={{
             backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${heroImage})`,
           }}
@@ -115,7 +134,7 @@ const Home = () => {
                 Get Free Quote
               </Button>
             </Link>
-            <a href="tel:+919445435102">
+            <a href="tel:+918925477007">
               <Button variant="secondary" size="lg">
                 <Phone className="h-5 w-5" />
                 Call Now
@@ -160,21 +179,33 @@ const Home = () => {
         viewport={{ once: true, amount: 0.5 }}
         variants={sectionVariants}
       >
-        <div className="container mx-auto px-4 max-w-4xl text-center animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-bold font-serif mb-6">
-            Our Story
-          </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-            Founded in 1998 by Christopher Durairaj & Nancy Navaneetham, Rebekha
-            Catering Services started in a small home kitchen at West Tambaram —
-            driven by love, passion, and authentic recipes passed down through
-            generations.
-          </p>
-          <Link to="/about">
-            <Button variant="default" size="lg">
-              Read Our Full Story
-            </Button>
-          </Link>
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.7 }}
+            >
+              <img src={aboutImage} alt="Our Kitchen" className="rounded-lg shadow-lg w-full h-auto object-cover" />
+            </motion.div>
+            <div className="text-center md:text-left">
+              <h2 className="text-3xl md:text-4xl font-bold font-serif mb-6">
+                Our Story
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed mb-8">
+                Founded in 1998 by Christopher Durairaj & Nancy Navaneetham, Rebekha
+                Catering Services started in a small home kitchen at West Tambaram —
+                driven by love, passion, and authentic recipes passed down through
+                generations.
+              </p>
+              <Link to="/about">
+                <Button variant="default" size="lg">
+                  Read Our Full Story
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </motion.section>
 
@@ -247,29 +278,41 @@ const Home = () => {
             </p>
           </div>
 
-          <motion.div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto" variants={listVariants}>
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-              >
-                <Card className="h-full hover:shadow-elegant transition-shadow">
-                  <CardContent className="pt-6">
-                    <div className="text-primary text-4xl mb-4">"</div>
-                    <p className="text-muted-foreground mb-4 italic">
-                      {testimonial.text}
-                    </p>
-                    <div className="border-t border-border pt-4">
-                      <p className="font-semibold">{testimonial.name}</p>
-                      <p className="text-sm text-muted-foreground">
-                        {testimonial.event}
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
+          <Carousel
+            plugins={[plugin.current]}
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            className="w-full max-w-4xl mx-auto relative"
+            onMouseEnter={plugin.current.stop}
+            onMouseLeave={plugin.current.reset}
+          >
+            <CarouselContent>
+              {testimonials.map((testimonial, index) => (
+                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                  <div className="p-1 h-full">
+                    <Card className="h-full flex flex-col justify-between hover:shadow-elegant transition-shadow">
+                      <CardContent className="pt-6">
+                        <div className="text-primary text-4xl mb-4">"</div>
+                        <p className="text-muted-foreground mb-4 italic flex-grow">
+                          {testimonial.text}
+                        </p>
+                        <div className="border-t border-border pt-4 mt-auto">
+                          <p className="font-semibold">{testimonial.name}</p>
+                          <p className="text-sm text-muted-foreground">
+                            {testimonial.event}
+                          </p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
 
           <div className="text-center mt-10">
             <Link to="/testimonials">
