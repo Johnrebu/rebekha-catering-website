@@ -1,0 +1,4 @@
+# This rule tells Netlify to redirect all paths to the index.html file.
+# This is necessary for single-page applications like React to handle routing correctly.
+# The 200 status code means it's a "rewrite" - the URL in the browser stays the same.
+/*    /index.html   200
