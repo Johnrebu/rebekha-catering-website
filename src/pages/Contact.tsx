@@ -1,52 +1,24 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Phone, Mail, MapPin, MessageCircle, Clock } from "lucide-react";
-import { toast } from "sonner";
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    occasion: "",
-    message: "",
-  });
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://js-na2.hsforms.net/forms/embed/244427242.js";
+    script.type = "text/javascript";
+    script.async = true;
+    script.defer = true;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    
-    // Create WhatsApp message
-    const whatsappMessage = `New Inquiry from Website:%0A%0AName: ${formData.name}%0APhone: ${formData.phone}%0AEmail: ${formData.email}%0AOccasion: ${formData.occasion}%0AMessage: ${formData.message}`;
-    
-    // Open WhatsApp
-    window.open(`https://wa.me/918925477007?text=${whatsappMessage}`, "_blank");
-    
-    toast.success("Opening WhatsApp...", {
-      description: "We'll get back to you shortly!",
-    });
-    
-    // Reset form
-    setFormData({
-      name: "",
-      phone: "",
-      email: "",
-      occasion: "",
-      message: "",
-    });
-  };
+    document.body.appendChild(script);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
+    return () => {
+      // Clean up the script when the component unmounts
+      document.body.removeChild(script);
+    };
+  }, []);
 
   return (
     <div className="min-h-screen">
@@ -75,86 +47,13 @@ const Contact = () => {
               </h2>
               <Card>
                 <CardContent className="pt-6">
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div>
-                      <Label htmlFor="name">Full Name *</Label>
-                      <Input
-                        id="name"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        placeholder="Your name"
-                        className="mt-2"
-                      />
-                    </div>
-
-                    <div>
-                      <Label htmlFor="phone">Phone Number *</Label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleChange}
-                        required
-                        placeholder="+91 89254 77007"
-                        className="mt-2"
-                      />
-                    </div>
-
-                    <div>
-                      <Label htmlFor="email">Email Address</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="your.email@example.com"
-                        className="mt-2"
-                      />
-                    </div>
-
-                    <div>
-                      <Label htmlFor="occasion">Type of Event *</Label>
-                      <Input
-                        id="occasion"
-                        name="occasion"
-                        value={formData.occasion}
-                        onChange={handleChange}
-                        required
-                        placeholder="Wedding, Birthday, Corporate Event, etc."
-                        className="mt-2"
-                      />
-                    </div>
-
-                    <div>
-                      <Label htmlFor="message">Your Message</Label>
-                      <Textarea
-                        id="message"
-                        name="message"
-                        value={formData.message}
-                        onChange={handleChange}
-                        placeholder="Tell us about your event requirements, guest count, date, location, and any special requests..."
-                        className="mt-2 min-h-32"
-                      />
-                    </div>
-
-                    <Button
-                      type="submit"
-                      variant="hero"
-                      size="lg"
-                      className="w-full"
-                    >
-                      Send Message via WhatsApp
-                    </Button>
-
-                    <p className="text-sm text-muted-foreground text-center">
-                      By submitting this form, your inquiry will be sent to us
-                      via WhatsApp
-                    </p>
-                  </form>
+                  {/* HubSpot Form Embed */}
+                  <div
+                    className="hs-form-frame"
+                    data-region="na2"
+                    data-form-id="8dab0ded-7cbd-495b-8690-f9b1615418ee"
+                    data-portal-id="244427242"
+                  ></div>
                 </CardContent>
               </Card>
             </div>
