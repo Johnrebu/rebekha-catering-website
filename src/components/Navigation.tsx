@@ -75,6 +75,16 @@ const Navigation = () => {
                 }`}></span>
               </Link>
             ))}
+            
+            {/* Contact Us Button - Gold/Mustard Accent */}
+            <Link to="/contact">
+              <button className="relative px-5 py-2.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-semibold text-sm transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-yellow-500/60 flex items-center gap-2 group overflow-hidden border-2 border-yellow-400/50">
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <span className="relative z-10">Contact Us</span>
+              </button>
+            </Link>
+            
+            {/* Call Now Button */}
             <a href="tel:+918925477007">
               <button className="relative px-5 py-2.5 rounded-full bg-gradient-to-r from-red-700 to-amber-600 text-white font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/50 flex items-center gap-2 group overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -123,6 +133,15 @@ const Navigation = () => {
                   </div>
                 </Link>
               ))}
+              
+              {/* Contact Us Button - Mobile */}
+              <Link to="/contact" onClick={() => setIsOpen(false)} className="mt-2">
+                <button className="w-full px-5 py-3 rounded-lg bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/60 flex items-center justify-center gap-2 group border-2 border-yellow-400/50">
+                  <span>Contact Us</span>
+                </button>
+              </Link>
+              
+              {/* Call Now Button - Mobile */}
               <a href="tel:+918925477007" className="mt-2">
                 <button className="w-full px-5 py-3 rounded-lg bg-gradient-to-r from-red-700 to-amber-600 text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/50 flex items-center justify-center gap-2 group">
                   <Phone className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />

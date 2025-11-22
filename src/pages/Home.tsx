@@ -93,54 +93,101 @@ const Home = () => {
 
       {/* Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image with Dark Overlay */}
         <div
-          className="absolute inset-0 bg-cover bg-center bg-fixed"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(${heroImage})`,
+            backgroundImage: `url(${heroImage})`,
           }}
         />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70"></div>
+        
+        {/* Decorative gradient border at top */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
+        
+        {/* Warm glow effects */}
+        <div className="absolute inset-0 bg-gradient-to-br from-red-950/30 via-transparent to-amber-950/30"></div>
+        
         <motion.div
-          className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto"
+          className="relative z-10 text-center text-white px-4 max-w-5xl mx-auto"
           initial="hidden"
           animate="visible"
           variants={{
-            visible: { transition: { staggerChildren: 0.3 } },
+            visible: { transition: { staggerChildren: 0.25 } },
           }}
         >
+          {/* Main Headline - Serif Font */}
           <motion.h1
             variants={itemVariants}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold font-serif mb-4"
+            className="text-4xl md:text-6xl lg:text-7xl font-bold font-serif mb-6 leading-tight"
           >
-            Rebekha Catering Services
+            <span className="bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-200 bg-clip-text text-transparent drop-shadow-2xl">
+              Authentic Tastes,
+            </span>
+            <br />
+            <span className="bg-gradient-to-r from-amber-200 via-yellow-300 to-amber-200 bg-clip-text text-transparent drop-shadow-2xl">
+              Unforgettable Memories.
+            </span>
           </motion.h1>
-          <motion.p variants={itemVariants} className="text-2xl md:text-3xl mb-6 italic">
-            Serving Love for Every Occasion
+          
+          {/* Decorative divider */}
+          <motion.div 
+            variants={itemVariants}
+            className="w-32 h-1 bg-gradient-to-r from-red-700 via-amber-500 to-red-700 mx-auto mb-6 rounded-full"
+          ></motion.div>
+          
+          {/* Subtext */}
+          <motion.p 
+            variants={itemVariants} 
+            className="text-xl md:text-2xl lg:text-3xl mb-10 text-amber-100 font-light tracking-wide"
+          >
+            Premier Catering Services in West Tambaram & Chennai
           </motion.p>
-          <motion.p variants={itemVariants} className="text-lg md:text-xl mb-8 max-w-2xl mx-auto">
-            Homemade, hygienic veg & non-veg catering from West Tambaram since
-            1998, blending traditional recipes with modern culinary love.
-          </motion.p>
+          
+          {/* Buttons */}
           <motion.div
             variants={itemVariants}
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col sm:flex-row gap-5 justify-center items-center"
           >
+            {/* Primary Button - View Menu */}
             <Link to="/menu">
-              <Button variant="hero" size="lg">
-                Explore Menu
-              </Button>
+              <button className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-bold text-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-yellow-500/60 flex items-center gap-3 overflow-hidden border-2 border-yellow-400/50 min-w-[200px] justify-center">
+                <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <Utensils className="h-5 w-5 relative z-10 transition-transform duration-300 group-hover:rotate-12" />
+                <span className="relative z-10">View Menu</span>
+              </button>
             </Link>
+            
+            {/* Secondary Button - Get a Quote (Outline) */}
             <Link to="/contact">
-              <Button variant="outline" size="lg">
-                Get Free Quote
-              </Button>
+              <button className="group relative px-8 py-4 rounded-full bg-transparent border-2 border-amber-300 text-amber-100 font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-amber-100/10 hover:border-amber-200 hover:shadow-lg hover:shadow-amber-500/30 flex items-center gap-3 min-w-[200px] justify-center backdrop-blur-sm">
+                <Phone className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+                <span>Get a Quote</span>
+              </button>
             </Link>
-            <a href="tel:+918925477007">
-              <Button variant="secondary" size="lg">
-                <Phone className="h-5 w-5" />
-                Call Now
-              </Button>
-            </a>
           </motion.div>
+          
+          {/* Trust badge */}
+          <motion.p 
+            variants={itemVariants}
+            className="mt-10 text-amber-200 text-sm md:text-base flex items-center justify-center gap-2"
+          >
+            <Award className="h-5 w-5" />
+            <span className="italic">Serving Love Since 1998 • 25+ Years of Excellence</span>
+          </motion.p>
+        </motion.div>
+        
+        {/* Floating scroll indicator */}
+        <motion.div
+          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5, duration: 0.8, repeat: Infinity, repeatType: "reverse" }}
+        >
+          <div className="w-6 h-10 border-2 border-amber-300/50 rounded-full flex justify-center pt-2">
+            <div className="w-1 h-2 bg-amber-300 rounded-full"></div>
+          </div>
         </motion.div>
       </section>
 
