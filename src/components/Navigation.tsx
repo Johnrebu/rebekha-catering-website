@@ -24,7 +24,6 @@ const Navigation = () => {
     { path: "/menu", label: "Menu" },
     { path: "/gallery", label: "Gallery" },
     { path: "/testimonials", label: "Testimonials" },
-    { path: "/contact", label: "Contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -46,7 +45,7 @@ const Navigation = () => {
           <Link to="/" className="flex items-center gap-3 group">
             {/* Logo Image */}
             <img 
-              src='/reblogo.svg' 
+              src='/logo4.png' 
               alt='Rebekha Caterers Logo' 
               className='h-12 md:h-14 lg:h-16 w-auto transition-all duration-300 group-hover:scale-105'
             />
@@ -100,55 +99,98 @@ const Navigation = () => {
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>
         </div>
+      </div>
 
-        {/* Mobile Navigation */}
+      {/* Mobile Menu Overlay - Backdrop */}
+      {isOpen && (
         <div 
-          className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-            isOpen ? 'max-h-[600px] opacity-100 mt-4' : 'max-h-0 opacity-0'
-          }`}
-        >
-          <div className="pb-4 border-t border-amber-500/20 pt-4">
-            <div className="flex flex-col gap-1">
-              {navLinks.map((link, index) => (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  onClick={() => setIsOpen(false)}
-                  className="group relative"
-                  style={{ animationDelay: `${index * 50}ms` }}
-                >
-                  <div className={`px-4 py-3 rounded-lg transition-all duration-300 ${
-                    isActive(link.path)
-                      ? "bg-gradient-to-r from-red-700/50 to-amber-600/50"
-                      : "hover:bg-amber-100/10"
+          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 lg:hidden"
+          onClick={() => setIsOpen(false)}
+        />
+      )}
+
+      {/* Mobile Menu - Slide-in Drawer from Right */}
+      <div 
+        className={`fixed top-0 right-0 h-full w-4/5 max-w-sm bg-gradient-to-b from-red-950 via-amber-950 to-red-950 z-50 lg:hidden transform transition-transform duration-500 ease-out shadow-2xl ${
+          isOpen ? 'translate-x-0' : 'translate-x-full'
+        }`}
+      >
+        {/* Decorative border */}
+        <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-transparent via-amber-500 to-transparent"></div>
+        
+        {/* Close button */}
+        <div className="flex justify-end p-4 border-b border-amber-500/20">
+          <button
+            onClick={() => setIsOpen(false)}
+            className="p-2 rounded-lg bg-amber-100/10 backdrop-blur-sm border border-amber-500/30 text-amber-300 transition-all duration-300 hover:bg-gradient-to-r hover:from-red-700 hover:to-amber-600 hover:scale-110"
+            aria-label="Close menu"
+          >
+            <X className="h-6 w-6" />
+          </button>
+        </div>
+
+        {/* Menu Content */}
+        <div className="flex flex-col h-full px-6 py-8 overflow-y-auto">
+          {/* Navigation Links */}
+          <nav className="flex-1 flex flex-col gap-2">
+            {navLinks.map((link, index) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setIsOpen(false)}
+                className="group"
+                style={{ 
+                  animation: isOpen ? `slideIn 0.3s ease-out ${index * 0.1}s both` : 'none'
+                }}
+              >
+                <div className={`py-4 px-6 rounded-xl text-center transition-all duration-300 ${
+                  isActive(link.path)
+                    ? "bg-gradient-to-r from-red-700 to-amber-600 shadow-lg"
+                    : "hover:bg-amber-100/10 hover:translate-x-2"
+                }`}>
+                  <span className={`text-2xl font-semibold transition-colors duration-300 ${
+                    isActive(link.path) ? "text-white" : "text-amber-100"
                   }`}>
-                    <span className={`text-base font-medium transition-colors duration-300 ${
-                      isActive(link.path) ? "text-amber-300" : "text-amber-100"
-                    }`}>
-                      {link.label}
-                    </span>
-                  </div>
-                </Link>
-              ))}
-              
-              {/* Contact Us Button - Mobile */}
-              <Link to="/contact" onClick={() => setIsOpen(false)} className="mt-2">
-                <button className="w-full px-5 py-3 rounded-lg bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-semibold transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/60 flex items-center justify-center gap-2 group border-2 border-yellow-400/50">
-                  <span>Contact Us</span>
-                </button>
+                    {link.label}
+                  </span>
+                </div>
               </Link>
-              
-              {/* Call Now Button - Mobile */}
-              <a href="tel:+918925477007" className="mt-2">
-                <button className="w-full px-5 py-3 rounded-lg bg-gradient-to-r from-red-700 to-amber-600 text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/50 flex items-center justify-center gap-2 group">
-                  <Phone className="h-4 w-4 transition-transform duration-300 group-hover:rotate-12" />
-                  <span>Call Now</span>
-                </button>
-              </a>
-            </div>
+            ))}
+          </nav>
+
+          {/* Bottom Buttons */}
+          <div className="space-y-3 pt-6 border-t border-amber-500/20">
+            {/* Get a Quote Button */}
+            <Link to="/contact" onClick={() => setIsOpen(false)}>
+              <button className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/60 border-2 border-yellow-400/50">
+                Get a Quote
+              </button>
+            </Link>
+            
+            {/* Call Now Button */}
+            <a href="tel:+918925477007">
+              <button className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-red-700 to-amber-600 text-white font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/50 flex items-center justify-center gap-2 group">
+                <Phone className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
+                <span>Call Now</span>
+              </button>
+            </a>
           </div>
         </div>
       </div>
+
+      {/* Custom CSS for slide-in animation */}
+      <style>{`
+        @keyframes slideIn {
+          from {
+            opacity: 0;
+            transform: translateX(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
+        }
+      `}</style>
     </nav>
   );
 };
