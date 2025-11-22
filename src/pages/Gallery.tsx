@@ -1,22 +1,112 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import heroImage from "@/assets/hero-catering.jpg";
-import weddingImage from "@/assets/wedding-catering.jpg";
-import birthdayImage from "@/assets/birthday-catering.jpg";
-import corporateImage from "@/assets/corporate-catering.jpg";
-import privateDinnerImage from "@/assets/private-dinner.jpg";
-import vegImage from "@/assets/south-indian-veg.jpg";
-import nonVegImage from "@/assets/non-veg-feast.jpg";
 
 const Gallery = () => {
   const galleryImages = [
-    { src: heroImage, alt: "Luxurious catering buffet spread", category: "Buffet Setups" },
-    { src: weddingImage, alt: "Elegant wedding catering", category: "Weddings" },
-    { src: birthdayImage, alt: "Colorful birthday party catering", category: "Birthdays" },
-    { src: corporateImage, alt: "Professional corporate event", category: "Corporate Events" },
-    { src: privateDinnerImage, alt: "Intimate private dinner", category: "Private Dinners" },
-    { src: vegImage, alt: "Traditional South Indian vegetarian meal", category: "Vegetarian" },
-    { src: nonVegImage, alt: "Delicious non-vegetarian feast", category: "Non-Vegetarian" },
+    { 
+      src: "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=800&q=80", 
+      alt: "Traditional Indian wedding buffet with golden decorations", 
+      category: "Wedding Catering" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&q=80", 
+      alt: "Colorful Indian food spread with curries and rice", 
+      category: "Buffet Setups" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1567337710282-00832b415979?w=800&q=80", 
+      alt: "Authentic South Indian vegetarian thali on banana leaf", 
+      category: "Vegetarian" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=800&q=80", 
+      alt: "Delicious biryani with raita and garnishing", 
+      category: "Non-Vegetarian" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1596797038530-2c107229654b?w=800&q=80", 
+      alt: "Colorful Indian sweets and desserts platter", 
+      category: "Desserts" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=800&q=80", 
+      alt: "Tandoori chicken with naan bread", 
+      category: "Non-Vegetarian" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=800&q=80", 
+      alt: "Elegant corporate event buffet setup", 
+      category: "Corporate Events" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1506368249639-73a05d6f6488?w=800&q=80", 
+      alt: "Beautiful wedding reception dining setup", 
+      category: "Weddings" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1574484284002-952d92456975?w=800&q=80", 
+      alt: "Variety of Indian curries in serving bowls", 
+      category: "Vegetarian" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1517244683847-7456b63c5969?w=800&q=80", 
+      alt: "Festive birthday party catering setup", 
+      category: "Birthdays" 
+    },
+   
+    { 
+      src: "https://images.unsplash.com/photo-1512058564366-18510be2db19?w=800&q=80", 
+      alt: "Intimate private dinner table setting", 
+      category: "Private Dinners" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1589301760014-d929f3979dbc?w=800&q=80", 
+      alt: "Golden gulab jamun dessert in syrup", 
+      category: "Desserts" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?w=800&q=80", 
+      alt: "Crispy orange jalebi swirls", 
+      category: "Desserts" 
+    },
+ 
+    { 
+      src: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=800&q=80", 
+      alt: "Colorful kulfi ice cream dessert", 
+      category: "Desserts" 
+    },
+  
+    { 
+      src: "https://images.unsplash.com/photo-1630383249896-424e482df921?w=800&q=80", 
+      alt: "Rasmalai dessert in creamy sauce", 
+      category: "Desserts" 
+    },
+
+    { 
+      src: "https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=800&q=80", 
+      alt: "Colorful ladoo sweets platter", 
+      category: "Desserts" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=800&q=80", 
+      alt: "Grilled kebab platter with mint chutney", 
+      category: "Non-Vegetarian" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1642821373181-696a54913e93?w=800&q=80", 
+      alt: "Kaju barfi cashew dessert", 
+      category: "Desserts" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?w=800&q=80", 
+      alt: "Grand buffet display at wedding", 
+      category: "Wedding Catering" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1598103442097-8b74394b95c6?w=800&q=80", 
+      alt: "Chicken biryani with garnish and raita", 
+      category: "Non-Vegetarian" 
+    },
   ];
 
   return (
