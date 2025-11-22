@@ -107,6 +107,31 @@ const Gallery = () => {
       alt: "Chicken biryani with garnish and raita", 
       category: "Non-Vegetarian" 
     },
+    { 
+      src: "https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?w=800&q=80", 
+      alt: "Mango kulfi Indian ice cream on stick", 
+      category: "Ice Cream & Desserts" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=800&q=80", 
+      alt: "Colorful ice cream sundae with toppings", 
+      category: "Ice Cream & Desserts" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1501443762994-82bd5dace89a?w=800&q=80", 
+      alt: "Assorted gelato ice cream flavors", 
+      category: "Ice Cream & Desserts" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1560008581-09b62139bbbb?w=800&q=80", 
+      alt: "Delicious ice cream scoops in cones", 
+      category: "Ice Cream & Desserts" 
+    },
+    { 
+      src: "https://images.unsplash.com/photo-1582143495604-cdbb37e29371?w=800&q=80", 
+      alt: "Traditional pistachio kulfi dessert", 
+      category: "Ice Cream & Desserts" 
+    },
   ];
 
   return (

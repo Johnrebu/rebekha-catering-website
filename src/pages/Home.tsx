@@ -15,19 +15,26 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { Heart, Users, Utensils, Award, Phone, MessageCircle } from "lucide-react";
-import heroImage from "@/assets/hero-catering.jpg";
-import weddingImage from "@/assets/wedding-catering.jpg";
-import birthdayImage from "@/assets/birthday-catering.jpg";
-import corporateImage from "@/assets/corporate-catering.jpg";
-import aboutImage from "@/assets/hero-catering.jpg"; // Assuming you have an image like this
-import privateDinnerImage from "@/assets/private-dinner.jpg";
+
+// High-quality images for catering (Unsplash for better reliability)
+const heroImage = "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600&q=80";
+const weddingImage = "https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=1200";
+const birthdayImage = "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=1200";
+const corporateImage = "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1200";
+const aboutImage = "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1200";
+const privateDinnerImage = "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1200";
+
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 const Home = () => {
   const plugin = React.useRef(
-    Autoplay({ delay: 4000, stopOnInteraction: true, stopOnMouseEnter: true })
+    Autoplay({ 
+      delay: 3000, 
+      stopOnInteraction: false, 
+      stopOnMouseEnter: true 
+    })
   );
 
   const highlights = [
@@ -331,13 +338,13 @@ const Home = () => {
               align: "start",
               loop: true,
             }}
-            className="w-full max-w-4xl mx-auto relative"
+            className="w-full max-w-5xl mx-auto relative px-12"
             onMouseEnter={plugin.current.stop}
             onMouseLeave={plugin.current.reset}
           >
-            <CarouselContent>
+            <CarouselContent className="-ml-4">
               {testimonials.map((testimonial, index) => (
-                <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
+                <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
                   <div className="p-1 h-full">
                     <Card className="h-full flex flex-col justify-between hover:shadow-elegant transition-shadow">
                       <CardContent className="pt-6">
@@ -357,8 +364,8 @@ const Home = () => {
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious />
-            <CarouselNext />
+            <CarouselPrevious className="bg-gradient-to-r from-red-700 to-amber-600 text-white border-none hover:from-red-800 hover:to-amber-700 shadow-lg -left-4 lg:-left-6" />
+            <CarouselNext className="bg-gradient-to-r from-red-700 to-amber-600 text-white border-none hover:from-red-800 hover:to-amber-700 shadow-lg -right-4 lg:-right-6" />
           </Carousel>
 
           <div className="text-center mt-10">
