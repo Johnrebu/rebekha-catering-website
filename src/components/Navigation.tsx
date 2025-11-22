@@ -111,7 +111,7 @@ const Navigation = () => {
 
       {/* Mobile Menu - Slide-in Drawer from Right */}
       <div 
-        className={`fixed top-0 right-0 h-full w-4/5 max-w-sm bg-gradient-to-b from-red-950 via-amber-950 to-red-950 z-50 lg:hidden transform transition-transform duration-500 ease-out shadow-2xl ${
+        className={`fixed top-0 right-0 h-screen w-4/5 max-w-sm bg-gradient-to-b from-red-950 via-amber-950 to-red-950 z-50 lg:hidden transform transition-transform duration-500 ease-out shadow-2xl overflow-hidden ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
@@ -129,16 +129,16 @@ const Navigation = () => {
           </button>
         </div>
 
-        {/* Menu Content */}
-        <div className="flex flex-col h-full px-6 py-8 overflow-y-auto">
+        {/* Menu Content - Scrollable */}
+        <div className="h-[calc(100vh-80px)] overflow-y-auto px-6 py-6">
           {/* Navigation Links */}
-          <nav className="flex-1 flex flex-col gap-2">
+          <div className="space-y-3 mb-6">
             {navLinks.map((link, index) => (
               <Link
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className="group"
+                className="block group"
                 style={{ 
                   animation: isOpen ? `slideIn 0.3s ease-out ${index * 0.1}s both` : 'none'
                 }}
@@ -156,7 +156,7 @@ const Navigation = () => {
                 </div>
               </Link>
             ))}
-          </nav>
+          </div>
 
           {/* Bottom Buttons */}
           <div className="space-y-3 pt-6 border-t border-amber-500/20">
