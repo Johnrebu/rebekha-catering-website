@@ -56,10 +56,10 @@ const Home = () => {
 
   const testimonials = [
     {
-      name: "Priya Sharma",
+      name: "Antony Raj",
       event: "Wedding Reception",
       text: "The food was absolutely delicious and the presentation was stunning! Our guests are still talking about the amazing feast. Thank you for making our special day even more memorable!",
-      initials: "PS",
+      initials: "AR",
       color: "from-pink-500 to-rose-500",
       rating: 5,
     },
@@ -72,18 +72,18 @@ const Home = () => {
       rating: 5,
     },
     {
-      name: "Anjali Menon",
+      name: "Anjali",
       event: "Birthday Party",
       text: "The variety and quality of food exceeded our expectations. The team was punctual and the setup was beautiful. Will definitely book again!",
-      initials: "AM",
+      initials: "AJ",
       color: "from-purple-500 to-pink-500",
       rating: 5,
     },
     {
-      name: "Suresh Iyer",
+      name: "Suresh",
       event: "50th Anniversary",
       text: "We wanted authentic South Indian food and Rebekha Catering delivered beyond expectations. The banana leaf meal reminded us of traditional family gatherings.",
-      initials: "SI",
+      initials: "S",
       color: "from-amber-500 to-orange-500",
       rating: 5,
     },
