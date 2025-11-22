@@ -14,7 +14,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
-import { Heart, Users, Utensils, Award, Phone, MessageCircle } from "lucide-react";
+import { Heart, Users, Utensils, Award, Phone, MessageCircle, Star, Quote, BadgeCheck } from "lucide-react";
 import heroImage from "@/assets/hero-catering.jpg";
 
 // High-quality images for catering services
@@ -59,16 +59,41 @@ const Home = () => {
       name: "Priya Sharma",
       event: "Wedding Reception",
       text: "The food was absolutely delicious and the presentation was stunning! Our guests are still talking about the amazing feast. Thank you for making our special day even more memorable!",
+      initials: "PS",
+      color: "from-pink-500 to-rose-500",
+      rating: 5,
     },
     {
       name: "Rajesh Kumar",
       event: "Corporate Event",
       text: "Professional service and authentic taste. Rebekha Catering made our company anniversary celebration a huge success. Highly recommended!",
+      initials: "RK",
+      color: "from-blue-500 to-cyan-500",
+      rating: 5,
     },
     {
       name: "Anjali Menon",
       event: "Birthday Party",
       text: "The variety and quality of food exceeded our expectations. The team was punctual and the setup was beautiful. Will definitely book again!",
+      initials: "AM",
+      color: "from-purple-500 to-pink-500",
+      rating: 5,
+    },
+    {
+      name: "Suresh Iyer",
+      event: "50th Anniversary",
+      text: "We wanted authentic South Indian food and Rebekha Catering delivered beyond expectations. The banana leaf meal reminded us of traditional family gatherings.",
+      initials: "SI",
+      color: "from-amber-500 to-orange-500",
+      rating: 5,
+    },
+    {
+      name: "Mohammed Farhan",
+      event: "Office Inauguration",
+      text: "The non-veg spread was phenomenal! The chicken biryani and mutton dishes were restaurant-quality. Best catering service in Chennai!",
+      initials: "MF",
+      color: "from-green-500 to-emerald-500",
+      rating: 5,
     },
   ];
   // Animation variants for Framer Motion
@@ -346,17 +371,38 @@ const Home = () => {
               {testimonials.map((testimonial, index) => (
                 <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
                   <div className="p-1 h-full">
-                    <Card className="h-full flex flex-col justify-between hover:shadow-elegant transition-shadow">
-                      <CardContent className="pt-6">
-                        <div className="text-primary text-4xl mb-4">"</div>
-                        <p className="text-muted-foreground mb-4 italic flex-grow">
-                          {testimonial.text}
+                    <Card className="h-full relative overflow-hidden border-0 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+                      {/* Gradient top border */}
+                      <div className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${testimonial.color}`}></div>
+                      
+                      <CardContent className="pt-8 pb-6 flex flex-col h-full">
+                        {/* Quote Icon */}
+                        <Quote className="h-8 w-8 text-amber-600/20 mb-3" />
+                        
+                        {/* Rating Stars */}
+                        <div className="flex gap-1 mb-4">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star key={i} className="h-4 w-4 fill-amber-500 text-amber-500" />
+                          ))}
+                        </div>
+
+                        {/* Testimonial Text */}
+                        <p className="text-muted-foreground mb-6 italic text-sm leading-relaxed flex-grow">
+                          "{testimonial.text}"
                         </p>
-                        <div className="border-t border-border pt-4 mt-auto">
-                          <p className="font-semibold">{testimonial.name}</p>
-                          <p className="text-sm text-muted-foreground">
-                            {testimonial.event}
-                          </p>
+
+                        {/* Client Info with Avatar */}
+                        <div className="flex items-center gap-3 border-t border-border pt-4 mt-auto">
+                          <div className={`flex-shrink-0 w-11 h-11 rounded-full bg-gradient-to-br ${testimonial.color} flex items-center justify-center text-white font-bold text-sm shadow-lg`}>
+                            {testimonial.initials}
+                          </div>
+                          <div className="flex-1">
+                            <div className="flex items-center gap-1">
+                              <p className="font-semibold text-sm">{testimonial.name}</p>
+                              <BadgeCheck className="h-4 w-4 text-blue-500 fill-blue-500" />
+                            </div>
+                            <p className="text-xs text-muted-foreground">{testimonial.event}</p>
+                          </div>
                         </div>
                       </CardContent>
                     </Card>
