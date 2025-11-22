@@ -44,15 +44,12 @@ const Navigation = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="p-2 rounded-full bg-amber-100/10 backdrop-blur-sm border border-amber-500/30 transition-all duration-300 group-hover:bg-gradient-to-r group-hover:from-red-700 group-hover:to-amber-600 group-hover:scale-110 group-hover:shadow-lg group-hover:shadow-amber-500/50">
-              <ChefHat className="h-5 w-5 md:h-6 md:w-6 text-amber-300 transition-transform duration-300 group-hover:rotate-12" />
-            </div>
-            <div className="flex flex-col">
-              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold font-serif bg-gradient-to-r from-amber-300 to-yellow-500 bg-clip-text text-transparent transition-all duration-300 group-hover:scale-105">
-                Rebekha Catering
-              </h1>
-              <p className="text-xs md:text-sm text-amber-200 italic">Serving Love Since 1998</p>
-            </div>
+            {/* Logo Image */}
+            <img 
+              src='/reblogo.svg' 
+              alt='Rebekha Caterers Logo' 
+              className='h-12 md:h-14 lg:h-16 w-auto transition-all duration-300 group-hover:scale-105'
+            />
           </Link>
 
           {/* Desktop Navigation */}
