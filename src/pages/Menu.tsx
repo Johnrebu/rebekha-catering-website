@@ -11,7 +11,7 @@ import nonVegImage from "@/assets/non-veg-feast.jpg";
 const Menu = () => {
   const vegMenuWithImages = {
     Starters: {
-      image: "https://images.unsplash.com/photo-1626074353765-517a65edd872?w=600&q=80",
+      image: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80",
       items: [
         "Paneer Tikka",
         "Veg Manchurian",
@@ -80,7 +80,7 @@ const Menu = () => {
 
   const nonVegMenuWithImages = {
     Starters: {
-      image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?w=600&q=80",
+      image: "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=600&q=80",
       items: [
         "Chicken 65",
         "Chicken Tikka",
