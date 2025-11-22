@@ -47,10 +47,14 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4 animate-fade-in">
             <div className="group">
-              <h3 className="text-3xl font-bold font-serif mb-2 bg-gradient-to-r from-amber-300 to-yellow-500 bg-clip-text text-transparent transition-all duration-300 group-hover:scale-105">
-                Rebekha Catering
-              </h3>
-              <div className="h-1 w-20 bg-gradient-to-r from-red-700 to-amber-500 rounded-full transition-all duration-300 group-hover:w-32"></div>
+              {/* Logo Badge */}
+              <div className="bg-white p-2 rounded-full inline-block mb-4 shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl">
+                <img 
+                  src='/logo3.png' 
+                  alt='Rebekha Caterers' 
+                  className='h-20 w-auto'
+                />
+              </div>
             </div>
             <p className="text-sm italic text-amber-200 flex items-center gap-2">
               <Heart className="h-4 w-4 fill-current text-red-400 animate-pulse" />
