@@ -15,9 +15,9 @@ import {
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 import { Heart, Users, Utensils, Award, Phone, MessageCircle } from "lucide-react";
+import heroImage from "@/assets/hero-catering.jpg";
 
-// High-quality images for catering (Unsplash for better reliability)
-const heroImage = "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1600&q=80";
+// High-quality images for catering services
 const weddingImage = "https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=1200";
 const birthdayImage = "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=1200";
 const corporateImage = "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=1200";
