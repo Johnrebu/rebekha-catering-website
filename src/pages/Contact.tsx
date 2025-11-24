@@ -16,6 +16,8 @@ const Contact = () => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -24,25 +26,92 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you can add your form submission logic (API call, email service, etc.)
-    console.log("Form submitted:", formData);
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setError("");
     
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        eventType: "",
-        guestCount: "",
-        date: "",
-        message: "",
-      });
-    }, 3000);
+    try {
+      // HubSpot Portal ID
+      const portalId = "244427242";
+      // You'll need to create a form in HubSpot and get the Form GUID
+      // For now, we'll use HubSpot's contact API endpoint
+      
+      const response = await fetch(
+        `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/8dab0ded-7cbd-495b-8690-f9b1615418ee`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fields: [
+              {
+                name: "firstname",
+                value: formData.name.split(" ")[0] || formData.name,
+              },
+              {
+                name: "lastname",
+                value: formData.name.split(" ").slice(1).join(" ") || "",
+              },
+              {
+                name: "email",
+                value: formData.email,
+              },
+              {
+                name: "phone",
+                value: formData.phone,
+              },
+              {
+                name: "event_type",
+                value: formData.eventType,
+              },
+              {
+                name: "guest_count",
+                value: formData.guestCount,
+              },
+              {
+                name: "event_date",
+                value: formData.date,
+              },
+              {
+                name: "message",
+                value: formData.message,
+              },
+            ],
+            context: {
+              pageUri: window.location.href,
+              pageName: "Contact Page",
+            },
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
+
+      setSubmitted(true);
+      
+      // Reset form after 5 seconds
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          eventType: "",
+          guestCount: "",
+          date: "",
+          message: "",
+        });
+      }, 5000);
+    } catch (err) {
+      console.error("Form submission error:", err);
+      setError("Failed to submit form. Please try again or contact us directly via phone or email.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -90,6 +159,12 @@ const Contact = () => {
                     </div>
                   ) : (
                     <form onSubmit={handleSubmit} className="space-y-6">
+                      {error && (
+                        <div className="p-4 rounded-lg bg-red-50 border border-red-200">
+                          <p className="text-red-600 text-sm">{error}</p>
+                        </div>
+                      )}
+                      
                       <div>
                         <label htmlFor="name" className="block text-sm font-semibold mb-2">
                           Your Name *
@@ -101,7 +176,8 @@ const Contact = () => {
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          className="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
+                          disabled={isSubmitting}
+                          className="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                           placeholder="John Elon"
                         />
                       </div>
@@ -118,7 +194,8 @@ const Contact = () => {
                             value={formData.email}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
+                            disabled={isSubmitting}
+                            className="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                             placeholder="john@elon.com"
                           />
                         </div>
@@ -133,7 +210,8 @@ const Contact = () => {
                             value={formData.phone}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
+                            disabled={isSubmitting}
+                            className="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                             placeholder="+91 98765 43210"
                           />
                         </div>
@@ -150,7 +228,8 @@ const Contact = () => {
                             value={formData.eventType}
                             onChange={handleChange}
                             required
-                            className="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
+                            disabled={isSubmitting}
+                            className="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                           >
                             <option value="">Select Event Type</option>
                             <option value="wedding">Wedding</option>
@@ -170,7 +249,8 @@ const Contact = () => {
                             name="guestCount"
                             value={formData.guestCount}
                             onChange={handleChange}
-                            className="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
+                            disabled={isSubmitting}
+                            className="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                             placeholder="100"
                           />
                         </div>
@@ -186,7 +266,8 @@ const Contact = () => {
                           name="date"
                           value={formData.date}
                           onChange={handleChange}
-                          className="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition-all"
+                          disabled={isSubmitting}
+                          className="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                         />
                       </div>
 
@@ -200,17 +281,28 @@ const Contact = () => {
                           value={formData.message}
                           onChange={handleChange}
                           rows={4}
-                          className="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition-all resize-none"
+                          disabled={isSubmitting}
+                          className="w-full px-4 py-3 rounded-lg border border-amber-200 focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 outline-none transition-all resize-none disabled:opacity-50 disabled:cursor-not-allowed"
                           placeholder="Tell us more about your event requirements..."
                         />
                       </div>
 
                       <button
                         type="submit"
-                        className="w-full px-8 py-4 rounded-full bg-gradient-to-r from-red-700 to-amber-600 text-white font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/50 flex items-center justify-center gap-2"
+                        disabled={isSubmitting}
+                        className="w-full px-8 py-4 rounded-full bg-gradient-to-r from-red-700 to-amber-600 text-white font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-amber-500/50 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
                       >
-                        <Send className="h-5 w-5" />
-                        Send Message
+                        {isSubmitting ? (
+                          <>
+                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <Send className="h-5 w-5" />
+                            Send Message
+                          </>
+                        )}
                       </button>
                     </form>
                   )}
