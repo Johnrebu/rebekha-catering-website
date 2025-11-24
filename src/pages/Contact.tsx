@@ -426,6 +426,66 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* Visiting Card Section */}
+      <section className="py-16 bg-gradient-to-b from-background to-muted">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center mb-10">
+            <h2 className="text-3xl font-bold font-serif mb-4 bg-gradient-to-r from-red-700 to-amber-600 bg-clip-text text-transparent">
+              Our Business Card
+            </h2>
+            <p className="text-muted-foreground">
+              Feel free to save and share our contact details
+            </p>
+          </div>
+          
+          <div className="max-w-3xl mx-auto">
+            <Card className="overflow-hidden border-0 shadow-2xl hover:shadow-3xl transition-all duration-500 group">
+              <CardContent className="p-8 bg-gradient-to-br from-white to-amber-50/30">
+                <div className="relative">
+                  <img 
+                    src="/visiting-card.jpg" 
+                    alt="Rebekha Caterers Business Card - Event & Biryani Catering Specialists" 
+                    className="w-full h-auto rounded-xl shadow-xl group-hover:scale-[1.02] transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/5 to-transparent rounded-xl pointer-events-none"></div>
+                </div>
+                
+                <div className="mt-6 flex flex-col sm:flex-row gap-4 justify-center items-center">
+                  <a 
+                    href="/visiting-card.jpg" 
+                    download="Rebekha-Caterers-Business-Card.jpg"
+                    className="px-6 py-3 bg-gradient-to-r from-red-700 to-amber-600 text-white font-semibold rounded-full hover:scale-105 transition-all duration-300 hover:shadow-xl hover:shadow-amber-500/50 flex items-center gap-2"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                    Download Card
+                  </a>
+                  
+                  <button 
+                    onClick={() => {
+                      if (navigator.share) {
+                        navigator.share({
+                          title: 'Rebekha Caterers - Contact',
+                          text: 'Event & Biryani Catering Specialists - Delicious Taste, Professional Service',
+                          url: window.location.href
+                        }).catch(() => {});
+                      }
+                    }}
+                    className="px-6 py-3 bg-white border-2 border-amber-600 text-amber-700 font-semibold rounded-full hover:bg-amber-50 transition-all duration-300 hover:scale-105 flex items-center gap-2"
+                  >
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                    </svg>
+                    Share
+                  </button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Map Section */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4">

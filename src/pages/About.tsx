@@ -168,6 +168,45 @@ const About = () => {
         </div>
       </section>
 
+      {/* Visiting Card Section */}
+      <section className="py-16 bg-gradient-to-b from-background to-muted">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold font-serif mb-3 bg-gradient-to-r from-red-700 to-amber-600 bg-clip-text text-transparent">
+              Connect With Us
+            </h2>
+            <p className="text-muted-foreground">
+              Save our contact details for easy reference
+            </p>
+          </div>
+          
+          <Card className="overflow-hidden border-0 shadow-xl hover:shadow-2xl transition-all duration-300 max-w-2xl mx-auto">
+            <CardContent className="p-6 bg-gradient-to-br from-white to-amber-50/20">
+              <div className="relative group">
+                <img 
+                  src="/visiting-card.jpg" 
+                  alt="Rebekha Caterers Contact Card" 
+                  className="w-full h-auto rounded-lg shadow-lg group-hover:scale-[1.02] transition-transform duration-300"
+                />
+              </div>
+              
+              <div className="mt-4 text-center">
+                <a 
+                  href="/visiting-card.jpg" 
+                  download="Rebekha-Caterers-Card.jpg"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-red-700 to-amber-600 text-white font-semibold rounded-full hover:scale-105 transition-all duration-300 hover:shadow-lg"
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                  </svg>
+                  Download Card
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
       {/* Journey Timeline with Images */}
       <section className="py-20 bg-muted">
         <div className="container mx-auto px-4 max-w-5xl">
