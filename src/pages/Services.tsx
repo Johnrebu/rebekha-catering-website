@@ -157,7 +157,7 @@ const Services = () => {
                     </ul>
 
                     <Link to="/contact">
-                      <button className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-red-700 to-amber-600 text-white font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-amber-500/50 flex items-center gap-3 overflow-hidden">
+                      <button className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-red-700 to-amber-600 text-white font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-amber-500/50 flex items-center gap-3 overflow-hidden magic-hover">
                         <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <Sparkles className="h-5 w-5 relative z-10 transition-transform duration-300 group-hover:rotate-12" />
                         <span className="relative z-10">Get Quote for This Event</span>
@@ -304,12 +304,12 @@ const Services = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/contact">
-              <button className="px-8 py-4 rounded-full bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-bold text-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-yellow-500/60 border-2 border-yellow-400/50">
+              <button className="px-8 py-4 rounded-full bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-bold text-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-yellow-500/60 border-2 border-yellow-400/50 magic-hover">
                 Contact Us Now
               </button>
             </Link>
             <Link to="/menu">
-              <button className="px-8 py-4 rounded-full bg-transparent border-2 border-amber-300 text-amber-100 font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-amber-100/10 hover:border-amber-200 hover:shadow-lg hover:shadow-amber-500/30">
+              <button className="px-8 py-4 rounded-full bg-transparent border-2 border-amber-300 text-amber-100 font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-amber-100/10 hover:border-amber-200 hover:shadow-lg hover:shadow-amber-500/30 magic-hover">
                 View Our Menu
               </button>
             </Link>
@@ -323,3 +323,4 @@ const Services = () => {
 };
 
 export default Services;
+

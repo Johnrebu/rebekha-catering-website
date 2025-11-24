@@ -42,7 +42,7 @@ const Navigation = () => {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
+          <Link to="/" className="flex items-center gap-3 group magic-hover">
             {/* Logo Image */}
             <img 
               src='/reblogo.svg' 
@@ -57,7 +57,7 @@ const Navigation = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className="group relative"
+                className="group relative magic-hover"
               >
                 <span className={`text-sm font-medium transition-all duration-300 ${
                   isActive(link.path) 
@@ -74,7 +74,7 @@ const Navigation = () => {
             
             {/* Contact Us Button - Gold/Mustard Accent */}
             <Link to="/contact">
-              <button className="relative px-5 py-2.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-semibold text-sm transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-yellow-500/60 flex items-center gap-2 group overflow-hidden border-2 border-yellow-400/50">
+              <button className="relative px-5 py-2.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-semibold text-sm transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-yellow-500/60 flex items-center gap-2 group overflow-hidden border-2 border-yellow-400/50 magic-hover">
                 <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <span className="relative z-10">Contact Us</span>
               </button>
@@ -82,7 +82,7 @@ const Navigation = () => {
             
             {/* Call Now Button */}
             <a href="tel:+918925477007">
-              <button className="relative px-5 py-2.5 rounded-full bg-gradient-to-r from-red-700 to-amber-600 text-white font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/50 flex items-center gap-2 group overflow-hidden">
+              <button className="relative px-5 py-2.5 rounded-full bg-gradient-to-r from-red-700 to-amber-600 text-white font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/50 flex items-center gap-2 group overflow-hidden magic-hover">
                 <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <Phone className="h-4 w-4 relative z-10 transition-transform duration-300 group-hover:rotate-12" />
                 <span className="relative z-10">Call Now</span>
@@ -138,7 +138,7 @@ const Navigation = () => {
                 key={link.path}
                 to={link.path}
                 onClick={() => setIsOpen(false)}
-                className="block group"
+                className="block group magic-hover"
                 style={{ 
                   animation: isOpen ? `slideIn 0.3s ease-out ${index * 0.1}s both` : 'none'
                 }}
@@ -162,14 +162,14 @@ const Navigation = () => {
           <div className="space-y-3 pt-6 border-t border-amber-500/20">
             {/* Get a Quote Button */}
             <Link to="/contact" onClick={() => setIsOpen(false)}>
-              <button className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/60 border-2 border-yellow-400/50">
+              <button className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/60 border-2 border-yellow-400/50 magic-hover">
                 Get a Quote
               </button>
             </Link>
             
             {/* Call Now Button */}
             <a href="tel:+918925477007">
-              <button className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-red-700 to-amber-600 text-white font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/50 flex items-center justify-center gap-2 group">
+              <button className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-red-700 to-amber-600 text-white font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/50 flex items-center justify-center gap-2 group magic-hover">
                 <Phone className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
                 <span>Call Now</span>
               </button>

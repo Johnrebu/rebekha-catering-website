@@ -1,4 +1,4 @@
-/* Magic Cursor Styles */
+/* Magic Cursor Styles - Venus Catering Style */
 
 /* Hide default cursor on desktop */
 @media (min-width: 1024px) {
@@ -12,71 +12,66 @@
   }
 }
 
-/* Main cursor dot */
+/* Main cursor dot - small solid white */
 .magic-cursor {
   position: fixed;
-  width: 8px;
-  height: 8px;
-  background: linear-gradient(135deg, #991b1b 0%, #d97706 100%);
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.95);
   border-radius: 50%;
   pointer-events: none;
   z-index: 99999;
   transform: translate(-50%, -50%);
-  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
-  box-shadow: 0 0 10px rgba(153, 27, 27, 0.5);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  mix-blend-mode: difference;
 }
 
 .magic-cursor-pointer {
-  width: 0;
-  height: 0;
   opacity: 0;
+  transform: translate(-50%, -50%) scale(0);
 }
 
 .magic-cursor-hidden {
   opacity: 0;
 }
 
-/* Cursor follower circle */
+/* Cursor follower circle - white outline ring */
 .magic-cursor-follower {
   position: fixed;
-  width: 40px;
-  height: 40px;
-  border: 2px solid rgba(153, 27, 27, 0.3);
+  width: 32px;
+  height: 32px;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  background: transparent;
   border-radius: 50%;
   pointer-events: none;
   z-index: 99998;
   transform: translate(-50%, -50%);
-  transition: width 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
-              height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+  transition: width 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              height 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275),
               border-color 0.3s ease,
+              background 0.3s ease,
               opacity 0.3s ease;
-  animation: magic-cursor-pulse 2s ease-in-out infinite;
+  mix-blend-mode: difference;
 }
 
 .magic-cursor-follower-pointer {
-  width: 60px;
-  height: 60px;
-  border-color: rgba(217, 119, 6, 0.6);
-  background: rgba(217, 119, 6, 0.1);
+  width: 65px;
+  height: 65px;
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.08);
 }
 
 .magic-cursor-follower-hidden {
   opacity: 0;
 }
 
-/* Pulse animation */
-@keyframes magic-cursor-pulse {
-  0%, 100% {
-    transform: translate(-50%, -50%) scale(1);
-  }
-  50% {
-    transform: translate(-50%, -50%) scale(1.1);
-  }
+/* Smooth follow effect with slight delay */
+.magic-cursor {
+  transition-delay: 0s;
 }
 
-/* Smooth follow effect using custom property */
 .magic-cursor-follower {
-  transition-delay: 0.05s;
+  transition-delay: 0.1s;
 }
 
 /* Only show on desktop */
@@ -86,3 +81,4 @@
     display: none;
   }
 }
+

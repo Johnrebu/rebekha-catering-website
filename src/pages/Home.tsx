@@ -184,7 +184,7 @@ const Home = () => {
           >
             {/* Primary Button - View Menu */}
             <Link to="/menu">
-              <button className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-bold text-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-yellow-500/60 flex items-center gap-3 overflow-hidden border-2 border-yellow-400/50 min-w-[200px] justify-center">
+              <button className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-bold text-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-yellow-500/60 flex items-center gap-3 overflow-hidden border-2 border-yellow-400/50 min-w-[200px] justify-center magic-hover">
                 <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 <Utensils className="h-5 w-5 relative z-10 transition-transform duration-300 group-hover:rotate-12" />
                 <span className="relative z-10">View Menu</span>
@@ -193,7 +193,7 @@ const Home = () => {
             
             {/* Secondary Button - Get a Quote (Outline) */}
             <Link to="/contact">
-              <button className="group relative px-8 py-4 rounded-full bg-transparent border-2 border-amber-300 text-amber-100 font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-amber-100/10 hover:border-amber-200 hover:shadow-lg hover:shadow-amber-500/30 flex items-center gap-3 min-w-[200px] justify-center backdrop-blur-sm">
+              <button className="group relative px-8 py-4 rounded-full bg-transparent border-2 border-amber-300 text-amber-100 font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-amber-100/10 hover:border-amber-200 hover:shadow-lg hover:shadow-amber-500/30 flex items-center gap-3 min-w-[200px] justify-center backdrop-blur-sm magic-hover">
                 <Phone className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12" />
                 <span>Get a Quote</span>
               </button>
@@ -466,3 +466,4 @@ const Home = () => {
 };
 
 export default Home;
+

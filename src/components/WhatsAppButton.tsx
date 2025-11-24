@@ -44,6 +44,7 @@ const WhatsAppButton: React.FC = () => {
             animate-pulse-subtle
             group
             block
+            magic-hover
           "
         >
           {/* Official WhatsApp Logo */}
