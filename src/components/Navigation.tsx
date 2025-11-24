@@ -45,7 +45,7 @@ const Navigation = () => {
           <Link to="/" className="flex items-center gap-3 group">
             {/* Logo Image */}
             <img 
-              src='/logo4.png' 
+              src='/reblogo.svg' 
               alt='Rebekha Caterers Logo' 
               className='h-12 md:h-14 lg:h-16 w-auto transition-all duration-300 group-hover:scale-105'
             />
