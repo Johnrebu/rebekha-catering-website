@@ -2,6 +2,43 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Star, Quote, Award, Users, Calendar, TrendingUp } from "lucide-react";
+import { useCountAnimation } from "@/hooks/useCountAnimation";
+
+const AnimatedStat = ({ icon, value, label, color }: { icon: React.ReactNode, value: string, label: string, color: string }) => {
+  // Parse the value to extract number and suffix
+  const parseValue = (val: string) => {
+    const match = val.match(/^(\d+(?:\.\d+)?)(.*)/);
+    if (match) {
+      return { number: parseFloat(match[1]), suffix: match[2] };
+    }
+    return { number: 0, suffix: '' };
+  };
+
+  const { number, suffix } = parseValue(value);
+  const { displayValue, elementRef } = useCountAnimation({ 
+    end: number, 
+    duration: 2500,
+    suffix: suffix
+  });
+
+  return (
+    <div 
+      ref={elementRef}
+      className="group relative overflow-hidden rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300"
+    >
+      <div className={`absolute inset-0 bg-gradient-to-br ${color} opacity-10 group-hover:opacity-20 transition-opacity`}></div>
+      <div className="relative z-10">
+        <div className={`inline-flex p-3 rounded-full bg-gradient-to-br ${color} text-white mb-3`}>
+          {icon}
+        </div>
+        <div className={`text-4xl md:text-5xl font-bold bg-gradient-to-r ${color} bg-clip-text text-transparent mb-2`}>
+          {displayValue}
+        </div>
+        <div className="text-sm text-muted-foreground font-medium">{label}</div>
+      </div>
+    </div>
+  );
+};
 
 const Testimonials = () => {
   const testimonials = [
@@ -24,7 +61,7 @@ const Testimonials = () => {
       color: "from-blue-500 to-cyan-500"
     },
     {
-      name: "Anjali Menon",
+      name: "Anjali",
       event: "Birthday Party",
       rating: 5,
       date: "October 2024",
@@ -33,7 +70,7 @@ const Testimonials = () => {
       color: "from-purple-500 to-pink-500"
     },
     {
-      name: "Suresh Iyer",
+      name: "Suresh Kumar",
       event: "50th Wedding Anniversary",
       rating: 5,
       date: "September 2024",
@@ -87,7 +124,7 @@ const Testimonials = () => {
       color: "from-violet-500 to-purple-500"
     },
     {
-      name: "Vikram Reddy",
+      name: "Vikram",
       event: "Retirement Party",
       rating: 5,
       date: "March 2024",
@@ -105,7 +142,7 @@ const Testimonials = () => {
       color: "from-yellow-500 to-amber-500"
     },
     {
-      name: "Arjun Nair",
+      name: "Saravanan",
       event: "Corporate Seminar",
       rating: 5,
       date: "January 2024",
@@ -172,21 +209,13 @@ const Testimonials = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {stats.map((stat, index) => (
-              <div 
+              <AnimatedStat
                 key={index}
-                className="group relative overflow-hidden rounded-2xl p-6 text-center hover:scale-105 transition-all duration-300"
-              >
-                <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-10 group-hover:opacity-20 transition-opacity`}></div>
-                <div className="relative z-10">
-                  <div className={`inline-flex p-3 rounded-full bg-gradient-to-br ${stat.color} text-white mb-3`}>
-                    {stat.icon}
-                  </div>
-                  <div className={`text-4xl md:text-5xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2`}>
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-muted-foreground font-medium">{stat.label}</div>
-                </div>
-              </div>
+                icon={stat.icon}
+                value={stat.value}
+                label={stat.label}
+                color={stat.color}
+              />
             ))}
           </div>
         </div>
