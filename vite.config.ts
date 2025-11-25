@@ -35,13 +35,10 @@ export default defineConfig(({ mode }) => ({
     },
     // Chunk size warnings
     chunkSizeWarningLimit: 1000,
-    // Minification
-    minify: 'terser',
-    terserOptions: {
-      compress: {
-        drop_console: mode === 'production',
-        drop_debugger: mode === 'production',
-      },
+    // Minification (esbuild is default and faster)
+    minify: 'esbuild',
+    esbuild: {
+      drop: mode === 'production' ? ['console', 'debugger'] : [],
     },
     // CSS code splitting
     cssCodeSplit: true,

@@ -45,9 +45,9 @@ const Navigation = () => {
           <Link to="/" className="flex items-center gap-3 group magic-hover">
             {/* Logo Image */}
             <img 
-              src='/reblogo.svg' 
+              src='/reblogo.png' 
               alt='Rebekha Caterers Logo' 
-              className='h-12 md:h-14 lg:h-16 w-auto transition-all duration-300 group-hover:scale-105'
+              className='h-16 md:h-20 lg:h-24 w-auto transition-all duration-300 group-hover:scale-105'
             />
           </Link>
 

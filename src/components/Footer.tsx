@@ -48,11 +48,12 @@ const Footer = () => {
           <div className="space-y-4 animate-fade-in">
             <div className="group">
               {/* Logo Badge */}
-              <div className="bg-white p-2 rounded-full inline-block mb-4 shadow-lg transition-all duration-300 group-hover:scale-105 group-hover:shadow-xl">
+              {/* Logo Badge */}
+              <div className="inline-block mb-4 transition-all duration-300 group-hover:scale-105">
                 <img 
-                  src='/logo3.png' 
+                  src='/reblogo.png' 
                   alt='Rebekha Caterers' 
-                  className='h-20 w-auto'
+                  className='h-24 w-auto rounded-xl'
                 />
               </div>
             </div>
