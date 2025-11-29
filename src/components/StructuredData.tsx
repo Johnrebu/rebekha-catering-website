@@ -1,12 +1,41 @@
 import { Helmet } from "react-helmet-async";
 
 const StructuredData = () => {
+  // Organization schema with logo - critical for Google search results
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Rebekha Catering Services",
+    "url": "https://rebekhacaterers.online",
+    "logo": "https://rebekhacaterers.online/reblogo.png",
+    "image": "https://rebekhacaterers.online/reblogo.png",
+    "description": "Premium veg & non-veg catering services in West Tambaram, Chennai. Serving love since 1998.",
+    "foundingDate": "1998",
+    "slogan": "Serving Love Since 1998",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "West Tambaram",
+      "addressLocality": "Chennai",
+      "addressRegion": "Tamil Nadu",
+      "addressCountry": "IN"
+    },
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "telephone": "+91-XXXXXXXXXX",
+      "contactType": "customer service",
+      "areaServed": "IN",
+      "availableLanguage": ["English", "Tamil"]
+    }
+  };
+
   const localBusinessSchema = {
     "@context": "https://schema.org",
     "@type": "Restaurant",
     "name": "Rebekha Catering Services",
-    "image": "https://lovable.dev/opengraph-image-p98pqg.png",
+    "image": "https://rebekhacaterers.online/reblogo.png",
+    "logo": "https://rebekhacaterers.online/reblogo.png",
     "description": "Premium veg & non-veg catering services in West Tambaram, Chennai. Authentic homemade taste for weddings, birthdays, corporate events.",
+    "url": "https://rebekhacaterers.online",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "West Tambaram",
@@ -83,6 +112,9 @@ const StructuredData = () => {
 
   return (
     <Helmet>
+      <script type="application/ld+json">
+        {JSON.stringify(organizationSchema)}
+      </script>
       <script type="application/ld+json">
         {JSON.stringify(localBusinessSchema)}
       </script>
