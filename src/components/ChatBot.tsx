@@ -24,8 +24,68 @@ const ChatBot: React.FC = () => {
       address: "#19, Perumal Koil Street, Irumbuliyur, Tambaram (W), Chennai - 600045",
       mobile: ["9445435102", "9445435103"],
       email: "rebekhacaterers@gmail.com",
-      proprietor: "Rebekha Raj"
+      proprietor: "Rebekha Raj",
+      founded: 1998,
+      experience: "Over 25 years",
+      location: "West Tambaram, Chennai",
+      founders: {
+        cofounder1: "Christopher Durairaj",
+        cofounder2: "Nancy Navaneetham"
+      },
+      philosophy: "We don't just serve food. We serve love, tradition, and unforgettable memories."
     };
+
+    // Core Values
+    const coreValues = [
+      {
+        title: "Family Legacy",
+        description: "Family-driven legacy of taste and tradition spanning over 25 years"
+      },
+      {
+        title: "Hygienic Standards",
+        description: "Strict hygiene protocols and fresh, quality ingredients in every dish"
+      },
+      {
+        title: "Veg & Non-Veg",
+        description: "Comprehensive menu options for all dietary preferences and needs"
+      },
+      {
+        title: "Custom Menus",
+        description: "Personalized menu creation for your unique event requirements"
+      },
+      {
+        title: "Professional Team",
+        description: "Experienced staff ensuring flawless execution and presentation"
+      },
+      {
+        title: "Excellence",
+        description: "Committed to exceeding expectations in every catering experience"
+      }
+    ];
+
+    // Company Journey
+    const journey = [
+      {
+        year: 1998,
+        milestone: "The Beginning",
+        description: "Started in a small home kitchen with a dream to bring authentic, homemade taste to celebrations"
+      },
+      {
+        year: 2005,
+        milestone: "Growing Recognition",
+        description: "Expanded services to include corporate events and large-scale weddings"
+      },
+      {
+        year: 2015,
+        milestone: "Culinary Innovation",
+        description: "Introduced fusion menus and specialized dietary options while maintaining traditional roots"
+      },
+      {
+        year: 2025,
+        milestone: "Today & Beyond",
+        description: "Continuing to serve love with over 25 years of experience, thousands of satisfied clients, and a commitment to excellence"
+      }
+    ];
 
     // Menu Items
     const menuItems = {
@@ -79,6 +139,77 @@ const ChatBot: React.FC = () => {
     ];
 
     // Response patterns
+    
+    // About Us / Company History
+    if (lowerMessage.includes("about") || lowerMessage.includes("history") || lowerMessage.includes("story") || lowerMessage.includes("who are you") || lowerMessage.includes("tell me about")) {
+      return `🏛️ About Rebekha Caterers\n\n` +
+        `📜 Our Story:\n` +
+        `Founded in ${companyInfo.founded}, Rebekha Catering Services began as a small family venture with a big vision: to create exceptional catering experiences that blend traditional flavors with modern culinary techniques.\n\n` +
+        `👨‍🍳 Our Founders:\n` +
+        `${companyInfo.founders.cofounder1} and ${companyInfo.founders.cofounder2} started this journey in a modest kitchen in ${companyInfo.location}, crafting signature dishes using recipes passed down through generations.\n\n` +
+        `⏳ Experience: ${companyInfo.experience} of serving love, tradition, and unforgettable memories\n\n` +
+        `💭 Our Philosophy:\n` +
+        `"${companyInfo.philosophy}"\n\n` +
+        `📍 Location: ${companyInfo.location}\n\n` +
+        `Want to know more? Ask about our values, journey, or services!`;
+    }
+
+    // Founders
+    if (lowerMessage.includes("founder") || lowerMessage.includes("owner") || lowerMessage.includes("christopher") || lowerMessage.includes("nancy")) {
+      return `👨‍🍳 Meet Our Founders\n\n` +
+        `👤 ${companyInfo.founders.cofounder1} - Co-Founder\n` +
+        `The visionary behind our authentic recipes and quality standards. Christopher's passion for traditional cooking methods combined with innovative presentation has been the cornerstone of our success.\n\n` +
+        `👤 ${companyInfo.founders.cofounder2} - Co-Founder\n` +
+        `The heart of our operations and customer relations. Nancy's attention to detail and commitment to hygiene has set the gold standard for our catering services.\n\n` +
+        `Together, they started Rebekha Caterers in ${companyInfo.founded} in ${companyInfo.location}, bringing authentic flavors and genuine hospitality to celebrations across Chennai.\n\n` +
+        `📱 Contact: ${companyInfo.mobile[0]}`;
+    }
+
+    // Values / Why Choose Us
+    if (lowerMessage.includes("value") || lowerMessage.includes("why choose") || lowerMessage.includes("why rebekha") || lowerMessage.includes("what makes you")) {
+      return `✨ Why Choose Rebekha Caterers?\n\n` +
+        `🏆 Our Core Values:\n\n` +
+        `💝 Family Legacy\n` +
+        `   ${coreValues[0].description}\n\n` +
+        `🛡️ Hygienic Standards\n` +
+        `   ${coreValues[1].description}\n\n` +
+        `🍽️ Veg & Non-Veg Options\n` +
+        `   ${coreValues[2].description}\n\n` +
+        `✨ Custom Menus\n` +
+        `   ${coreValues[3].description}\n\n` +
+        `👥 Professional Team\n` +
+        `   ${coreValues[4].description}\n\n` +
+        `🏅 Excellence\n` +
+        `   ${coreValues[5].description}\n\n` +
+        `💭 "${companyInfo.philosophy}"\n\n` +
+        `With ${companyInfo.experience} of experience, we've served thousands of satisfied clients!`;
+    }
+
+    // Journey / Milestones
+    if (lowerMessage.includes("journey") || lowerMessage.includes("milestone") || lowerMessage.includes("growth") || lowerMessage.includes("evolution")) {
+      return `📅 Our Journey Through the Years\n\n` +
+        `🎯 ${journey[0].year} - ${journey[0].milestone}\n` +
+        `   ${journey[0].description}\n\n` +
+        `🎯 ${journey[1].year} - ${journey[1].milestone}\n` +
+        `   ${journey[1].description}\n\n` +
+        `🎯 ${journey[2].year} - ${journey[2].milestone}\n` +
+        `   ${journey[2].description}\n\n` +
+        `🎯 ${journey[3].year} - ${journey[3].milestone}\n` +
+        `   ${journey[3].description}\n\n` +
+        `From a small home kitchen to serving thousands of events - our commitment to quality and authenticity remains unchanged! 🌟\n\n` +
+        `📱 Be part of our story: ${companyInfo.mobile[0]}`;
+    }
+
+    // Experience / How long
+    if (lowerMessage.includes("experience") || lowerMessage.includes("how long") || lowerMessage.includes("years") || lowerMessage.includes("established")) {
+      return `⏳ Our Experience\n\n` +
+        `📅 Founded: ${companyInfo.founded}\n` +
+        `🎊 Experience: ${companyInfo.experience}\n` +
+        `📍 Location: ${companyInfo.location}\n\n` +
+        `Since ${companyInfo.founded}, we've been serving authentic flavors and creating unforgettable memories for thousands of events across Chennai.\n\n` +
+        `From intimate family gatherings to grand weddings and corporate events, we bring the same dedication and quality to every occasion.\n\n` +
+        `Want to know more about our journey? Just ask!`;
+    }
     
     // Greetings
     if (lowerMessage.match(/^(hi|hello|hey|good morning|good afternoon|good evening|namaste)/)) {
