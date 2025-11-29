@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import { MessageCircle, X, Send, Loader2 } from "lucide-react";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 
 interface Message {
   role: "user" | "assistant";
@@ -15,48 +14,283 @@ const ChatBot: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // Initialize Gemini AI
-  const getGeminiResponse = async (userMessage: string): Promise<string> => {
-    try {
-      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-      
-      if (!apiKey || apiKey === "your_api_key_here") {
-        return "⚠️ API key not configured. Please add your Gemini API key to the .env file. Visit https://makersuite.google.com/app/apikey to get your free key!";
+  // Knowledge-based response system
+  const getKnowledgeBasedResponse = (userMessage: string): string => {
+    const lowerMessage = userMessage.toLowerCase();
+
+    // Company Information
+    const companyInfo = {
+      name: "Rebekha Caterers",
+      address: "#19, Perumal Koil Street, Irumbuliyur, Tambaram (W), Chennai - 600045",
+      mobile: ["9445435102", "9445435103"],
+      email: "rebekhacaterers@gmail.com",
+      proprietor: "Rebekha Raj"
+    };
+
+    // Menu Items
+    const menuItems = {
+      mainCourse: [
+        "Biryani Base (Depends on package chosen)",
+        "Mutton Biryani",
+        "Vegetarian Biryani",
+        "Leghorn Chicken Biryani"
+      ],
+      sideDishs: [
+        "Chicken 65",
+        "Chicken Gravy",
+        "Brinjal Gravy",
+        "Onion Raitha"
+      ],
+      desserts: [
+        "Fruit Salad",
+        "Ice Cream (Unlimited Self-service)"
+      ]
+    };
+
+    // Package Rates (Per Person Basis)
+    const packages = [
+      {
+        name: "Mutton Biryani Package",
+        rate: "₹380 per person",
+        features: "Includes full menu with Mutton Biryani as the base",
+        example: "For 1500 guests: ₹5,70,000 (Rupees Five Lakhs Seventy Thousand Only)"
+      },
+      {
+        name: "Veg / Leghorn Chicken Biryani Package",
+        rate: "₹320 per person",
+        features: "Includes full menu with either Veg or Leghorn Chicken Biryani as the base",
+        example: "For 1500 guests: ₹4,80,000 (Rupees Four Lakhs Eighty Thousand Only)"
       }
+    ];
 
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    // Bulk Quantity Options
+    const bulkOptions = [
+      {
+        name: "Bulk Mutton Rate",
+        quantity: "120 kg",
+        rate: "₹750 per kg",
+        total: "₹90,000 (Rupees Ninety Thousand Only)"
+      },
+      {
+        name: "Bulk Leghorn Chicken Rate",
+        quantity: "200 kg (Total Price)",
+        total: "₹40,000 (Rupees Forty Thousand Only)"
+      }
+    ];
 
-      // System prompt with catering business context
-      const systemPrompt = `You are a helpful customer support assistant for Rebekha Caterers, a premium catering service based in Tamil Nadu, India.
-
-Business Information:
-- Company: Rebekha Caterers
-- Services: Full-service catering for weddings, corporate events, birthday parties, and all special occasions
-- Specialties: Both vegetarian and non-vegetarian menus with authentic South Indian, North Indian, and fusion cuisines
-- Menu Options: Traditional South Indian dishes, North Indian curries, Chinese fusion, live counters (dosa, chaat, etc.)
-- Contact: Phone/WhatsApp: +91 89254 77007
-- Service Area: Tamil Nadu and surrounding regions
-- Experience: Professional team with years of experience in event catering
-
-Your Role:
-- Answer questions about our catering services, menus, pricing, and availability
-- Be friendly, professional, and helpful
-- Provide specific information when possible
-- Encourage customers to contact us via WhatsApp or phone for bookings and detailed quotes
-- If you don't know specific pricing or availability, politely direct them to contact us directly
-
-Tone: Warm, professional, and enthusiastic about helping customers plan their perfect event.`;
-
-      const fullPrompt = `${systemPrompt}\n\nCustomer Question: ${userMessage}\n\nAssistant Response:`;
-
-      const result = await model.generateContent(fullPrompt);
-      const response = await result.response;
-      return response.text();
-    } catch (error) {
-      console.error("Gemini API Error:", error);
-      return "I apologize, but I'm having trouble connecting right now. Please try again in a moment, or contact us directly at +91 89254 77007 (WhatsApp available).";
+    // Response patterns
+    
+    // Greetings
+    if (lowerMessage.match(/^(hi|hello|hey|good morning|good afternoon|good evening|namaste)/)) {
+      return `Hello! 👋 Welcome to Rebekha Caterers!\n\nWe're Chennai's premier catering service specializing in memorable events.\n\nHow can I help you today?\n• Package pricing\n• Menu options\n• Bulk orders\n• Contact information\n\nFeel free to ask me anything!`;
     }
+
+    // Contact information
+    if (lowerMessage.includes("contact") || lowerMessage.includes("phone") || lowerMessage.includes("mobile") || lowerMessage.includes("call") || lowerMessage.includes("email") || lowerMessage.includes("address")) {
+      return `📞 Contact Information:\n\n` +
+        `📱 Mobile: ${companyInfo.mobile.join(" / ")}\n` +
+        `📧 Email: ${companyInfo.email}\n` +
+        `📍 Address: ${companyInfo.address}\n` +
+        `👤 Proprietor: ${companyInfo.proprietor}\n\n` +
+        `Feel free to reach out via phone or WhatsApp for bookings and detailed quotes!`;
+    }
+
+    // Pricing and packages
+    if (lowerMessage.includes("price") || lowerMessage.includes("cost") || lowerMessage.includes("rate") || lowerMessage.includes("package") || lowerMessage.includes("quote") || lowerMessage.includes("quotation")) {
+      return `💰 Our Catering Packages:\n\n` +
+        `📦 OPTION 1: Mutton Biryani Package\n` +
+        `   Rate: ₹380 per person\n` +
+        `   Example: For 1500 guests = ₹5,70,000\n\n` +
+        `📦 OPTION 2: Veg / Leghorn Chicken Biryani Package\n` +
+        `   Rate: ₹320 per person\n` +
+        `   Example: For 1500 guests = ₹4,80,000\n\n` +
+        `✨ Package rates include service charges\n\n` +
+        `💡 Note: All packages include the complete menu with appetizers, main course, sides, and unlimited ice cream!\n\n` +
+        `For a customized quote for your event, please contact us at ${companyInfo.mobile[0]}.`;
+    }
+
+    // Menu queries
+    if (lowerMessage.includes("menu") || lowerMessage.includes("food") || lowerMessage.includes("dish") || lowerMessage.includes("item")) {
+      return `🍽️ Our Catering Menu:\n\n` +
+        `🍛 MAIN COURSE:\n` +
+        `   • Biryani Base (Mutton/Veg/Leghorn Chicken)\n\n` +
+        `🥘 NON-VEG SIDE DISH (Choose one):\n` +
+        `   • Chicken 65 OR\n` +
+        `   • Chicken Gravy\n\n` +
+        `🍆 VEGETARIAN SIDES:\n` +
+        `   • Brinjal Gravy\n` +
+        `   • Onion Raitha\n\n` +
+        `🍨 DESSERTS:\n` +
+        `   • Fruit Salad\n` +
+        `   • Ice Cream (Unlimited Self-service)\n\n` +
+        `✅ All menu items are included in our package rates!\n\n` +
+        `Want to customize your menu? Contact us at ${companyInfo.mobile[0]}.`;
+    }
+
+    // Bulk orders
+    if (lowerMessage.includes("bulk") || lowerMessage.includes("wholesale") || lowerMessage.includes("large quantity")) {
+      return `📦 Bulk Quantity Options:\n\n` +
+        `(These are for bulk supply only, outside of per-person packages)\n\n` +
+        `🍖 Bulk Mutton Rate:\n` +
+        `   Quantity: 120 kg\n` +
+        `   Rate: ₹750 per kg\n` +
+        `   Total: ₹90,000\n\n` +
+        `🍗 Bulk Leghorn Chicken Rate:\n` +
+        `   Quantity: 200 kg\n` +
+        `   Total Price: ₹40,000\n\n` +
+        `For bulk orders or special requirements, please contact us at ${companyInfo.mobile[0]}.`;
+    }
+
+    // Mutton specific
+    if (lowerMessage.includes("mutton") || lowerMessage.includes("lamb")) {
+      return `🍖 Mutton Options:\n\n` +
+        `📦 Mutton Biryani Package:\n` +
+        `   ₹380 per person (includes full menu)\n` +
+        `   Example: 1500 guests = ₹5,70,000\n\n` +
+        `📦 Bulk Mutton Rate:\n` +
+        `   120 kg @ ₹750 per kg\n` +
+        `   Total: ₹90,000\n\n` +
+        `Our mutton biryani is prepared with authentic spices and premium quality meat!\n\n` +
+        `Contact us for bookings: ${companyInfo.mobile[0]}`;
+    }
+
+    // Chicken specific
+    if (lowerMessage.includes("chicken")) {
+      return `🍗 Chicken Options:\n\n` +
+        `📦 Leghorn Chicken Biryani Package:\n` +
+        `   ₹320 per person (includes full menu)\n\n` +
+        `🥘 Non-Veg Side Dishes:\n` +
+        `   • Chicken 65\n` +
+        `   • Chicken Gravy\n` +
+        `   (Choose one with your package)\n\n` +
+        `📦 Bulk Leghorn Chicken:\n` +
+        `   200 kg - ₹40,000 (total price)\n\n` +
+        `Fresh, tender chicken prepared with our signature recipes!\n\n` +
+        `Call us for more details: ${companyInfo.mobile[0]}`;
+    }
+
+    // Vegetarian specific
+    if (lowerMessage.includes("veg") || lowerMessage.includes("vegetarian")) {
+      return `🥗 Vegetarian Options:\n\n` +
+        `📦 Vegetarian Biryani Package:\n` +
+        `   ₹320 per person\n` +
+        `   Example: 1500 guests = ₹4,80,000\n\n` +
+        `🥘 Included Vegetarian Items:\n` +
+        `   • Vegetarian Biryani (Main Course)\n` +
+        `   • Brinjal Gravy\n` +
+        `   • Onion Raitha\n` +
+        `   • Fruit Salad\n` +
+        `   • Ice Cream (Unlimited)\n\n` +
+        `Delicious vegetarian cuisine with authentic flavors!\n\n` +
+        `Contact: ${companyInfo.mobile[0]}`;
+    }
+
+    // Ice cream
+    if (lowerMessage.includes("ice cream") || lowerMessage.includes("icecream") || lowerMessage.includes("dessert")) {
+      return `🍨 Dessert Offerings:\n\n` +
+        `✨ Unlimited Self-Service Ice Cream included in all packages!\n\n` +
+        `We also serve:\n` +
+        `   • Fresh Fruit Salad\n\n` +
+        `All desserts are included in our per-person package rates.\n\n` +
+        `Sweet endings for your special occasions! 🎉`;
+    }
+
+    // Event types
+    if (lowerMessage.includes("wedding") || lowerMessage.includes("marriage") || lowerMessage.includes("event") || lowerMessage.includes("party") || lowerMessage.includes("function")) {
+      return `🎉 We Cater All Types of Events!\n\n` +
+        `Our services are perfect for:\n` +
+        `   • Weddings & Receptions\n` +
+        `   • Corporate Events\n` +
+        `   • Birthday Parties\n` +
+        `   • Anniversary Celebrations\n` +
+        `   • Family Gatherings\n` +
+        `   • Religious Functions\n\n` +
+        `📊 Sample Pricing:\n` +
+        `   • Mutton Biryani Package: ₹380/person\n` +
+        `   • Veg/Chicken Biryani Package: ₹320/person\n\n` +
+        `Package rates include service charges and full menu!\n\n` +
+        `Let's make your event memorable! Call: ${companyInfo.mobile[0]}`;
+    }
+
+    // Guest count / capacity
+    if (lowerMessage.includes("guest") || lowerMessage.includes("people") || lowerMessage.includes("person") || lowerMessage.includes("capacity") || lowerMessage.match(/\d+/)) {
+      const numbers = lowerMessage.match(/\d+/);
+      if (numbers) {
+        const guestCount = parseInt(numbers[0]);
+        const muttonTotal = guestCount * 380;
+        const vegChickenTotal = guestCount * 320;
+        
+        return `📊 Pricing for ${guestCount} Guests:\n\n` +
+          `📦 OPTION 1: Mutton Biryani Package\n` +
+          `   ₹380 × ${guestCount} = ₹${muttonTotal.toLocaleString('en-IN')}\n\n` +
+          `📦 OPTION 2: Veg/Chicken Biryani Package\n` +
+          `   ₹320 × ${guestCount} = ₹${vegChickenTotal.toLocaleString('en-IN')}\n\n` +
+          `✅ Includes complete menu with unlimited ice cream!\n` +
+          `✅ Service charges included\n\n` +
+          `For a detailed quotation, contact us:\n` +
+          `📱 ${companyInfo.mobile[0]} / ${companyInfo.mobile[1]}`;
+      }
+    }
+
+    // Service charges
+    if (lowerMessage.includes("service") || lowerMessage.includes("charge") || lowerMessage.includes("include")) {
+      return `✅ What's Included in Our Packages:\n\n` +
+        `📋 Package rates include:\n` +
+        `   ✓ Service charges\n` +
+        `   ✓ Complete menu items\n` +
+        `   ✓ Unlimited ice cream (self-service)\n` +
+        `   ✓ Professional serving staff\n\n` +
+        `💰 Our Packages:\n` +
+        `   • Mutton Biryani: ₹380/person\n` +
+        `   • Veg/Chicken Biryani: ₹320/person\n\n` +
+        `No hidden charges - transparent pricing!\n\n` +
+        `Contact: ${companyInfo.mobile[0]}`;
+    }
+
+    // Booking process
+    if (lowerMessage.includes("book") || lowerMessage.includes("reserve") || lowerMessage.includes("order") || lowerMessage.includes("how to")) {
+      return `📞 How to Book Our Services:\n\n` +
+        `1️⃣ Contact us via:\n` +
+        `   📱 Phone/WhatsApp: ${companyInfo.mobile[0]}\n` +
+        `   📱 Alternate: ${companyInfo.mobile[1]}\n` +
+        `   📧 Email: ${companyInfo.email}\n\n` +
+        `2️⃣ Share your event details:\n` +
+        `   • Date & Time\n` +
+        `   • Guest count\n` +
+        `   • Preferred package\n` +
+        `   • Location\n\n` +
+        `3️⃣ Receive a detailed quotation\n\n` +
+        `4️⃣ Confirm your booking\n\n` +
+        `We're here to make your event special! 🎉`;
+    }
+
+    // Thank you / appreciation
+    if (lowerMessage.includes("thank") || lowerMessage.includes("thanks")) {
+      return `You're welcome! 😊\n\n` +
+        `Thank you for choosing Rebekha Caterers!\n\n` +
+        `For bookings or queries:\n` +
+        `📱 ${companyInfo.mobile[0]} / ${companyInfo.mobile[1]}\n` +
+        `📧 ${companyInfo.email}\n\n` +
+        `We look forward to serving you! 🎉`;
+    }
+
+    // Default response with comprehensive information
+    return `I'm here to help you with Rebekha Caterers services! 😊\n\n` +
+      `🔍 I can provide information about:\n\n` +
+      `💰 Pricing & Packages:\n` +
+      `   • Mutton Biryani: ₹380/person\n` +
+      `   • Veg/Chicken Biryani: ₹320/person\n\n` +
+      `🍽️ Menu Items:\n` +
+      `   • Biryani varieties\n` +
+      `   • Side dishes\n` +
+      `   • Unlimited ice cream\n\n` +
+      `📦 Bulk Orders:\n` +
+      `   • Mutton: 120kg @ ₹750/kg\n` +
+      `   • Chicken: 200kg @ ₹40,000\n\n` +
+      `📞 Contact Details:\n` +
+      `   • ${companyInfo.mobile[0]} / ${companyInfo.mobile[1]}\n` +
+      `   • ${companyInfo.email}\n\n` +
+      `What would you like to know? Ask me about pricing, menu, bulk orders, or bookings!`;
   };
 
   // Scroll to bottom when new messages arrive
@@ -77,7 +311,7 @@ Tone: Warm, professional, and enthusiastic about helping customers plan their pe
     }
   }, [isOpen]);
 
-  const handleSend = async () => {
+  const handleSend = () => {
     if (message.trim() && !isLoading) {
       const userMessage: Message = {
         role: "user",
@@ -89,8 +323,8 @@ Tone: Warm, professional, and enthusiastic about helping customers plan their pe
       setMessage("");
       setIsLoading(true);
 
-      // Get AI response
-      const aiResponse = await getGeminiResponse(userMessage.content);
+      // Get knowledge-based response
+      const aiResponse = getKnowledgeBasedResponse(userMessage.content);
 
       const assistantMessage: Message = {
         role: "assistant",
@@ -98,8 +332,11 @@ Tone: Warm, professional, and enthusiastic about helping customers plan their pe
         timestamp: new Date(),
       };
 
-      setMessages((prev) => [...prev, assistantMessage]);
-      setIsLoading(false);
+      // Add a small delay to make it feel more natural
+      setTimeout(() => {
+        setMessages((prev) => [...prev, assistantMessage]);
+        setIsLoading(false);
+      }, 500);
     }
   };
 
