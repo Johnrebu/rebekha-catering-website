@@ -7,7 +7,6 @@ import { lazy, Suspense } from "react";
 import ChatBot from "@/components/ChatBot";
 import { AuthProvider } from "@/contexts/AuthContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
-import SupabaseTest from "@/components/SupabaseTest";
 
 // Lazy load page components for better code splitting
 const Home = lazy(() => import("./pages/Home"));
@@ -43,7 +42,6 @@ const App = () => {
           <Toaster />
           <Sonner />
           <ChatBot />
-          <SupabaseTest />
           <BrowserRouter>
             <Suspense fallback={<PageLoader />}>
               <Routes>
