@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone, ChefHat } from "lucide-react";
+import { Menu, X, Phone, ChefHat, User, LogOut } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const { user, signOut } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -72,13 +74,48 @@ const Navigation = () => {
               </Link>
             ))}
             
-            {/* Contact Us Button - Gold/Mustard Accent */}
-            <Link to="/contact">
-              <button className="relative px-5 py-2.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-semibold text-sm transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-yellow-500/60 flex items-center gap-2 group overflow-hidden border-2 border-yellow-400/50 magic-hover">
-                <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <span className="relative z-10">Contact Us</span>
-              </button>
-            </Link>
+            {/* Auth Buttons - Conditional based on user state */}
+            {user ? (
+              <>
+                {/* Dashboard Button */}
+                <Link to="/dashboard">
+                  <button className="relative px-5 py-2.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-semibold text-sm transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-yellow-500/60 flex items-center gap-2 group overflow-hidden border-2 border-yellow-400/50 magic-hover">
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <User className="h-4 w-4 relative z-10" />
+                    <span className="relative z-10">Dashboard</span>
+                  </button>
+                </Link>
+                
+                {/* Logout Button */}
+                <button 
+                  onClick={signOut}
+                  className="relative px-5 py-2.5 rounded-full bg-gradient-to-r from-red-700 to-amber-600 text-white font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/50 flex items-center gap-2 group overflow-hidden magic-hover"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <LogOut className="h-4 w-4 relative z-10 transition-transform duration-300" />
+                  <span className="relative z-10">Logout</span>
+                </button>
+              </>
+            ) : (
+              <>
+                {/* Contact Us Button */}
+                <Link to="/contact">
+                  <button className="relative px-5 py-2.5 rounded-full bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-semibold text-sm transition-all duration-300 hover:scale-110 hover:shadow-xl hover:shadow-yellow-500/60 flex items-center gap-2 group overflow-hidden border-2 border-yellow-400/50 magic-hover">
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-400 to-yellow-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <span className="relative z-10">Contact Us</span>
+                  </button>
+                </Link>
+                
+                {/* Login Button */}
+                <Link to="/login">
+                  <button className="relative px-5 py-2.5 rounded-full bg-gradient-to-r from-red-700 to-amber-600 text-white font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/50 flex items-center gap-2 group overflow-hidden magic-hover">
+                    <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <User className="h-4 w-4 relative z-10 transition-transform duration-300" />
+                    <span className="relative z-10">Login</span>
+                  </button>
+                </Link>
+              </>
+            )}
             
             {/* Call Now Button */}
             <a href="tel:+918925477007">
@@ -160,12 +197,43 @@ const Navigation = () => {
 
           {/* Bottom Buttons */}
           <div className="space-y-3 pt-6 border-t border-amber-500/20">
-            {/* Get a Quote Button */}
-            <Link to="/contact" onClick={() => setIsOpen(false)}>
-              <button className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/60 border-2 border-yellow-400/50 magic-hover">
-                Get a Quote
-              </button>
-            </Link>
+            {user ? (
+              <>
+                {/* Dashboard Button */}
+                <Link to="/dashboard" onClick={() => setIsOpen(false)}>
+                  <button className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/60 border-2 border-yellow-400/50 magic-hover flex items-center justify-center gap-2">
+                    <User className="h-5 w-5" />
+                    <span>My Dashboard</span>
+                  </button>
+                </Link>
+                
+                {/* Logout Button */}
+                <button 
+                  onClick={() => { signOut(); setIsOpen(false); }}
+                  className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-red-700 to-amber-600 text-white font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/50 flex items-center justify-center gap-2 group magic-hover"
+                >
+                  <LogOut className="h-5 w-5 transition-transform duration-300" />
+                  <span>Logout</span>
+                </button>
+              </>
+            ) : (
+              <>
+                {/* Login Button */}
+                <Link to="/login" onClick={() => setIsOpen(false)}>
+                  <button className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/60 border-2 border-yellow-400/50 magic-hover flex items-center justify-center gap-2">
+                    <User className="h-5 w-5" />
+                    <span>Login</span>
+                  </button>
+                </Link>
+                
+                {/* Register Button */}
+                <Link to="/register" onClick={() => setIsOpen(false)}>
+                  <button className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-red-700 to-amber-600 text-white font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/50 flex items-center justify-center gap-2 group magic-hover">
+                    <span>Create Account</span>
+                  </button>
+                </Link>
+              </>
+            )}
             
             {/* Call Now Button */}
             <a href="tel:+918925477007">
