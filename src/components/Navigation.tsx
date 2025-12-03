@@ -218,18 +218,18 @@ const Navigation = () => {
               </>
             ) : (
               <>
-                {/* Login Button */}
-                <Link to="/login" onClick={() => setIsOpen(false)}>
+                {/* Contact Us Button */}
+                <Link to="/contact" onClick={() => setIsOpen(false)}>
                   <button className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/60 border-2 border-yellow-400/50 magic-hover flex items-center justify-center gap-2">
-                    <User className="h-5 w-5" />
-                    <span>Login</span>
+                    <span>Contact Us</span>
                   </button>
                 </Link>
                 
-                {/* Register Button */}
-                <Link to="/register" onClick={() => setIsOpen(false)}>
+                {/* Login Button */}
+                <Link to="/login" onClick={() => setIsOpen(false)}>
                   <button className="w-full px-6 py-4 rounded-xl bg-gradient-to-r from-red-700 to-amber-600 text-white font-semibold text-lg transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-amber-500/50 flex items-center justify-center gap-2 group magic-hover">
-                    <span>Create Account</span>
+                    <User className="h-5 w-5" />
+                    <span>Login</span>
                   </button>
                 </Link>
               </>
