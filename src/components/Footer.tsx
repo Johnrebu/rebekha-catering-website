@@ -51,9 +51,15 @@ const Footer = () => {
               {/* Logo Badge */}
               <div className="inline-block mb-4 transition-all duration-300 group-hover:scale-105">
                 <img 
-                  src='/reblogo.png' 
+                  src='/rebekha-logo.png' 
                   alt='Rebekha Caterers' 
                   className='h-24 w-auto rounded-xl'
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    if (target.src.includes('rebekha-logo.png')) {
+                      target.src = '/reblogo.png';
+                    }
+                  }}
                 />
               </div>
             </div>

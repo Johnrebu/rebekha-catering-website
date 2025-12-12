@@ -34,12 +34,12 @@ const Navigation = () => {
     <nav 
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         scrolled 
-          ? 'bg-gradient-to-r from-red-950/95 via-amber-950/95 to-red-950/95 backdrop-blur-md shadow-lg shadow-amber-900/20' 
-          : 'bg-gradient-to-r from-red-950/90 via-amber-950/90 to-red-950/90 backdrop-blur-sm'
+          ? 'bg-gradient-to-r from-amber-50/98 via-white/98 to-amber-50/98 backdrop-blur-md shadow-lg shadow-amber-200/50' 
+          : 'bg-gradient-to-r from-amber-50/95 via-white/95 to-amber-50/95 backdrop-blur-sm'
       }`}
     >
       {/* Decorative top border */}
-      <div className="absolute top-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-amber-500 to-transparent"></div>
+      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-red-700 via-amber-500 to-red-700"></div>
       
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
@@ -47,9 +47,16 @@ const Navigation = () => {
           <Link to="/" className="flex items-center gap-3 group magic-hover">
             {/* Logo Image */}
             <img 
-              src='/reblogo.png' 
+              src='/rebekha-logo.png' 
               alt='Rebekha Caterers Logo' 
               className='h-16 md:h-20 lg:h-24 w-auto transition-all duration-300 group-hover:scale-105'
+              onError={(e) => {
+                // Fallback to old logo if new one fails
+                const target = e.target as HTMLImageElement;
+                if (target.src.includes('rebekha-logo.png')) {
+                  target.src = '/reblogo.png';
+                }
+              }}
             />
           </Link>
 
@@ -63,8 +70,8 @@ const Navigation = () => {
               >
                 <span className={`text-sm font-medium transition-all duration-300 ${
                   isActive(link.path) 
-                    ? "text-amber-300" 
-                    : "text-amber-100 hover:text-amber-300"
+                    ? "text-red-700" 
+                    : "text-amber-900 hover:text-red-700"
                 }`}>
                   {link.label}
                 </span>
@@ -129,7 +136,7 @@ const Navigation = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="lg:hidden p-2 rounded-lg bg-amber-100/10 backdrop-blur-sm border border-amber-500/30 text-amber-300 transition-all duration-300 hover:bg-gradient-to-r hover:from-red-700 hover:to-amber-600 hover:scale-110"
+            className="lg:hidden p-2 rounded-lg bg-amber-100 border border-amber-300 text-amber-800 transition-all duration-300 hover:bg-gradient-to-r hover:from-red-700 hover:to-amber-600 hover:text-white hover:scale-110"
             onClick={() => setIsOpen(!isOpen)}
             aria-label="Toggle menu"
           >
