@@ -401,11 +401,15 @@ const Home = () => {
               {/* Main Image */}
               <div className="relative rounded-2xl overflow-hidden shadow-2xl group">
                 <img 
-                  src={aboutImage} 
-                  alt="Our Kitchen" 
+                  src="/founders.jpg" 
+                  alt="Our Founders - Christopher Durairaj & Nancy Navaneetham" 
                   className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105" 
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-6 left-6 text-white">
+                  <p className="font-semibold text-lg">Our Founders</p>
+                  <p className="text-amber-200 text-sm">Christopher & Nancy</p>
+                </div>
               </div>
               
               {/* Floating Badge */}

@@ -85,11 +85,17 @@ const About = () => {
             <div className="order-1 md:order-2">
               <div className="relative group">
                 <div className="absolute -inset-1 bg-gradient-to-r from-red-700 to-amber-600 rounded-2xl opacity-50 blur transition-all duration-300 group-hover:opacity-100"></div>
-                <img 
-                  src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=800&q=80" 
-                  alt="Kitchen team preparing food" 
-                  className="relative rounded-2xl shadow-2xl w-full h-96 object-cover"
-                />
+                <div className="relative rounded-2xl shadow-2xl overflow-hidden">
+                  <img 
+                    src="/founders.jpg" 
+                    alt="Our Founders - Christopher Durairaj & Nancy Navaneetham with grandchild" 
+                    className="relative rounded-2xl w-full h-auto object-cover"
+                  />
+                  <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6">
+                    <p className="text-white font-semibold text-lg">Our Founders</p>
+                    <p className="text-amber-200 text-sm">Christopher Durairaj & Nancy Navaneetham</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -128,41 +134,58 @@ const About = () => {
             Meet Our Founders
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-12">
-            <Card className="overflow-hidden hover:shadow-2xl transition-shadow">
-              <div className="h-64 bg-gradient-to-br from-red-700 to-amber-600 flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1583394293214-28ded15ee548?w=600&q=80')] bg-cover bg-center opacity-20"></div>
-                <div className="relative z-10 text-center text-white">
-                  <div className="w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm mx-auto mb-4 flex items-center justify-center border-4 border-white/30">
-                    <span className="text-6xl font-bold">CD</span>
+          {/* Single Founders Card with Photo */}
+          <div className="max-w-3xl mx-auto">
+            <Card className="overflow-hidden hover:shadow-2xl transition-shadow border-0 shadow-xl">
+              <div className="relative">
+                {/* Decorative top border */}
+                <div className="absolute top-0 left-0 right-0 h-2 bg-gradient-to-r from-red-700 via-amber-500 to-red-700 z-10"></div>
+                
+                <div className="md:flex">
+                  {/* Image Side */}
+                  <div className="md:w-1/2 relative">
+                    <img 
+                      src="/founders.jpg" 
+                      alt="Our Founders - Christopher Durairaj & Nancy Navaneetham" 
+                      className="w-full h-full object-cover min-h-[400px]"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent md:bg-gradient-to-r md:from-transparent md:to-black/20"></div>
+                  </div>
+                  
+                  {/* Content Side */}
+                  <div className="md:w-1/2 p-8 flex flex-col justify-center bg-gradient-to-br from-amber-50 to-white">
+                    <div className="space-y-6">
+                      {/* Founders Names */}
+                      <div>
+                        <h3 className="text-2xl font-bold font-serif text-gray-900 mb-1">Christopher Durairaj</h3>
+                        <p className="text-amber-700 font-semibold">Co-Founder & Head Chef</p>
+                      </div>
+                      
+                      <div className="w-16 h-0.5 bg-gradient-to-r from-red-700 to-amber-600"></div>
+                      
+                      <div>
+                        <h3 className="text-2xl font-bold font-serif text-gray-900 mb-1">Nancy Navaneetham</h3>
+                        <p className="text-amber-700 font-semibold">Co-Founder & Operations Head</p>
+                      </div>
+                      
+                      <div className="w-16 h-0.5 bg-gradient-to-r from-red-700 to-amber-600"></div>
+                      
+                      {/* Description */}
+                      <p className="text-gray-600 leading-relaxed">
+                        Together, they have built Rebekha Catering Services from a humble home kitchen 
+                        into one of Chennai's most trusted catering brands. Their passion for authentic 
+                        flavors and commitment to quality has served over 10,000+ happy events.
+                      </p>
+                      
+                      {/* Badge */}
+                      <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-700 to-amber-600 text-white rounded-full text-sm font-semibold">
+                        <Award className="h-4 w-4" />
+                        <span>Serving Love Since 1998</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <CardContent className="pt-6 text-center">
-                <h3 className="text-2xl font-bold font-serif mb-2">Christopher Durairaj</h3>
-                <p className="text-amber-700 font-semibold mb-4">Co-Founder</p>
-                <p className="text-muted-foreground">
-                  The visionary behind our authentic recipes and quality standards. Christopher's passion for traditional cooking methods combined with innovative presentation has been the cornerstone of our success.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden hover:shadow-2xl transition-shadow">
-              <div className="h-64 bg-gradient-to-br from-amber-600 to-yellow-500 flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542042161784-26ab9e041e89?w=600&q=80')] bg-cover bg-center opacity-20"></div>
-                <div className="relative z-10 text-center text-white">
-                  <div className="w-32 h-32 rounded-full bg-white/20 backdrop-blur-sm mx-auto mb-4 flex items-center justify-center border-4 border-white/30">
-                    <span className="text-6xl font-bold">NN</span>
-                  </div>
-                </div>
-              </div>
-              <CardContent className="pt-6 text-center">
-                <h3 className="text-2xl font-bold font-serif mb-2">Nancy Navaneetham</h3>
-                <p className="text-amber-700 font-semibold mb-4">Co-Founder</p>
-                <p className="text-muted-foreground">
-                  The heart of our operations and customer relations. Nancy's attention to detail and commitment to hygiene has set the gold standard for our catering services.
-                </p>
-              </CardContent>
             </Card>
           </div>
         </div>
