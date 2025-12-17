@@ -13,4 +13,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://rebekha-caterers.online/sitemap.xml
+Sitemap: https://rebekhacaterers.online/sitemap.xml
