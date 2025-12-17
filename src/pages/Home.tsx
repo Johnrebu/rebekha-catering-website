@@ -403,7 +403,7 @@ const Home = () => {
                 <img 
                   src="/founders.jpg" 
                   alt="Our Founders - Christopher Durairaj & Nancy Navaneetham" 
-                  className="w-full h-[500px] object-cover transition-transform duration-700 group-hover:scale-105" 
+                  className="w-full h-[500px] object-cover object-top transition-transform duration-700 group-hover:scale-105" 
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <div className="absolute bottom-6 left-6 text-white">
