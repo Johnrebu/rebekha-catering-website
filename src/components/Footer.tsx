@@ -98,6 +98,7 @@ const Footer = () => {
                 { to: "/services", label: "Services" },
                 { to: "/menu", label: "Menu" },
                 { to: "/gallery", label: "Gallery" },
+                { to: "/faq", label: "FAQ" },
                 { to: "/contact", label: "Contact" }
               ].map((link, index) => (
                 <li key={index} className="group">
