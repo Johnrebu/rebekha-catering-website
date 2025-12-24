@@ -18,6 +18,8 @@ const Gallery = lazy(() => import("./pages/Gallery"));
 const Testimonials = lazy(() => import("./pages/Testimonials"));
 const Contact = lazy(() => import("./pages/Contact"));
 const CustomMenu = lazy(() => import("./pages/CustomMenu"));
+const Blog = lazy(() => import("./pages/Blog"));
+const BlogPost = lazy(() => import("./pages/BlogPost"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 
 // Authentication pages
@@ -55,6 +57,8 @@ const App = () => {
                 <Route path="/testimonials" element={<Testimonials />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/custom-menu" element={<CustomMenu />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
                 
                 {/* Authentication routes */}
                 <Route path="/login" element={<Login />} />
