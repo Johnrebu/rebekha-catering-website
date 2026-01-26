@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 const WhatsAppButton: React.FC = () => {
   const [showTooltip, setShowTooltip] = useState(false);
-  const phoneNumber = "918925477007"; // WhatsApp number without + sign for wa.me format
+  const phoneNumber = "918925477007";
   const message = encodeURIComponent(
     "Hello! I'm interested in your catering services. Please help me with menu options, pricing, and availability for my event."
   );
@@ -19,10 +19,9 @@ const WhatsAppButton: React.FC = () => {
             ${showTooltip ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 pointer-events-none'}
           `}
         >
-          <div className="bg-gradient-to-r from-red-700 to-amber-600 text-white px-4 py-2 rounded-lg shadow-xl whitespace-nowrap">
-            <p className="font-semibold text-sm">WhatsApp Us</p>
-            {/* Arrow */}
-            <div className="absolute top-full right-6 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-amber-600"></div>
+          <div className="bg-[hsl(30,20%,15%)] text-white px-4 py-2 shadow-xl whitespace-nowrap">
+            <p className="font-medium text-sm">Chat with us</p>
+            <div className="absolute top-full right-6 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-[hsl(30,20%,15%)]"></div>
           </div>
         </div>
 
@@ -35,46 +34,25 @@ const WhatsAppButton: React.FC = () => {
           onMouseEnter={() => setShowTooltip(true)}
           onMouseLeave={() => setShowTooltip(false)}
           className="
-            w-16 h-16 rounded-full
+            w-14 h-14
             bg-[#25D366] hover:bg-[#20BD5C]
             flex items-center justify-center
-            shadow-2xl hover:shadow-[0_0_30px_rgba(37,211,102,0.6)]
+            shadow-lg hover:shadow-xl
             transition-all duration-300
             hover:scale-110
-            animate-pulse-subtle
             group
             block
-            magic-hover
           "
         >
-          {/* Official WhatsApp Logo */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 175.216 175.552"
-            className="w-9 h-9 fill-white transition-transform duration-300 group-hover:rotate-12"
+            className="w-8 h-8 fill-white transition-transform duration-300 group-hover:scale-110"
           >
             <path d="M175.216,85.123c0,46.92-38.287,84.91-85.564,84.91a85.78,85.78,0,0,1-41.018-10.408L0,175.552l16.355-48.027a84.253,84.253,0,0,1-11.35-42.4C5.005,38.2,43.293.214,90.57.214s84.646,37.987,84.646,84.91ZM90.57,13.495c-39.891,0-72.34,32.194-72.34,71.628a71.481,71.481,0,0,0,13.677,42.1L20.507,156.578l30.227-9.635a72.306,72.306,0,0,0,39.836,11.835c39.892,0,72.34-32.194,72.34-71.628S130.462,13.495,90.57,13.495Zm43.543,91.254c-.532-.85-1.94-1.359-4.045-2.38-2.107-1.021-12.448-6.129-14.377-6.83s-3.334-1.05-4.742,1.021-5.443,6.83-6.668,8.23-2.461,1.53-4.566.51-8.9-3.271-16.935-10.44c-6.259-5.568-10.483-12.439-11.707-14.539s-.13-3.23,1.019-4.271c1.04-.94,2.312-2.45,3.475-3.68s1.54-2.12,2.3-3.53.383-2.63-.191-3.68-4.742-11.4-6.49-15.61c-1.71-4.091-3.449-3.53-4.742-3.6s-2.62-.085-4.022-.085a7.775,7.775,0,0,0-5.614,2.59c-1.929,2.1-7.372,7.189-7.372,17.529s7.563,20.339,8.626,21.749,14.908,22.769,36.109,31.93c5.041,2.18,8.974,3.479,12.042,4.46,5.065,1.59,9.67,1.359,13.321.85,4.06-.6,12.448-5.08,14.2-9.99s1.748-9.14,1.217-10.02Z" />
           </svg>
         </a>
       </div>
-
-      {/* Custom CSS for subtle pulse animation */}
-      <style>{`
-        @keyframes pulse-subtle {
-          0%, 100% {
-            transform: scale(1);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04), 0 0 0 0 rgba(37, 211, 102, 0.7);
-          }
-          50% {
-            transform: scale(1.05);
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 0 0 0 10px rgba(37, 211, 102, 0);
-          }
-        }
-        
-        .animate-pulse-subtle {
-          animation: pulse-subtle 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-      `}</style>
     </>
   );
 };

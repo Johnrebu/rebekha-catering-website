@@ -1,319 +1,249 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Check, Heart, Cake, Briefcase, Users, Sparkles, ChefHat } from "lucide-react";
+import { Check, Heart, Cake, Briefcase, Users, ChefHat } from "lucide-react";
 
 const Services = () => {
   const services = [
     {
-      image: "https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=1200&q=80",
-      icon: <Heart className="h-8 w-8" />,
-      iconColor: "text-pink-500",
-      title: "Wedding & Engagement Catering",
-      description:
-       "Make your special day unforgettable with our exquisite wedding catering services. We handle everything from intimate ceremonies to grand celebrations with elegance and precision.",
+      image: "https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=800",
+      icon: <Heart className="h-6 w-6" />,
+      title: "Wedding & Engagement",
+      description: "Make your special day unforgettable with our exquisite wedding catering services.",
       features: [
-        "Customized wedding menus tailored to your taste",
+        "Customized wedding menus",
         "Traditional & fusion options",
-        "Elegant presentation & venue setup",
-        "Professional uniformed service staff",
-        "Floral decoration coordination",
-        "Multi-cuisine offerings (Indian, Continental, Chinese)",
+        "Elegant presentation",
+        "Professional service staff",
+        "Multi-cuisine offerings",
       ],
     },
     {
-      image: "https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=1200&q=80",
-      icon: <Cake className="h-8 w-8" />,
-      iconColor: "text-yellow-500",
-      title: "Birthday Party Catering",
-      description:
-        "Celebrate life's special moments with delicious food and joyful service. From kids' parties to milestone celebrations, we create memorable experiences filled with fun and flavor.",
+      image: "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=800",
+      icon: <Cake className="h-6 w-6" />,
+      title: "Birthday Parties",
+      description: "Celebrate life's special moments with delicious food and joyful service.",
       features: [
-        "Age-appropriate customized menus",
-        "Theme-based food presentation",
-        "Kids-friendly delicious options",
-        "Cake & dessert bar coordination",
-        "Party setup & decoration assistance",
-        "Fun & interactive service experience",
+        "Age-appropriate menus",
+        "Theme-based presentation",
+        "Kids-friendly options",
+        "Cake coordination",
+        "Party setup assistance",
       ],
     },
     {
-      image: "https://images.unsplash.com/photo-1511578314322-379afb476865?w=1200&q=80",
-      icon: <Briefcase className="h-8 w-8" />,
-      iconColor: "text-blue-500",
-      title: "Corporate & Office Events",
-      description:
-        "Professional catering for business events, conferences, product launches, and office celebrations. We ensure smooth, efficient service that lets you focus on your event's success.",
+      image: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=800",
+      icon: <Briefcase className="h-6 w-6" />,
+      title: "Corporate Events",
+      description: "Professional catering for business events, conferences, and office celebrations.",
       features: [
-        "Timely & efficient punctual service",
-        "Professional corporate presentation",
+        "Timely & efficient service",
+        "Corporate presentation",
         "Conference meal packages",
-        "Working lunch box options",
-        "Coffee, tea & snack break stations",
-        "Complete dietary accommodations",
+        "Box meal options",
+        "Dietary accommodations",
       ],
     },
     {
-      image: "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=80",
-      icon: <Users className="h-8 w-8" />,
-      iconColor: "text-amber-600",
-      title: "Private Dinners & Family Gatherings",
-      description:
-        "Intimate dining experiences for your family and close friends. Enjoy restaurant-quality gourmet food in the comfort of your home or chosen venue with personalized attention.",
+      image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800",
+      icon: <Users className="h-6 w-6" />,
+      title: "Private Dinners",
+      description: "Intimate dining experiences for your family and close friends.",
       features: [
-        "Intimate dining setups & arrangement",
-        "Chef's special signature menus",
-        "Personalized dedicated service",
-        "Multi-course fine dining meals",
-        "Elegant table decoration",
-        "Wine & beverage pairing suggestions",
+        "Intimate dining setups",
+        "Chef's special menus",
+        "Personalized service",
+        "Multi-course meals",
+        "Elegant decoration",
       ],
     },
   ];
 
+  const additionalServices = [
+    {
+      title: "Dietary Specializations",
+      image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=400",
+      items: ["Jain meals", "Vegan options", "Diabetic-friendly", "Gluten-free dishes"],
+    },
+    {
+      title: "Cuisine Varieties",
+      image: "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=400",
+      items: ["South Indian", "North Indian", "Continental", "Indo-Chinese"],
+    },
+    {
+      title: "Event Support",
+      image: "https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=400",
+      items: ["Service staff", "Buffet setup", "Tableware", "On-site cooking"],
+    },
+  ];
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[hsl(45,40%,94%)]">
       <Navigation />
 
-      {/* Hero Section with Background Image */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
-        <div className="absolute inset-0">
-          <img 
-            src="https://images.unsplash.com/photo-1555244162-803834f70033?w=1600&q=80" 
-            alt="Catering services" 
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/70"></div>
-        </div>
-        <div className="container mx-auto px-4 max-w-4xl text-center relative z-10">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-serif mb-6 animate-fade-in text-white">
+      {/* Hero Section */}
+      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: `url('https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=1920')`
+          }}
+        />
+        <div className="absolute inset-0 bg-black/50" />
+
+        <motion.div
+          className="relative z-10 text-center text-white px-4"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <h1 className="text-5xl md:text-7xl mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
             Our Services
           </h1>
-          <p className="text-xl text-amber-100 animate-fade-in">
+          <p className="text-xl font-light tracking-wide">
             Comprehensive catering solutions for every occasion
           </p>
-        </div>
+        </motion.div>
       </section>
 
-      {/* Services Grid with Enhanced Design */}
-      <section className="py-20 bg-background">
-        <div className="container mx-auto px-4 max-w-7xl">
-          <div className="space-y-24">
+      {/* Services Grid */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
+              What We Offer
+            </h2>
+            <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto" />
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             {services.map((service, index) => (
-              <div
+              <motion.div
                 key={index}
-                className={`grid md:grid-cols-2 gap-12 items-center ${
-                  index % 2 === 1 ? "md:flex-row-reverse" : ""
-                }`}
+                className="bg-[hsl(45,40%,94%)] overflow-hidden group"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
               >
-                <div className={index % 2 === 1 ? "md:order-2" : ""}>
-                  <div className="relative group">
-                    {/* Gradient border effect */}
-                    <div className="absolute -inset-1 bg-gradient-to-r from-red-700 to-amber-600 rounded-2xl opacity-50 blur transition-all duration-300 group-hover:opacity-100"></div>
-                    
-                    <Card className="relative overflow-hidden shadow-2xl h-full rounded-2xl border-none">
-                      <div className="relative h-[450px] overflow-hidden">
-                        <img
-                          src={service.image}
-                          alt={service.title}
-                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        />
-                        {/* Gradient overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-                        
-                        {/* Icon badge */}
-                        <div className="absolute top-6 right-6 w-16 h-16 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center shadow-lg">
-                          <div className={service.iconColor}>
-                            {service.icon}
-                          </div>
-                        </div>
-                      </div>
-                    </Card>
+                <div className="relative h-64 overflow-hidden">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-all duration-300" />
+                  <div className="absolute top-4 right-4 w-12 h-12 bg-[hsl(43,76%,58%)] flex items-center justify-center text-[hsl(30,20%,15%)]">
+                    {service.icon}
                   </div>
                 </div>
 
-                <div className={index % 2 === 1 ? "md:order-1" : ""}>
-                  <div className="space-y-6">
-                    <h2 className="text-3xl md:text-4xl font-bold font-serif bg-gradient-to-r from-red-700 to-amber-600 bg-clip-text text-transparent">
-                      {service.title}
-                    </h2>
-                    <p className="text-lg text-muted-foreground leading-relaxed">
-                      {service.description}
-                    </p>
+                <div className="p-8">
+                  <h3 className="text-2xl text-[hsl(30,20%,15%)] mb-3" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                    {service.title}
+                  </h3>
+                  <p className="text-[hsl(30,10%,45%)] mb-6">{service.description}</p>
 
-                    <ul className="space-y-3">
-                      {service.features.map((feature, idx) => (
-                        <li key={idx} className="flex items-start gap-3 group/item">
-                          <div className="flex-shrink-0 mt-1 w-5 h-5 rounded-full bg-gradient-to-r from-red-700 to-amber-600 flex items-center justify-center">
-                            <Check className="h-3 w-3 text-white" />
-                          </div>
-                          <span className="text-base group-hover/item:text-foreground transition-colors">
-                            {feature}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
+                  <ul className="space-y-2 mb-6">
+                    {service.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center gap-3 text-sm text-[hsl(30,10%,35%)]">
+                        <Check className="h-4 w-4 text-[hsl(43,76%,58%)]" />
+                        <span>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
 
-                    <Link to="/contact">
-                      <button className="group relative px-8 py-4 rounded-full bg-gradient-to-r from-red-700 to-amber-600 text-white font-bold text-lg transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-amber-500/50 flex items-center gap-3 overflow-hidden magic-hover">
-                        <div className="absolute inset-0 bg-gradient-to-r from-amber-600 to-red-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <Sparkles className="h-5 w-5 relative z-10 transition-transform duration-300 group-hover:rotate-12" />
-                        <span className="relative z-10">Get Quote for This Event</span>
-                      </button>
-                    </Link>
-                  </div>
+                  <Link to="/contact">
+                    <button className="text-sm font-medium tracking-wider uppercase text-[hsl(43,76%,58%)] hover:text-[hsl(38,70%,45%)] transition-colors flex items-center gap-2">
+                      Get Quote →
+                    </button>
+                  </Link>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Additional Services with Images */}
-      <section className="py-20 bg-muted">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold font-serif mb-4">
+      {/* Additional Services */}
+      <section className="py-20 bg-[hsl(43,76%,58%)]">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
               Additional Services
             </h2>
-            <p className="text-lg text-muted-foreground">
-              Customized solutions for all your catering needs
-            </p>
-          </div>
+            <div className="w-16 h-0.5 bg-[hsl(30,20%,15%)] mx-auto opacity-50" />
+          </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 group">
-              <div className="h-48 overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80" 
-                  alt="Dietary Specializations" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold mb-4 text-amber-700">Dietary Specializations</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    Jain meals (no onion/garlic)
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    Vegan options
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    Diabetic-friendly menus
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    Gluten-free dishes
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    Allergy-conscious preparation
-                  </li>
+          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+            {additionalServices.map((service, index) => (
+              <motion.div
+                key={index}
+                className="bg-white p-6 text-center"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="w-20 h-20 mx-auto mb-4 overflow-hidden rounded-full">
+                  <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
+                </div>
+                <h3 className="text-lg font-medium text-[hsl(30,20%,15%)] mb-4 uppercase tracking-wide text-sm">
+                  {service.title}
+                </h3>
+                <ul className="space-y-2">
+                  {service.items.map((item, idx) => (
+                    <li key={idx} className="text-sm text-[hsl(30,10%,45%)] flex items-center justify-center gap-2">
+                      <ChefHat className="h-3 w-3 text-[hsl(43,76%,58%)]" />
+                      {item}
+                    </li>
+                  ))}
                 </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 group">
-              <div className="h-48 overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1585937421612-70a008356fbe?w=600&q=80" 
-                  alt="Cuisine Varieties" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold mb-4 text-amber-700">Cuisine Varieties</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    South Indian traditional
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    North Indian specialties
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    Continental cuisine
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    Indo-Chinese fusion
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    Authentic regional dishes
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="overflow-hidden hover:shadow-2xl transition-all duration-300 group">
-              <div className="h-48 overflow-hidden">
-                <img 
-                  src="https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=600&q=80" 
-                  alt="Event Support" 
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-              <CardContent className="pt-6">
-                <h3 className="text-xl font-bold mb-4 text-amber-700">Event Support</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    Professional service staff
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    Buffet setup & decoration
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    Tableware & cutlery
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    On-site cooking options
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <ChefHat className="h-4 w-4 text-amber-600" />
-                    Post-event cleanup
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-b from-red-950 via-amber-950 to-red-950 text-white">
-        <div className="container mx-auto px-4 text-center max-w-3xl">
-          <h2 className="text-3xl md:text-4xl font-bold font-serif mb-6 bg-gradient-to-r from-amber-200 to-yellow-300 bg-clip-text text-transparent">
-            Ready to Plan Your Event?
-          </h2>
-          <p className="text-lg mb-8 text-amber-100">
-            Let's discuss your requirements and create a customized catering experience that
-            exceeds your expectations.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/contact">
-              <button className="px-8 py-4 rounded-full bg-gradient-to-r from-yellow-500 to-amber-400 text-amber-950 font-bold text-lg transition-all duration-300 hover:scale-110 hover:shadow-2xl hover:shadow-yellow-500/60 border-2 border-yellow-400/50 magic-hover">
-                Contact Us Now
-              </button>
-            </Link>
-            <Link to="/menu">
-              <button className="px-8 py-4 rounded-full bg-transparent border-2 border-amber-300 text-amber-100 font-semibold text-lg transition-all duration-300 hover:scale-105 hover:bg-amber-100/10 hover:border-amber-200 hover:shadow-lg hover:shadow-amber-500/30 magic-hover">
-                View Our Menu
-              </button>
-            </Link>
-          </div>
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-6" style={{ fontFamily: "'Great Vibes', cursive" }}>
+              Ready to Plan Your Event?
+            </h2>
+            <p className="text-lg text-[hsl(30,10%,35%)] mb-10 max-w-xl mx-auto" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+              Let's discuss your requirements and create a customized catering experience
+              that exceeds your expectations.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/contact">
+                <button className="px-10 py-4 text-sm font-medium tracking-widest uppercase bg-[hsl(43,76%,58%)] text-[hsl(30,20%,15%)] border-2 border-[hsl(43,76%,58%)] hover:bg-[hsl(38,70%,45%)] hover:border-[hsl(38,70%,45%)] transition-all duration-300">
+                  Contact Us Now
+                </button>
+              </Link>
+              <Link to="/menu">
+                <button className="px-10 py-4 text-sm font-medium tracking-widest uppercase bg-transparent text-[hsl(30,20%,15%)] border-2 border-[hsl(43,76%,58%)] hover:bg-[hsl(43,76%,58%)] transition-all duration-300">
+                  View Our Menu
+                </button>
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
@@ -323,4 +253,3 @@ const Services = () => {
 };
 
 export default Services;
-

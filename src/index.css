@@ -1,80 +1,98 @@
-/* If you are not using Tailwind CSS, remove these lines. If you are, ensure your build process supports Tailwind directives. */
-
 /* Tailwind core layers – MUST come before any @layer usage */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
+/* Google Fonts Import for elegant script font */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
+
+/* Eden Caterers inspired Design System
+   Primary: Warm Gold/Mustard
+   Secondary: Cream/Beige backgrounds
+   Accent: Rich gold
+   Clean, elegant, minimal
 */
 
 @layer base {
   :root {
-    --background: 35 25% 96%;
-    --foreground: 20 14% 20%;
+    /* Main warm gold/mustard - inspired by Eden Caterers */
+    --eden-gold: 43 76% 58%;
+    --eden-gold-dark: 38 70% 45%;
+    --eden-gold-light: 45 80% 70%;
+
+    /* Cream/Beige backgrounds */
+    --eden-cream: 45 40% 94%;
+    --eden-cream-dark: 40 30% 88%;
+    --eden-white: 0 0% 100%;
+
+    /* Text colors */
+    --eden-text-dark: 30 20% 15%;
+    --eden-text-medium: 30 10% 35%;
+    --eden-text-light: 30 10% 55%;
+
+    --background: 45 40% 94%;
+    --foreground: 30 20% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 20 14% 20%;
+    --card-foreground: 30 20% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 20 14% 20%;
+    --popover-foreground: 30 20% 15%;
 
-    --primary: 32 45% 55%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 43 76% 58%;
+    --primary-foreground: 30 20% 15%;
 
-    --secondary: 350 60% 35%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 45 40% 94%;
+    --secondary-foreground: 30 20% 15%;
 
-    --muted: 35 20% 90%;
-    --muted-foreground: 20 10% 45%;
+    --muted: 45 30% 90%;
+    --muted-foreground: 30 10% 45%;
 
-    --accent: 40 85% 65%;
-    --accent-foreground: 20 14% 20%;
+    --accent: 43 76% 58%;
+    --accent-foreground: 30 20% 15%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 35 15% 85%;
-    --input: 35 15% 85%;
-    --ring: 32 45% 55%;
+    --border: 40 20% 85%;
+    --input: 40 20% 85%;
+    --ring: 43 76% 58%;
 
-    --radius: 0.75rem;
+    --radius: 0.25rem;
 
-    --gradient-primary: linear-gradient(135deg, hsl(32 45% 55%), hsl(40 85% 65%));
-    --gradient-hero: linear-gradient(180deg, hsl(35 25% 96% / 0.95), hsl(35 25% 96%));
-    --shadow-warm: 0 10px 40px -10px hsl(32 45% 55% / 0.25);
-    --shadow-elegant: 0 4px 20px -4px hsl(20 14% 20% / 0.1);
+    --gradient-gold: linear-gradient(135deg, hsl(43 76% 58%), hsl(38 70% 45%));
+    --shadow-soft: 0 4px 20px -4px hsl(30 20% 15% / 0.08);
+    --shadow-hover: 0 8px 30px -8px hsl(30 20% 15% / 0.15);
   }
 
   .dark {
-    --background: 20 14% 15%;
-    --foreground: 35 25% 95%;
+    --background: 30 15% 10%;
+    --foreground: 45 30% 95%;
 
-    --card: 20 14% 18%;
-    --card-foreground: 35 25% 95%;
+    --card: 30 15% 15%;
+    --card-foreground: 45 30% 95%;
 
-    --popover: 20 14% 18%;
-    --popover-foreground: 35 25% 95%;
+    --popover: 30 15% 15%;
+    --popover-foreground: 45 30% 95%;
 
-    --primary: 32 45% 55%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 43 76% 58%;
+    --primary-foreground: 30 20% 10%;
 
-    --secondary: 350 60% 45%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 30 15% 20%;
+    --secondary-foreground: 45 30% 95%;
 
-    --muted: 20 10% 25%;
-    --muted-foreground: 35 15% 65%;
+    --muted: 30 10% 20%;
+    --muted-foreground: 40 15% 65%;
 
-    --accent: 40 85% 65%;
-    --accent-foreground: 20 14% 15%;
+    --accent: 43 76% 58%;
+    --accent-foreground: 30 20% 10%;
 
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 20 10% 25%;
-    --input: 20 10% 25%;
-    --ring: 32 45% 55%;
+    --border: 30 10% 25%;
+    --input: 30 10% 25%;
+    --ring: 43 76% 58%;
   }
 }
 
@@ -83,19 +101,205 @@ All colors MUST be HSL.
     border-color: hsl(var(--border));
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
   }
 
+  /* Elegant script font for headings - Eden Caterers style */
   h1,
   h2,
-  h3,
+  h3 {
+    font-family: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+  }
+
   h4,
   h5,
   h6 {
-    font-family: serif;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+  }
+
+  /* Script style headings for major sections */
+  .heading-script {
+    font-family: 'Great Vibes', cursive;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+  }
+
+  /* Eden style elegant headings */
+  .heading-elegant {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  /* Custom Typography for Blog Content */
+  .prose-eden h1,
+  .prose-eden h2,
+  .prose-eden h3,
+  .prose-eden h4 {
+    color: hsl(var(--eden-text-dark));
+    font-family: 'Cormorant Garamond', serif;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .prose-eden h1 {
+    font-size: 2.5rem;
+  }
+
+  .prose-eden h2 {
+    font-size: 2rem;
+    border-bottom: 1px solid hsl(var(--border));
+    padding-bottom: 0.5rem;
+  }
+
+  .prose-eden h3 {
+    font-size: 1.5rem;
+  }
+
+  .prose-eden p {
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+
+  .prose-eden ul,
+  .prose-eden ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .prose-eden li {
+    margin-bottom: 0.5rem;
+  }
+
+  .prose-eden blockquote {
+    border-left: 4px solid hsl(var(--eden-gold));
+    padding-left: 1.5rem;
+    font-style: italic;
+    color: hsl(var(--eden-text-medium));
+    margin: 2rem 0;
+  }
+}
+
+/* Eden Caterers Style Components */
+@layer components {
+
+  /* Golden underline decoration for headings */
+  .eden-underline {
+    position: relative;
+    display: inline-block;
+  }
+
+  .eden-underline::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--eden-gold)), transparent);
+  }
+
+  /* Eden style buttons */
+  .btn-eden {
+    @apply px-8 py-3 text-sm font-medium tracking-wider uppercase;
+    background-color: hsl(var(--eden-gold));
+    color: hsl(var(--eden-text-dark));
+    border: 2px solid hsl(var(--eden-gold));
+    transition: all 0.3s ease;
+  }
+
+  .btn-eden:hover {
+    background-color: hsl(var(--eden-gold-dark));
+    border-color: hsl(var(--eden-gold-dark));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px hsl(var(--eden-gold) / 0.3);
+  }
+
+  .btn-eden-outline {
+    @apply px-8 py-3 text-sm font-medium tracking-wider uppercase;
+    background-color: transparent;
+    color: hsl(var(--eden-gold-dark));
+    border: 2px solid hsl(var(--eden-gold));
+    transition: all 0.3s ease;
+  }
+
+  .btn-eden-outline:hover {
+    background-color: hsl(var(--eden-gold));
+    color: hsl(var(--eden-text-dark));
+  }
+
+  /* Section backgrounds */
+  .section-cream {
+    background-color: hsl(var(--eden-cream));
+  }
+
+  .section-white {
+    background-color: hsl(var(--eden-white));
+  }
+
+  .section-gold {
+    background-color: hsl(var(--eden-gold));
+  }
+
+  /* Food gallery grid - Eden style */
+  .food-grid {
+    display: grid;
+    gap: 4px;
+  }
+
+  .food-grid-item {
+    overflow: hidden;
+    position: relative;
+  }
+
+  .food-grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .food-grid-item:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Testimonial card - Eden style */
+  .testimonial-card {
+    background: hsl(var(--eden-white));
+    padding: 2rem;
+    text-align: center;
+  }
+
+  /* Eden navigation style */
+  .nav-eden {
+    background-color: hsl(var(--eden-cream));
+    border-bottom: 1px solid hsl(var(--border));
+  }
+
+  .nav-eden a {
+    color: hsl(var(--eden-text-dark));
+    font-size: 0.875rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+  }
+
+  .nav-eden a:hover {
+    color: hsl(var(--eden-gold-dark));
   }
 }
 
@@ -104,6 +308,29 @@ All colors MUST be HSL.
     text-wrap: balance;
   }
 
+  /* Eden gold text */
+  .text-eden-gold {
+    color: hsl(var(--eden-gold));
+  }
+
+  .text-eden-gold-dark {
+    color: hsl(var(--eden-gold-dark));
+  }
+
+  /* Background utilities */
+  .bg-eden-gold {
+    background-color: hsl(var(--eden-gold));
+  }
+
+  .bg-eden-cream {
+    background-color: hsl(var(--eden-cream));
+  }
+
+  .bg-eden-cream-dark {
+    background-color: hsl(var(--eden-cream-dark));
+  }
+
+  /* Smooth animations */
   .animate-fade-in {
     animation: fadeIn 0.6s ease-out;
   }
@@ -112,11 +339,16 @@ All colors MUST be HSL.
     animation: slideUp 0.6s ease-out;
   }
 
+  .animate-scale-in {
+    animation: scaleIn 0.4s ease-out;
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;
       transform: translateY(20px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -128,9 +360,83 @@ All colors MUST be HSL.
       opacity: 0;
       transform: translateY(30px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
+
+  @keyframes scaleIn {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Hover effects */
+  .hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+  }
+
+  /* Image hover zoom */
+  .img-zoom {
+    overflow: hidden;
+  }
+
+  .img-zoom img {
+    transition: transform 0.5s ease;
+  }
+
+  .img-zoom:hover img {
+    transform: scale(1.08);
+  }
+
+  /* Decorative line */
+  .line-gold {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, hsl(var(--eden-gold)), hsl(var(--eden-gold-dark)));
+  }
+
+  .line-gold-center {
+    width: 80px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, hsl(var(--eden-gold)), transparent);
+    margin: 0 auto;
+  }
+}
+
+/* Custom scrollbar - elegant */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--eden-cream));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--eden-gold));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--eden-gold-dark));
+}
+
+/* Selection color */
+::selection {
+  background: hsl(var(--eden-gold) / 0.3);
+  color: hsl(var(--eden-text-dark));
 }
