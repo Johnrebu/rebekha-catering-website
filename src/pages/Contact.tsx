@@ -381,6 +381,85 @@ const Contact = () => {
         </div>
       </section>
 
+      {/* Business Card Section */}
+      <section className="py-20 bg-[hsl(43,76%,58%)]">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
+              Our Business Cards
+            </h2>
+            <div className="w-16 h-0.5 bg-[hsl(30,20%,15%)] mx-auto opacity-50" />
+            <p className="mt-6 text-[hsl(30,20%,15%)]/80 max-w-2xl mx-auto">
+              Feel free to save or share our contact details. We specialize in both event catering and professional transport services.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+            {/* Catering Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              className="group"
+            >
+              <div className="bg-white p-4 shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
+                <img
+                  src="/catering-card.jpg"
+                  alt="Rebekha Caterers Business Card"
+                  className="w-full h-auto shadow-inner"
+                />
+                <div className="mt-6 flex justify-between items-center px-2">
+                  <h3 className="text-lg font-medium text-[hsl(30,20%,15%)]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                    Catering Specialist
+                  </h3>
+                  <a
+                    href="/catering-card.jpg"
+                    download="Rebekha-Catering-Card.jpg"
+                    className="text-xs uppercase tracking-widest font-bold text-[hsl(43,76%,58%)] hover:text-[hsl(38,70%,45%)] transition-colors"
+                  >
+                    Download Card
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+
+            {/* Transport Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="group"
+            >
+              <div className="bg-white p-4 shadow-2xl transition-transform duration-500 group-hover:scale-[1.02]">
+                <img
+                  src="/transport-card.jpg"
+                  alt="RC Transport Business Card"
+                  className="w-full h-auto shadow-inner"
+                />
+                <div className="mt-6 flex justify-between items-center px-2">
+                  <h3 className="text-lg font-medium text-[hsl(30,20%,15%)]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                    Transport Services
+                  </h3>
+                  <a
+                    href="/transport-card.jpg"
+                    download="RC-Transport-Card.jpg"
+                    className="text-xs uppercase tracking-widest font-bold text-[hsl(43,76%,58%)] hover:text-[hsl(38,70%,45%)] transition-colors"
+                  >
+                    Download Card
+                  </a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* Map Section */}
       <section className="py-16 bg-[hsl(45,40%,94%)]">
         <div className="container mx-auto px-6">

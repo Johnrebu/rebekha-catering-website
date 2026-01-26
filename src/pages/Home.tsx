@@ -543,6 +543,40 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Business Card Section - Home Page */}
+      <section className="py-20 bg-[hsl(45,40%,94%)]">
+        <div className="container mx-auto px-6">
+          <div className="max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-xl flex flex-col md:flex-row items-center gap-12">
+            <div className="md:w-1/2">
+              <h2 className="text-4xl text-[hsl(30,20%,15%)] mb-6" style={{ fontFamily: "'Great Vibes', cursive" }}>
+                Connect With Us
+              </h2>
+              <p className="text-[hsl(30,10%,35%)] mb-8 leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.2rem' }}>
+                Save our contact details for your next event. We are dedicated to providing the best catering and transport services in Chennai.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link to="/contact">
+                  <button className="px-6 py-3 text-xs font-bold uppercase tracking-widest bg-[hsl(43,76%,58%)] text-[hsl(30,20%,15%)] hover:bg-[hsl(38,70%,45%)] transition-all">
+                    Get in Touch
+                  </button>
+                </Link>
+                <a href="/catering-card.jpg" download className="px-6 py-3 text-xs font-bold uppercase tracking-widest border-2 border-[hsl(43,76%,58%)] text-[hsl(30,20%,15%)] hover:bg-[hsl(43,76%,58%)] transition-all text-center">
+                  Save Card
+                </a>
+              </div>
+            </div>
+            <div className="md:w-1/2 relative group">
+              <div className="absolute -inset-2 bg-[hsl(43,76%,58%)]/20 blur-lg group-hover:bg-[hsl(43,76%,58%)]/30 transition-all"></div>
+              <img
+                src="/catering-card.jpg"
+                alt="Rebekha Caterers Card"
+                className="relative z-10 w-full shadow-2xl transition-transform duration-500 group-hover:scale-[1.05]"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Footer />
       <WhatsAppButton />
     </div>
