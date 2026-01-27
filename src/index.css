@@ -1,10 +1,10 @@
-/* Tailwind core layers – MUST come before any @layer usage */
+/* Google Fonts Import for elegant script font - MUST be first */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
+
+/* Tailwind core layers */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* Google Fonts Import for elegant script font */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
 
 /* Eden Caterers inspired Design System
    Primary: Warm Gold/Mustard
