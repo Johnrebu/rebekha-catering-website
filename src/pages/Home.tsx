@@ -1,9 +1,10 @@
 import * as React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
 import {
   Heart, Users, ChefHat, Award, Phone, ArrowRight,
-  Leaf, Clock, Star, Quote, MapPin
+  Leaf, Clock, Star, Quote, MapPin, Send, Check
 } from "lucide-react";
 
 import Navigation from "@/components/Navigation";
@@ -81,6 +82,81 @@ const Home = () => {
   const yearsCounter = useCounter(25, 2000);
   const eventsCounter = useCounter(10000, 2500);
   const dishesCounter = useCounter(200, 2000);
+
+  // Enquire form state
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    eventType: "",
+    message: "",
+  });
+  const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setError("");
+
+    try {
+      const portalId = "244427242";
+
+      const response = await fetch(
+        `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/8dab0ded-7cbd-495b-8690-f9b1615418ee`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            fields: [
+              { name: "firstname", value: formData.name.split(" ")[0] || formData.name },
+              { name: "lastname", value: formData.name.split(" ").slice(1).join(" ") || "" },
+              { name: "email", value: formData.email },
+              { name: "phone", value: formData.phone },
+              { name: "event_type", value: formData.eventType },
+              { name: "message", value: formData.message },
+            ],
+            context: {
+              pageUri: window.location.href,
+              pageName: "Home Page Enquiry",
+            },
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to submit form");
+      }
+
+      setSubmitted(true);
+
+      setTimeout(() => {
+        setSubmitted(false);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          eventType: "",
+          message: "",
+        });
+      }, 5000);
+    } catch (err) {
+      console.error("Form submission error:", err);
+      setError("Failed to submit form. Please try again or contact us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[hsl(45,40%,94%)]">
@@ -481,50 +557,113 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
+            {submitted ? (
+              <div className="text-center py-12">
+                <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <Check className="h-8 w-8 text-white" />
+                </div>
+                <h3 className="text-2xl text-[hsl(30,20%,15%)] mb-2" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                  Thank You!
+                </h3>
+                <p className="text-[hsl(30,10%,45%)]">
+                  We've received your enquiry and will get back to you soon.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {error && (
+                  <div className="p-4 bg-red-50 border border-red-200">
+                    <p className="text-red-600 text-sm">{error}</p>
+                  </div>
+                )}
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Name *</label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 bg-white border border-[hsl(40,20%,85%)] focus:border-[hsl(43,76%,58%)] focus:outline-none transition-colors disabled:opacity-50"
+                      placeholder="Your name"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Phone *</label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 bg-white border border-[hsl(40,20%,85%)] focus:border-[hsl(43,76%,58%)] focus:outline-none transition-colors disabled:opacity-50"
+                      placeholder="+91 98765 43210"
+                    />
+                  </div>
+                </div>
                 <div>
-                  <label className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Name</label>
+                  <label className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Email *</label>
                   <input
-                    type="text"
-                    className="w-full px-4 py-3 bg-white border border-[hsl(40,20%,85%)] focus:border-[hsl(43,76%,58%)] focus:outline-none transition-colors"
-                    placeholder="Your name"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-white border border-[hsl(40,20%,85%)] focus:border-[hsl(43,76%,58%)] focus:outline-none transition-colors disabled:opacity-50"
+                    placeholder="your@email.com"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Phone</label>
-                  <input
-                    type="tel"
-                    className="w-full px-4 py-3 bg-white border border-[hsl(40,20%,85%)] focus:border-[hsl(43,76%,58%)] focus:outline-none transition-colors"
-                    placeholder="Your phone"
-                  />
+                  <label className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Event Type</label>
+                  <select
+                    name="eventType"
+                    value={formData.eventType}
+                    onChange={handleChange}
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-white border border-[hsl(40,20%,85%)] focus:border-[hsl(43,76%,58%)] focus:outline-none transition-colors disabled:opacity-50"
+                  >
+                    <option value="">Select event type</option>
+                    <option value="wedding">Wedding</option>
+                    <option value="birthday">Birthday</option>
+                    <option value="corporate">Corporate Event</option>
+                    <option value="other">Other</option>
+                  </select>
                 </div>
-              </div>
-              <div>
-                <label className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Event Type</label>
-                <select className="w-full px-4 py-3 bg-white border border-[hsl(40,20%,85%)] focus:border-[hsl(43,76%,58%)] focus:outline-none transition-colors">
-                  <option value="">Select event type</option>
-                  <option value="wedding">Wedding</option>
-                  <option value="birthday">Birthday</option>
-                  <option value="corporate">Corporate Event</option>
-                  <option value="other">Other</option>
-                </select>
-              </div>
-              <div>
-                <label className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Message</label>
-                <textarea
-                  rows={4}
-                  className="w-full px-4 py-3 bg-white border border-[hsl(40,20%,85%)] focus:border-[hsl(43,76%,58%)] focus:outline-none transition-colors resize-none"
-                  placeholder="Tell us about your event"
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full py-4 text-sm font-medium tracking-widest uppercase bg-[hsl(43,76%,58%)] text-[hsl(30,20%,15%)] border-2 border-[hsl(43,76%,58%)] hover:bg-[hsl(38,70%,45%)] hover:border-[hsl(38,70%,45%)] transition-all duration-300"
-              >
-                Send Enquiry
-              </button>
-            </form>
+                <div>
+                  <label className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Message</label>
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows={4}
+                    disabled={isSubmitting}
+                    className="w-full px-4 py-3 bg-white border border-[hsl(40,20%,85%)] focus:border-[hsl(43,76%,58%)] focus:outline-none transition-colors resize-none disabled:opacity-50"
+                    placeholder="Tell us about your event"
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full py-4 text-sm font-medium tracking-widest uppercase bg-[hsl(43,76%,58%)] text-[hsl(30,20%,15%)] border-2 border-[hsl(43,76%,58%)] hover:bg-[hsl(38,70%,45%)] hover:border-[hsl(38,70%,45%)] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-current" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      <Send className="h-4 w-4" />
+                      Send Enquiry
+                    </>
+                  )}
+                </button>
+              </form>
+            )}
 
             {/* Contact Info */}
             <div className="mt-8 pt-8 border-t border-[hsl(40,20%,85%)] text-center">
