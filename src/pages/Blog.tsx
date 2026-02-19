@@ -3,6 +3,8 @@ import { motion } from "framer-motion";
 import { Calendar, User, ArrowRight } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { blogPosts } from "@/data/blogPosts";
 
 const Blog = () => {
@@ -10,6 +12,12 @@ const Blog = () => {
 
   return (
     <div className="min-h-screen bg-[hsl(45,40%,94%)]">
+      <SEO 
+        title="Catering Blog - Tips, Ideas & Recipes | Rebekha Catering Services"
+        description="Read our blog for event planning tips, menu ideas, catering advice, and authentic Indian recipes. Expert insights from Rebekha Catering Services."
+        keywords="catering blog, event planning tips, menu ideas, catering recipes, wedding planning guide"
+      />
+      <StructuredData />
       <Navigation />
 
       {/* Hero Section */}

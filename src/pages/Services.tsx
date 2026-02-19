@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { Check, Heart, Cake, Briefcase, Users, ChefHat } from "lucide-react";
 
 const Services = () => {
@@ -80,6 +82,12 @@ const Services = () => {
 
   return (
     <div className="min-h-screen bg-[hsl(45,40%,94%)]">
+      <SEO 
+        title="Catering Services in Chennai | Wedding, Corporate & Birthday Events"
+        description="Professional catering services for all occasions in Chennai. Wedding catering, corporate events, birthday parties, private dining. Customized menus, hygienic preparation, affordable prices."
+        keywords="wedding catering Chennai, corporate catering services, birthday catering, private event catering, professional caterers Tamil Nadu"
+      />
+      <StructuredData />
       <Navigation />
 
       {/* Hero Section */}

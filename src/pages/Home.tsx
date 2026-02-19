@@ -10,6 +10,8 @@ import {
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 
 // Food images for gallery
 const foodImages = [
@@ -157,6 +159,12 @@ const Home = () => {
 
   return (
     <div className="min-h-screen bg-[hsl(45,40%,94%)]">
+      <SEO 
+        title="Rebekha Catering Services - Best Wedding & Corporate Catering in Chennai"
+        description="Award-winning veg & non-veg catering services in Chennai. Serving love since 1998. Perfect for weddings, birthday parties, corporate events & private dining. Hygienic, affordable."
+        keywords="catering services Chennai, wedding catering Chennai, corporate event catering, best caterers West Tambaram, veg non-veg catering"
+      />
+      <StructuredData />
       <Navigation />
 
       {/* Hero Section - Eden Style */}

@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { Phone, Mail, MapPin, MessageCircle, Clock, Send, Check } from "lucide-react";
 
 const Contact = () => {
@@ -88,6 +90,12 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen bg-[hsl(45,40%,94%)]">
+      <SEO 
+        title="Contact Rebekha Catering Services - Call now for Booking"
+        description="Get in touch with Rebekha Catering Services in West Tambaram, Chennai. Call now to book your event catering. Available 24/7 for consultations."
+        keywords="contact catering Chennai, catering inquiry, book catering services, Rebekha contact"
+      />
+      <StructuredData />
       <Navigation />
 
       {/* Hero Section */}

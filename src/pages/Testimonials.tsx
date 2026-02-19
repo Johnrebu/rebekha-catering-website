@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { Star, Quote, Award, Users, Calendar } from "lucide-react";
 
 const Testimonials = () => {
@@ -59,6 +61,12 @@ const Testimonials = () => {
 
   return (
     <div className="min-h-screen bg-[hsl(45,40%,94%)]">
+      <SEO 
+        title="Client Testimonials | Rebekha Catering Services - 4.9★ Reviews"
+        description="Read 150+ 5-star reviews from our happy clients in Chennai. Wedding catering, corporate events, birthday parties - trust Rebekha Caterers for your special occasion."
+        keywords="client reviews catering Chennai, best catering reviews, catering testimonials, Rebekha ratings"
+      />
+      <StructuredData />
       <Navigation />
 
       {/* Hero Section */}

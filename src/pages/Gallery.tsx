@@ -2,6 +2,8 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { X } from "lucide-react";
 
 const Gallery = () => {
@@ -72,6 +74,12 @@ const Gallery = () => {
 
   return (
     <div className="min-h-screen bg-[hsl(45,40%,94%)]">
+      <SEO 
+        title="Photo Gallery - Rebekha Catering Events | Wedding & Party Photos"
+        description="Browse our event gallery featuring beautiful catering setups and food presentations from weddings, corporate events, and birthday parties in Chennai."
+        keywords="catering photos, event gallery Chennai, wedding catering photos, party setup gallery, professional catering events"
+      />
+      <StructuredData />
       <Navigation />
 
       {/* Hero Section */}

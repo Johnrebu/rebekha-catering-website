@@ -2,6 +2,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { Heart, Users, Utensils, Award, Shield, Sparkles, ChefHat, Clock } from "lucide-react";
 
 const About = () => {
@@ -67,6 +69,12 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-[hsl(45,40%,94%)]">
+      <SEO 
+        title="About Rebekha Catering Services - 25+ Years Experience Since 1998"
+        description="Learn the story of Rebekha Catering Services - a family-run catering business in Chennai serving love and authentic Indian cuisine for 25+ years. 10,000+ happy clients."
+        keywords="about catering Chennai, catering company history, family catering business, professional catering since 1998"
+      />
+      <StructuredData />
       <Navigation />
 
       {/* Hero Section - Eden Style */}

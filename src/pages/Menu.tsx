@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SEO from "@/components/SEO";
+import StructuredData from "@/components/StructuredData";
 import { Leaf, Drumstick } from "lucide-react";
 
 const Menu = () => {
@@ -75,6 +77,12 @@ const Menu = () => {
 
   return (
     <div className="min-h-screen bg-[hsl(45,40%,94%)]">
+      <SEO 
+        title="Catering Menu - Vegetarian & Non-Vegetarian Options | Rebekha Catering"
+        description="Explore our authentic Indian catering menu. Vegetarian and non-vegetarian dishes, customized menus available. From wedding feasts to corporate lunches."
+        keywords="catering menu Chennai, vegetarian catering menu, non-veg catering options, Indian catering menu, custom catering menu"
+      />
+      <StructuredData />
       <Navigation />
 
       {/* Hero Section */}
