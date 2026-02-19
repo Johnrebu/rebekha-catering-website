@@ -37,20 +37,17 @@ const testimonials = [
   {
     name: "Antony Raj",
     event: "Wedding Reception",
-    text: "The food was absolutely delicious and the presentation was stunning! Our guests are still talking about the amazing feast.",
-    image: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=200"
+    text: "The food was absolutely delicious and the presentation was stunning! Our guests are still talking about the amazing feast."
   },
   {
     name: "Rajesh Kumar",
     event: "Corporate Event",
-    text: "Professional service and authentic taste. Rebekha Catering made our company anniversary celebration a huge success!",
-    image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200"
+    text: "Professional service and authentic taste. Rebekha Catering made our company anniversary celebration a huge success!"
   },
   {
     name: "Anjali Sharma",
     event: "Birthday Party",
-    text: "The variety and quality of food exceeded our expectations. The team was punctual and the setup was beautiful!",
-    image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=200"
+    text: "The variety and quality of food exceeded our expectations. The team was punctual and the setup was beautiful!"
   },
 ];
 
@@ -507,11 +504,6 @@ const Home = () => {
                 <p className="text-[hsl(30,10%,35%)] italic mb-6 leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.1rem' }}>
                   "{testimonial.text}"
                 </p>
-                <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className="w-16 h-16 rounded-full object-cover mx-auto mb-3"
-                />
                 <h4 className="font-medium text-[hsl(30,20%,15%)]">{testimonial.name}</h4>
                 <p className="text-sm text-[hsl(30,10%,45%)]">{testimonial.event}</p>
               </motion.div>
