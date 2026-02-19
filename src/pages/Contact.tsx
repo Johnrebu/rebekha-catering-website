@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import GoogleBusinessProfile from "@/components/GoogleBusinessProfile";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import { Phone, Mail, MapPin, MessageCircle, Clock, Send, Check } from "lucide-react";
@@ -495,6 +496,32 @@ const Contact = () => {
               title="West Tambaram Location"
             />
           </div>
+        </div>
+      </section>
+
+      {/* Google Business Profile & Map Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl text-center text-[hsl(30,20%,15%)] mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
+              Find Us
+            </h2>
+            <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto" />
+          </motion.div>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            <GoogleBusinessProfile />
+          </motion.div>
         </div>
       </section>
 
