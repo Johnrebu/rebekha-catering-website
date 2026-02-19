@@ -11,48 +11,42 @@ const Testimonials = () => {
       event: "Wedding Reception",
       date: "December 2024",
       text: "The food was absolutely delicious and the presentation was stunning! Our guests are still talking about the amazing feast. Rebekha Caterers made our special day truly memorable.",
-      rating: 5,
-      image: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=200"
+      rating: 5
     },
     {
       name: "Rajesh Kumar",
       event: "Corporate Event",
       date: "November 2024",
       text: "Professional service and authentic taste. Rebekha Catering made our company anniversary celebration a huge success! The team was punctual and the food quality was exceptional.",
-      rating: 5,
-      image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=200"
+      rating: 5
     },
     {
       name: "Anjali Sharma",
       event: "Birthday Party",
       date: "October 2024",
       text: "The variety and quality of food exceeded our expectations. The team was punctual and the setup was beautiful! My daughter's birthday was perfect thanks to their amazing service.",
-      rating: 5,
-      image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=200"
+      rating: 5
     },
     {
       name: "Suresh Babu",
       event: "Engagement Ceremony",
       date: "September 2024",
       text: "We chose Rebekha Caterers for our daughter's engagement and we couldn't be happier. The biryani was absolutely divine and the service was top-notch.",
-      rating: 5,
-      image: "https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=200"
+      rating: 5
     },
     {
       name: "Lakshmi Narayanan",
       event: "House Warming",
       date: "August 2024",
       text: "From the initial consultation to the final cleanup, everything was handled professionally. The food was fresh, hot, and absolutely delicious. Highly recommend!",
-      rating: 5,
-      image: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=200"
+      rating: 5
     },
     {
       name: "Vikram Sundaram",
       event: "Corporate Lunch",
       date: "July 2024",
       text: "Our team loved the variety of dishes. The vegetarian and non-vegetarian options were equally amazing. Will definitely book again for our next corporate event.",
-      rating: 5,
-      image: "https://images.pexels.com/photos/1681010/pexels-photo-1681010.jpeg?auto=compress&cs=tinysrgb&w=200"
+      rating: 5
     },
   ];
 
@@ -151,12 +145,6 @@ const Testimonials = () => {
                 <p className="text-[hsl(30,10%,35%)] italic mb-6 leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.1rem' }}>
                   "{testimonial.text}"
                 </p>
-
-                <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className="w-16 h-16 rounded-full object-cover mx-auto mb-3"
-                />
 
                 <h4 className="font-medium text-[hsl(30,20%,15%)]">{testimonial.name}</h4>
                 <p className="text-sm text-[hsl(43,76%,58%)]">{testimonial.event}</p>
