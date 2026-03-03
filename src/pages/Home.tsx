@@ -386,16 +386,20 @@ const Home = () => {
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Image */}
             <motion.div
-              className="relative"
+              className="relative max-w-sm mx-auto lg:mx-0"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
               <div className="overflow-hidden">
                 <img
-                  src="/founders.jpg"
+                  src="/founders-new-std.jpeg"
+                  srcSet="/founders-new-std.jpeg 450w, /founders-new-hd.jpeg 903w"
+                  sizes="(max-width: 1024px) 90vw, 384px"
                   alt="Our Founders"
-                  className="w-full h-[500px] object-cover object-top"
+                  className="w-full h-[500px] object-cover object-center contrast-110 saturate-110 brightness-105"
+                  loading="lazy"
+                  decoding="async"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = 'https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=800';
