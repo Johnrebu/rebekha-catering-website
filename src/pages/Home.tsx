@@ -170,12 +170,7 @@ const Home = () => {
       {/* Hero Section - Eden Style */}
       <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
         {/* Background Image */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=1920')`
-          }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center [background-image:url('https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=1920')]" />
         <div className="absolute inset-0 bg-black/40" />
 
         {/* Hero Content */}
@@ -185,7 +180,7 @@ const Home = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-normal mb-6" style={{ fontFamily: "'Great Vibes', cursive" }}>
+          <h1 className="text-5xl md:text-7xl lg:text-8xl font-normal mb-6 [font-family:'Great_Vibes',cursive]">
             Rebekha Caterers
           </h1>
           <p className="text-xl md:text-2xl font-light mb-8 tracking-wide">
@@ -220,7 +215,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
+            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
               Our Food
             </h2>
             <div className="w-20 h-0.5 bg-[hsl(30,20%,15%)] mx-auto opacity-50" />
@@ -301,12 +296,7 @@ const Home = () => {
 
       {/* Special Event Banner */}
       <section className="relative py-24 overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-fixed"
-          style={{
-            backgroundImage: `url('https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=1920')`
-          }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center bg-fixed [background-image:url('https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=1920')]" />
         <div className="absolute inset-0 bg-[hsl(43,76%,58%)]/90" />
 
         <motion.div
@@ -315,10 +305,10 @@ const Home = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-5xl md:text-7xl text-[hsl(30,20%,15%)] mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
+          <h2 className="text-5xl md:text-7xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
             Wedding Season
           </h2>
-          <p className="text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] mb-6" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+          <p className="text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] mb-6 [font-family:'Cormorant_Garamond',serif]">
             2026
           </p>
           <p className="text-lg text-[hsl(30,20%,15%)]/80 mb-8 max-w-xl mx-auto">
@@ -343,7 +333,7 @@ const Home = () => {
               viewport={{ once: true }}
             >
               <Award className="h-10 w-10 text-[hsl(43,76%,58%)] mx-auto mb-3" />
-              <div className="text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+              <div className="text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
                 {yearsCounter.count}+
               </div>
               <p className="text-sm text-[hsl(30,10%,45%)] uppercase tracking-wider mt-2">Years</p>
@@ -357,7 +347,7 @@ const Home = () => {
               transition={{ delay: 0.1 }}
             >
               <Users className="h-10 w-10 text-[hsl(43,76%,58%)] mx-auto mb-3" />
-              <div className="text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+              <div className="text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
                 {eventsCounter.count.toLocaleString()}+
               </div>
               <p className="text-sm text-[hsl(30,10%,45%)] uppercase tracking-wider mt-2">Events</p>
@@ -371,7 +361,7 @@ const Home = () => {
               transition={{ delay: 0.2 }}
             >
               <ChefHat className="h-10 w-10 text-[hsl(43,76%,58%)] mx-auto mb-3" />
-              <div className="text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+              <div className="text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
                 {dishesCounter.count}+
               </div>
               <p className="text-sm text-[hsl(30,10%,45%)] uppercase tracking-wider mt-2">Dishes</p>
@@ -414,17 +404,17 @@ const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-6" style={{ fontFamily: "'Great Vibes', cursive" }}>
+              <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-6 [font-family:'Great_Vibes',cursive]">
                 About Us
               </h2>
               <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mb-8" />
 
-              <p className="text-lg text-[hsl(30,10%,35%)] leading-relaxed mb-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.25rem' }}>
+              <p className="text-lg text-[hsl(30,10%,35%)] leading-relaxed mb-6 [font-family:'Cormorant_Garamond',serif] text-[1.25rem]">
                 Rebekha Caterers is one of Chennai's most trusted catering services,
                 providing fresh, authentic and delicious food since 1998.
               </p>
 
-              <p className="text-lg text-[hsl(30,10%,35%)] leading-relaxed mb-8" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.25rem' }}>
+              <p className="text-lg text-[hsl(30,10%,35%)] leading-relaxed mb-8 [font-family:'Cormorant_Garamond',serif] text-[1.25rem]">
                 Founded by Christopher Durairaj & Nancy Navaneetham, we bring
                 traditional recipes passed through generations to your celebrations.
                 Be it a wedding for 1000 or a birthday for 50, we have the experience
@@ -465,11 +455,11 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
+            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
               The Team
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
-            <p className="text-lg text-[hsl(30,10%,35%)] mb-8 max-w-xl mx-auto" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+            <p className="text-lg text-[hsl(30,10%,35%)] mb-8 max-w-xl mx-auto [font-family:'Cormorant_Garamond',serif]">
               Our dedicated team of chefs, service staff, and coordinators work together
               to make your events exceptional.
             </p>
@@ -491,7 +481,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
+            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
               Testimonials
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto" />
@@ -513,7 +503,7 @@ const Home = () => {
                     <Star key={i} className="h-4 w-4 fill-[hsl(43,76%,58%)] text-[hsl(43,76%,58%)]" />
                   ))}
                 </div>
-                <p className="text-[hsl(30,10%,35%)] italic mb-6 leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.1rem' }}>
+                <p className="text-[hsl(30,10%,35%)] italic mb-6 leading-relaxed [font-family:'Cormorant_Garamond',serif] text-[1.1rem]">
                   "{testimonial.text}"
                 </p>
                 <h4 className="font-medium text-[hsl(30,20%,15%)]">{testimonial.name}</h4>
@@ -546,11 +536,11 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
+            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
               Enquire
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
-            <p className="text-lg text-[hsl(30,10%,35%)] max-w-xl mx-auto" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+            <p className="text-lg text-[hsl(30,10%,35%)] max-w-xl mx-auto [font-family:'Cormorant_Garamond',serif]">
               Ready to make your event memorable? Get in touch with us today.
             </p>
           </motion.div>
@@ -566,7 +556,7 @@ const Home = () => {
                 <div className="w-16 h-16 bg-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Check className="h-8 w-8 text-white" />
                 </div>
-                <h3 className="text-2xl text-[hsl(30,20%,15%)] mb-2" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                <h3 className="text-2xl text-[hsl(30,20%,15%)] mb-2 [font-family:'Cormorant_Garamond',serif]">
                   Thank You!
                 </h3>
                 <p className="text-[hsl(30,10%,45%)]">
@@ -582,8 +572,9 @@ const Home = () => {
                 )}
                 <div className="grid md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Name *</label>
+                    <label htmlFor="home-name" className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Name *</label>
                     <input
+                      id="home-name"
                       type="text"
                       name="name"
                       value={formData.name}
@@ -595,8 +586,9 @@ const Home = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Phone *</label>
+                    <label htmlFor="home-phone" className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Phone *</label>
                     <input
+                      id="home-phone"
                       type="tel"
                       name="phone"
                       value={formData.phone}
@@ -609,8 +601,9 @@ const Home = () => {
                   </div>
                 </div>
                 <div>
-                  <label className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Email *</label>
+                  <label htmlFor="home-email" className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Email *</label>
                   <input
+                    id="home-email"
                     type="email"
                     name="email"
                     value={formData.email}
@@ -622,8 +615,9 @@ const Home = () => {
                   />
                 </div>
                 <div>
-                  <label className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Event Type</label>
+                  <label htmlFor="home-event-type" className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Event Type</label>
                   <select
+                    id="home-event-type"
                     name="eventType"
                     value={formData.eventType}
                     onChange={handleChange}
@@ -638,8 +632,9 @@ const Home = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Message</label>
+                  <label htmlFor="home-message" className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Message</label>
                   <textarea
+                    id="home-message"
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
@@ -691,10 +686,10 @@ const Home = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-xl flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2">
-              <h2 className="text-4xl text-[hsl(30,20%,15%)] mb-6" style={{ fontFamily: "'Great Vibes', cursive" }}>
+              <h2 className="text-4xl text-[hsl(30,20%,15%)] mb-6 [font-family:'Great_Vibes',cursive]">
                 Connect With Us
               </h2>
-              <p className="text-[hsl(30,10%,35%)] mb-8 leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.2rem' }}>
+              <p className="text-[hsl(30,10%,35%)] mb-8 leading-relaxed [font-family:'Cormorant_Garamond',serif] text-[1.2rem]">
                 Save our contact details for your next event. We are dedicated to providing the best catering and transport services in Chennai.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">

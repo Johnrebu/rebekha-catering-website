@@ -79,12 +79,7 @@ const About = () => {
 
       {/* Hero Section - Eden Style */}
       <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1920')`
-          }}
-        />
+        <div className="absolute inset-0 bg-cover bg-center [background-image:url('https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1920')]" />
         <div className="absolute inset-0 bg-black/50" />
 
         <motion.div
@@ -93,7 +88,7 @@ const About = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-7xl mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
+          <h1 className="text-5xl md:text-7xl mb-4 [font-family:'Great_Vibes',cursive]">
             About Us
           </h1>
           <p className="text-xl font-light tracking-wide">
@@ -129,12 +124,12 @@ const About = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-6" style={{ fontFamily: "'Great Vibes', cursive" }}>
+              <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-6 [font-family:'Great_Vibes',cursive]">
                 Our Story
               </h2>
               <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mb-8" />
 
-              <div className="space-y-6" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.15rem' }}>
+              <div className="space-y-6 [font-family:'Cormorant_Garamond',serif] text-[1.15rem]">
                 <p className="text-[hsl(30,10%,35%)] leading-relaxed">
                   Founded in 1998, Rebekha Catering Services began as a small family venture
                   with a big vision: to create exceptional catering experiences that blend
@@ -156,7 +151,7 @@ const About = () => {
               </div>
 
               <div className="mt-8 pt-8 border-t border-[hsl(40,20%,85%)]">
-                <p className="text-2xl italic text-[hsl(30,10%,35%)]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                <p className="text-2xl italic text-[hsl(30,10%,35%)] [font-family:'Cormorant_Garamond',serif]">
                   "We don't just serve food. We serve love, tradition, and unforgettable memories."
                 </p>
               </div>
@@ -174,7 +169,7 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
+            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
               Our Values
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(30,20%,15%)] mx-auto opacity-50" />
@@ -210,7 +205,7 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
+            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
               Meet Our Founders
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto" />
@@ -237,7 +232,7 @@ const About = () => {
               <div className="p-10 flex flex-col justify-center">
                 <div className="space-y-6">
                   <div>
-                    <h3 className="text-2xl text-[hsl(30,20%,15%)] mb-1" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                    <h3 className="text-2xl text-[hsl(30,20%,15%)] mb-1 [font-family:'Cormorant_Garamond',serif]">
                       Christopher Durairaj
                     </h3>
                     <p className="text-[hsl(43,76%,58%)] text-sm uppercase tracking-wider">Co-Founder & Head Chef</p>
@@ -246,7 +241,7 @@ const About = () => {
                   <div className="w-12 h-0.5 bg-[hsl(43,76%,58%)]" />
 
                   <div>
-                    <h3 className="text-2xl text-[hsl(30,20%,15%)] mb-1" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                    <h3 className="text-2xl text-[hsl(30,20%,15%)] mb-1 [font-family:'Cormorant_Garamond',serif]">
                       Nancy Navaneetham
                     </h3>
                     <p className="text-[hsl(43,76%,58%)] text-sm uppercase tracking-wider">Co-Founder & Operations Head</p>
@@ -254,7 +249,7 @@ const About = () => {
 
                   <div className="w-12 h-0.5 bg-[hsl(43,76%,58%)]" />
 
-                  <p className="text-[hsl(30,10%,35%)]" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.1rem' }}>
+                  <p className="text-[hsl(30,10%,35%)] [font-family:'Cormorant_Garamond',serif] text-[1.1rem]">
                     Together, they have built Rebekha Catering Services from a humble home kitchen
                     into one of Chennai's most trusted catering brands. Their passion for authentic
                     flavors and commitment to quality has served over 10,000+ happy events.
@@ -280,7 +275,7 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
+            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
               Our Journey
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto" />
@@ -304,10 +299,10 @@ const About = () => {
                   />
                 </div>
                 <div className={`md:w-2/3 text-center ${index % 2 === 0 ? 'md:text-left' : 'md:text-right'}`}>
-                  <span className="text-4xl font-light text-[hsl(43,76%,58%)]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                  <span className="text-4xl font-light text-[hsl(43,76%,58%)] [font-family:'Cormorant_Garamond',serif]">
                     {item.year}
                   </span>
-                  <h3 className="text-2xl text-[hsl(30,20%,15%)] mt-2 mb-3" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                  <h3 className="text-2xl text-[hsl(30,20%,15%)] mt-2 mb-3 [font-family:'Cormorant_Garamond',serif]">
                     {item.title}
                   </h3>
                   <p className="text-[hsl(30,10%,35%)]">{item.description}</p>
@@ -326,12 +321,12 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
+            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
               The Team
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-8" />
 
-            <p className="text-lg text-[hsl(30,10%,35%)] max-w-2xl mx-auto mb-10" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+            <p className="text-lg text-[hsl(30,10%,35%)] max-w-2xl mx-auto mb-10 [font-family:'Cormorant_Garamond',serif]">
               Behind every successful event is our dedicated team of over 50 professionals -
               including expert chefs, experienced service staff, and meticulous event coordinators.
             </p>
@@ -352,7 +347,7 @@ const About = () => {
                   transition={{ delay: index * 0.1 }}
                 >
                   <item.icon className="h-8 w-8 text-[hsl(43,76%,58%)] mx-auto mb-3" />
-                  <div className="text-3xl font-light text-[hsl(30,20%,15%)]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                  <div className="text-3xl font-light text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
                     {item.count}
                   </div>
                   <p className="text-xs uppercase tracking-wider text-[hsl(30,10%,45%)] mt-1">{item.label}</p>
@@ -371,7 +366,7 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl text-[hsl(30,20%,15%)] mb-6" style={{ fontFamily: "'Great Vibes', cursive" }}>
+            <h2 className="text-4xl text-[hsl(30,20%,15%)] mb-6 [font-family:'Great_Vibes',cursive]">
               Ready to Create Memories?
             </h2>
             <p className="text-[hsl(30,20%,15%)]/80 mb-8 max-w-xl mx-auto">
