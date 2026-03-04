@@ -3,7 +3,7 @@ import { MapPin, Phone, Globe, Clock, MapIcon } from "lucide-react";
 const GoogleBusinessProfile = () => {
   const businessInfo = {
     name: "Rebekha Catering Services",
-    phone: "+91-XXXXXXXXXX", // Replace with your actual phone number
+    phone: "+91-9445435102",
     website: "https://rebekhacaterers.online",
     googleBusinessUrl: "https://www.google.com/maps/place/Rebekha+Catering+Services+Chennai", // Update after creating profile
     address: "West Tambaram, Chennai, Tamil Nadu 600045, India",
@@ -46,7 +46,7 @@ const GoogleBusinessProfile = () => {
               <Phone className="h-5 w-5 text-[hsl(43,76%,58%)] mt-1 flex-shrink-0" />
               <div>
                 <p className="text-sm text-gray-600">Call Us</p>
-                <a href="tel:+91XXXXXXXXXX" className="text-lg font-semibold text-[hsl(30,20%,15%)] hover:text-[hsl(43,76%,58%)]">
+                <a href="tel:+919445435102" className="text-lg font-semibold text-[hsl(30,20%,15%)] hover:text-[hsl(43,76%,58%)]">
                   {businessInfo.phone}
                 </a>
               </div>

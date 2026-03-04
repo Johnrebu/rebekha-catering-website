@@ -21,7 +21,7 @@ const StructuredData = () => {
     },
     "contactPoint": {
       "@type": "ContactPoint",
-      "telephone": "+91-XXXXXXXXXX",
+      "telephone": "+91-9445435102",
       "contactType": "customer service",
       "areaServed": "IN",
       "availableLanguage": ["English", "Tamil"]
@@ -48,7 +48,7 @@ const StructuredData = () => {
       "latitude": "12.9226",
       "longitude": "80.1275"
     },
-    "telephone": "+91-XXXXXXXXXX",
+    "telephone": "+91-9445435102",
     "servesCuisine": ["Indian", "South Indian", "Vegetarian", "Non-Vegetarian"],
     "priceRange": "$$",
     "openingHoursSpecification": {
