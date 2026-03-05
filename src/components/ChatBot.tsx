@@ -233,7 +233,9 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
 const normalize = (value: string): string =>
   value.toLowerCase().replace(/[^\w\s]/g, " ").replace(/\s+/g, " ").trim();
 
-const formatINR = (amount: number): string => `Rs ${amount.toLocaleString("en-IN")}`;
+function formatINR(amount: number): string {
+  return `Rs ${amount.toLocaleString("en-IN")}`;
+}
 
 const tokenize = (value: string): string[] => {
   return normalize(value)
