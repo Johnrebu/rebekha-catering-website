@@ -2,6 +2,7 @@ import * as React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, useInView } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import {
   Heart, Users, ChefHat, Award, Phone, ArrowRight,
   Leaf, Clock, Star, Quote, MapPin, Send, Check
@@ -12,6 +13,12 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger
+} from "@/components/ui/accordion";
 
 // Food images for gallery
 const foodImages = [
@@ -51,6 +58,33 @@ const testimonials = [
     event: "Birthday Party",
     text: "The variety and quality of food exceeded our expectations. The team was punctual and the setup was beautiful!"
   },
+];
+
+const homeFaqs = [
+  {
+    question: "What types of events do you cater in Chennai?",
+    answer: "We cater weddings, engagement ceremonies, birthday parties, corporate events, housewarmings, private dinners, and large family functions across Chennai."
+  },
+  {
+    question: "Do you provide both vegetarian and non-vegetarian catering?",
+    answer: "Yes. We offer separate vegetarian and non-vegetarian menus, and can also create mixed buffet plans based on your guest preferences."
+  },
+  {
+    question: "How early should I book your catering service?",
+    answer: "For weddings and peak season dates, we recommend booking 2 to 6 months in advance. For smaller events, we can often support shorter notice based on availability."
+  },
+  {
+    question: "Can you customize menu items for my budget and taste?",
+    answer: "Yes. We build custom menus based on your event type, guest count, cuisine preference, and budget while maintaining quality and hygiene standards."
+  },
+  {
+    question: "Do you provide serving staff, setup, and vessels?",
+    answer: "Yes. Our full-service catering includes professional serving staff, buffet setup, and required service equipment so you can focus on your guests."
+  },
+  {
+    question: "Which locations do you serve apart from West Tambaram?",
+    answer: "We are based in West Tambaram and serve most areas in Chennai and nearby districts. Share your venue location and date to confirm service availability."
+  }
 ];
 
 // Animated counter hook
@@ -93,6 +127,19 @@ const Home = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+
+  const faqStructuredData = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: homeFaqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -164,6 +211,11 @@ const Home = () => {
         description="Award-winning veg & non-veg catering services in Chennai. Serving love since 1998. Perfect for weddings, birthday parties, corporate events & private dining. Hygienic, affordable."
         keywords="catering services Chennai, wedding catering Chennai, corporate event catering, best caterers West Tambaram, veg non-veg catering"
       />
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(faqStructuredData)}
+        </script>
+      </Helmet>
       <StructuredData />
       <Navigation />
 
@@ -523,6 +575,60 @@ const Home = () => {
                 View All Reviews
               </button>
             </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+              Frequently Asked Questions
+            </h2>
+            <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
+            <p className="text-lg text-[hsl(30,10%,35%)] max-w-2xl mx-auto [font-family:'Cormorant_Garamond',serif]">
+              Quick answers about our wedding, birthday, and corporate catering services in Chennai.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="max-w-4xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Accordion type="single" collapsible className="w-full space-y-4">
+              {homeFaqs.map((faq, index) => (
+                <AccordionItem
+                  key={index}
+                  value={`home-faq-${index}`}
+                  className="border border-[hsl(40,20%,85%)] px-6 bg-[hsl(45,40%,94%)]"
+                >
+                  <AccordionTrigger className="hover:no-underline py-6">
+                    <span className="text-left text-lg text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
+                      {faq.question}
+                    </span>
+                  </AccordionTrigger>
+                  <AccordionContent className="text-[hsl(30,10%,35%)] pb-6 leading-relaxed [font-family:'Cormorant_Garamond',serif] text-[1.1rem]">
+                    {faq.answer}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+
+            <div className="text-center mt-10">
+              <Link to="/faq">
+                <button className="px-8 py-3 text-sm font-medium tracking-widest uppercase bg-transparent text-[hsl(30,20%,15%)] border-2 border-[hsl(43,76%,58%)] hover:bg-[hsl(43,76%,58%)] transition-all duration-300">
+                  View More FAQs
+                </button>
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>
