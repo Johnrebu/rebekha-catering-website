@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import {
   Heart, Users, ChefHat, Award, Phone, ArrowRight,
-  Leaf, Clock, Star, Quote, MapPin, Send, Check
+  Leaf, Clock, Star, Quote, MapPin, Send, Check, CalendarDays, Instagram
 } from "lucide-react";
 
 import Navigation from "@/components/Navigation";
@@ -13,6 +13,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import { blogPosts } from "@/data/blogPosts";
 import {
   Accordion,
   AccordionContent,
@@ -87,6 +88,33 @@ const homeFaqs = [
   }
 ];
 
+const instagramPosts = [
+  {
+    image: "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=800",
+    alt: "Birthday catering buffet setup",
+    caption: "Birthday celebration buffet setup in Chennai",
+    link: "https://www.instagram.com/rebekhacaterers/",
+  },
+  {
+    image: "https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=800",
+    alt: "Wedding catering service",
+    caption: "Live wedding catering service by Rebekha team",
+    link: "https://www.instagram.com/rebekhacaterers/",
+  },
+  {
+    image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800",
+    alt: "Corporate lunch catering",
+    caption: "Corporate event lunch with custom menu",
+    link: "https://www.instagram.com/rebekhacaterers/",
+  },
+  {
+    image: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=800",
+    alt: "South Indian non veg spread",
+    caption: "Chef special South Indian non-veg spread",
+    link: "https://www.instagram.com/rebekhacaterers/",
+  },
+];
+
 // Animated counter hook
 const useCounter = (end: number, duration: number = 2000) => {
   const [count, setCount] = React.useState(0);
@@ -127,6 +155,9 @@ const Home = () => {
   const [submitted, setSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const latestBlogPosts = [...blogPosts]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 4);
 
   const faqStructuredData = {
     "@context": "https://schema.org",
@@ -520,6 +551,146 @@ const Home = () => {
                 Meet The Team
               </button>
             </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Blog / Updates Section */}
+      <section className="py-20 bg-[hsl(45,40%,94%)]">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+              Latest Updates
+            </h2>
+            <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
+            <p className="text-lg text-[hsl(30,10%,35%)] max-w-2xl mx-auto [font-family:'Cormorant_Garamond',serif]">
+              Wedding catering tips, menu customization guides, event planning checklists, and seasonal special offers.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+            {latestBlogPosts.map((post, index) => (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08 }}
+              >
+                <Link to={`/blog/${post.slug}`} className="block group h-full">
+                  <article className="bg-white h-full border border-[hsl(40,20%,85%)] overflow-hidden">
+                    <div className="relative h-44 overflow-hidden">
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                    <div className="p-5">
+                      <p className="text-xs uppercase tracking-wider text-[hsl(30,10%,45%)] mb-3 flex items-center gap-2">
+                        <CalendarDays className="h-3.5 w-3.5" />
+                        {new Date(post.date).toLocaleDateString("en-IN", {
+                          day: "2-digit",
+                          month: "short",
+                          year: "numeric",
+                        })}
+                      </p>
+                      <h3 className="text-xl text-[hsl(30,20%,15%)] mb-3 line-clamp-2 group-hover:text-[hsl(38,70%,45%)] transition-colors [font-family:'Cormorant_Garamond',serif]">
+                        {post.title}
+                      </h3>
+                      <p className="text-sm text-[hsl(30,10%,45%)] leading-relaxed line-clamp-3">
+                        {post.excerpt}
+                      </p>
+                    </div>
+                  </article>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+
+          <motion.div
+            className="text-center mt-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <Link to="/blog">
+              <button className="px-8 py-3 text-sm font-medium tracking-widest uppercase bg-transparent text-[hsl(30,20%,15%)] border-2 border-[hsl(43,76%,58%)] hover:bg-[hsl(43,76%,58%)] transition-all duration-300">
+                Explore Blog
+              </button>
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Instagram Feed Section */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+              Instagram Highlights
+            </h2>
+            <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
+            <p className="text-lg text-[hsl(30,10%,35%)] max-w-2xl mx-auto [font-family:'Cormorant_Garamond',serif]">
+              Recent catering moments from weddings, birthdays, and corporate events.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
+            {instagramPosts.map((post, index) => (
+              <motion.a
+                key={post.alt}
+                href={post.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block"
+                initial={{ opacity: 0, scale: 0.96 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.08 }}
+              >
+                <div className="relative overflow-hidden">
+                  <img
+                    src={post.image}
+                    alt={post.alt}
+                    className="w-full h-44 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-end">
+                    <p className="text-white text-xs md:text-sm p-3 opacity-0 group-hover:opacity-100 transition-opacity">
+                      {post.caption}
+                    </p>
+                  </div>
+                </div>
+              </motion.a>
+            ))}
+          </div>
+
+          <motion.div
+            className="text-center mt-10"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <a
+              href="https://www.instagram.com/rebekhacaterers/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <button className="px-8 py-3 text-sm font-medium tracking-widest uppercase bg-[hsl(43,76%,58%)] text-[hsl(30,20%,15%)] border-2 border-[hsl(43,76%,58%)] hover:bg-[hsl(38,70%,45%)] hover:border-[hsl(38,70%,45%)] transition-all duration-300 inline-flex items-center gap-2">
+                <Instagram className="h-4 w-4" />
+                Follow on Instagram
+              </button>
+            </a>
           </motion.div>
         </div>
       </section>

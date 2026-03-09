@@ -93,7 +93,7 @@ export const blogPosts: BlogPost[] = [
     category: 'Culinary Culture',
     tags: ['South Indian', 'Traditional', 'Food Culture']
   },
-    {
+  {
     id: '4',
     slug: 'eco-friendly-catering-trends',
     title: 'Rising Trends in Eco-Friendly Catering',
@@ -118,5 +118,118 @@ export const blogPosts: BlogPost[] = [
     image: 'https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?auto=format&fit=crop&q=80',
     category: 'Sustainability',
     tags: ['Eco-friendly', 'Sustainability', 'Green Events']
+  },
+  {
+    id: '5',
+    slug: 'wedding-catering-tips-for-guest-experience',
+    title: 'Wedding Catering Tips to Delight Every Guest',
+    excerpt: 'From welcome drinks to dessert counters, practical wedding catering tips that improve guest comfort and event flow.',
+    content: `
+      <h2>Plan the Food Journey, Not Just the Food List</h2>
+      <p>A successful wedding menu is about timing, variety, and comfort. Guests remember how smoothly the meal experience felt from start to finish.</p>
+
+      <h3>1. Start with Smart Welcome Service</h3>
+      <p>Offer two to three easy-to-eat starters and refreshing beverages as guests arrive. Keep options balanced with both veg and non-veg choices.</p>
+
+      <h3>2. Build a Comfortable Buffet Flow</h3>
+      <p>Separate counters for starters, mains, breads, and desserts reduce crowding. Clear sign boards help guests choose quickly.</p>
+
+      <h3>3. Include Familiar + Signature Items</h3>
+      <p>Blend classic crowd favorites with one or two signature dishes to make your menu memorable without being risky.</p>
+
+      <h3>4. Keep Senior Guests in Mind</h3>
+      <p>Add mild options, less-oil choices, and easy-access service points for families and elderly guests.</p>
+
+      <p>Need help planning your wedding menu in Chennai? Rebekha Caterers can create a guest-friendly plan based on your venue, crowd, and budget.</p>
+    `,
+    date: '2026-01-28',
+    author: 'Rebekha Team',
+    image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?auto=format&fit=crop&q=80',
+    category: 'Wedding Planning',
+    tags: ['Wedding Catering Tips', 'Guest Experience', 'Event Planning']
+  },
+  {
+    id: '6',
+    slug: 'menu-customization-guide-for-events',
+    title: 'Menu Customization Guide for Weddings, Birthdays and Corporate Events',
+    excerpt: 'A practical guide to building custom catering menus based on guest profile, service style, and budget.',
+    content: `
+      <h2>Create a Menu That Fits Your Event</h2>
+      <p>Every function has different needs. A custom menu helps you avoid waste, satisfy guests, and control costs.</p>
+
+      <h3>Step 1: Define Guest Mix</h3>
+      <p>Estimate vegetarian, non-vegetarian, kids, and senior guest proportions early. This ratio decides your dish count and serving quantities.</p>
+
+      <h3>Step 2: Match the Service Format</h3>
+      <p>Live counters work well for weddings and receptions. Compact buffet spreads are ideal for office and indoor events.</p>
+
+      <h3>Step 3: Balance Budget and Variety</h3>
+      <p>Prioritize quality on key items like starters and biryani, then add value with seasonal vegetables and local favorites.</p>
+
+      <h3>Step 4: Confirm Dietary Preferences</h3>
+      <p>Check for Jain, no-onion/no-garlic, low-spice, and allergy-related requirements in advance for smooth service.</p>
+
+      <p>At Rebekha Caterers, we help families and companies in Chennai build customized menus with transparent planning and clear pricing.</p>
+    `,
+    date: '2026-02-08',
+    author: 'Rebekha Team',
+    image: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&q=80',
+    category: 'Menu Guides',
+    tags: ['Menu Customization', 'Budget Planning', 'Catering Guide']
+  },
+  {
+    id: '7',
+    slug: 'event-planning-checklist-catering',
+    title: 'Event Planning Checklist: Catering Essentials You Should Not Miss',
+    excerpt: 'Use this catering checklist to stay organized before your wedding, birthday, or corporate event in Chennai.',
+    content: `
+      <h2>Ahead-of-Time Planning Prevents Last-Minute Stress</h2>
+      <p>A simple checklist can save your event day. Keep all catering decisions tracked in one place.</p>
+
+      <h3>30 Days Before</h3>
+      <p>Finalize guest count range, confirm venue kitchen rules, and shortlist menu themes.</p>
+
+      <h3>15 Days Before</h3>
+      <p>Lock menu items, service timing, counter plan, and special dietary requests.</p>
+
+      <h3>7 Days Before</h3>
+      <p>Share final guest estimate, entry timing, and onsite coordinator details with the catering team.</p>
+
+      <h3>Event Day</h3>
+      <p>Keep one family coordinator or event manager as the point of contact so service decisions stay quick and smooth.</p>
+
+      <p>Download-ready planning templates and coordinated service support are available when you book with Rebekha Caterers.</p>
+    `,
+    date: '2026-02-19',
+    author: 'Rebekha Team',
+    image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&q=80',
+    category: 'Event Planning',
+    tags: ['Checklist', 'Catering Essentials', 'Event Timeline']
+  },
+  {
+    id: '8',
+    slug: 'seasonal-catering-specials-2026',
+    title: 'Seasonal Catering Specials 2026: Limited Menu Promotions',
+    excerpt: 'Explore seasonal specials for wedding and party catering with festive menu bundles and value pricing.',
+    content: `
+      <h2>Fresh Seasonal Menus, Better Value</h2>
+      <p>Seasonal ingredients improve flavor and help us offer attractive pricing for larger events.</p>
+
+      <h3>Summer Special Counters</h3>
+      <p>Live chaat, chilled beverages, and lighter main course combinations designed for outdoor comfort.</p>
+
+      <h3>Monsoon Comfort Menus</h3>
+      <p>Hot starters, regional gravies, and premium tea/coffee add-ons for indoor celebrations.</p>
+
+      <h3>Festival and Wedding Bundles</h3>
+      <p>Combo packages with welcome drinks, starters, mains, sweets, and service team support.</p>
+
+      <p>Contact Rebekha Caterers for current seasonal offers available for your event date and location in Chennai.</p>
+    `,
+    date: '2026-03-01',
+    author: 'Rebekha Team',
+    image: 'https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&q=80',
+    category: 'Seasonal Specials',
+    tags: ['Seasonal Promotions', 'Wedding Offers', 'Catering Deals']
   }
 ];
