@@ -141,6 +141,8 @@ const useCounter = (end: number, duration: number = 2000) => {
 };
 
 const Home = () => {
+  const inquiryReceiverEmail = "reburr94@gmail.com";
+
   const yearsCounter = useCounter(25, 2000);
   const eventsCounter = useCounter(10000, 2500);
   const dishesCounter = useCounter(200, 2000);
@@ -186,28 +188,23 @@ const Home = () => {
     setError("");
 
     try {
-      const portalId = "244427242";
-
       const response = await fetch(
-        `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/8dab0ded-7cbd-495b-8690-f9b1615418ee`,
+        `https://formsubmit.co/ajax/${inquiryReceiverEmail}`,
         {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            Accept: "application/json",
           },
           body: JSON.stringify({
-            fields: [
-              { name: "firstname", value: formData.name.split(" ")[0] || formData.name },
-              { name: "lastname", value: formData.name.split(" ").slice(1).join(" ") || "" },
-              { name: "email", value: formData.email },
-              { name: "phone", value: formData.phone },
-              { name: "event_type", value: formData.eventType },
-              { name: "message", value: formData.message },
-            ],
-            context: {
-              pageUri: window.location.href,
-              pageName: "Home Page Enquiry",
-            },
+            _subject: "New Inquiry - Home Page",
+            _captcha: "false",
+            source_page: window.location.href,
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone,
+            event_type: formData.eventType,
+            message: formData.message,
           }),
         }
       );
