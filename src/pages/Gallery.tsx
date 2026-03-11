@@ -122,7 +122,7 @@ const galleryPhotos: GalleryPhoto[] = [
   },
   {
     id: 11,
-    src: "https://images.pexels.com/photos/666988/pexels-photo-666988.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    src: "https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=1200",
     alt: "Dessert counter with sweets and ice cream",
     eventType: "Weddings",
     eventDate: "2026-01-18",
