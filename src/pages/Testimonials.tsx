@@ -7,6 +7,45 @@ import StructuredData from "@/components/StructuredData";
 import { Star, Quote, Award, Users, Calendar } from "lucide-react";
 
 const Testimonials = () => {
+  const cardStyles = [
+    {
+      card: "bg-[hsl(48,60%,96%)]",
+      quote: "text-[hsl(38,70%,45%)]",
+      star: "fill-[hsl(38,70%,45%)] text-[hsl(38,70%,45%)]",
+      event: "text-[hsl(38,70%,45%)]",
+    },
+    {
+      card: "bg-[hsl(150,35%,95%)]",
+      quote: "text-[hsl(155,35%,38%)]",
+      star: "fill-[hsl(155,35%,38%)] text-[hsl(155,35%,38%)]",
+      event: "text-[hsl(155,35%,38%)]",
+    },
+    {
+      card: "bg-[hsl(210,55%,95%)]",
+      quote: "text-[hsl(210,45%,42%)]",
+      star: "fill-[hsl(210,45%,42%)] text-[hsl(210,45%,42%)]",
+      event: "text-[hsl(210,45%,42%)]",
+    },
+    {
+      card: "bg-[hsl(12,55%,95%)]",
+      quote: "text-[hsl(12,55%,45%)]",
+      star: "fill-[hsl(12,55%,45%)] text-[hsl(12,55%,45%)]",
+      event: "text-[hsl(12,55%,45%)]",
+    },
+    {
+      card: "bg-[hsl(282,35%,95%)]",
+      quote: "text-[hsl(282,30%,42%)]",
+      star: "fill-[hsl(282,30%,42%)] text-[hsl(282,30%,42%)]",
+      event: "text-[hsl(282,30%,42%)]",
+    },
+    {
+      card: "bg-[hsl(190,45%,94%)]",
+      quote: "text-[hsl(190,45%,38%)]",
+      star: "fill-[hsl(190,45%,38%)] text-[hsl(190,45%,38%)]",
+      event: "text-[hsl(190,45%,38%)]",
+    },
+  ];
+
   const testimonials = [
     {
       name: "Antony Raj",
@@ -133,32 +172,36 @@ const Testimonials = () => {
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                className="bg-white p-8 text-center"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Quote className="h-8 w-8 text-[hsl(43,76%,58%)] mx-auto mb-4" />
+            {testimonials.map((testimonial, index) => {
+              const style = cardStyles[index % cardStyles.length];
 
-                <div className="flex justify-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-[hsl(43,76%,58%)] text-[hsl(43,76%,58%)]" />
-                  ))}
-                </div>
+              return (
+                <motion.div
+                  key={index}
+                  className={`${style.card} p-8 text-center`}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Quote className={`h-8 w-8 ${style.quote} mx-auto mb-4`} />
 
-                <p className="text-[hsl(30,10%,35%)] italic mb-6 leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.1rem' }}>
-                  "{testimonial.text}"
-                </p>
+                  <div className="flex justify-center mb-4">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className={`h-4 w-4 ${style.star}`} />
+                    ))}
+                  </div>
 
-                <h4 className="font-medium text-[hsl(30,20%,15%)]">{testimonial.name}</h4>
-                <p className="text-sm text-[hsl(43,76%,58%)]">{testimonial.event}</p>
-                <p className="text-xs text-[hsl(30,10%,55%)] mt-1">{testimonial.date}</p>
-              </motion.div>
-            ))}
+                  <p className="text-[hsl(30,10%,35%)] italic mb-6 leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.1rem' }}>
+                    "{testimonial.text}"
+                  </p>
+
+                  <h4 className="font-medium text-[hsl(30,20%,15%)]">{testimonial.name}</h4>
+                  <p className={`text-sm ${style.event}`}>{testimonial.event}</p>
+                  <p className="text-xs text-[hsl(30,10%,55%)] mt-1">{testimonial.date}</p>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
