@@ -1,5 +1,5 @@
 /* Google Fonts Import for elegant script font - MUST be first */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
 
 /* Tailwind core layers */
 @tailwind base;
@@ -194,6 +194,72 @@
 
 /* Eden Caterers Style Components */
 @layer components {
+  .brand-logo {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    line-height: 1;
+    user-select: none;
+  }
+
+  .brand-logo-row {
+    display: flex;
+    align-items: center;
+    gap: 0.1rem;
+  }
+
+  .brand-letter {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.1em;
+    padding: 0.08em 0.14em;
+    border-radius: 0.24em;
+    font-family: 'Baloo 2', 'Inter', sans-serif;
+    font-size: clamp(1rem, 1.35vw, 1.35rem);
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: #ffffff;
+    background: linear-gradient(155deg, var(--brand-start), var(--brand-end));
+    transform: rotate(var(--brand-tilt));
+    border: 1px solid hsl(0 0% 100% / 0.28);
+    box-shadow:
+      inset 0 2px 4px hsl(0 0% 100% / 0.45),
+      0 2px 0 hsl(0 0% 0% / 0.12),
+      0 6px 14px hsl(0 0% 0% / 0.2);
+    text-shadow: 0 2px 8px hsl(0 0% 0% / 0.25);
+    transition: transform 0.3s ease, filter 0.3s ease;
+  }
+
+  .brand-logo:hover .brand-letter {
+    filter: brightness(1.08) saturate(1.08);
+  }
+
+  .brand-logo-subtitle {
+    font-family: 'Baloo 2', 'Inter', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.32em;
+    color: hsl(30 20% 20%);
+    padding-left: 0.12rem;
+    text-transform: uppercase;
+  }
+
+  .brand-logo-compact .brand-letter {
+    font-size: clamp(0.94rem, 1.25vw, 1.25rem);
+  }
+
+  @media (max-width: 768px) {
+    .brand-logo-compact .brand-letter {
+      font-size: clamp(0.82rem, 3vw, 1rem);
+      min-width: 1em;
+    }
+
+    .brand-logo-subtitle {
+      font-size: 0.52rem;
+      letter-spacing: 0.24em;
+    }
+  }
 
   /* Golden underline decoration for headings */
   .eden-underline {

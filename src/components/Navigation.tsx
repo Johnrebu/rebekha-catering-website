@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, Mail } from "lucide-react";
+import BrandLogo from "./BrandLogo";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -59,18 +60,8 @@ const Navigation = () => {
         <div className="container mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
-              <img
-                src='/rebekha-logo.png'
-                alt='Rebekha Caterers'
-                className='h-14 md:h-16 lg:h-20 w-auto transition-all duration-300 group-hover:opacity-80'
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  if (target.src.includes('rebekha-logo.png')) {
-                    target.src = '/reblogo.png';
-                  }
-                }}
-              />
+            <Link to="/" className="flex items-center group transition-transform duration-300 hover:scale-[1.01]">
+              <BrandLogo variant="compact" />
             </Link>
 
             {/* Desktop Navigation */}

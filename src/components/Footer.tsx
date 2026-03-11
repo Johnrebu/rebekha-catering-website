@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, MessageCircle, Facebook, Instagram, Twitter } from "lucide-react";
+import BrandLogo from "./BrandLogo";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -12,17 +13,7 @@ const Footer = () => {
           {/* Brand Section */}
           <div className="space-y-4">
             <Link to="/">
-              <img
-                src='/rebekha-logo.png'
-                alt='Rebekha Caterers'
-                className='h-20 w-auto'
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  if (target.src.includes('rebekha-logo.png')) {
-                    target.src = '/reblogo.png';
-                  }
-                }}
-              />
+              <BrandLogo variant="full" className="max-w-max" />
             </Link>
             <p className="text-sm text-[hsl(30,10%,35%)] leading-relaxed mt-4" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1rem' }}>
               Authentic veg & non-veg catering services for all your special occasions.
