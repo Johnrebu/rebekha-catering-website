@@ -14,6 +14,7 @@ import WhatsAppButton from "@/components/WhatsAppButton";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import { blogPosts } from "@/data/blogPosts";
+import { CompareDemo } from "@/components/ui/compare-demo";
 import {
   Accordion,
   AccordionContent,
@@ -287,6 +288,35 @@ const Home = () => {
             </Link>
           </div>
         </motion.div>
+      </section>
+
+      {/* Before / After Compare */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-12"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+              Compare Our Food Styling
+            </h2>
+            <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
+            <p className="text-lg text-[hsl(30,10%,35%)] max-w-2xl mx-auto [font-family:'Cormorant_Garamond',serif]">
+              Drag the handle to compare two presentation styles and see the quality details.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <CompareDemo />
+          </motion.div>
+        </div>
       </section>
 
       {/* Our Food Section - Eden Style */}

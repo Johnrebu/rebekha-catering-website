@@ -94,9 +94,6 @@ const GoogleBusinessProfile = () => {
         <h3 className="text-2xl font-bold text-[hsl(30,20%,15%)] mb-3">
           Visit Us on Google
         </h3>
-        <p className="text-[hsl(30,20%,15%)] mb-6 max-w-2xl mx-auto">
-          Check our ratings, reviews, photos, and more on our official Google Business Profile
-        </p>
         <a
           href={businessInfo.googleBusinessUrl}
           target="_blank"
@@ -108,18 +105,6 @@ const GoogleBusinessProfile = () => {
         </a>
       </div>
 
-      {/* Why Google Business Profile */}
-      <div className="bg-gray-50 p-6 rounded-lg border border-gray-200">
-        <h4 className="font-bold text-[hsl(30,20%,15%)] mb-3">Why Choose Google Business Profile?</h4>
-        <ul className="space-y-2 text-sm text-gray-700">
-          <li>✓ Appear on Google Search & Google Maps</li>
-          <li>✓ Build trust with customer reviews & ratings</li>
-          <li>✓ Share photos, menus, and updates</li>
-          <li>✓ Respond to customer reviews</li>
-          <li>✓ Get insights on how customers find you</li>
-          <li>✓ Improve local SEO rankings</li>
-        </ul>
-      </div>
     </div>
   );
 };
