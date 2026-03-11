@@ -93,9 +93,9 @@ const nonVegCategories: MenuCategory[] = [
   },
   {
     name: "Mutton and Seafood",
-    image: "https://images.pexels.com/photos/8477541/pexels-photo-8477541.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/725991/pexels-photo-725991.jpeg?auto=compress&cs=tinysrgb&w=800",
     dishes: [
-      { name: "Mutton Chukka", image: "https://images.pexels.com/photos/8477541/pexels-photo-8477541.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
+      { name: "Mutton Chukka", image: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
       { name: "Mutton Curry", image: "https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
       { name: "Prawn Masala", image: "https://images.pexels.com/photos/3298688/pexels-photo-3298688.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
       { name: "Fish Moilee", image: "https://images.pexels.com/photos/3763847/pexels-photo-3763847.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
