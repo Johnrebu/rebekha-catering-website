@@ -5,7 +5,7 @@ export function CompareDemo() {
   return (
     <div className="w-full max-w-[860px] p-4 border rounded-3xl bg-neutral-100 border-neutral-200">
       <Compare
-        firstImage="https://images.pexels.com/photos/9609838/pexels-photo-9609838.jpeg?auto=compress&cs=tinysrgb&w=1600"
+        firstImage="https://images.pexels.com/photos/5410400/pexels-photo-5410400.jpeg?auto=compress&cs=tinysrgb&w=1600"
         secondImage="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1600"
         firstImageClassName="object-cover object-center"
         secondImageClassname="object-cover object-center"

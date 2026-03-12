@@ -30,9 +30,9 @@ const dietaryTagStyle: Record<DietaryTag, string> = {
 const vegCategories: MenuCategory[] = [
   {
     name: "Starters",
-    image: "https://images.pexels.com/photos/9609838/pexels-photo-9609838.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/5410400/pexels-photo-5410400.jpeg?auto=compress&cs=tinysrgb&w=800",
     dishes: [
-      { name: "Paneer Tikka", image: "https://images.pexels.com/photos/9609838/pexels-photo-9609838.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
+      { name: "Paneer Tikka", image: "https://images.pexels.com/photos/5410400/pexels-photo-5410400.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
       { name: "Veg Manchurian", image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
       { name: "Corn Cheese Balls", image: "https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
       { name: "Aloo Tikki Chaat", image: "https://images.pexels.com/photos/5410400/pexels-photo-5410400.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Vegan"] },
@@ -42,7 +42,7 @@ const vegCategories: MenuCategory[] = [
     name: "Main Course",
     image: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=800",
     dishes: [
-      { name: "Paneer Butter Masala", image: "https://images.pexels.com/photos/9609845/pexels-photo-9609845.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
+      { name: "Paneer Butter Masala", image: "https://images.pexels.com/photos/5410401/pexels-photo-5410401.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
       { name: "Dal Makhani", image: "https://images.pexels.com/photos/5410401/pexels-photo-5410401.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
       { name: "Kadai Vegetable", image: "https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Vegan", "Gluten-Free"] },
       { name: "Jain Veg Curry", image: "https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Jain"] },

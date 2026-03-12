@@ -132,7 +132,7 @@ const galleryPhotos: GalleryPhoto[] = [
   },
   {
     id: 12,
-    src: "https://images.pexels.com/photos/9609838/pexels-photo-9609838.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    src: "https://images.pexels.com/photos/5410400/pexels-photo-5410400.jpeg?auto=compress&cs=tinysrgb&w=1200",
     alt: "Paneer starters in buffet line",
     eventType: "Corporate",
     eventDate: "2026-02-26",

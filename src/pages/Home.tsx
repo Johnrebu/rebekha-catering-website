@@ -25,7 +25,7 @@ import {
 // Food images for gallery
 const foodImages = [
   { src: "https://images.pexels.com/photos/7394819/pexels-photo-7394819.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Biryani", category: "Main Course" },
-  { src: "https://images.pexels.com/photos/9609838/pexels-photo-9609838.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Paneer Tikka", category: "Starters" },
+  { src: "https://images.pexels.com/photos/5410400/pexels-photo-5410400.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Paneer Tikka", category: "Starters" },
   { src: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Butter Chicken", category: "Main Course" },
   { src: "https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Masala Dosa", category: "South Indian" },
   { src: "https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Chicken 65", category: "Starters" },
@@ -91,7 +91,7 @@ const homeFaqs = [
 
 const instagramPosts = [
   {
-    image: "https://images.pexels.com/photos/9609838/pexels-photo-9609838.jpeg?auto=compress&cs=tinysrgb&w=800",
+    image: "https://images.pexels.com/photos/5410400/pexels-photo-5410400.jpeg?auto=compress&cs=tinysrgb&w=800",
     alt: "Paneer starter platter",
     caption: "Freshly prepared paneer starters for events",
     link: "https://www.instagram.com/rebekhacaterers/",
