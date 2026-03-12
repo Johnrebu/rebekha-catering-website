@@ -5,7 +5,7 @@ import { motion, useInView } from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import {
   Heart, Users, ChefHat, Award, Phone, ArrowRight,
-  Leaf, Clock, Star, Quote, MapPin, Send, Check, CalendarDays, Instagram
+  Leaf, Clock, MapPin, Send, Check, CalendarDays, Instagram
 } from "lucide-react";
 
 import Navigation from "@/components/Navigation";
@@ -15,6 +15,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import { blogPosts } from "@/data/blogPosts";
 import { CompareDemo } from "@/components/ui/compare-demo";
+import TestimonialsDemo from "@/components/ui/testimonials-demo";
 import {
   Accordion,
   AccordionContent,
@@ -42,24 +43,6 @@ const menuCategories = [
   { name: "Wedding", image: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
   { name: "Corporate", image: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
   { name: "Birthday", image: "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
-];
-
-const testimonials = [
-  {
-    name: "Antony Raj",
-    event: "Wedding Reception",
-    text: "The food was absolutely delicious and the presentation was stunning! Our guests are still talking about the amazing feast."
-  },
-  {
-    name: "Rajesh Kumar",
-    event: "Corporate Event",
-    text: "Professional service and authentic taste. Rebekha Catering made our company anniversary celebration a huge success!"
-  },
-  {
-    name: "Anjali Sharma",
-    event: "Birthday Party",
-    text: "The variety and quality of food exceeded our expectations. The team was punctual and the setup was beautiful!"
-  },
 ];
 
 const homeFaqs = [
@@ -735,32 +718,20 @@ const Home = () => {
               Testimonials
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto" />
+            <p className="mt-5 text-[hsl(30,10%,35%)] max-w-2xl mx-auto [font-family:'Cormorant_Garamond',serif]">
+              Real client feedback from weddings, birthdays, and corporate events.
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                className="bg-white p-8 text-center"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Quote className="h-8 w-8 text-[hsl(43,76%,58%)] mx-auto mb-4" />
-                <div className="flex justify-center mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-[hsl(43,76%,58%)] text-[hsl(43,76%,58%)]" />
-                  ))}
-                </div>
-                <p className="text-[hsl(30,10%,35%)] italic mb-6 leading-relaxed [font-family:'Cormorant_Garamond',serif] text-[1.1rem]">
-                  "{testimonial.text}"
-                </p>
-                <h4 className="font-medium text-[hsl(30,20%,15%)]">{testimonial.name}</h4>
-                <p className="text-sm text-[hsl(30,10%,45%)]">{testimonial.event}</p>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-6xl mx-auto"
+          >
+            <TestimonialsDemo />
+          </motion.div>
 
           <motion.div
             className="text-center mt-10"

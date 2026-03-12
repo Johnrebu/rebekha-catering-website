@@ -4,93 +4,10 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
-import { Star, Quote, Award, Users, Calendar } from "lucide-react";
+import TestimonialsDemo from "@/components/ui/testimonials-demo";
+import { Star, Award, Users, Calendar } from "lucide-react";
 
 const Testimonials = () => {
-  const cardStyles = [
-    {
-      card: "bg-[hsl(48,60%,96%)]",
-      quote: "text-[hsl(38,70%,45%)]",
-      star: "fill-[hsl(38,70%,45%)] text-[hsl(38,70%,45%)]",
-      event: "text-[hsl(38,70%,45%)]",
-    },
-    {
-      card: "bg-[hsl(150,35%,95%)]",
-      quote: "text-[hsl(155,35%,38%)]",
-      star: "fill-[hsl(155,35%,38%)] text-[hsl(155,35%,38%)]",
-      event: "text-[hsl(155,35%,38%)]",
-    },
-    {
-      card: "bg-[hsl(210,55%,95%)]",
-      quote: "text-[hsl(210,45%,42%)]",
-      star: "fill-[hsl(210,45%,42%)] text-[hsl(210,45%,42%)]",
-      event: "text-[hsl(210,45%,42%)]",
-    },
-    {
-      card: "bg-[hsl(12,55%,95%)]",
-      quote: "text-[hsl(12,55%,45%)]",
-      star: "fill-[hsl(12,55%,45%)] text-[hsl(12,55%,45%)]",
-      event: "text-[hsl(12,55%,45%)]",
-    },
-    {
-      card: "bg-[hsl(282,35%,95%)]",
-      quote: "text-[hsl(282,30%,42%)]",
-      star: "fill-[hsl(282,30%,42%)] text-[hsl(282,30%,42%)]",
-      event: "text-[hsl(282,30%,42%)]",
-    },
-    {
-      card: "bg-[hsl(190,45%,94%)]",
-      quote: "text-[hsl(190,45%,38%)]",
-      star: "fill-[hsl(190,45%,38%)] text-[hsl(190,45%,38%)]",
-      event: "text-[hsl(190,45%,38%)]",
-    },
-  ];
-
-  const testimonials = [
-    {
-      name: "Antony Raj",
-      event: "Wedding Reception",
-      date: "December 2024",
-      text: "The food was absolutely delicious and the presentation was stunning! Our guests are still talking about the amazing feast. Rebekha Caterers made our special day truly memorable.",
-      rating: 5
-    },
-    {
-      name: "Rajesh Kumar",
-      event: "Corporate Event",
-      date: "November 2024",
-      text: "Professional service and authentic taste. Rebekha Catering made our company anniversary celebration a huge success! The team was punctual and the food quality was exceptional.",
-      rating: 5
-    },
-    {
-      name: "Anjali Sharma",
-      event: "Birthday Party",
-      date: "October 2024",
-      text: "The variety and quality of food exceeded our expectations. The team was punctual and the setup was beautiful! My daughter's birthday was perfect thanks to their amazing service.",
-      rating: 5
-    },
-    {
-      name: "Suresh Babu",
-      event: "Engagement Ceremony",
-      date: "September 2024",
-      text: "We chose Rebekha Caterers for our daughter's engagement and we couldn't be happier. The biryani was absolutely divine and the service was top-notch.",
-      rating: 5
-    },
-    {
-      name: "Lakshmi Narayanan",
-      event: "House Warming",
-      date: "August 2024",
-      text: "From the initial consultation to the final cleanup, everything was handled professionally. The food was fresh, hot, and absolutely delicious. Highly recommend!",
-      rating: 5
-    },
-    {
-      name: "Vikram Sundaram",
-      event: "Corporate Lunch",
-      date: "July 2024",
-      text: "Our team loved the variety of dishes. The vegetarian and non-vegetarian options were equally amazing. Will definitely book again for our next corporate event.",
-      rating: 5
-    },
-  ];
-
   const stats = [
     { icon: <Users className="h-8 w-8" />, value: "10,000+", label: "Happy Clients" },
     { icon: <Award className="h-8 w-8" />, value: "25+", label: "Years Experience" },
@@ -100,10 +17,10 @@ const Testimonials = () => {
 
   return (
     <div className="min-h-screen bg-[hsl(45,40%,94%)]">
-      <SEO 
-        title="Client Testimonials | Rebekha Catering Services - 4.9★ Reviews"
-        description="Read 150+ 5-star reviews from our happy clients in Chennai. Wedding catering, corporate events, birthday parties - trust Rebekha Caterers for your special occasion."
-        keywords="client reviews catering Chennai, best catering reviews, catering testimonials, Rebekha ratings"
+      <SEO
+        title="Client Testimonials | Rebekha Catering Services - 4.9 Star Reviews"
+        description="Read authentic customer reviews for Rebekha Catering Services in Chennai. Trusted for weddings, birthdays, and corporate catering with consistent quality and service."
+        keywords="client reviews catering Chennai, catering testimonials, wedding catering reviews, corporate catering feedback"
       />
       <StructuredData />
       <Navigation />
@@ -113,7 +30,7 @@ const Testimonials = () => {
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: `url('https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=1920')`
+            backgroundImage: "url('https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1920')",
           }}
         />
         <div className="absolute inset-0 bg-black/50" />
@@ -127,9 +44,7 @@ const Testimonials = () => {
           <h1 className="text-5xl md:text-7xl mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
             Testimonials
           </h1>
-          <p className="text-xl font-light tracking-wide">
-            What our clients say about us
-          </p>
+          <p className="text-xl font-light tracking-wide">Real stories from clients who trusted us for their events</p>
         </motion.div>
       </section>
 
@@ -146,7 +61,10 @@ const Testimonials = () => {
                 transition={{ delay: index * 0.1 }}
               >
                 <div className="text-[hsl(43,76%,58%)] mb-3 flex justify-center">{stat.icon}</div>
-                <div className="text-3xl md:text-4xl font-light text-[hsl(30,20%,15%)]" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                <div
+                  className="text-3xl md:text-4xl font-light text-[hsl(30,20%,15%)]"
+                  style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                >
                   {stat.value}
                 </div>
                 <p className="text-xs uppercase tracking-wider text-[hsl(30,10%,45%)] mt-1">{stat.label}</p>
@@ -156,69 +74,32 @@ const Testimonials = () => {
         </div>
       </section>
 
-      {/* Testimonials Grid */}
+      {/* 3D Marquee Testimonials */}
       <section className="py-20 bg-[hsl(45,40%,94%)]">
         <div className="container mx-auto px-6">
           <motion.div
-            className="text-center mb-16"
+            className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
             <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
-              Client Reviews
+              Client Voices
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto" />
+            <p className="mt-5 text-[hsl(30,10%,35%)] max-w-2xl mx-auto">
+              Explore feedback from wedding, birthday, and corporate catering events. Hover to pause and read each review.
+            </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {testimonials.map((testimonial, index) => {
-              const style = cardStyles[index % cardStyles.length];
-
-              return (
-                <motion.div
-                  key={index}
-                  className={`${style.card} p-8 text-center`}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
-                  <Quote className={`h-8 w-8 ${style.quote} mx-auto mb-4`} />
-
-                  <div className="flex justify-center mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className={`h-4 w-4 ${style.star}`} />
-                    ))}
-                  </div>
-
-                  <p className="text-[hsl(30,10%,35%)] italic mb-6 leading-relaxed" style={{ fontFamily: "'Cormorant Garamond', serif", fontSize: '1.1rem' }}>
-                    "{testimonial.text}"
-                  </p>
-
-                  <h4 className="font-medium text-[hsl(30,20%,15%)]">{testimonial.name}</h4>
-                  <p className={`text-sm ${style.event}`}>{testimonial.event}</p>
-                  <p className="text-xs text-[hsl(30,10%,55%)] mt-1">{testimonial.date}</p>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Quote */}
-      <section className="py-20 bg-[hsl(43,76%,58%)]">
-        <div className="container mx-auto px-6 text-center max-w-3xl">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="max-w-6xl mx-auto"
           >
-            <Quote className="h-12 w-12 text-[hsl(30,20%,15%)] mx-auto mb-6 opacity-50" />
-            <blockquote className="text-2xl md:text-3xl text-[hsl(30,20%,15%)] italic mb-8" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-              "We don't just serve food. We serve love, tradition, and unforgettable memories."
-            </blockquote>
-            <p className="text-[hsl(30,20%,15%)]/70">— Rebekha Caterers Philosophy</p>
+            <TestimonialsDemo />
           </motion.div>
         </div>
       </section>
