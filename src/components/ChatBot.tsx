@@ -27,7 +27,7 @@ type Intent =
 
 interface ChatContext {
   guestCount?: number;
-  packageChoice?: "mutton" | "vegChicken";
+  packageChoice?: "veg" | "nonveg";
   lastIntent?: Intent;
   lastTopic?: string;
 }
@@ -55,8 +55,8 @@ const COMPANY = {
 };
 
 const RATES = {
-  mutton: 380,
-  vegChicken: 320,
+  veg: 300,
+  nonveg: 450,
   bulkMuttonPerKg: 750,
   bulkMuttonQtyKg: 120,
   bulkChickenQtyKg: 200,
@@ -131,8 +131,8 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
     intent: "pricing",
     title: "Package Pricing",
     content: [
-      `Mutton Biryani Package: ${formatINR(RATES.mutton)} per person.`,
-      `Veg / Leghorn Chicken Biryani Package: ${formatINR(RATES.vegChicken)} per person.`,
+      `Vegetarian Plate: ${formatINR(RATES.veg)} per person.`,
+      `Non-Vegetarian Plate: ${formatINR(RATES.nonveg)} per person.`,
       "Total estimate is calculated by guest count x per-person rate.",
     ],
     keywords: ["price", "pricing", "cost", "rate", "quotation", "quote", "budget", "amount"],
@@ -253,8 +253,8 @@ const extractGuestCount = (input: string): number | undefined => {
 };
 
 const detectPackageChoice = (input: string): ChatContext["packageChoice"] | undefined => {
-  if (input.includes("mutton") || input.includes("lamb")) return "mutton";
-  if (input.includes("veg") || input.includes("vegetarian") || input.includes("chicken")) return "vegChicken";
+  if (input.includes("non veg") || input.includes("non-veg") || input.includes("nonveg") || input.includes("chicken") || input.includes("mutton")) return "nonveg";
+  if (input.includes("veg") || input.includes("vegetarian")) return "veg";
   return undefined;
 };
 
@@ -269,8 +269,8 @@ const scoreIntent = (normalizedInput: string, intent: Intent): number => {
 
 const buildPricingMessage = (guestCount?: number, packageChoice?: ChatContext["packageChoice"]): string => {
   if (guestCount && packageChoice) {
-    const rate = packageChoice === "mutton" ? RATES.mutton : RATES.vegChicken;
-    const label = packageChoice === "mutton" ? "Mutton Biryani Package" : "Veg / Chicken Biryani Package";
+    const rate = packageChoice === "nonveg" ? RATES.nonveg : RATES.veg;
+    const label = packageChoice === "nonveg" ? "Non-Vegetarian Plate" : "Vegetarian Plate";
     const total = guestCount * rate;
     return [
       `Pricing for ${guestCount} guests (${label}):`,
@@ -283,21 +283,21 @@ const buildPricingMessage = (guestCount?: number, packageChoice?: ChatContext["p
   }
 
   if (guestCount) {
-    const muttonTotal = guestCount * RATES.mutton;
-    const vegChickenTotal = guestCount * RATES.vegChicken;
+    const vegTotal = guestCount * RATES.veg;
+    const nonVegTotal = guestCount * RATES.nonveg;
     return [
       `Pricing for ${guestCount} guests:`,
-      `1. Mutton Biryani Package: ${formatINR(RATES.mutton)} x ${guestCount} = ${formatINR(muttonTotal)}`,
-      `2. Veg / Chicken Biryani Package: ${formatINR(RATES.vegChicken)} x ${guestCount} = ${formatINR(vegChickenTotal)}`,
+      `1. Vegetarian Plate: ${formatINR(RATES.veg)} x ${guestCount} = ${formatINR(vegTotal)}`,
+      `2. Non-Vegetarian Plate: ${formatINR(RATES.nonveg)} x ${guestCount} = ${formatINR(nonVegTotal)}`,
       "",
-      "Tell me your preferred package (mutton or veg/chicken) and I will narrow it down.",
+      "Tell me your preferred package (veg or non-veg) and I will narrow it down.",
     ].join("\n");
   }
 
   return [
     "Our package pricing:",
-    `1. Mutton Biryani Package: ${formatINR(RATES.mutton)} per person`,
-    `2. Veg / Leghorn Chicken Biryani Package: ${formatINR(RATES.vegChicken)} per person`,
+    `1. Vegetarian Plate: ${formatINR(RATES.veg)} per person`,
+    `2. Non-Vegetarian Plate: ${formatINR(RATES.nonveg)} per person`,
     "",
     "Share guest count for instant estimate.",
   ].join("\n");
@@ -425,10 +425,10 @@ const generateResponse = (userInput: string, context: ChatContext): { message: s
   }
 
   return {
-    message: [
+      message: [
       "I can help with pricing, menu options, event support, booking steps, and contact details.",
       "You can ask natural questions like:",
-      "1. We have 350 guests, what is the cost for mutton package?",
+      "1. We have 350 guests, what is the cost for non-veg package?",
       "2. What events do you handle and can you customize the menu?",
       "3. Share contact and booking process",
       "",

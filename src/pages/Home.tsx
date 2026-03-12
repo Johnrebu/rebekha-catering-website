@@ -29,9 +29,9 @@ const foodImages = [
   { src: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Butter Chicken", category: "Main Course" },
   { src: "https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Masala Dosa", category: "South Indian" },
   { src: "https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Chicken 65", category: "Starters" },
-  { src: "https://images.pexels.com/photos/666988/pexels-photo-666988.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Desserts", category: "Sweets" },
-  { src: "https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Wedding Setup", category: "Events" },
-  { src: "https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Fresh Ingredients", category: "Quality" },
+  { src: "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Dessert Platter", category: "Sweets" },
+  { src: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "South Indian Platter", category: "Main Course" },
+  { src: "https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Crispy Starters", category: "Snacks" },
 ];
 
 // Menu categories
@@ -39,9 +39,9 @@ const menuCategories = [
   { name: "Breakfast", image: "https://images.pexels.com/photos/1099680/pexels-photo-1099680.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/menu" },
   { name: "Lunch", image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/menu" },
   { name: "Dinner", image: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/menu" },
-  { name: "Wedding", image: "https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
-  { name: "Corporate", image: "https://images.pexels.com/photos/260922/pexels-photo-260922.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
-  { name: "Birthday", image: "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
+  { name: "Wedding", image: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
+  { name: "Corporate", image: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
+  { name: "Birthday", image: "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
 ];
 
 const testimonials = [
@@ -91,15 +91,15 @@ const homeFaqs = [
 
 const instagramPosts = [
   {
-    image: "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=800",
-    alt: "Birthday catering buffet setup",
-    caption: "Birthday celebration buffet setup in Chennai",
+    image: "https://images.pexels.com/photos/9609838/pexels-photo-9609838.jpeg?auto=compress&cs=tinysrgb&w=800",
+    alt: "Paneer starter platter",
+    caption: "Freshly prepared paneer starters for events",
     link: "https://www.instagram.com/rebekhacaterers/",
   },
   {
-    image: "https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=800",
-    alt: "Wedding catering service",
-    caption: "Live wedding catering service by Rebekha team",
+    image: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=800",
+    alt: "Signature biryani preparation",
+    caption: "Aromatic biryani prepared for large gatherings",
     link: "https://www.instagram.com/rebekhacaterers/",
   },
   {
@@ -251,7 +251,7 @@ const Home = () => {
       {/* Hero Section - Eden Style */}
       <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
         {/* Background Image */}
-        <div className="absolute inset-0 bg-cover bg-center [background-image:url('https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=1920')]" />
+        <div className="absolute inset-0 bg-cover bg-center [background-image:url('https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1920')]" />
         <div className="absolute inset-0 bg-black/40" />
 
         {/* Hero Content */}
@@ -406,7 +406,7 @@ const Home = () => {
 
       {/* Special Event Banner */}
       <section className="relative py-24 overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center bg-fixed [background-image:url('https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=1920')]" />
+        <div className="absolute inset-0 bg-cover bg-center bg-fixed [background-image:url('https://images.pexels.com/photos/7394819/pexels-photo-7394819.jpeg?auto=compress&cs=tinysrgb&w=1920')]" />
         <div className="absolute inset-0 bg-[hsl(43,76%,58%)]/90" />
 
         <motion.div

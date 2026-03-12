@@ -114,10 +114,10 @@ const nonVegCategories: MenuCategory[] = [
 ];
 
 const guestTiers = [
-  { label: "50-100 Guests", min: 50, max: 100, veg: 420, nonveg: 620, mixed: 540 },
-  { label: "101-250 Guests", min: 101, max: 250, veg: 390, nonveg: 580, mixed: 500 },
-  { label: "251-500 Guests", min: 251, max: 500, veg: 360, nonveg: 540, mixed: 470 },
-  { label: "500+ Guests", min: 501, max: 5000, veg: 340, nonveg: 510, mixed: 445 },
+  { label: "50-100 Guests", min: 50, max: 100, veg: 300, nonveg: 450, mixed: 375 },
+  { label: "101-250 Guests", min: 101, max: 250, veg: 300, nonveg: 450, mixed: 375 },
+  { label: "251-500 Guests", min: 251, max: 500, veg: 300, nonveg: 450, mixed: 375 },
+  { label: "500+ Guests", min: 501, max: 5000, veg: 300, nonveg: 450, mixed: 375 },
 ];
 
 const MenuColumn = ({
