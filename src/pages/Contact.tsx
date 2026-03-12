@@ -3,12 +3,37 @@ import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import GoogleBusinessProfile from "@/components/GoogleBusinessProfile";
+import { AdvancedMap, type CircleData, type MarkerData } from "@/components/ui/interactive-map";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import { Phone, Mail, MapPin, MessageCircle, Clock, Send, Check } from "lucide-react";
 
 const Contact = () => {
   const inquiryReceiverEmail = "reburr94@gmail.com";
+  const officeLocation: [number, number] = [12.9226, 80.1275];
+
+  const locationMarkers: MarkerData[] = [
+    {
+      id: "rebekha-office",
+      position: officeLocation,
+      color: "red",
+      size: "large",
+      popup: {
+        title: "Rebekha Catering Services",
+        content: "19, Perumal Koil Street, Irumbuliyur, West Tambaram, Chennai - 600045",
+      },
+    },
+  ];
+
+  const serviceRadius: CircleData[] = [
+    {
+      id: "service-radius",
+      center: officeLocation,
+      radius: 6500,
+      style: { color: "#f4c542", fillOpacity: 0.15, weight: 2 },
+      popup: "Primary service coverage around West Tambaram",
+    },
+  ];
 
   const [formData, setFormData] = useState({
     name: "",
@@ -481,16 +506,16 @@ const Contact = () => {
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto" />
           </motion.div>
 
-          <div className="max-w-4xl mx-auto overflow-hidden">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d62686.89288283826!2d80.09476717910156!3d12.922915!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a525f637c4d7b3f%3A0x2ac0d82f8a7c0b95!2sWest%20Tambaram%2C%20Chennai%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1234567890"
-              width="100%"
-              height="400"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="West Tambaram Location"
+          <div className="max-w-4xl mx-auto overflow-hidden border border-[hsl(40,20%,85%)]">
+            <AdvancedMap
+              center={officeLocation}
+              zoom={13}
+              markers={locationMarkers}
+              circles={serviceRadius}
+              enableClustering={false}
+              enableSearch
+              enableControls
+              style={{ height: "420px", width: "100%" }}
             />
           </div>
         </div>
