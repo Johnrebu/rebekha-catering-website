@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, Mail } from "lucide-react";
 import BrandLogo from "./BrandLogo";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -86,6 +87,7 @@ const Navigation = () => {
 
             {/* CTA Buttons */}
             <div className="hidden lg:flex items-center gap-4">
+              <ModeToggle />
               <Link to="/menu">
                 <button className="px-6 py-2.5 text-sm font-medium tracking-wider uppercase bg-[hsl(43,76%,58%)] text-[hsl(30,20%,15%)] border-2 border-[hsl(43,76%,58%)] hover:bg-[hsl(38,70%,45%)] hover:border-[hsl(38,70%,45%)] transition-all duration-300">
                   Order Online
@@ -131,6 +133,9 @@ const Navigation = () => {
               ))}
 
               <div className="flex flex-col gap-3 mt-4 pt-4 border-t border-[hsl(40,20%,85%)]">
+                <div className="flex justify-center pb-1">
+                  <ModeToggle />
+                </div>
                 <Link to="/menu" onClick={() => setIsOpen(false)}>
                   <button className="w-full py-3 text-sm font-medium tracking-wider uppercase bg-[hsl(43,76%,58%)] text-[hsl(30,20%,15%)] border-2 border-[hsl(43,76%,58%)]">
                     Order Online
