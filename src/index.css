@@ -1,5 +1,5 @@
 /* Google Fonts Import for elegant script font - MUST be first */
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allura&family=Baloo+2:wght@700;800&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
 
 /* Tailwind core layers */
 @tailwind base;
@@ -132,9 +132,10 @@
 
   /* Script style headings for major sections */
   .heading-script {
-    font-family: 'Great Vibes', cursive;
+    font-family: 'Allura', 'Snell Roundhand', cursive;
     font-weight: 400;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.015em;
+    line-height: 1.05;
   }
 
   /* Eden style elegant headings */

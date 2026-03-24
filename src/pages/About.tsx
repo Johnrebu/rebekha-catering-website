@@ -190,7 +190,7 @@ const About = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <h1 className="text-5xl md:text-7xl mb-4 [font-family:'Great_Vibes',cursive]">
+          <h1 className="heading-script text-5xl md:text-7xl mb-4">
             About Us
           </h1>
           <p className="text-xl font-light tracking-wide">
@@ -226,7 +226,7 @@ const About = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-6 [font-family:'Great_Vibes',cursive]">
+              <h2 className="heading-script text-5xl text-[hsl(30,20%,15%)] mb-6">
                 Our Story
               </h2>
               <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mb-8" />
@@ -264,7 +264,7 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+            <h2 className="heading-script text-5xl text-[hsl(30,20%,15%)] mb-4">
               Our Values
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(30,20%,15%)] mx-auto opacity-50" />
@@ -300,7 +300,7 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+            <h2 className="heading-script text-5xl text-[hsl(30,20%,15%)] mb-4">
               Meet Our Founders
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto" />
@@ -368,7 +368,7 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+            <h2 className="heading-script text-5xl text-[hsl(30,20%,15%)] mb-4">
               Our Journey
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto" />
@@ -414,7 +414,7 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+            <h2 className="heading-script text-5xl text-[hsl(30,20%,15%)] mb-4">
               The Team
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-8" />
@@ -467,7 +467,7 @@ const About = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-4xl text-[hsl(30,20%,15%)] mb-6 [font-family:'Great_Vibes',cursive]">
+            <h2 className="heading-script text-4xl text-[hsl(30,20%,15%)] mb-6">
               Let Us Plan Your Next Event
             </h2>
             <p className="text-[hsl(30,20%,15%)]/85 mb-8 max-w-2xl mx-auto">

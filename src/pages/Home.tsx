@@ -226,7 +226,7 @@ const HomeHero = () => {
                   <ScrollReveal delay={0.08}>
                     <motion.h1
                       style={headingStyle}
-                      className="font-outliers-serif mt-6 text-[clamp(3.75rem,7vw,7.25rem)] leading-[0.86] text-[#f8f1e6]"
+                      className="heading-script mt-6 text-[clamp(4.5rem,8vw,8rem)] leading-[0.84] text-[#f8f1e6]"
                     >
                       Bring ceremony
                       <br />
@@ -328,7 +328,7 @@ const HomeHero = () => {
                         style={tertiaryImageStyle}
                       />
                       <div className="mt-4 flex items-center justify-between gap-4">
-                        <p className="font-outliers-serif text-2xl leading-none text-[#f8f1e6]">
+                        <p className="heading-script text-[2.4rem] leading-[0.9] text-[#f8f1e6]">
                           Private dinners
                         </p>
                         <p className="font-outliers-sans text-[0.68rem] uppercase tracking-[0.28em] text-[#eedecd]">
@@ -369,7 +369,7 @@ const HomeHero = () => {
                   <p className="font-outliers-sans mt-5 text-[0.68rem] uppercase tracking-[0.28em] text-[#6e5e4f]">
                     {`0${index + 1}`}
                   </p>
-                  <h2 className="font-outliers-serif mt-3 text-[2rem] leading-none text-[#140e0a]">
+                  <h2 className="heading-script mt-3 text-[2.6rem] leading-[0.92] text-[#140e0a]">
                     {title}
                   </h2>
                   <p className="font-outliers-sans mt-4 text-sm leading-6 text-[#514a40]">
@@ -528,7 +528,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
               Compare Our Food Styling
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
@@ -557,7 +557,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
               Our Food
             </h2>
             <div className="w-20 h-0.5 bg-[hsl(30,20%,15%)] mx-auto opacity-50" />
@@ -647,7 +647,7 @@ const Home = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-5xl md:text-7xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+          <h2 className="heading-script text-5xl md:text-7xl text-[hsl(30,20%,15%)] mb-4">
             Wedding Season
           </h2>
           <p className="text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] mb-6 [font-family:'Cormorant_Garamond',serif]">
@@ -746,7 +746,7 @@ const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-6 [font-family:'Great_Vibes',cursive]">
+              <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-6">
                 About Us
               </h2>
               <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mb-8" />
@@ -797,7 +797,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
               The Team
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
@@ -823,7 +823,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
               Latest Updates
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
@@ -896,7 +896,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
               Instagram Highlights
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
@@ -963,7 +963,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
               Testimonials
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto" />
@@ -1006,7 +1006,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
               Frequently Asked Questions
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
@@ -1060,7 +1060,7 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 [font-family:'Great_Vibes',cursive]">
+            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
               Enquire
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
@@ -1210,7 +1210,7 @@ const Home = () => {
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto bg-white p-8 md:p-12 shadow-xl flex flex-col md:flex-row items-center gap-12">
             <div className="md:w-1/2">
-              <h2 className="text-4xl text-[hsl(30,20%,15%)] mb-6 [font-family:'Great_Vibes',cursive]">
+              <h2 className="heading-script text-4xl text-[hsl(30,20%,15%)] mb-6">
                 Connect With Us
               </h2>
               <p className="text-[hsl(30,10%,35%)] mb-8 leading-relaxed [font-family:'Cormorant_Garamond',serif] text-[1.2rem]">
