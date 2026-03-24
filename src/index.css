@@ -1,5 +1,5 @@
 /* Google Fonts Import for elegant script font - MUST be first */
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@700;800&family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Inter:wght@300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap');
 
 /* Tailwind core layers */
 @tailwind base;
@@ -509,6 +509,24 @@
     height: 2px;
     background: linear-gradient(90deg, transparent, hsl(var(--eden-gold)), transparent);
     margin: 0 auto;
+  }
+
+  .font-outliers-serif {
+    font-family: 'Bodoni Moda', 'Cormorant Garamond', Georgia, serif;
+    font-weight: 500;
+    letter-spacing: -0.04em;
+  }
+
+  .font-outliers-sans {
+    font-family: 'Manrope', 'Inter', sans-serif;
+  }
+
+  .hero-grain {
+    background-image:
+      radial-gradient(circle at 20% 20%, hsl(0 0% 100% / 0.16) 0, transparent 18%),
+      radial-gradient(circle at 82% 4%, hsl(0 0% 100% / 0.1) 0, transparent 24%),
+      radial-gradient(circle at 54% 78%, hsl(0 0% 100% / 0.08) 0, transparent 22%);
+    mix-blend-mode: soft-light;
   }
 }
 

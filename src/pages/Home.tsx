@@ -1,7 +1,13 @@
 import * as React from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { motion, useInView } from "framer-motion";
+import {
+  motion,
+  useInView,
+  useReducedMotion,
+  useScroll,
+  useTransform
+} from "framer-motion";
 import { Helmet } from "react-helmet-async";
 import {
   Heart, Users, ChefHat, Award, Phone, ArrowRight,
@@ -22,6 +28,10 @@ import {
   AccordionItem,
   AccordionTrigger
 } from "@/components/ui/accordion";
+import heroCateringImage from "@/assets/hero-catering.jpg";
+import weddingCateringImage from "@/assets/wedding-catering.jpg";
+import corporateCateringImage from "@/assets/corporate-catering.jpg";
+import privateDinnerImage from "@/assets/private-dinner.jpg";
 
 // Food images for gallery
 const foodImages = [
@@ -98,6 +108,282 @@ const instagramPosts = [
     link: "https://www.instagram.com/rebekhacaterers/",
   },
 ];
+
+const revealEase = [0.22, 1, 0.36, 1] as const;
+
+const heroHighlights = [
+  {
+    label: "Since 1998",
+    copy: "Large-format wedding spreads and smaller private dinners handled with the same disciplined service flow.",
+  },
+  {
+    label: "Custom menus",
+    copy: "Vegetarian, non-vegetarian, and mixed event menus shaped around guest count, venue rhythm, and budget.",
+  },
+];
+
+const heroFeatureCards = [
+  {
+    title: "Layered service",
+    description: "Buffet lines, live counters, and plated moments designed to feel calm, premium, and easy to move through.",
+    icon: Clock,
+  },
+  {
+    title: "Regional depth",
+    description: "South Indian and event-ready menus with room for ceremony staples, signature dishes, and late additions.",
+    icon: Leaf,
+  },
+  {
+    title: "Venue-led planning",
+    description: "West Tambaram based with Chennai-wide execution, aligned to guest flow, access points, and timing windows.",
+    icon: MapPin,
+  },
+];
+
+type ScrollRevealProps = {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+  amount?: number;
+};
+
+const ScrollReveal = ({
+  children,
+  className,
+  delay = 0,
+  amount = 0.28,
+}: ScrollRevealProps) => (
+  <motion.div
+    className={className}
+    initial={{ opacity: 0, y: 32 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, amount }}
+    transition={{ duration: 0.85, delay, ease: revealEase }}
+  >
+    {children}
+  </motion.div>
+);
+
+const HomeHero = () => {
+  const heroRef = React.useRef<HTMLElement>(null);
+  const shouldReduceMotion = useReducedMotion();
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end end"],
+  });
+
+  const backgroundY = useTransform(scrollYProgress, [0, 1], ["-6%", "10%"]);
+  const backgroundScale = useTransform(scrollYProgress, [0, 1], [1.04, 1.16]);
+  const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "16%"]);
+  const headingScale = useTransform(scrollYProgress, [0, 1], [1, 0.97]);
+  const primaryCardY = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
+  const secondaryCardY = useTransform(scrollYProgress, [0, 1], ["0%", "10%"]);
+  const tertiaryCardY = useTransform(scrollYProgress, [0, 1], ["0%", "-8%"]);
+  const primaryImageScale = useTransform(scrollYProgress, [0, 1], [1.02, 1.12]);
+  const secondaryImageScale = useTransform(scrollYProgress, [0, 1], [1.08, 1.02]);
+  const tertiaryImageScale = useTransform(scrollYProgress, [0, 1], [0.98, 1.07]);
+  const scrollHintOpacity = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
+
+  const backgroundStyle = shouldReduceMotion ? undefined : { y: backgroundY, scale: backgroundScale };
+  const contentStyle = shouldReduceMotion ? undefined : { y: contentY };
+  const headingStyle = shouldReduceMotion ? undefined : { scale: headingScale };
+  const primaryCardStyle = shouldReduceMotion ? undefined : { y: primaryCardY };
+  const secondaryCardStyle = shouldReduceMotion ? undefined : { y: secondaryCardY };
+  const tertiaryCardStyle = shouldReduceMotion ? undefined : { y: tertiaryCardY };
+  const primaryImageStyle = shouldReduceMotion ? undefined : { scale: primaryImageScale };
+  const secondaryImageStyle = shouldReduceMotion ? undefined : { scale: secondaryImageScale };
+  const tertiaryImageStyle = shouldReduceMotion ? undefined : { scale: tertiaryImageScale };
+  const scrollHintStyle = shouldReduceMotion ? undefined : { opacity: scrollHintOpacity };
+
+  return (
+    <section ref={heroRef} className="relative overflow-clip bg-[#f4efe7]">
+      <div className="relative min-h-[165vh]">
+        <div className="sticky top-0 h-screen overflow-hidden bg-[#120d0a]">
+          <motion.div className="absolute inset-0" style={backgroundStyle}>
+            <img
+              src={heroCateringImage}
+              alt="Rebekha catering service with an elegant event spread"
+              className="h-full w-full object-cover object-center"
+            />
+          </motion.div>
+
+          <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(10,8,6,0.92)_12%,rgba(10,8,6,0.58)_46%,rgba(10,8,6,0.84)_100%)]" />
+          <div className="absolute inset-y-0 left-0 w-full bg-[radial-gradient(circle_at_18%_42%,rgba(0,0,0,0.34),transparent_30%),linear-gradient(90deg,rgba(8,6,4,0.78)_0%,rgba(8,6,4,0.5)_34%,rgba(8,6,4,0.16)_58%,transparent_72%)]" />
+          <div className="hero-grain absolute inset-0 opacity-80" />
+          <div className="absolute inset-x-0 top-0 h-32 bg-[linear-gradient(180deg,rgba(0,0,0,0.35),transparent)]" />
+
+          <div className="relative z-10 flex h-full items-center">
+            <div className="container px-6 pb-14 pt-28 md:pt-32">
+              <div className="grid items-end gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.95fr)]">
+                <motion.div style={contentStyle} className="max-w-2xl">
+                  <ScrollReveal>
+                    <p className="font-outliers-sans text-[0.72rem] uppercase tracking-[0.34em] text-[#f0ddc9]">
+                      Wedding & Event Catering
+                    </p>
+                  </ScrollReveal>
+
+                  <ScrollReveal delay={0.08}>
+                    <motion.h1
+                      style={headingStyle}
+                      className="font-outliers-serif mt-6 text-[clamp(3.75rem,7vw,7.25rem)] leading-[0.86] text-[#f8f1e6]"
+                    >
+                      Bring ceremony
+                      <br />
+                      to the table.
+                    </motion.h1>
+                  </ScrollReveal>
+
+                  <ScrollReveal delay={0.14}>
+                    <p className="font-outliers-sans mt-6 max-w-xl text-base leading-7 text-[#f6ede1] md:text-lg">
+                      Fresh vegetarian and non-vegetarian catering for weddings, birthdays,
+                      corporate events, and family functions across Chennai, with custom menus
+                      and professional service from setup to serving.
+                    </p>
+                  </ScrollReveal>
+
+                  <ScrollReveal delay={0.2}>
+                    <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                      <Link to="/contact">
+                        <button className="font-outliers-sans inline-flex items-center justify-center gap-2 border border-[#dbcab8] bg-[#f6eee2] px-8 py-4 text-xs uppercase tracking-[0.28em] text-[#140e0a] transition-all duration-300 hover:bg-white">
+                          Plan Your Event
+                          <ArrowRight className="h-4 w-4" />
+                        </button>
+                      </Link>
+                      <Link to="/menu">
+                        <button className="font-outliers-sans inline-flex items-center justify-center gap-2 border border-white/28 bg-black/32 px-8 py-4 text-xs uppercase tracking-[0.28em] text-[#fbf4ea] transition-all duration-300 hover:bg-black/42">
+                          Explore Menus
+                        </button>
+                      </Link>
+                    </div>
+                  </ScrollReveal>
+
+                  <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                    {heroHighlights.map((item, index) => (
+                      <ScrollReveal key={item.label} delay={0.26 + index * 0.06}>
+                        <div className="border border-white/18 bg-black/44 p-5 shadow-[0_18px_50px_-30px_rgba(0,0,0,0.85)] backdrop-blur-md">
+                          <p className="font-outliers-sans text-[0.68rem] uppercase tracking-[0.28em] text-[#f1d4a8]">
+                            {item.label}
+                          </p>
+                          <p className="font-outliers-sans mt-3 text-sm leading-6 text-[#f7efe5]">
+                            {item.copy}
+                          </p>
+                        </div>
+                      </ScrollReveal>
+                    ))}
+                  </div>
+
+                  <ScrollReveal delay={0.3} className="mt-12 lg:hidden">
+                    <div className="overflow-hidden border border-white/12 bg-black/35 p-3 backdrop-blur-sm">
+                      <motion.img
+                        src={weddingCateringImage}
+                        alt="Wedding catering table by Rebekha Caterers"
+                        className="aspect-[4/5] w-full object-cover"
+                        style={primaryImageStyle}
+                      />
+                      <div className="mt-4 flex items-center justify-between text-[0.7rem] uppercase tracking-[0.28em] text-[#f2e3cf]">
+                        <span className="font-outliers-sans">Wedding spreads</span>
+                        <span className="font-outliers-sans">01</span>
+                      </div>
+                    </div>
+                  </ScrollReveal>
+                </motion.div>
+
+                <div className="relative hidden min-h-[620px] lg:block">
+                  <motion.div className="absolute right-0 top-0 w-[70%]" style={primaryCardStyle}>
+                    <div className="overflow-hidden border border-white/18 bg-black/42 p-3 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.85)] backdrop-blur-sm">
+                      <motion.img
+                        src={weddingCateringImage}
+                        alt="Wedding catering table by Rebekha Caterers"
+                        className="aspect-[4/5] w-full object-cover"
+                        style={primaryImageStyle}
+                      />
+                      <div className="mt-4 flex items-center justify-between text-[0.7rem] uppercase tracking-[0.28em] text-[#f2e3cf]">
+                        <span className="font-outliers-sans">Wedding spreads</span>
+                        <span className="font-outliers-sans">01</span>
+                      </div>
+                    </div>
+                  </motion.div>
+
+                  <motion.div className="absolute left-0 top-[18%] w-[38%]" style={secondaryCardStyle}>
+                    <div className="overflow-hidden border border-[#ead8c6] bg-[#f6eee4] p-3 shadow-[0_36px_80px_-42px_rgba(0,0,0,0.72)]">
+                      <motion.img
+                        src={corporateCateringImage}
+                        alt="Corporate catering setup by Rebekha Caterers"
+                        className="aspect-[3/4] w-full object-cover"
+                        style={secondaryImageStyle}
+                      />
+                      <p className="font-outliers-sans mt-4 text-[0.7rem] uppercase tracking-[0.28em] text-[#43362a]">
+                        Corporate service
+                      </p>
+                    </div>
+                  </motion.div>
+
+                  <motion.div className="absolute bottom-0 left-[14%] w-[52%]" style={tertiaryCardStyle}>
+                    <div className="overflow-hidden border border-white/18 bg-black/42 p-3 shadow-[0_34px_80px_-42px_rgba(0,0,0,0.72)] backdrop-blur-sm">
+                      <motion.img
+                        src={privateDinnerImage}
+                        alt="Private dinner table setting by Rebekha Caterers"
+                        className="aspect-[5/3] w-full object-cover"
+                        style={tertiaryImageStyle}
+                      />
+                      <div className="mt-4 flex items-center justify-between gap-4">
+                        <p className="font-outliers-serif text-2xl leading-none text-[#f8f1e6]">
+                          Private dinners
+                        </p>
+                        <p className="font-outliers-sans text-[0.68rem] uppercase tracking-[0.28em] text-[#eedecd]">
+                          Closer, quieter setups
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <motion.div
+            className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 items-center gap-3 lg:flex"
+            style={scrollHintStyle}
+          >
+            <span className="font-outliers-sans text-[0.65rem] uppercase tracking-[0.28em] text-[#eadbc7]">
+              Scroll To Explore
+            </span>
+            <span className="h-px w-20 bg-[#eadbc7]/40" />
+          </motion.div>
+        </div>
+      </div>
+
+      <div className="relative z-20 -mt-24 px-6 pb-16">
+        <div className="container">
+          <ScrollReveal amount={0.24}>
+            <div className="grid gap-6 border border-[#dac8b6] bg-[#f4ece1] p-6 shadow-[0_32px_80px_-44px_rgba(18,13,10,0.65)] md:grid-cols-3 md:p-8">
+              {heroFeatureCards.map(({ icon: Icon, title, description }, index) => (
+                <div
+                  key={title}
+                  className="border-t border-[#1a130d]/10 pt-6 first:border-0 first:pt-0 md:border-l md:border-t-0 md:pl-6 md:pt-0 md:first:border-l-0 md:first:pl-0"
+                >
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#1a130d]/10 bg-white text-[#1a130d]">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <p className="font-outliers-sans mt-5 text-[0.68rem] uppercase tracking-[0.28em] text-[#6e5e4f]">
+                    {`0${index + 1}`}
+                  </p>
+                  <h2 className="font-outliers-serif mt-3 text-[2rem] leading-none text-[#140e0a]">
+                    {title}
+                  </h2>
+                  <p className="font-outliers-sans mt-4 text-sm leading-6 text-[#514a40]">
+                    {description}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </ScrollReveal>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 // Animated counter hook
 const useCounter = (end: number, duration: number = 2000) => {
@@ -231,44 +517,7 @@ const Home = () => {
       <StructuredData />
       <Navigation />
 
-      {/* Hero Section - Eden Style */}
-      <section className="relative h-[80vh] min-h-[600px] flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0 bg-cover bg-center [background-image:url('https://images.pexels.com/photos/958545/pexels-photo-958545.jpeg?auto=compress&cs=tinysrgb&w=1920')]" />
-        <div className="absolute inset-0 bg-black/40" />
-
-        {/* Hero Content */}
-        <motion.div
-          className="relative z-10 text-center text-white px-4 max-w-4xl mx-auto"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-normal mb-6 [font-family:'Great_Vibes',cursive]">
-            Rebekha Caterers
-          </h1>
-          <p className="text-xl md:text-2xl font-light mb-8 tracking-wide">
-            Fresh, authentic catering for every occasion
-          </p>
-          <p className="text-lg opacity-90 mb-10 max-w-2xl mx-auto">
-            Since 1998, we've been serving Chennai with delicious, homemade food
-            that brings families together.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/menu">
-              <button className="px-10 py-4 text-sm font-medium tracking-widest uppercase bg-[hsl(43,76%,58%)] text-[hsl(30,20%,15%)] border-2 border-[hsl(43,76%,58%)] hover:bg-[hsl(38,70%,45%)] hover:border-[hsl(38,70%,45%)] transition-all duration-300">
-                Order Online
-              </button>
-            </Link>
-            <Link to="/contact">
-              <button className="px-10 py-4 text-sm font-medium tracking-widest uppercase bg-transparent text-white border-2 border-white hover:bg-white/10 transition-all duration-300">
-                Enquire
-              </button>
-            </Link>
-          </div>
-        </motion.div>
-      </section>
+      <HomeHero />
 
       {/* Before / After Compare */}
       <section className="py-20 bg-white">
