@@ -240,7 +240,7 @@ const CustomMenu = () => {
                     onChange={handleChange}
                     rows={3}
                     className="w-full px-4 py-3 bg-white border border-[hsl(40,20%,85%)] focus:border-[hsl(43,76%,58%)] focus:outline-none transition-colors resize-none"
-                    placeholder="Jain, Vegan, Gluten-free, etc."
+                    placeholder="Jain, Vegan, etc."
                   />
                 </div>
                 <div>

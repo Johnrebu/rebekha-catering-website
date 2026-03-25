@@ -7,7 +7,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import { Calculator, Drumstick, IndianRupee, Leaf, Users } from "lucide-react";
 
-type DietaryTag = "Jain" | "Vegan" | "Gluten-Free";
+type DietaryTag = "Jain" | "Vegan";
 
 interface Dish {
   name: string;
@@ -24,7 +24,6 @@ interface MenuCategory {
 const dietaryTagStyle: Record<DietaryTag, string> = {
   Jain: "bg-amber-100 text-amber-800 border-amber-200",
   Vegan: "bg-green-100 text-green-800 border-green-200",
-  "Gluten-Free": "bg-blue-100 text-blue-800 border-blue-200",
 };
 
 const vegCategories: MenuCategory[] = [
@@ -32,7 +31,7 @@ const vegCategories: MenuCategory[] = [
     name: "Starters",
     image: "https://images.pexels.com/photos/5410400/pexels-photo-5410400.jpeg?auto=compress&cs=tinysrgb&w=800",
     dishes: [
-      { name: "Paneer Tikka", image: "https://images.pexels.com/photos/5410400/pexels-photo-5410400.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
+      { name: "Paneer Tikka", image: "https://images.pexels.com/photos/5410400/pexels-photo-5410400.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
       { name: "Veg Manchurian", image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
       { name: "Corn Cheese Balls", image: "https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
       { name: "Aloo Tikki Chaat", image: "https://images.pexels.com/photos/5410400/pexels-photo-5410400.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Vegan"] },
@@ -43,8 +42,8 @@ const vegCategories: MenuCategory[] = [
     image: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=800",
     dishes: [
       { name: "Paneer Butter Masala", image: "https://images.pexels.com/photos/5410401/pexels-photo-5410401.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
-      { name: "Dal Makhani", image: "https://images.pexels.com/photos/5410401/pexels-photo-5410401.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
-      { name: "Kadai Vegetable", image: "https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Vegan", "Gluten-Free"] },
+      { name: "Dal Makhani", image: "https://images.pexels.com/photos/5410401/pexels-photo-5410401.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
+      { name: "Kadai Vegetable", image: "https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Vegan"] },
       { name: "Jain Veg Curry", image: "https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Jain"] },
     ],
   },
@@ -53,9 +52,9 @@ const vegCategories: MenuCategory[] = [
     image: "https://images.pexels.com/photos/7394819/pexels-photo-7394819.jpeg?auto=compress&cs=tinysrgb&w=800",
     dishes: [
       { name: "Veg Biryani", image: "https://images.pexels.com/photos/7394819/pexels-photo-7394819.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
-      { name: "Jeera Rice", image: "https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Vegan", "Gluten-Free"] },
-      { name: "Lemon Rice", image: "https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Vegan", "Gluten-Free"] },
-      { name: "Curd Rice", image: "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
+      { name: "Jeera Rice", image: "https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Vegan"] },
+      { name: "Lemon Rice", image: "https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Vegan"] },
+      { name: "Curd Rice", image: "https://images.pexels.com/photos/1640772/pexels-photo-1640772.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
     ],
   },
   {
@@ -63,9 +62,9 @@ const vegCategories: MenuCategory[] = [
     image: "https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=800",
     dishes: [
       { name: "Mini Idli Sambar", image: "https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Vegan"] },
-      { name: "Ghee Pongal", image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
-      { name: "Payasam", image: "https://images.pexels.com/photos/666988/pexels-photo-666988.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
-      { name: "Fruit Bowl", image: "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Jain", "Vegan", "Gluten-Free"] },
+      { name: "Ghee Pongal", image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
+      { name: "Payasam", image: "https://images.pexels.com/photos/666988/pexels-photo-666988.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
+      { name: "Fruit Bowl", image: "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Jain", "Vegan"] },
     ],
   },
 ];
@@ -75,9 +74,9 @@ const nonVegCategories: MenuCategory[] = [
     name: "Non-Veg Starters",
     image: "https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=800",
     dishes: [
-      { name: "Chicken 65", image: "https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
-      { name: "Chicken Tikka", image: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
-      { name: "Fish Fry", image: "https://images.pexels.com/photos/725991/pexels-photo-725991.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
+      { name: "Chicken 65", image: "https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
+      { name: "Chicken Tikka", image: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
+      { name: "Fish Fry", image: "https://images.pexels.com/photos/725991/pexels-photo-725991.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
       { name: "Egg Pakoda", image: "https://images.pexels.com/photos/6941028/pexels-photo-6941028.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
     ],
   },
@@ -85,9 +84,9 @@ const nonVegCategories: MenuCategory[] = [
     name: "Chicken Special",
     image: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=800",
     dishes: [
-      { name: "Butter Chicken", image: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
-      { name: "Chicken Chettinad", image: "https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
-      { name: "Pepper Chicken", image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
+      { name: "Butter Chicken", image: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
+      { name: "Chicken Chettinad", image: "https://images.pexels.com/photos/699953/pexels-photo-699953.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
+      { name: "Pepper Chicken", image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
       { name: "Kadai Chicken", image: "https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
     ],
   },
@@ -95,10 +94,10 @@ const nonVegCategories: MenuCategory[] = [
     name: "Mutton and Seafood",
     image: "https://images.pexels.com/photos/725991/pexels-photo-725991.jpeg?auto=compress&cs=tinysrgb&w=800",
     dishes: [
-      { name: "Mutton Chukka", image: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
-      { name: "Mutton Curry", image: "https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
-      { name: "Prawn Masala", image: "https://images.pexels.com/photos/3298688/pexels-photo-3298688.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
-      { name: "Fish Moilee", image: "https://images.pexels.com/photos/3763847/pexels-photo-3763847.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
+      { name: "Mutton Chukka", image: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
+      { name: "Mutton Curry", image: "https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
+      { name: "Prawn Masala", image: "https://images.pexels.com/photos/3298688/pexels-photo-3298688.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
+      { name: "Fish Moilee", image: "https://images.pexels.com/photos/3763847/pexels-photo-3763847.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
     ],
   },
   {
@@ -108,7 +107,7 @@ const nonVegCategories: MenuCategory[] = [
       { name: "Chicken Biryani", image: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
       { name: "Mutton Biryani", image: "https://images.pexels.com/photos/7394819/pexels-photo-7394819.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
       { name: "Egg Biryani", image: "https://images.pexels.com/photos/6941028/pexels-photo-6941028.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
-      { name: "Rasmalai", image: "https://images.pexels.com/photos/666988/pexels-photo-666988.jpeg?auto=compress&cs=tinysrgb&w=600", tags: ["Gluten-Free"] },
+      { name: "Rasmalai", image: "https://images.pexels.com/photos/666988/pexels-photo-666988.jpeg?auto=compress&cs=tinysrgb&w=600", tags: [] },
     ],
   },
 ];
@@ -221,7 +220,7 @@ const Menu = () => {
       <SEO
         title="Catering Menu Chennai - Veg and Non-Veg Comparison | Rebekha Catering"
         description="Compare vegetarian and non-vegetarian catering menus side-by-side. Check guest-based price tiers, dietary tags, dish images, and use the custom menu price estimator."
-        keywords="catering menu Chennai, vegetarian vs non-vegetarian menu, catering price per plate Chennai, custom menu builder, Jain vegan gluten-free catering"
+        keywords="catering menu Chennai, vegetarian vs non-vegetarian menu, catering price per plate Chennai, custom menu builder, Jain vegan catering"
         canonical="https://rebekhacaterers.online/menu"
         ogUrl="https://rebekhacaterers.online/menu"
       />
@@ -267,7 +266,7 @@ const Menu = () => {
             </h2>
             <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
             <p className="text-[hsl(30,10%,35%)] max-w-3xl mx-auto">
-              View both menus side-by-side for quick planning. Each dish includes dietary tags like Jain, Vegan, and Gluten-Free.
+              View both menus side-by-side for quick planning. Each dish includes dietary tags like Jain and Vegan.
             </p>
           </motion.div>
 

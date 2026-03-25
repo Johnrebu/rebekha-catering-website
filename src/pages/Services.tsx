@@ -66,7 +66,7 @@ const Services = () => {
     {
       title: "Dietary Specializations",
       image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=400",
-      items: ["Jain meals", "Vegan options", "Diabetic-friendly", "Gluten-free dishes"],
+      items: ["Jain meals", "Vegan options", "Diabetic-friendly"],
     },
     {
       title: "Cuisine Varieties",
