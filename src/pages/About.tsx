@@ -281,7 +281,7 @@ const About = () => {
                 transition={{ delay: index * 0.1 }}
               >
                 <div className="text-[hsl(43,76%,58%)] mb-4 flex justify-center">{value.icon}</div>
-                <h3 className="font-medium text-lg mb-3 text-[hsl(30,20%,15%)] uppercase tracking-wide text-sm">
+                <h3 className="mb-3 text-sm font-medium uppercase tracking-wide text-[hsl(30,20%,15%)]">
                   {value.title}
                 </h3>
                 <p className="text-sm text-[hsl(30,10%,45%)]">{value.description}</p>

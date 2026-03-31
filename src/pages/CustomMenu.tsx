@@ -292,7 +292,7 @@ const CustomMenu = () => {
                 <div className="w-12 h-12 bg-[hsl(43,76%,58%)] flex items-center justify-center mx-auto mb-4">
                   <Check className="h-6 w-6 text-[hsl(30,20%,15%)]" />
                 </div>
-                <h4 className="text-lg font-medium text-[hsl(30,20%,15%)] mb-2 uppercase tracking-wide text-sm">{info.title}</h4>
+                <h4 className="mb-2 text-sm font-medium uppercase tracking-wide text-[hsl(30,20%,15%)]">{info.title}</h4>
                 <p className="text-sm text-[hsl(30,10%,45%)]">{info.text}</p>
               </motion.div>
             ))}

@@ -4,6 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import { HoverPreview } from "@/components/ui/hover-preview";
 import { Check, Heart, Cake, Briefcase, Users, ChefHat } from "lucide-react";
 
 const Services = () => {
@@ -178,6 +179,9 @@ const Services = () => {
           </div>
         </div>
       </section>
+
+      {/* Hover Preview Section */}
+      <HoverPreview />
 
       {/* Additional Services */}
       <section className="py-20 bg-[hsl(43,76%,58%)]">
