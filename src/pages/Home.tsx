@@ -11,7 +11,7 @@ import {
 import { Helmet } from "react-helmet-async";
 import {
   Heart, Users, ChefHat, Award, Phone, ArrowRight,
-  Leaf, Clock, MapPin, Send, Check, CalendarDays, Instagram
+  Leaf, Clock, MapPin, Send, Check, CalendarDays, Instagram, Flame, Sparkles, UtensilsCrossed
 } from "lucide-react";
 
 import Navigation from "@/components/Navigation";
@@ -22,6 +22,7 @@ import StructuredData from "@/components/StructuredData";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { blogPosts } from "@/data/blogPosts";
 import { CompareDemo } from "@/components/ui/compare-demo";
+import InteractiveSelector, { type InteractiveSelectorItem } from "@/components/ui/interactive-selector";
 import { GlowCard } from "@/components/ui/spotlight-card";
 import TestimonialsDemo from "@/components/ui/testimonials-demo";
 import {
@@ -35,16 +36,42 @@ import weddingCateringImage from "@/assets/wedding-catering.jpg";
 import corporateCateringImage from "@/assets/corporate-catering.jpg";
 import privateDinnerImage from "@/assets/private-dinner.jpg";
 
-// Food images for gallery
-const foodImages = [
-  { src: "https://images.pexels.com/photos/7394819/pexels-photo-7394819.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Biryani", category: "Main Course" },
-  { src: "https://images.pexels.com/photos/5410400/pexels-photo-5410400.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Paneer Tikka", category: "Starters" },
-  { src: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Butter Chicken", category: "Main Course" },
-  { src: "https://images.pexels.com/photos/5560763/pexels-photo-5560763.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Masala Dosa", category: "South Indian" },
-  { src: "https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Chicken 65", category: "Starters" },
-  { src: "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Dessert Platter", category: "Sweets" },
-  { src: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "South Indian Platter", category: "Main Course" },
-  { src: "https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg?auto=compress&cs=tinysrgb&w=800", alt: "Crispy Starters", category: "Snacks" },
+const homeFoodSelectorItems: InteractiveSelectorItem[] = [
+  {
+    title: "Wedding Buffets",
+    description: "Full-course vegetarian and non-vegetarian buffet lines designed for fast, elegant guest service.",
+    image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
+    icon: <ChefHat className="h-5 w-5 text-white" />,
+    eyebrow: "Signature spreads",
+  },
+  {
+    title: "Live Counters",
+    description: "Interactive dosa, grill, and tawa counters that keep events feeling fresh and animated.",
+    image: "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1200&q=80",
+    icon: <Flame className="h-5 w-5 text-white" />,
+    eyebrow: "Cooked on demand",
+  },
+  {
+    title: "South Indian Favourites",
+    description: "Breakfast and lunch menus rooted in familiar regional classics with crowd-pleasing balance.",
+    image: "https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=1200&q=80",
+    icon: <Leaf className="h-5 w-5 text-white" />,
+    eyebrow: "Regional depth",
+  },
+  {
+    title: "Starter Service",
+    description: "Crisp starters and passed bites timed around arrivals, speeches, and peak guest movement.",
+    image: "https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=1200&q=80",
+    icon: <UtensilsCrossed className="h-5 w-5 text-white" />,
+    eyebrow: "Perfect openers",
+  },
+  {
+    title: "Dessert Tables",
+    description: "Festive dessert displays that close the meal with polish, variety, and visual warmth.",
+    image: "https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=1200&q=80",
+    icon: <Sparkles className="h-5 w-5 text-white" />,
+    eyebrow: "Sweet finales",
+  },
 ];
 
 // Menu categories
@@ -571,7 +598,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Our Food Section - Eden Style */}
+      {/* Our Food Section */}
       <section className="py-20 bg-[hsl(43,76%,58%)]">
         <div className="container mx-auto px-6">
           <motion.div
@@ -583,35 +610,24 @@ const Home = () => {
             <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
               Our Food
             </h2>
-            <div className="w-20 h-0.5 bg-[hsl(30,20%,15%)] mx-auto opacity-50" />
+            <div className="w-20 h-0.5 bg-[hsl(30,20%,15%)] mx-auto opacity-50 mb-6" />
+            <p className="mx-auto max-w-2xl text-lg text-[hsl(30,18%,20%)] [font-family:'Cormorant_Garamond',serif]">
+              Explore how our menus shift from wedding buffet scale to live counters,
+              starters, regional classics, and polished dessert service.
+            </p>
           </motion.div>
 
-          {/* Food Grid - Masonry Style */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-1 md:gap-2">
-            {foodImages.map((food, index) => (
-              <motion.div
-                key={index}
-                className={`relative overflow-hidden cursor-pointer group ${index === 0 ? 'col-span-2 row-span-2' : ''
-                  }`}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
-              >
-                <img
-                  src={food.src}
-                  alt={food.alt}
-                  className={`w-full object-cover transition-transform duration-500 group-hover:scale-110 ${index === 0 ? 'h-[400px] md:h-[500px]' : 'h-[180px] md:h-[240px]'
-                    }`}
-                />
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
-                  <span className="text-white text-lg font-medium opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    {food.alt}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.7 }}
+          >
+            <InteractiveSelector
+              items={homeFoodSelectorItems}
+              className="mx-auto max-w-6xl"
+            />
+          </motion.div>
 
           <motion.div
             className="text-center mt-10"
