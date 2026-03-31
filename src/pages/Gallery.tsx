@@ -7,6 +7,8 @@ import StructuredData from "@/components/StructuredData";
 import { ImagePlayer } from "@/components/ui/image-player";
 import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
 import { ThreeDIconTabs, type IconTabItem } from "@/components/ui/3d-icon-tabs-1";
+import weddingCateringImage from "@/assets/wedding-catering.jpg";
+import birthdayCateringImage from "@/assets/birthday-catering.jpg";
 import {
   Briefcase,
   CalendarDays,
@@ -45,8 +47,8 @@ interface GalleryPhoto {
 const galleryPhotos: GalleryPhoto[] = [
   {
     id: 1,
-    src: "https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    alt: "Wedding buffet setup with floral decor",
+    src: weddingCateringImage,
+    alt: "Elegant wedding buffet setup in a decorated banquet hall",
     eventType: "Weddings",
     eventDate: "2026-02-21",
     caption: "Grand wedding buffet with live counters for 800 guests",
@@ -56,8 +58,8 @@ const galleryPhotos: GalleryPhoto[] = [
   },
   {
     id: 2,
-    src: "https://images.pexels.com/photos/1729797/pexels-photo-1729797.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    alt: "Birthday dessert and snacks counter",
+    src: birthdayCateringImage,
+    alt: "Colorful birthday party catering table with snacks and decorations",
     eventType: "Birthdays",
     eventDate: "2026-01-30",
     caption: "Colorful birthday menu with dessert and chaat stations",
