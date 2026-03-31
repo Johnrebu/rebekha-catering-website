@@ -22,6 +22,7 @@ import StructuredData from "@/components/StructuredData";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { blogPosts } from "@/data/blogPosts";
 import { CompareDemo } from "@/components/ui/compare-demo";
+import { GlowCard } from "@/components/ui/spotlight-card";
 import TestimonialsDemo from "@/components/ui/testimonials-demo";
 import {
   Accordion,
@@ -123,21 +124,31 @@ const heroHighlights = [
   },
 ];
 
-const heroFeatureCards = [
+type HeroFeatureCard = {
+  title: string;
+  description: string;
+  icon: React.ComponentType<{ className?: string }>;
+  glowColor: "blue" | "purple" | "green" | "red" | "orange";
+};
+
+const heroFeatureCards: HeroFeatureCard[] = [
   {
     title: "Layered service",
     description: "Buffet lines, live counters, and plated moments designed to feel calm, premium, and easy to move through.",
     icon: Clock,
+    glowColor: "orange",
   },
   {
     title: "Regional depth",
     description: "South Indian and event-ready menus with room for ceremony staples, signature dishes, and late additions.",
     icon: Leaf,
+    glowColor: "green",
   },
   {
     title: "Venue-led planning",
     description: "West Tambaram based with Chennai-wide execution, aligned to guest flow, access points, and timing windows.",
     icon: MapPin,
+    glowColor: "blue",
   },
 ];
 
@@ -364,24 +375,30 @@ const HomeHero = () => {
         <div className="container">
           <ScrollReveal amount={0.24}>
             <div className="grid gap-6 border border-[#dac8b6] bg-[#f4ece1] p-5 shadow-[0_32px_80px_-44px_rgba(18,13,10,0.65)] sm:p-6 md:grid-cols-3 md:p-8">
-              {heroFeatureCards.map(({ icon: Icon, title, description }, index) => (
-                <div
+              {heroFeatureCards.map(({ icon: Icon, title, description, glowColor }, index) => (
+                <GlowCard
                   key={title}
-                  className="border-t border-[#1a130d]/10 pt-6 text-center first:border-0 first:pt-0 md:border-l md:border-t-0 md:pl-6 md:pt-0 md:text-left md:first:border-l-0 md:first:pl-0"
+                  customSize
+                  glowColor={glowColor}
+                  className="h-full min-h-[250px] w-full rounded-[28px] bg-[#f6eee4]/88 p-5 text-center shadow-[0_28px_70px_-46px_rgba(18,13,10,0.7)] backdrop-blur-xl sm:p-6 md:p-7 md:text-left"
                 >
-                  <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full border border-[#1a130d]/10 bg-white text-[#1a130d] md:mx-0">
-                    <Icon className="h-5 w-5" />
+                  <div className="flex flex-col items-center gap-4 md:items-start">
+                    <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full border border-[#1a130d]/10 bg-white text-[#1a130d] md:mx-0">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div>
+                      <p className="font-outliers-sans text-[0.68rem] uppercase tracking-[0.28em] text-[#6e5e4f]">
+                        {`0${index + 1}`}
+                      </p>
+                      <h2 className="heading-script mt-3 text-[2.6rem] leading-[0.92] text-[#140e0a]">
+                        {title}
+                      </h2>
+                    </div>
                   </div>
-                  <p className="font-outliers-sans mt-5 text-[0.68rem] uppercase tracking-[0.28em] text-[#6e5e4f]">
-                    {`0${index + 1}`}
-                  </p>
-                  <h2 className="heading-script mt-3 text-[2.6rem] leading-[0.92] text-[#140e0a]">
-                    {title}
-                  </h2>
-                  <p className="font-outliers-sans mt-4 text-sm leading-6 text-[#514a40]">
+                  <p className="font-outliers-sans text-sm leading-6 text-[#514a40]">
                     {description}
                   </p>
-                </div>
+                </GlowCard>
               ))}
             </div>
           </ScrollReveal>
