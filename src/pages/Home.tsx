@@ -21,6 +21,7 @@ import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { blogPosts } from "@/data/blogPosts";
+import { CircularRevealHeading } from "@/components/ui/circular-reveal-heading";
 import { CompareDemo } from "@/components/ui/compare-demo";
 import { GlowCard } from "@/components/ui/spotlight-card";
 import TestimonialsDemo from "@/components/ui/testimonials-demo";
@@ -55,6 +56,29 @@ const menuCategories = [
   { name: "Wedding", image: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
   { name: "Corporate", image: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
   { name: "Birthday", image: "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
+];
+
+const circularRevealItems = [
+  {
+    text: "Weddings",
+    image:
+      "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    text: "Corporate",
+    image:
+      "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    text: "Birthdays",
+    image:
+      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    text: "Private Dining",
+    image:
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80",
+  },
 ];
 
 const homeFaqs = [
@@ -656,6 +680,79 @@ const Home = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Occasion Reveal Section */}
+      <section className="py-20 bg-[hsl(45,40%,94%)]">
+        <div className="container mx-auto grid gap-14 px-6 lg:grid-cols-[minmax(0,0.95fr)_minmax(320px,0.85fr)] lg:items-center">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="font-outliers-sans text-[0.72rem] uppercase tracking-[0.32em] text-[hsl(38,70%,45%)]">
+              Tap Or Hover The Ring
+            </p>
+            <h2 className="heading-script mt-6 text-5xl md:text-6xl text-[hsl(30,20%,15%)]">
+              Built around the way you host.
+            </h2>
+            <div className="my-6 h-0.5 w-16 bg-[hsl(43,76%,58%)]" />
+            <p className="max-w-xl text-lg leading-relaxed text-[hsl(30,10%,35%)] [font-family:'Cormorant_Garamond',serif]">
+              Preview the event moods we plan most often. On desktop, hover each word to reveal
+              the atmosphere behind it. On smaller screens, tap a label to switch the image.
+            </p>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-3xl border border-[hsl(40,20%,85%)] bg-white/80 p-5">
+                <p className="font-outliers-sans text-[0.68rem] uppercase tracking-[0.28em] text-[hsl(38,70%,45%)]">
+                  Wedding service
+                </p>
+                <p className="mt-3 text-sm leading-6 text-[hsl(30,10%,35%)]">
+                  Ceremony timing, buffet flow, and guest comfort balanced in one service plan.
+                </p>
+              </div>
+              <div className="rounded-3xl border border-[hsl(40,20%,85%)] bg-white/80 p-5">
+                <p className="font-outliers-sans text-[0.68rem] uppercase tracking-[0.28em] text-[hsl(38,70%,45%)]">
+                  Corporate precision
+                </p>
+                <p className="mt-3 text-sm leading-6 text-[hsl(30,10%,35%)]">
+                  Menus and setup paced for lunch windows, team events, and cleaner service rhythm.
+                </p>
+              </div>
+            </div>
+
+            <Link to="/services" className="mt-8 inline-flex">
+              <button className="px-8 py-3 text-sm font-medium tracking-widest uppercase bg-[hsl(43,76%,58%)] text-[hsl(30,20%,15%)] border-2 border-[hsl(43,76%,58%)] hover:bg-[hsl(38,70%,45%)] hover:border-[hsl(38,70%,45%)] transition-all duration-300 inline-flex items-center gap-2">
+                Explore Services
+                <ArrowRight className="h-4 w-4" />
+              </button>
+            </Link>
+          </motion.div>
+
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, scale: 0.96 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+          >
+            <CircularRevealHeading
+              items={circularRevealItems}
+              size="md"
+              className="mx-auto"
+              centerText={
+                <div className="flex flex-col items-center gap-3 text-center text-[#444444]">
+                  <ChefHat className="h-8 w-8 text-[hsl(43,76%,58%)]" />
+                  <p className="font-outliers-sans text-[0.68rem] uppercase tracking-[0.28em]">
+                    Rebekha Caterers
+                  </p>
+                  <p className="heading-script text-[2.5rem] leading-none text-[#2f2721]">
+                    Event craft
+                  </p>
+                </div>
+              }
+            />
+          </motion.div>
         </div>
       </section>
 
