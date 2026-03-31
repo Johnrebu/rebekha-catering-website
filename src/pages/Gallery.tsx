@@ -4,7 +4,21 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
-import { CalendarDays, ChevronLeft, ChevronRight, Image as ImageIcon, Quote, X } from "lucide-react";
+import { ThreeDIconTabs, type IconTabItem } from "@/components/ui/3d-icon-tabs-1";
+import {
+  Briefcase,
+  CalendarDays,
+  Cake,
+  ChevronLeft,
+  ChevronRight,
+  Heart,
+  House,
+  Image as ImageIcon,
+  LayoutGrid,
+  Quote,
+  UtensilsCrossed,
+  X,
+} from "lucide-react";
 
 type EventType = "All" | "Weddings" | "Birthdays" | "Corporate" | "Housewarming" | "Private Dining";
 
@@ -142,7 +156,39 @@ const galleryPhotos: GalleryPhoto[] = [
   },
 ];
 
-const eventFilters: EventType[] = ["All", "Weddings", "Birthdays", "Corporate", "Housewarming", "Private Dining"];
+const galleryTabs: IconTabItem<EventType>[] = [
+  {
+    id: "All",
+    label: "All",
+    icon: <LayoutGrid className="h-7 w-7 md:h-8 md:w-8" />,
+  },
+  {
+    id: "Weddings",
+    label: "Weddings",
+    icon: <Heart className="h-7 w-7 md:h-8 md:w-8" />,
+  },
+  {
+    id: "Birthdays",
+    label: "Birthdays",
+    icon: <Cake className="h-7 w-7 md:h-8 md:w-8" />,
+  },
+  {
+    id: "Corporate",
+    label: "Corporate",
+    icon: <Briefcase className="h-7 w-7 md:h-8 md:w-8" />,
+  },
+  {
+    id: "Housewarming",
+    label: "Housewarming",
+    icon: <House className="h-7 w-7 md:h-8 md:w-8" />,
+  },
+  {
+    id: "Private Dining",
+    label: "Dining",
+    icon: <UtensilsCrossed className="h-7 w-7 md:h-8 md:w-8" />,
+    badge: "NEW",
+  },
+];
 
 const Gallery = () => {
   const [activeFilter, setActiveFilter] = useState<EventType>("All");
@@ -200,7 +246,7 @@ const Gallery = () => {
       {/* Filters + count */}
       <section className="py-10 bg-white border-b border-[hsl(40,20%,85%)]">
         <div className="container mx-auto px-6">
-          <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-8">
             <div>
               <h2 className="text-4xl text-[hsl(30,20%,15%)] mb-2" style={{ fontFamily: "'Great Vibes', cursive" }}>
                 Our Creations
@@ -211,24 +257,14 @@ const Gallery = () => {
               </p>
             </div>
 
-            <div className="flex flex-wrap gap-2">
-              {eventFilters.map((filter) => (
-                <button
-                  key={filter}
-                  onClick={() => {
-                    setActiveFilter(filter);
-                    setSelectedIndex(null);
-                  }}
-                  className={`px-4 py-2 text-xs uppercase tracking-widest border transition-colors ${
-                    activeFilter === filter
-                      ? "bg-[hsl(43,76%,58%)] border-[hsl(43,76%,58%)] text-[hsl(30,20%,15%)]"
-                      : "border-[hsl(40,20%,80%)] text-[hsl(30,10%,40%)] hover:border-[hsl(43,76%,58%)]"
-                  }`}
-                >
-                  {filter}
-                </button>
-              ))}
-            </div>
+            <ThreeDIconTabs
+              tabs={galleryTabs}
+              activeTab={activeFilter}
+              onTabChange={(tabId) => {
+                setActiveFilter(tabId as EventType);
+                setSelectedIndex(null);
+              }}
+            />
           </div>
         </div>
       </section>
