@@ -1,9 +1,10 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import ScrollExpandMedia from "@/components/ui/scroll-expansion-hero";
 import { ThreeDIconTabs, type IconTabItem } from "@/components/ui/3d-icon-tabs-1";
 import {
   Briefcase,
@@ -20,7 +21,13 @@ import {
   X,
 } from "lucide-react";
 
-type EventType = "All" | "Weddings" | "Birthdays" | "Corporate" | "Housewarming" | "Private Dining";
+type EventType =
+  | "All"
+  | "Weddings"
+  | "Birthdays"
+  | "Corporate"
+  | "Housewarming"
+  | "Private Dining";
 
 interface GalleryPhoto {
   id: number;
@@ -41,7 +48,8 @@ const galleryPhotos: GalleryPhoto[] = [
     eventType: "Weddings",
     eventDate: "2026-02-21",
     caption: "Grand wedding buffet with live counters for 800 guests",
-    feedback: "The spread was elegant and service timing was perfect throughout the evening.",
+    feedback:
+      "The spread was elegant and service timing was perfect throughout the evening.",
     location: "Tambaram, Chennai",
   },
   {
@@ -51,7 +59,8 @@ const galleryPhotos: GalleryPhoto[] = [
     eventType: "Birthdays",
     eventDate: "2026-01-30",
     caption: "Colorful birthday menu with dessert and chaat stations",
-    feedback: "Kids loved the menu variety and the setup looked amazing in photos.",
+    feedback:
+      "Kids loved the menu variety and the setup looked amazing in photos.",
     location: "Chromepet, Chennai",
   },
   {
@@ -61,7 +70,8 @@ const galleryPhotos: GalleryPhoto[] = [
     eventType: "Corporate",
     eventDate: "2026-02-08",
     caption: "Corporate annual day lunch for 450 attendees",
-    feedback: "Professional team and smooth crowd handling during peak lunch time.",
+    feedback:
+      "Professional team and smooth crowd handling during peak lunch time.",
     location: "OMR, Chennai",
   },
   {
@@ -71,7 +81,8 @@ const galleryPhotos: GalleryPhoto[] = [
     eventType: "Housewarming",
     eventDate: "2026-01-14",
     caption: "Traditional South Indian lunch service for housewarming event",
-    feedback: "Authentic taste and very hygienic service. Guests were very happy.",
+    feedback:
+      "Authentic taste and very hygienic service. Guests were very happy.",
     location: "Pallikaranai, Chennai",
   },
   {
@@ -91,7 +102,8 @@ const galleryPhotos: GalleryPhoto[] = [
     eventType: "Weddings",
     eventDate: "2026-02-03",
     caption: "Live biryani counter as part of wedding dinner menu",
-    feedback: "Flavor and aroma were outstanding. The biryani counter was the highlight.",
+    feedback:
+      "Flavor and aroma were outstanding. The biryani counter was the highlight.",
     location: "Porur, Chennai",
   },
   {
@@ -101,7 +113,8 @@ const galleryPhotos: GalleryPhoto[] = [
     eventType: "Corporate",
     eventDate: "2025-12-19",
     caption: "Breakfast and tea break menu for corporate training day",
-    feedback: "Punctual service and good variety for all dietary preferences.",
+    feedback:
+      "Punctual service and good variety for all dietary preferences.",
     location: "Guindy, Chennai",
   },
   {
@@ -111,7 +124,8 @@ const galleryPhotos: GalleryPhoto[] = [
     eventType: "Housewarming",
     eventDate: "2026-02-16",
     caption: "Live tiffin and dosa station for morning function",
-    feedback: "Freshly made items and great support from the serving team.",
+    feedback:
+      "Freshly made items and great support from the serving team.",
     location: "Velachery, Chennai",
   },
   {
@@ -131,7 +145,8 @@ const galleryPhotos: GalleryPhoto[] = [
     eventType: "Private Dining",
     eventDate: "2026-02-12",
     caption: "Curated plated dinner for anniversary celebration",
-    feedback: "Beautiful plating and highly attentive staff from start to finish.",
+    feedback:
+      "Beautiful plating and highly attentive staff from start to finish.",
     location: "Anna Nagar, Chennai",
   },
   {
@@ -151,7 +166,8 @@ const galleryPhotos: GalleryPhoto[] = [
     eventType: "Corporate",
     eventDate: "2026-02-26",
     caption: "Vegetarian starter bar for product launch event",
-    feedback: "Great veg choices and smooth buffet flow even during rush hour.",
+    feedback:
+      "Great veg choices and smooth buffet flow even during rush hour.",
     location: "Nungambakkam, Chennai",
   },
 ];
@@ -194,15 +210,29 @@ const Gallery = () => {
   const [activeFilter, setActiveFilter] = useState<EventType>("All");
   const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+    window.dispatchEvent(new Event("resetSection"));
+  }, []);
+
   const filteredPhotos = useMemo(() => {
-    if (activeFilter === "All") return galleryPhotos;
+    if (activeFilter === "All") {
+      return galleryPhotos;
+    }
+
     return galleryPhotos.filter((photo) => photo.eventType === activeFilter);
   }, [activeFilter]);
 
   const openPhoto = (index: number) => setSelectedIndex(index);
   const closeLightbox = () => setSelectedIndex(null);
-  const showPrev = () => setSelectedIndex((prev) => (prev === null ? null : (prev - 1 + filteredPhotos.length) % filteredPhotos.length));
-  const showNext = () => setSelectedIndex((prev) => (prev === null ? null : (prev + 1) % filteredPhotos.length));
+  const showPrev = () =>
+    setSelectedIndex((prev) =>
+      prev === null ? null : (prev - 1 + filteredPhotos.length) % filteredPhotos.length,
+    );
+  const showNext = () =>
+    setSelectedIndex((prev) =>
+      prev === null ? null : (prev + 1) % filteredPhotos.length,
+    );
 
   const selectedPhoto = selectedIndex !== null ? filteredPhotos[selectedIndex] : null;
 
@@ -218,106 +248,105 @@ const Gallery = () => {
       <StructuredData />
       <Navigation />
 
-      {/* Hero */}
-      <section className="relative h-[50vh] min-h-[400px] flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: "url('https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=1920')",
-          }}
-        />
-        <div className="absolute inset-0 bg-black/50" />
+      <ScrollExpandMedia
+        mediaType="image"
+        mediaSrc="https://images.unsplash.com/photo-1511578314322-379afb476865?auto=format&fit=crop&w=1400&q=80"
+        bgImageSrc="https://images.unsplash.com/photo-1469371670807-013ccf25f16a?auto=format&fit=crop&w=1920&q=80"
+        title="Event Gallery"
+        date="Chennai Celebrations"
+        scrollToExpand="Scroll to reveal the archive"
+        textBlend
+        contentClassName="pt-12 md:pt-16"
+      >
+        <div className="mx-auto flex w-full max-w-7xl flex-col gap-10">
+          <section className="rounded-[2rem] border border-[hsl(40,20%,85%)] bg-white/95 p-6 shadow-[0_24px_60px_rgba(34,24,12,0.10)] backdrop-blur md:p-10">
+            <div className="flex flex-col gap-8">
+              <div>
+                <h2
+                  className="mb-2 text-4xl text-[hsl(30,20%,15%)]"
+                  style={{ fontFamily: "'Great Vibes', cursive" }}
+                >
+                  Our Creations
+                </h2>
+                <p className="flex items-center gap-2 text-sm text-[hsl(30,10%,45%)]">
+                  <ImageIcon className="h-4 w-4" />
+                  Showing {filteredPhotos.length} photo
+                  {filteredPhotos.length !== 1 ? "s" : ""}{" "}
+                  {activeFilter !== "All"
+                    ? `in ${activeFilter}`
+                    : "across all events"}
+                </p>
+              </div>
 
-        <motion.div
-          className="relative z-10 text-center text-white px-4"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h1 className="text-5xl md:text-7xl mb-4" style={{ fontFamily: "'Great Vibes', cursive" }}>
-            Gallery
-          </h1>
-          <p className="text-xl font-light tracking-wide">
-            Real event moments from our catering service in Chennai
-          </p>
-        </motion.div>
-      </section>
-
-      {/* Filters + count */}
-      <section className="py-10 bg-white border-b border-[hsl(40,20%,85%)]">
-        <div className="container mx-auto px-6">
-          <div className="flex flex-col gap-8">
-            <div>
-              <h2 className="text-4xl text-[hsl(30,20%,15%)] mb-2" style={{ fontFamily: "'Great Vibes', cursive" }}>
-                Our Creations
-              </h2>
-              <p className="text-sm text-[hsl(30,10%,45%)] flex items-center gap-2">
-                <ImageIcon className="h-4 w-4" />
-                Showing {filteredPhotos.length} photo{filteredPhotos.length !== 1 ? "s" : ""} {activeFilter !== "All" ? `in ${activeFilter}` : "across all events"}
-              </p>
+              <ThreeDIconTabs
+                tabs={galleryTabs}
+                activeTab={activeFilter}
+                onTabChange={(tabId) => {
+                  setActiveFilter(tabId as EventType);
+                  setSelectedIndex(null);
+                }}
+              />
             </div>
+          </section>
 
-            <ThreeDIconTabs
-              tabs={galleryTabs}
-              activeTab={activeFilter}
-              onTabChange={(tabId) => {
-                setActiveFilter(tabId as EventType);
-                setSelectedIndex(null);
-              }}
-            />
-          </div>
+          <section className="rounded-[2rem] border border-[hsl(40,20%,85%)] bg-[hsl(45,40%,96%)] p-6 shadow-[0_24px_60px_rgba(34,24,12,0.08)] md:p-8">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {filteredPhotos.map((photo, index) => (
+                <motion.article
+                  key={photo.id}
+                  className="group cursor-pointer overflow-hidden border border-[hsl(40,20%,85%)] bg-white"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.04 }}
+                  onClick={() => openPhoto(index)}
+                >
+                  <div className="relative h-64 overflow-hidden">
+                    <img
+                      src={photo.src}
+                      alt={photo.alt}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <span className="absolute left-3 top-3 bg-black/60 px-3 py-1 text-[10px] uppercase tracking-wider text-white">
+                      {photo.eventType}
+                    </span>
+                  </div>
+                  <div className="p-5">
+                    <h3
+                      className="mb-2 text-lg text-[hsl(30,20%,15%)]"
+                      style={{ fontFamily: "'Cormorant Garamond', serif" }}
+                    >
+                      {photo.caption}
+                    </h3>
+                    <p className="mb-3 flex items-center gap-2 text-xs text-[hsl(30,10%,45%)]">
+                      <CalendarDays className="h-3.5 w-3.5" />
+                      {new Date(photo.eventDate).toLocaleDateString("en-IN", {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                      })}{" "}
+                      | {photo.location}
+                    </p>
+                    <p className="flex items-start gap-2 text-sm leading-relaxed text-[hsl(30,10%,35%)]">
+                      <Quote className="mt-0.5 h-4 w-4 flex-shrink-0 text-[hsl(43,76%,58%)]" />
+                      {photo.feedback}
+                    </p>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+          </section>
         </div>
-      </section>
+      </ScrollExpandMedia>
 
-      {/* Gallery grid */}
-      <section className="py-14 bg-[hsl(45,40%,94%)]">
-        <div className="container mx-auto px-6">
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredPhotos.map((photo, index) => (
-              <motion.article
-                key={photo.id}
-                className="bg-white overflow-hidden border border-[hsl(40,20%,85%)] group cursor-pointer"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.04 }}
-                onClick={() => openPhoto(index)}
-              >
-                <div className="relative h-64 overflow-hidden">
-                  <img
-                    src={photo.src}
-                    alt={photo.alt}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <span className="absolute top-3 left-3 px-3 py-1 text-[10px] uppercase tracking-wider bg-black/60 text-white">
-                    {photo.eventType}
-                  </span>
-                </div>
-                <div className="p-5">
-                  <h3 className="text-lg text-[hsl(30,20%,15%)] mb-2" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                    {photo.caption}
-                  </h3>
-                  <p className="text-xs text-[hsl(30,10%,45%)] mb-3 flex items-center gap-2">
-                    <CalendarDays className="h-3.5 w-3.5" />
-                    {new Date(photo.eventDate).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })} • {photo.location}
-                  </p>
-                  <p className="text-sm text-[hsl(30,10%,35%)] leading-relaxed flex items-start gap-2">
-                    <Quote className="h-4 w-4 mt-0.5 text-[hsl(43,76%,58%)] flex-shrink-0" />
-                    {photo.feedback}
-                  </p>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Lightbox */}
       {selectedPhoto && (
-        <div className="fixed inset-0 z-50 bg-black/90 p-4 md:p-8 flex items-center justify-center" onClick={closeLightbox}>
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 md:p-8"
+          onClick={closeLightbox}
+        >
           <button
-            className="absolute top-4 right-4 text-white hover:text-[hsl(43,76%,58%)] transition-colors"
+            className="absolute right-4 top-4 text-white transition-colors hover:text-[hsl(43,76%,58%)]"
             onClick={closeLightbox}
             aria-label="Close gallery modal"
           >
@@ -327,9 +356,9 @@ const Gallery = () => {
           {filteredPhotos.length > 1 && (
             <>
               <button
-                className="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 text-white hover:text-[hsl(43,76%,58%)] transition-colors"
-                onClick={(e) => {
-                  e.stopPropagation();
+                className="absolute left-3 top-1/2 -translate-y-1/2 text-white transition-colors hover:text-[hsl(43,76%,58%)] md:left-6"
+                onClick={(event) => {
+                  event.stopPropagation();
                   showPrev();
                 }}
                 aria-label="Previous photo"
@@ -337,9 +366,9 @@ const Gallery = () => {
                 <ChevronLeft className="h-9 w-9" />
               </button>
               <button
-                className="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 text-white hover:text-[hsl(43,76%,58%)] transition-colors"
-                onClick={(e) => {
-                  e.stopPropagation();
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-white transition-colors hover:text-[hsl(43,76%,58%)] md:right-6"
+                onClick={(event) => {
+                  event.stopPropagation();
                   showNext();
                 }}
                 aria-label="Next photo"
@@ -350,19 +379,32 @@ const Gallery = () => {
           )}
 
           <div
-            className="max-w-5xl w-full bg-[hsl(30,20%,12%)] text-white border border-white/20"
-            onClick={(e) => e.stopPropagation()}
+            className="w-full max-w-5xl border border-white/20 bg-[hsl(30,20%,12%)] text-white"
+            onClick={(event) => event.stopPropagation()}
           >
-            <img src={selectedPhoto.src} alt={selectedPhoto.alt} className="w-full max-h-[68vh] object-contain bg-black" />
+            <img
+              src={selectedPhoto.src}
+              alt={selectedPhoto.alt}
+              className="max-h-[68vh] w-full object-contain bg-black"
+            />
             <div className="p-5">
-              <p className="text-xs uppercase tracking-wider text-[hsl(43,76%,58%)] mb-2">
-                {selectedPhoto.eventType} • {selectedIndex !== null ? selectedIndex + 1 : 1} / {filteredPhotos.length}
+              <p className="mb-2 text-xs uppercase tracking-wider text-[hsl(43,76%,58%)]">
+                {selectedPhoto.eventType} |{" "}
+                {selectedIndex !== null ? selectedIndex + 1 : 1} / {filteredPhotos.length}
               </p>
-              <h3 className="text-xl mb-2" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+              <h3
+                className="mb-2 text-xl"
+                style={{ fontFamily: "'Cormorant Garamond', serif" }}
+              >
                 {selectedPhoto.caption}
               </h3>
-              <p className="text-sm text-white/80 mb-3">
-                {new Date(selectedPhoto.eventDate).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })} • {selectedPhoto.location}
+              <p className="mb-3 text-sm text-white/80">
+                {new Date(selectedPhoto.eventDate).toLocaleDateString("en-IN", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}{" "}
+                | {selectedPhoto.location}
               </p>
               <p className="text-sm text-white/90">{selectedPhoto.feedback}</p>
             </div>
