@@ -19,6 +19,7 @@ import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
+import { useIsMobile } from "@/hooks/use-mobile";
 import { blogPosts } from "@/data/blogPosts";
 import { CompareDemo } from "@/components/ui/compare-demo";
 import TestimonialsDemo from "@/components/ui/testimonials-demo";
@@ -167,6 +168,8 @@ const ScrollReveal = ({
 const HomeHero = () => {
   const heroRef = React.useRef<HTMLElement>(null);
   const shouldReduceMotion = useReducedMotion();
+  const isMobile = useIsMobile();
+  const disableHeroMotion = shouldReduceMotion || isMobile;
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -185,21 +188,21 @@ const HomeHero = () => {
   const tertiaryImageScale = useTransform(scrollYProgress, [0, 1], [0.98, 1.07]);
   const scrollHintOpacity = useTransform(scrollYProgress, [0, 0.45], [1, 0]);
 
-  const backgroundStyle = shouldReduceMotion ? undefined : { y: backgroundY, scale: backgroundScale };
-  const contentStyle = shouldReduceMotion ? undefined : { y: contentY };
-  const headingStyle = shouldReduceMotion ? undefined : { scale: headingScale };
-  const primaryCardStyle = shouldReduceMotion ? undefined : { y: primaryCardY };
-  const secondaryCardStyle = shouldReduceMotion ? undefined : { y: secondaryCardY };
-  const tertiaryCardStyle = shouldReduceMotion ? undefined : { y: tertiaryCardY };
-  const primaryImageStyle = shouldReduceMotion ? undefined : { scale: primaryImageScale };
-  const secondaryImageStyle = shouldReduceMotion ? undefined : { scale: secondaryImageScale };
-  const tertiaryImageStyle = shouldReduceMotion ? undefined : { scale: tertiaryImageScale };
-  const scrollHintStyle = shouldReduceMotion ? undefined : { opacity: scrollHintOpacity };
+  const backgroundStyle = disableHeroMotion ? undefined : { y: backgroundY, scale: backgroundScale };
+  const contentStyle = disableHeroMotion ? undefined : { y: contentY };
+  const headingStyle = disableHeroMotion ? undefined : { scale: headingScale };
+  const primaryCardStyle = disableHeroMotion ? undefined : { y: primaryCardY };
+  const secondaryCardStyle = disableHeroMotion ? undefined : { y: secondaryCardY };
+  const tertiaryCardStyle = disableHeroMotion ? undefined : { y: tertiaryCardY };
+  const primaryImageStyle = disableHeroMotion ? undefined : { scale: primaryImageScale };
+  const secondaryImageStyle = disableHeroMotion ? undefined : { scale: secondaryImageScale };
+  const tertiaryImageStyle = disableHeroMotion ? undefined : { scale: tertiaryImageScale };
+  const scrollHintStyle = disableHeroMotion ? undefined : { opacity: scrollHintOpacity };
 
   return (
-    <section ref={heroRef} className="relative overflow-clip bg-[#f4efe7]">
-      <div className="relative min-h-[165vh]">
-        <div className="sticky top-0 h-screen overflow-hidden bg-[#120d0a]">
+    <section ref={heroRef} className="relative overflow-hidden bg-[#f4efe7]">
+      <div className="relative">
+        <div className="relative min-h-[100svh] overflow-hidden bg-[#120d0a] md:min-h-screen">
           <motion.div className="absolute inset-0" style={backgroundStyle}>
             <img
               src={heroCateringImage}
@@ -213,12 +216,15 @@ const HomeHero = () => {
           <div className="hero-grain absolute inset-0 opacity-80" />
           <div className="absolute inset-x-0 top-0 h-32 bg-[linear-gradient(180deg,rgba(0,0,0,0.35),transparent)]" />
 
-          <div className="relative z-10 flex h-full items-center">
-            <div className="container px-6 pb-14 pt-28 md:pt-32">
-              <div className="grid items-end gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.95fr)]">
-                <motion.div style={contentStyle} className="max-w-2xl">
+          <div className="relative z-10 flex min-h-[100svh] items-center">
+            <div className="container px-5 pb-10 pt-24 sm:px-6 sm:pb-12 sm:pt-28 md:pb-14 md:pt-32">
+              <div className="grid items-end gap-10 md:gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.95fr)]">
+                <motion.div
+                  style={contentStyle}
+                  className="mx-auto max-w-2xl text-center lg:mx-0 lg:text-left"
+                >
                   <ScrollReveal>
-                    <p className="font-outliers-sans text-[0.72rem] uppercase tracking-[0.34em] text-[#f0ddc9]">
+                    <p className="mx-auto max-w-[17rem] font-outliers-sans text-[0.68rem] uppercase tracking-[0.28em] text-[#f0ddc9] sm:max-w-none sm:text-[0.72rem] sm:tracking-[0.34em] lg:mx-0">
                       Wedding & Event Catering
                     </p>
                   </ScrollReveal>
@@ -226,7 +232,7 @@ const HomeHero = () => {
                   <ScrollReveal delay={0.08}>
                     <motion.h1
                       style={headingStyle}
-                      className="heading-script mt-6 text-[clamp(4.5rem,8vw,8rem)] leading-[0.84] text-[#f8f1e6]"
+                      className="heading-script mt-6 text-[clamp(3.35rem,17vw,5rem)] leading-[0.88] text-[#f8f1e6] sm:text-[clamp(4rem,13vw,6rem)] md:text-[clamp(4.5rem,8vw,8rem)] md:leading-[0.84]"
                     >
                       Bring ceremony
                       <br />
@@ -235,7 +241,7 @@ const HomeHero = () => {
                   </ScrollReveal>
 
                   <ScrollReveal delay={0.14}>
-                    <p className="font-outliers-sans mt-6 max-w-xl text-base leading-7 text-[#f6ede1] md:text-lg">
+                    <p className="mx-auto mt-6 max-w-xl font-outliers-sans text-base leading-7 text-[#f6ede1] md:text-lg lg:mx-0">
                       Fresh vegetarian and non-vegetarian catering for weddings, birthdays,
                       corporate events, and family functions across Chennai, with custom menus
                       and professional service from setup to serving.
@@ -243,15 +249,15 @@ const HomeHero = () => {
                   </ScrollReveal>
 
                   <ScrollReveal delay={0.2}>
-                    <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-                      <Link to="/contact">
-                        <button className="font-outliers-sans inline-flex items-center justify-center gap-2 border border-[#dbcab8] bg-[#f6eee2] px-8 py-4 text-xs uppercase tracking-[0.28em] text-[#140e0a] transition-all duration-300 hover:bg-white">
+                    <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+                      <Link to="/contact" className="w-full sm:w-auto">
+                        <button className="font-outliers-sans inline-flex w-full items-center justify-center gap-2 border border-[#dbcab8] bg-[#f6eee2] px-6 py-4 text-xs uppercase tracking-[0.24em] text-[#140e0a] transition-all duration-300 hover:bg-white sm:w-auto sm:px-8 sm:tracking-[0.28em]">
                           Plan Your Event
                           <ArrowRight className="h-4 w-4" />
                         </button>
                       </Link>
-                      <Link to="/menu">
-                        <button className="font-outliers-sans inline-flex items-center justify-center gap-2 border border-white/28 bg-black/32 px-8 py-4 text-xs uppercase tracking-[0.28em] text-[#fbf4ea] transition-all duration-300 hover:bg-black/42">
+                      <Link to="/menu" className="w-full sm:w-auto">
+                        <button className="font-outliers-sans inline-flex w-full items-center justify-center gap-2 border border-white/28 bg-black/32 px-6 py-4 text-xs uppercase tracking-[0.24em] text-[#fbf4ea] transition-all duration-300 hover:bg-black/42 sm:w-auto sm:px-8 sm:tracking-[0.28em]">
                           Explore Menus
                         </button>
                       </Link>
@@ -273,7 +279,7 @@ const HomeHero = () => {
                     ))}
                   </div>
 
-                  <ScrollReveal delay={0.3} className="mt-12 lg:hidden">
+                  <ScrollReveal delay={0.3} className="mt-12 mx-auto w-full max-w-sm lg:hidden">
                     <div className="overflow-hidden border border-white/12 bg-black/35 p-3 backdrop-blur-sm">
                       <motion.img
                         src={weddingCateringImage}
@@ -354,16 +360,16 @@ const HomeHero = () => {
         </div>
       </div>
 
-      <div className="relative z-20 -mt-24 px-6 pb-16">
+      <div className="relative z-20 -mt-10 px-5 pb-12 sm:-mt-16 sm:px-6 md:-mt-24 md:pb-16">
         <div className="container">
           <ScrollReveal amount={0.24}>
-            <div className="grid gap-6 border border-[#dac8b6] bg-[#f4ece1] p-6 shadow-[0_32px_80px_-44px_rgba(18,13,10,0.65)] md:grid-cols-3 md:p-8">
+            <div className="grid gap-6 border border-[#dac8b6] bg-[#f4ece1] p-5 shadow-[0_32px_80px_-44px_rgba(18,13,10,0.65)] sm:p-6 md:grid-cols-3 md:p-8">
               {heroFeatureCards.map(({ icon: Icon, title, description }, index) => (
                 <div
                   key={title}
-                  className="border-t border-[#1a130d]/10 pt-6 first:border-0 first:pt-0 md:border-l md:border-t-0 md:pl-6 md:pt-0 md:first:border-l-0 md:first:pl-0"
+                  className="border-t border-[#1a130d]/10 pt-6 text-center first:border-0 first:pt-0 md:border-l md:border-t-0 md:pl-6 md:pt-0 md:text-left md:first:border-l-0 md:first:pl-0"
                 >
-                  <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#1a130d]/10 bg-white text-[#1a130d]">
+                  <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full border border-[#1a130d]/10 bg-white text-[#1a130d] md:mx-0">
                     <Icon className="h-5 w-5" />
                   </div>
                   <p className="font-outliers-sans mt-5 text-[0.68rem] uppercase tracking-[0.28em] text-[#6e5e4f]">
@@ -503,7 +509,7 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[hsl(45,40%,94%)]">
+    <div className="min-h-screen overflow-x-hidden bg-[hsl(45,40%,94%)]">
       <SEO 
         title="Rebekha Catering Services - Best Wedding & Corporate Catering in Chennai"
         description="Award-winning veg & non-veg catering services in Chennai. Serving love since 1998. Perfect for weddings, birthday parties, corporate events & private dining. Hygienic, affordable."
@@ -667,15 +673,16 @@ const Home = () => {
       {/* Stats Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-3 gap-8 text-center">
+          <div className="grid gap-8 text-center sm:grid-cols-3">
             <motion.div
               ref={yearsCounter.ref}
+              className="mx-auto w-full max-w-[12rem]"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
               <Award className="h-10 w-10 text-[hsl(43,76%,58%)] mx-auto mb-3" />
-              <div className="text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
                 {yearsCounter.count}+
               </div>
               <p className="text-sm text-[hsl(30,10%,45%)] uppercase tracking-wider mt-2">Years</p>
@@ -683,13 +690,14 @@ const Home = () => {
 
             <motion.div
               ref={eventsCounter.ref}
+              className="mx-auto w-full max-w-[12rem]"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
             >
               <Users className="h-10 w-10 text-[hsl(43,76%,58%)] mx-auto mb-3" />
-              <div className="text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
                 {eventsCounter.count.toLocaleString()}+
               </div>
               <p className="text-sm text-[hsl(30,10%,45%)] uppercase tracking-wider mt-2">Events</p>
@@ -697,13 +705,14 @@ const Home = () => {
 
             <motion.div
               ref={dishesCounter.ref}
+              className="mx-auto w-full max-w-[12rem]"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
             >
               <ChefHat className="h-10 w-10 text-[hsl(43,76%,58%)] mx-auto mb-3" />
-              <div className="text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
+              <div className="text-3xl sm:text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
                 {dishesCounter.count}+
               </div>
               <p className="text-sm text-[hsl(30,10%,45%)] uppercase tracking-wider mt-2">Dishes</p>
