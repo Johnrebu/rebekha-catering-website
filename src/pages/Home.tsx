@@ -22,15 +22,10 @@ import StructuredData from "@/components/StructuredData";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { blogPosts } from "@/data/blogPosts";
 import { CompareDemo } from "@/components/ui/compare-demo";
+import FAQBlock from "@/components/ui/faq-block";
 import InteractiveSelector, { type InteractiveSelectorItem } from "@/components/ui/interactive-selector";
 import { GlowCard } from "@/components/ui/spotlight-card";
 import TestimonialsDemo from "@/components/ui/testimonials-demo";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger
-} from "@/components/ui/accordion";
 import heroCateringImage from "@/assets/hero-catering.jpg";
 import weddingCateringImage from "@/assets/wedding-catering.jpg";
 import corporateCateringImage from "@/assets/corporate-catering.jpg";
@@ -1040,56 +1035,86 @@ const Home = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-white">
+      <section className="relative overflow-hidden bg-white py-20">
+        <div className="absolute inset-x-0 top-0 h-40 bg-[radial-gradient(circle_at_top,rgba(203,161,77,0.18),transparent_68%)]" />
+        <div className="absolute right-0 top-24 hidden h-72 w-72 rounded-full bg-[radial-gradient(circle,rgba(220,188,121,0.14),transparent_68%)] blur-3xl lg:block" />
         <div className="container mx-auto px-6">
-          <motion.div
-            className="text-center mb-12"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
-              Frequently Asked Questions
-            </h2>
-            <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
-            <p className="text-lg text-[hsl(30,10%,35%)] max-w-2xl mx-auto [font-family:'Cormorant_Garamond',serif]">
-              Quick answers about our wedding, birthday, and corporate catering services in Chennai.
-            </p>
-          </motion.div>
+          <div className="grid items-start gap-12 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
+            <motion.div
+              className="relative z-10"
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <p className="font-outliers-sans text-[0.72rem] uppercase tracking-[0.32em] text-[hsl(38,70%,45%)]">
+                Frequently Asked Questions
+              </p>
+              <h2 className="heading-script mt-4 text-5xl leading-[0.95] text-[hsl(30,20%,15%)] md:text-6xl">
+                Find the right answer before you enquire.
+              </h2>
+              <div className="line-gold mt-6" />
+              <p className="mt-6 max-w-xl text-lg leading-8 text-[hsl(30,10%,35%)] [font-family:'Cormorant_Garamond',serif]">
+                We replaced the plain accordion stack with a richer FAQ assistant so visitors can search,
+                browse, and narrow in on catering answers faster across wedding, birthday, and corporate events.
+              </p>
 
-          <motion.div
-            className="max-w-4xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <Accordion type="single" collapsible className="w-full space-y-4">
-              {homeFaqs.map((faq, index) => (
-                <AccordionItem
-                  key={index}
-                  value={`home-faq-${index}`}
-                  className="border border-[hsl(40,20%,85%)] px-6 bg-[hsl(45,40%,94%)]"
-                >
-                  <AccordionTrigger className="hover:no-underline py-6">
-                    <span className="text-left text-lg text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
-                      {faq.question}
-                    </span>
-                  </AccordionTrigger>
-                  <AccordionContent className="text-[hsl(30,10%,35%)] pb-6 leading-relaxed [font-family:'Cormorant_Garamond',serif] text-[1.1rem]">
-                    {faq.answer}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </Accordion>
+              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                <div className="border border-[hsl(40,20%,85%)] bg-[hsl(45,40%,97%)] p-5">
+                  <p className="font-outliers-sans text-[0.68rem] uppercase tracking-[0.26em] text-[hsl(38,70%,45%)]">
+                    Popular Topics
+                  </p>
+                  <p className="mt-3 text-3xl text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
+                    6 key answers
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-[hsl(30,10%,45%)]">
+                    Booking timelines, menu flexibility, service staff, and Chennai coverage.
+                  </p>
+                </div>
+                <div className="border border-[hsl(40,20%,85%)] bg-[hsl(45,40%,97%)] p-5">
+                  <p className="font-outliers-sans text-[0.68rem] uppercase tracking-[0.26em] text-[hsl(38,70%,45%)]">
+                    Fast Next Step
+                  </p>
+                  <p className="mt-3 text-3xl text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
+                    Custom guidance
+                  </p>
+                  <p className="mt-2 text-sm leading-6 text-[hsl(30,10%,45%)]">
+                    If the answer is not listed, visitors can still ask a more specific question right inside the card.
+                  </p>
+                </div>
+              </div>
 
-            <div className="text-center mt-10">
-              <Link to="/faq">
-                <button className="px-8 py-3 text-sm font-medium tracking-widest uppercase bg-transparent text-[hsl(30,20%,15%)] border-2 border-[hsl(43,76%,58%)] hover:bg-[hsl(43,76%,58%)] transition-all duration-300">
-                  View More FAQs
-                </button>
-              </Link>
-            </div>
-          </motion.div>
+              <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+                <Link to="/faq">
+                  <button className="inline-flex items-center justify-center gap-2 border border-[hsl(43,76%,58%)] bg-[hsl(43,76%,58%)] px-8 py-3 text-sm font-medium uppercase tracking-[0.24em] text-[hsl(30,20%,15%)] transition-all duration-300 hover:bg-[hsl(38,70%,45%)]">
+                    Explore Full FAQ
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                </Link>
+                <Link to="/contact">
+                  <button className="inline-flex items-center justify-center border border-[hsl(40,20%,85%)] bg-white px-8 py-3 text-sm font-medium uppercase tracking-[0.24em] text-[hsl(30,20%,15%)] transition-all duration-300 hover:border-[hsl(43,76%,58%)] hover:text-[hsl(38,70%,45%)]">
+                    Talk to Our Team
+                  </button>
+                </Link>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.08 }}
+            >
+              <FAQBlock
+                faqs={homeFaqs}
+                suggestions={homeFaqs}
+                searchPlaceholder="Search catering questions..."
+                suggestionsTitle="Start with these quick topics"
+                getAiResponse={(question) =>
+                  `We do not have a ready-made FAQ for "${question}" yet. Share your event date, guest count, service style, and preferred menu, and our Chennai team will suggest the best next step.`
+                }
+              />
+            </motion.div>
+          </div>
         </div>
       </section>
 
