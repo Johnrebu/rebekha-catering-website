@@ -4,7 +4,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
-import { HoverPreview } from "@/components/ui/hover-preview";
+import { ServicesWithAnimatedHoverModal } from "@/components/ui/services-with-animated-hover-modal";
 import { Check, Heart, Cake, Briefcase, Users, ChefHat } from "lucide-react";
 
 const Services = () => {
@@ -78,6 +78,57 @@ const Services = () => {
       title: "Event Support",
       image: "https://images.pexels.com/photos/2306277/pexels-photo-2306277.jpeg?auto=compress&cs=tinysrgb&w=400",
       items: ["Service staff", "Buffet setup", "Tableware", "On-site cooking"],
+    },
+  ];
+
+  const servicePreviewItems = [
+    {
+      color: "#7a3d2b",
+      description:
+        "Elegant buffet styling, smooth guest flow, and menu planning tailored to your ceremony and reception.",
+      eyebrow: "Signature Events",
+      icon: Heart,
+      image:
+        "https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1200&q=80",
+      summary:
+        "Curated wedding spreads that feel generous, graceful, and easy for large gatherings to enjoy.",
+      title: "Wedding & Engagement",
+    },
+    {
+      color: "#d5974f",
+      description:
+        "Playful service, guest-friendly bites, and flexible menus designed for family celebrations of every size.",
+      eyebrow: "Family Celebrations",
+      icon: Cake,
+      image:
+        "https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?auto=format&fit=crop&w=1200&q=80",
+      summary:
+        "Birthday catering that stays lively, practical, and easy to serve across kids and adults alike.",
+      title: "Birthday Parties",
+    },
+    {
+      color: "#445a66",
+      description:
+        "Timely service, clean presentation, and dependable execution for launches, meetings, and office events.",
+      eyebrow: "Business Catering",
+      icon: Briefcase,
+      image:
+        "https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=1200&q=80",
+      summary:
+        "Corporate meal setups built around punctuality, presentation, and operational ease for busy teams.",
+      title: "Corporate Events",
+    },
+    {
+      color: "#5a5248",
+      description:
+        "A warmer dining rhythm with thoughtful presentation and attentive service for more intimate gatherings.",
+      eyebrow: "Private Dining",
+      icon: Users,
+      image:
+        "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=80",
+      summary:
+        "Private dinners with calmer pacing, polished plating, and menus that feel personal to your guests.",
+      title: "Private Dinners",
     },
   ];
 
@@ -180,8 +231,11 @@ const Services = () => {
         </div>
       </section>
 
-      {/* Hover Preview Section */}
-      <HoverPreview />
+      <ServicesWithAnimatedHoverModal
+        description="Hover on desktop or tap on mobile to preview how each event format looks and feels before you book your menu."
+        items={servicePreviewItems}
+        title="Preview the atmosphere behind each service."
+      />
 
       {/* Additional Services */}
       <section className="py-20 bg-[hsl(43,76%,58%)]">
