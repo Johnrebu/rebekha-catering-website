@@ -20,7 +20,6 @@ import {
   Image as ImageIcon,
   LayoutGrid,
   Quote,
-  Sparkles,
   UtensilsCrossed,
   X,
 } from "lucide-react";
@@ -295,47 +294,17 @@ const Gallery = () => {
             </div>
           </section>
 
-          <section className="grid gap-8 rounded-[2rem] border border-[hsl(40,20%,85%)] bg-white p-6 shadow-[0_24px_60px_rgba(34,24,12,0.08)] md:p-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-center">
-            <div className="flex flex-col gap-6">
-              <div>
-                <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.32em] text-[hsl(43,76%,58%)]">
-                  <Sparkles className="h-4 w-4" />
-                  Gallery Reel
-                </p>
-                <h3
-                  className="mt-4 text-4xl text-[hsl(30,20%,15%)] md:text-5xl"
-                  style={{ fontFamily: "'Great Vibes', cursive" }}
-                >
-                  A quick preview of
-                  {" "}
-                  {activeFilter === "All" ? "every celebration." : `${activeFilter.toLowerCase()} moments.`}
-                </h3>
-                <p className="mt-4 max-w-xl text-base leading-7 text-[hsl(30,10%,35%)]">
-                  This auto-playing strip uses the current gallery filter, so visitors can scan event
-                  atmosphere before opening the full lightbox experience.
-                </p>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-3">
-                <div className="border border-[hsl(40,20%,85%)] bg-[hsl(45,40%,96%)] p-4">
-                  <p className="text-[10px] uppercase tracking-[0.28em] text-[hsl(30,10%,45%)]">
-                    Active filter
-                  </p>
-                  <p className="mt-2 text-lg text-[hsl(30,20%,15%)]">{activeFilter}</p>
-                </div>
-                <div className="border border-[hsl(40,20%,85%)] bg-[hsl(45,40%,96%)] p-4">
-                  <p className="text-[10px] uppercase tracking-[0.28em] text-[hsl(30,10%,45%)]">
-                    Reel frames
-                  </p>
-                  <p className="mt-2 text-lg text-[hsl(30,20%,15%)]">{featuredReelPhotos.length}</p>
-                </div>
-                <div className="border border-[hsl(40,20%,85%)] bg-[hsl(45,40%,96%)] p-4">
-                  <p className="text-[10px] uppercase tracking-[0.28em] text-[hsl(30,10%,45%)]">
-                    Auto-play speed
-                  </p>
-                  <p className="mt-2 text-lg text-[hsl(30,20%,15%)]">1.4s</p>
-                </div>
-              </div>
+          <section className="rounded-[2rem] border border-[hsl(40,20%,85%)] bg-white p-6 shadow-[0_24px_60px_rgba(34,24,12,0.08)] md:p-8">
+            <div className="mb-6">
+              <h3
+                className="text-4xl text-[hsl(30,20%,15%)] md:text-5xl"
+                style={{ fontFamily: "'Great Vibes', cursive" }}
+              >
+                Gallery Highlights
+              </h3>
+              <p className="mt-3 max-w-3xl text-base leading-7 text-[hsl(30,10%,35%)]">
+                A quick look at our wedding, birthday, corporate, and private event spreads before you explore the full gallery.
+              </p>
             </div>
 
             <div className="overflow-hidden border border-[hsl(40,20%,85%)] bg-[hsl(30,20%,12%)] p-3 shadow-[0_24px_60px_rgba(34,24,12,0.16)]">
