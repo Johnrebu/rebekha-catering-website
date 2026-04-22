@@ -11,7 +11,7 @@ import {
 import { Helmet } from "react-helmet-async";
 import {
   Heart, Users, ChefHat, Award, Phone, ArrowRight,
-  Leaf, Clock, MapPin, Send, Check, CalendarDays, Instagram, Flame, Sparkles, UtensilsCrossed
+  Leaf, Clock, MapPin, Send, Check, CalendarDays, Instagram, Flame, Sparkles, UtensilsCrossed, Play
 } from "lucide-react";
 
 import Navigation from "@/components/Navigation";
@@ -30,6 +30,13 @@ import heroCateringImage from "@/assets/hero-catering.jpg";
 import weddingCateringImage from "@/assets/wedding-catering.jpg";
 import corporateCateringImage from "@/assets/corporate-catering.jpg";
 import privateDinnerImage from "@/assets/private-dinner.jpg";
+import motherRecipeStoryImage from "@/assets/stories/mother-recipe-story.png";
+import biryaniStoryImage from "@/assets/stories/biryani-story.png";
+import joyFamilyStoryImage from "@/assets/stories/joy-family-story.png";
+import legacyStoryImage from "@/assets/stories/legacy-story.png";
+import reelOneVideo from "@/assets/stories/reel-1.mp4";
+import reelTwoVideo from "@/assets/stories/reel-2.mp4";
+import reelThreeVideo from "@/assets/stories/reel-3.mp4";
 
 const homeFoodSelectorItems: InteractiveSelectorItem[] = [
   {
@@ -106,30 +113,51 @@ const homeFaqs = [
   }
 ];
 
-const instagramPosts = [
+const featuredPosterStories = [
   {
-    image: "https://images.pexels.com/photos/5410400/pexels-photo-5410400.jpeg?auto=compress&cs=tinysrgb&w=800",
-    alt: "Paneer starter platter",
-    caption: "Freshly prepared paneer starters for events",
-    link: "https://www.instagram.com/rebekhacaterers/",
+    title: "Born from a Mother's Recipe",
+    description: "A warm brand story anchored in heritage cooking and signature South Indian flavors.",
+    image: motherRecipeStoryImage,
+    alt: "Poster reading Born from a Mother's Recipe over a South Indian feast spread",
   },
   {
-    image: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=800",
-    alt: "Signature biryani preparation",
-    caption: "Aromatic biryani prepared for large gatherings",
-    link: "https://www.instagram.com/rebekhacaterers/",
+    title: "Honor Her with Every Bite",
+    description: "A Mother's Day creative built around celebration tables, sweets, and festive catering.",
+    image: biryaniStoryImage,
+    alt: "Poster reading Honor Her with Every Bite over a styled biryani and buffet spread",
   },
   {
-    image: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800",
-    alt: "Corporate lunch catering",
-    caption: "Corporate event lunch with custom menu",
-    link: "https://www.instagram.com/rebekhacaterers/",
+    title: "Focus on the Joy, We'll Handle the Rest",
+    description: "Family-event messaging that keeps the spotlight on the people, not the logistics.",
+    image: joyFamilyStoryImage,
+    alt: "Poster reading Focus on the Joy, We'll Handle the Rest over a family celebration table",
   },
   {
-    image: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=800",
-    alt: "South Indian non veg spread",
-    caption: "Chef special South Indian non-veg spread",
-    link: "https://www.instagram.com/rebekhacaterers/",
+    title: "Legacy Served on a Plate",
+    description: "A heritage-led visual that speaks to multi-generation gatherings and careful service.",
+    image: legacyStoryImage,
+    alt: "Poster reading Legacy Served on a Plate over a family meal celebration",
+  },
+];
+
+const featuredReelStories = [
+  {
+    title: "Motion Reel 01",
+    description: "Looped footage for social stories, campaign cuts, and quick event previews.",
+    video: reelOneVideo,
+    poster: motherRecipeStoryImage,
+  },
+  {
+    title: "Motion Reel 02",
+    description: "A second reel that keeps the service flow and table detail moving on screen.",
+    video: reelTwoVideo,
+    poster: biryaniStoryImage,
+  },
+  {
+    title: "Motion Reel 03",
+    description: "A third reel that shows the scale and energy of a full celebration setup.",
+    video: reelThreeVideo,
+    poster: legacyStoryImage,
   },
 ];
 
@@ -924,55 +952,105 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Instagram Feed Section */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-6">
+      {/* Stories & Reels Section */}
+      <section className="relative overflow-hidden bg-[#120d0a] py-20 sm:py-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(203,161,77,0.18),transparent_40%),linear-gradient(180deg,#160f0b_0%,#0c0907_100%)]" />
+        <div className="absolute inset-x-0 top-0 h-32 bg-[linear-gradient(180deg,rgba(255,255,255,0.08),transparent)]" />
+
+        <div className="container relative mx-auto px-6">
           <motion.div
-            className="text-center mb-12"
+            className="mx-auto mb-14 max-w-3xl text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
-              Instagram Highlights
+            <p className="font-outliers-sans text-[0.72rem] uppercase tracking-[0.34em] text-[#d9b46b]">
+              Stories & Reels
+            </p>
+            <h2 className="heading-script mt-4 text-5xl text-[#f7efe4] md:text-6xl">
+              Creative assets that move with the brand.
             </h2>
-            <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
-            <p className="text-lg text-[hsl(30,10%,35%)] max-w-2xl mx-auto [font-family:'Cormorant_Garamond',serif]">
-              Recent catering moments from weddings, birthdays, and corporate events.
+            <p className="mx-auto mt-5 max-w-2xl text-lg leading-8 text-[#e8d8c7] [font-family:'Cormorant_Garamond',serif]">
+              Four campaign posters and three motion reels from the Rebekha Caterers bundle,
+              placed here so visitors can see the brand voice and event energy together.
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-6xl mx-auto">
-            {instagramPosts.map((post, index) => (
-              <motion.a
-                key={post.alt}
-                href={post.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block"
-                initial={{ opacity: 0, scale: 0.96 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.08 }}
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {featuredPosterStories.map((story, index) => (
+              <motion.article
+                key={story.title}
+                className="group"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.7, delay: index * 0.06 }}
               >
-                <div className="relative overflow-hidden">
+                <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-black shadow-[0_28px_80px_-48px_rgba(0,0,0,0.95)]">
                   <img
-                    src={post.image}
-                    alt={post.alt}
-                    className="w-full h-44 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105"
+                    src={story.image}
+                    alt={story.alt}
+                    className="aspect-[9/16] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-end">
-                    <p className="text-white text-xs md:text-sm p-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                      {post.caption}
-                    </p>
+                </div>
+                <div className="px-1 pt-4">
+                  <p className="font-outliers-sans text-[0.68rem] uppercase tracking-[0.3em] text-[#d9b46b]">
+                    Poster {String(index + 1).padStart(2, "0")}
+                  </p>
+                  <h3 className="mt-2 text-xl leading-tight text-[#f7efe4] [font-family:'Cormorant_Garamond',serif]">
+                    {story.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-[#d8c5b1]">
+                    {story.description}
+                  </p>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            {featuredReelStories.map((reel, index) => (
+              <motion.article
+                key={reel.title}
+                className="group overflow-hidden rounded-[1.75rem] border border-white/10 bg-white/5 p-3 shadow-[0_28px_80px_-48px_rgba(0,0,0,0.95)] backdrop-blur-sm"
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.7, delay: index * 0.08 }}
+              >
+                <div className="relative overflow-hidden rounded-[1.25rem] bg-black">
+                  <video
+                    src={reel.video}
+                    poster={reel.poster}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="metadata"
+                    className="aspect-[9/16] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                    aria-label={reel.title}
+                  />
+                  <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.08),rgba(0,0,0,0.46))]" />
+                  <div className="absolute left-4 top-4 inline-flex items-center gap-2 rounded-full border border-white/15 bg-black/35 px-3 py-1 text-[0.62rem] uppercase tracking-[0.28em] text-white/90 backdrop-blur">
+                    <Play className="h-3 w-3" />
+                    Reel {String(index + 1).padStart(2, "0")}
                   </div>
                 </div>
-              </motion.a>
+                <div className="px-2 pb-2 pt-4">
+                  <h3 className="text-xl leading-tight text-[#f7efe4] [font-family:'Cormorant_Garamond',serif]">
+                    {reel.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-[#d8c5b1]">
+                    {reel.description}
+                  </p>
+                </div>
+              </motion.article>
             ))}
           </div>
 
           <motion.div
-            className="text-center mt-10"
+            className="mt-12 flex flex-col items-center gap-4 sm:flex-row sm:justify-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -981,12 +1059,18 @@ const Home = () => {
               href="https://www.instagram.com/rebekhacaterers/"
               target="_blank"
               rel="noopener noreferrer"
+              className="w-full sm:w-auto"
             >
-              <button className="px-8 py-3 text-sm font-medium tracking-widest uppercase bg-[hsl(43,76%,58%)] text-[hsl(30,20%,15%)] border-2 border-[hsl(43,76%,58%)] hover:bg-[hsl(38,70%,45%)] hover:border-[hsl(38,70%,45%)] transition-all duration-300 inline-flex items-center gap-2">
+              <button className="inline-flex w-full items-center justify-center gap-2 border border-[#d9b46b] bg-[#d9b46b] px-8 py-3 text-sm font-medium uppercase tracking-[0.24em] text-[#1a120d] transition-all duration-300 hover:bg-[#c79b39] hover:border-[#c79b39] sm:w-auto">
                 <Instagram className="h-4 w-4" />
                 Follow on Instagram
               </button>
             </a>
+            <Link to="/gallery" className="w-full sm:w-auto">
+              <button className="inline-flex w-full items-center justify-center border border-white/18 bg-white/5 px-8 py-3 text-sm font-medium uppercase tracking-[0.24em] text-[#f7efe4] transition-all duration-300 hover:border-[#d9b46b] hover:text-[#d9b46b] sm:w-auto">
+                View Gallery
+              </button>
+            </Link>
           </motion.div>
         </div>
       </section>
