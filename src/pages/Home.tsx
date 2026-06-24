@@ -285,54 +285,58 @@ const HomeHero = () => {
                   className="mx-auto max-w-2xl text-center lg:mx-0 lg:text-left"
                 >
                   <ScrollReveal>
-                    <p className="mx-auto max-w-[17rem] font-outliers-sans text-[0.68rem] uppercase tracking-[0.28em] text-[#f0ddc9] sm:max-w-none sm:text-[0.72rem] sm:tracking-[0.34em] lg:mx-0">
-                      Wedding & Event Catering
+                    <p className="font-sans text-sm uppercase tracking-widest text-[#f0ddc9]">
+                      Professional Catering Services
                     </p>
                   </ScrollReveal>
 
                   <ScrollReveal delay={0.08}>
                     <motion.h1
                       style={headingStyle}
-                      className="heading-script mt-6 text-[clamp(3.35rem,17vw,5rem)] leading-[0.88] text-[#f8f1e6] sm:text-[clamp(4rem,13vw,6rem)] md:text-[clamp(4.5rem,8vw,8rem)] md:leading-[0.84]"
+                      className="font-serif mt-6 text-[clamp(3.5rem,10vw,6rem)] font-bold leading-tight text-[#f8f1e6]"
                     >
-                      Bring ceremony
+                      Elegance
                       <br />
-                      to the table.
+                      on Every Plate
                     </motion.h1>
                   </ScrollReveal>
 
                   <ScrollReveal delay={0.14}>
-                    <p className="mx-auto mt-6 max-w-xl font-outliers-sans text-base leading-7 text-[#f6ede1] md:text-lg lg:mx-0">
-                      Fresh vegetarian and non-vegetarian catering for weddings, birthdays,
-                      corporate events, and family functions across Chennai, with custom menus
-                      and professional service from setup to serving.
+                    <p className="mx-auto mt-4 max-w-xl font-serif text-lg italic text-[#f1d4a8] lg:mx-0">
+                      25 years of trusted taste
+                    </p>
+                  </ScrollReveal>
+
+                  <ScrollReveal delay={0.16}>
+                    <p className="mx-auto mt-6 max-w-xl font-sans text-base leading-relaxed text-[#f6ede1] md:text-lg lg:mx-0">
+                      Premium vegetarian and non-vegetarian catering for weddings, corporate events, birthdays, and private celebrations. Serving Chennai with culinary excellence since 1998.
                     </p>
                   </ScrollReveal>
 
                   <ScrollReveal delay={0.2}>
                     <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
                       <Link to="/contact" className="w-full sm:w-auto">
-                        <button className="font-outliers-sans inline-flex w-full items-center justify-center gap-2 border border-[#dbcab8] bg-[#f6eee2] px-6 py-4 text-xs uppercase tracking-[0.24em] text-[#140e0a] transition-all duration-300 hover:bg-white sm:w-auto sm:px-8 sm:tracking-[0.28em]">
-                          Plan Your Event
+                        <button className="font-sans inline-flex w-full items-center justify-center gap-2 border-2 border-[#f6eee2] bg-[#f6eee2] px-8 py-4 font-semibold text-[#140e0a] transition-all duration-300 hover:bg-white hover:border-white sm:w-auto">
+                          Get Your Quote
                           <ArrowRight className="h-4 w-4" />
                         </button>
                       </Link>
                       <Link to="/menu" className="w-full sm:w-auto">
-                        <button className="font-outliers-sans inline-flex w-full items-center justify-center gap-2 border border-white/28 bg-black/32 px-6 py-4 text-xs uppercase tracking-[0.24em] text-[#fbf4ea] transition-all duration-300 hover:bg-black/42 sm:w-auto sm:px-8 sm:tracking-[0.28em]">
-                          Explore Menus
+                        <button className="font-sans inline-flex w-full items-center justify-center gap-2 border-2 border-white/40 bg-transparent px-8 py-4 font-semibold text-[#fbf4ea] transition-all duration-300 hover:bg-white/10 hover:border-white/60 sm:w-auto">
+                          View Our Menus
                         </button>
                       </Link>
                     </div>
                   </ScrollReveal>
 
-                  <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                  <div className="mt-12 grid gap-6 sm:grid-cols-2">
                     {heroHighlights.map((item, index) => (
                       <ScrollReveal key={item.label} delay={0.26 + index * 0.06}>
-                        <div className="border border-white/18 bg-black/44 p-5 shadow-[0_18px_50px_-30px_rgba(0,0,0,0.85)] backdrop-blur-md">
-                          <p className="font-outliers-sans text-[0.68rem] uppercase tracking-[0.28em] text-[#f1d4a8]">
+                        <div className="border border-white/20 bg-white/10 p-6 backdrop-blur-md hover:bg-white/15 transition-all duration-300">
+                          <p className="font-sans text-xs uppercase tracking-widest text-[#f1d4a8] font-semibold">
                             {item.label}
                           </p>
-                          <p className="font-outliers-sans mt-3 text-sm leading-6 text-[#f7efe5]">
+                          <p className="font-sans mt-3 text-sm leading-relaxed text-[#f7efe5]">
                             {item.copy}
                           </p>
                         </div>
@@ -365,9 +369,9 @@ const HomeHero = () => {
                         className="aspect-[4/5] w-full object-cover"
                         style={primaryImageStyle}
                       />
-                      <div className="mt-4 flex items-center justify-between text-[0.7rem] uppercase tracking-[0.28em] text-[#f2e3cf]">
-                        <span className="font-outliers-sans">Wedding spreads</span>
-                        <span className="font-outliers-sans">01</span>
+                      <div className="mt-4 flex items-center justify-between text-xs uppercase tracking-widest text-[#f2e3cf]">
+                        <span className="font-sans font-semibold">Wedding spreads</span>
+                        <span className="font-sans">01</span>
                       </div>
                     </div>
                   </motion.div>
@@ -380,8 +384,8 @@ const HomeHero = () => {
                         className="aspect-[3/4] w-full object-cover"
                         style={secondaryImageStyle}
                       />
-                      <p className="font-outliers-sans mt-4 text-[0.7rem] uppercase tracking-[0.28em] text-[#43362a]">
-                        Corporate service
+                      <p className="font-sans mt-4 text-xs uppercase tracking-widest text-[#43362a] font-semibold">
+                        Corporate Events
                       </p>
                     </div>
                   </motion.div>
@@ -395,11 +399,11 @@ const HomeHero = () => {
                         style={tertiaryImageStyle}
                       />
                       <div className="mt-4 flex items-center justify-between gap-4">
-                        <p className="heading-script text-[2.4rem] leading-[0.9] text-[#f8f1e6]">
-                          Private dinners
+                        <p className="font-serif text-2xl font-bold text-[#f8f1e6]">
+                          Private Dinners
                         </p>
-                        <p className="font-outliers-sans text-[0.68rem] uppercase tracking-[0.28em] text-[#eedecd]">
-                          Closer, quieter setups
+                        <p className="font-sans text-xs uppercase tracking-widest text-[#eedecd]">
+                          Intimate Gatherings
                         </p>
                       </div>
                     </div>
@@ -413,7 +417,7 @@ const HomeHero = () => {
             className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 items-center gap-3 lg:flex"
             style={scrollHintStyle}
           >
-            <span className="font-outliers-sans text-[0.65rem] uppercase tracking-[0.28em] text-[#eadbc7]">
+            <span className="font-sans text-xs uppercase tracking-widest text-[#eadbc7]">
               Scroll To Explore
             </span>
             <span className="h-px w-20 bg-[#eadbc7]/40" />
@@ -430,22 +434,22 @@ const HomeHero = () => {
                   key={title}
                   customSize
                   glowColor={glowColor}
-                  className="h-full min-h-[250px] w-full rounded-[28px] bg-[#f6eee4]/88 p-5 text-center shadow-[0_28px_70px_-46px_rgba(18,13,10,0.7)] backdrop-blur-xl sm:p-6 md:p-7 md:text-left"
+                  className="h-full min-h-[250px] w-full rounded-lg bg-[#f6eee4]/88 p-5 text-center shadow-[0_28px_70px_-46px_rgba(18,13,10,0.7)] backdrop-blur-xl sm:p-6 md:p-7 md:text-left"
                 >
                   <div className="flex flex-col items-center gap-4 md:items-start">
                     <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full border border-[#1a130d]/10 bg-white text-[#1a130d] md:mx-0">
                       <Icon className="h-5 w-5" />
                     </div>
                     <div>
-                      <p className="font-outliers-sans text-[0.68rem] uppercase tracking-[0.28em] text-[#6e5e4f]">
+                      <p className="font-sans text-xs uppercase tracking-widest text-[#6e5e4f] font-semibold">
                         {`0${index + 1}`}
                       </p>
-                      <h2 className="heading-script mt-3 text-[2.6rem] leading-[0.92] text-[#140e0a]">
+                      <h2 className="font-serif mt-3 text-2xl font-bold leading-snug text-[#140e0a]">
                         {title}
                       </h2>
                     </div>
                   </div>
-                  <p className="font-outliers-sans text-sm leading-6 text-[#514a40]">
+                  <p className="font-sans text-sm leading-relaxed text-[#514a40]">
                     {description}
                   </p>
                 </GlowCard>
@@ -601,11 +605,11 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
+            <h2 className="font-serif text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 font-bold">
               Compare Our Food Styling
             </h2>
-            <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
-            <p className="text-lg text-[hsl(30,10%,35%)] max-w-2xl mx-auto [font-family:'Cormorant_Garamond',serif]">
+            <div className="w-16 h-1 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
+            <p className="text-base text-[hsl(30,10%,35%)] max-w-2xl mx-auto font-sans">
               Drag the handle to compare two presentation styles and see the quality details.
             </p>
           </motion.div>
@@ -630,10 +634,10 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
+            <h2 className="font-serif text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 font-bold">
               Our Food
             </h2>
-            <div className="w-20 h-0.5 bg-[hsl(30,20%,15%)] mx-auto opacity-50 mb-6" />
+            <div className="w-20 h-1 bg-[hsl(30,20%,15%)] mx-auto opacity-50 mb-6" />
             <p className="mx-auto max-w-2xl text-lg text-[hsl(30,18%,20%)] [font-family:'Cormorant_Garamond',serif]">
               Explore how our menus shift from wedding buffet scale to live counters,
               starters, regional classics, and polished dessert service.
@@ -738,10 +742,10 @@ const Home = () => {
               viewport={{ once: true }}
             >
               <Award className="h-10 w-10 text-[hsl(43,76%,58%)] mx-auto mb-3" />
-              <div className="text-3xl sm:text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
+              <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-[hsl(30,20%,15%)] font-serif">
                 {yearsCounter.count}+
               </div>
-              <p className="text-sm text-[hsl(30,10%,45%)] uppercase tracking-wider mt-2">Years</p>
+              <p className="text-sm text-[hsl(30,10%,45%)] uppercase tracking-wider font-sans mt-2 font-semibold">Years Experience</p>
             </motion.div>
 
             <motion.div
@@ -753,10 +757,10 @@ const Home = () => {
               transition={{ delay: 0.1 }}
             >
               <Users className="h-10 w-10 text-[hsl(43,76%,58%)] mx-auto mb-3" />
-              <div className="text-3xl sm:text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
+              <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-[hsl(30,20%,15%)] font-serif">
                 {eventsCounter.count.toLocaleString()}+
               </div>
-              <p className="text-sm text-[hsl(30,10%,45%)] uppercase tracking-wider mt-2">Events</p>
+              <p className="text-sm text-[hsl(30,10%,45%)] uppercase tracking-wider font-sans mt-2 font-semibold">Events Served</p>
             </motion.div>
 
             <motion.div
@@ -768,10 +772,10 @@ const Home = () => {
               transition={{ delay: 0.2 }}
             >
               <ChefHat className="h-10 w-10 text-[hsl(43,76%,58%)] mx-auto mb-3" />
-              <div className="text-3xl sm:text-4xl md:text-5xl font-light text-[hsl(30,20%,15%)] [font-family:'Cormorant_Garamond',serif]">
+              <div className="text-4xl sm:text-5xl md:text-6xl font-bold text-[hsl(30,20%,15%)] font-serif">
                 {dishesCounter.count}+
               </div>
-              <p className="text-sm text-[hsl(30,10%,45%)] uppercase tracking-wider mt-2">Dishes</p>
+              <p className="text-sm text-[hsl(30,10%,45%)] uppercase tracking-wider font-sans mt-2 font-semibold">Menu Dishes</p>
             </motion.div>
           </div>
         </div>
@@ -811,22 +815,22 @@ const Home = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-6">
-                About Us
-              </h2>
-              <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mb-8" />
+            <h2 className="font-serif text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-6 font-bold">
+              About Us
+            </h2>
+            <div className="w-16 h-1 bg-[hsl(43,76%,58%)] mb-8" />
 
-              <p className="text-lg text-[hsl(30,10%,35%)] leading-relaxed mb-6 [font-family:'Cormorant_Garamond',serif] text-[1.25rem]">
-                Rebekha Caterers is one of Chennai's most trusted catering services,
-                providing fresh, authentic and delicious food since 1998.
-              </p>
+            <p className="text-lg text-[hsl(30,10%,35%)] leading-relaxed mb-6 font-sans text-base">
+              Rebekha Caterers is one of Chennai's most trusted catering services,
+              providing fresh, authentic and delicious food since 1998.
+            </p>
 
-              <p className="text-lg text-[hsl(30,10%,35%)] leading-relaxed mb-8 [font-family:'Cormorant_Garamond',serif] text-[1.25rem]">
-                Founded by Christopher Durairaj & Nancy Navaneetham, we bring
-                traditional recipes passed through generations to your celebrations.
-                Be it a wedding for 1000 or a birthday for 50, we have the experience
-                and passion to make your event memorable.
-              </p>
+            <p className="text-lg text-[hsl(30,10%,35%)] leading-relaxed mb-8 font-sans text-base">
+              Founded by Christopher Durairaj & Nancy Navaneetham, we bring
+              traditional recipes passed through generations to your celebrations.
+              Be it a wedding for 1000 or a birthday for 50, we have the experience
+              and passion to make your event memorable.
+            </p>
 
               {/* Features */}
               <div className="grid grid-cols-2 gap-4 mb-8">
@@ -862,11 +866,11 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
+            <h2 className="font-serif text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 font-bold">
               The Team
             </h2>
-            <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
-            <p className="text-lg text-[hsl(30,10%,35%)] mb-8 max-w-xl mx-auto [font-family:'Cormorant_Garamond',serif]">
+            <div className="w-16 h-1 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
+            <p className="text-base text-[hsl(30,10%,35%)] mb-8 max-w-xl mx-auto font-sans">
               Our dedicated team of chefs, service staff, and coordinators work together
               to make your events exceptional.
             </p>
@@ -888,11 +892,11 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
+            <h2 className="font-serif text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 font-bold">
               Latest Updates
             </h2>
-            <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
-            <p className="text-lg text-[hsl(30,10%,35%)] max-w-2xl mx-auto [font-family:'Cormorant_Garamond',serif]">
+            <div className="w-16 h-1 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
+            <p className="text-base text-[hsl(30,10%,35%)] max-w-2xl mx-auto font-sans">
               Wedding catering tips, menu customization guides, event planning checklists, and seasonal special offers.
             </p>
           </motion.div>
@@ -1084,11 +1088,11 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
+            <h2 className="font-serif text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 font-bold">
               Testimonials
             </h2>
-            <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto" />
-            <p className="mt-5 text-[hsl(30,10%,35%)] max-w-2xl mx-auto [font-family:'Cormorant_Garamond',serif]">
+            <div className="w-16 h-1 bg-[hsl(43,76%,58%)] mx-auto" />
+            <p className="mt-5 text-[hsl(30,10%,35%)] max-w-2xl mx-auto font-sans">
               Real client feedback from weddings, birthdays, and corporate events.
             </p>
           </motion.div>
@@ -1211,11 +1215,11 @@ const Home = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="heading-script text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4">
+            <h2 className="font-serif text-5xl md:text-6xl text-[hsl(30,20%,15%)] mb-4 font-bold">
               Enquire
             </h2>
-            <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
-            <p className="text-lg text-[hsl(30,10%,35%)] max-w-xl mx-auto [font-family:'Cormorant_Garamond',serif]">
+            <div className="w-16 h-1 bg-[hsl(43,76%,58%)] mx-auto mb-6" />
+            <p className="text-base text-[hsl(30,10%,35%)] max-w-xl mx-auto font-sans">
               Ready to make your event memorable? Get in touch with us today.
             </p>
           </motion.div>

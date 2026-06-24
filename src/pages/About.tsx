@@ -11,7 +11,7 @@ const About = () => {
     {
       icon: <Heart className="h-8 w-8" />,
       title: "Family Legacy",
-      description: "A family-led catering journey rooted in recipes, culture, and hospitality passed down over generations.",
+      description: "25 years of trusted taste. A family-led catering journey rooted in recipes, culture, and hospitality passed down over generations.",
     },
     {
       icon: <Shield className="h-8 w-8" />,
