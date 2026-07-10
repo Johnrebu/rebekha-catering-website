@@ -37,7 +37,7 @@ export default defineConfig(({ mode }) => ({
           'data-viz': ['recharts', '@tanstack/react-query'],
           'maps': ['leaflet', 'react-leaflet', 'react-leaflet-cluster'],
           'animation': ['@tsparticles/react', '@tsparticles/slim', 'gsap'],
-          'firebase-vendor': ['firebase'],
+          'firebase-vendor': ['firebase/app', 'firebase/auth', 'firebase/analytics'],
           'ui-components': ['sonner', 'vaul', 'embla-carousel-react'],
         },
         entryFileNames: 'js/[name]-[hash].js',

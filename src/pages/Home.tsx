@@ -11,7 +11,8 @@ import {
 import { Helmet } from "react-helmet-async";
 import {
   Heart, Users, ChefHat, Award, Phone, ArrowRight,
-  Leaf, Clock, MapPin, Send, Check, CalendarDays, Instagram, Flame, Sparkles, UtensilsCrossed, Play
+  Leaf, Clock, MapPin, Send, Check, CalendarDays, Instagram, Flame, Sparkles, UtensilsCrossed, Play,
+  ShieldCheck, Wallet, MessageCircle
 } from "lucide-react";
 
 import Navigation from "@/components/Navigation";
@@ -30,6 +31,9 @@ import heroCateringImage from "@/assets/hero-catering.jpg";
 import weddingCateringImage from "@/assets/wedding-catering.jpg";
 import corporateCateringImage from "@/assets/corporate-catering.jpg";
 import privateDinnerImage from "@/assets/private-dinner.jpg";
+import birthdayCateringImage from "@/assets/birthday-catering.jpg";
+import nonVegFeastImage from "@/assets/non-veg-feast.jpg";
+import southIndianVegImage from "@/assets/south-indian-veg.jpg";
 import motherRecipeStoryImage from "@/assets/stories/mother-recipe-story.png";
 import biryaniStoryImage from "@/assets/stories/biryani-story.png";
 import joyFamilyStoryImage from "@/assets/stories/joy-family-story.png";
@@ -86,6 +90,45 @@ const menuCategories = [
   { name: "Wedding", image: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
   { name: "Corporate", image: "https://images.pexels.com/photos/7625056/pexels-photo-7625056.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
   { name: "Birthday", image: "https://images.pexels.com/photos/1132047/pexels-photo-1132047.jpeg?auto=compress&cs=tinysrgb&w=400", link: "/services" },
+];
+
+const foodGalleryItems = [
+  {
+    title: "Wedding Buffets",
+    description: "Elegant buffet spreads styled for grand celebrations and fast guest service.",
+    image: weddingCateringImage,
+    tag: "Wedding",
+  },
+  {
+    title: "Corporate Catering",
+    description: "Polished plated service and premium packing for office events and executive gatherings.",
+    image: corporateCateringImage,
+    tag: "Corporate",
+  },
+  {
+    title: "Private Dinners",
+    description: "Warm, intimate dining sets designed for family celebrations and quiet evenings.",
+    image: privateDinnerImage,
+    tag: "Private",
+  },
+  {
+    title: "Birthday Specials",
+    description: "Colorful menus and festive presentation for birthdays and milestone parties.",
+    image: birthdayCateringImage,
+    tag: "Birthday",
+  },
+  {
+    title: "Non-Veg Feast",
+    description: "Rich, flavour-packed spreads that bring depth and variety to every event table.",
+    image: nonVegFeastImage,
+    tag: "Non-Veg",
+  },
+  {
+    title: "South Indian Delights",
+    description: "Classic regional favourites presented with fresh ingredients and thoughtful styling.",
+    image: southIndianVegImage,
+    tag: "Veg",
+  },
 ];
 
 const homeFaqs = [
@@ -516,6 +559,7 @@ const Home = () => {
     email: "",
     phone: "",
     eventType: "",
+    eventDate: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -567,6 +611,7 @@ const Home = () => {
             email: formData.email,
             phone: formData.phone,
             event_type: formData.eventType,
+            event_date: formData.eventDate,
             message: formData.message,
           }),
         }
@@ -585,6 +630,7 @@ const Home = () => {
           email: "",
           phone: "",
           eventType: "",
+          eventDate: "",
           message: "",
         });
       }, 5000);
@@ -865,6 +911,60 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Food Gallery Section */}
+      <section className="bg-[hsl(45,40%,94%)] py-20 md:py-24">
+        <div className="container mx-auto px-6">
+          <ScrollReveal className="mb-12 text-center">
+            <p className="font-sans text-xs uppercase tracking-[0.3em] text-[#b8860b] font-semibold mb-3">
+              Signature Spread
+            </p>
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#140e0a] mb-4">
+              A Taste of Every Celebration
+            </h2>
+            <p className="mx-auto max-w-2xl font-sans text-base leading-relaxed text-[#514a40]">
+              From elegant wedding buffets to intimate private dinners, our food presentation is designed to feel warm, premium, and memorable.
+            </p>
+          </ScrollReveal>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+            {foodGalleryItems.map((item, index) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.55, delay: index * 0.08 }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                className="group overflow-hidden rounded-[1.2rem] border border-[#e7d9c8] bg-white shadow-[0_24px_70px_-40px_rgba(20,14,10,0.45)]"
+              >
+                <div className="relative overflow-hidden">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="h-72 w-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#140e0a]/80 via-[#140e0a]/10 to-transparent" />
+                  <div className="absolute left-4 top-4 rounded-full border border-white/30 bg-white/20 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.25em] text-[#fff8ef] backdrop-blur-sm">
+                    {item.tag}
+                  </div>
+                  <div className="absolute bottom-0 left-0 right-0 p-5">
+                    <h3 className="font-serif text-2xl font-semibold text-white">
+                      {item.title}
+                    </h3>
+                  </div>
+                </div>
+                <div className="p-5">
+                  <p className="font-sans text-sm leading-relaxed text-[#5f554d]">
+                    {item.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Mutton & Chicken Shop Banner Section */}
       <section className="py-12 md:py-16 px-5 sm:px-6 bg-white">
         <div className="container">
@@ -877,6 +977,71 @@ const Home = () => {
               />
             </div>
           </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Why Choose Us Section */}
+      <section className="bg-white py-20 md:py-24">
+        <div className="container mx-auto px-6">
+          <ScrollReveal className="mb-12 text-center">
+            <p className="font-sans text-xs uppercase tracking-[0.3em] text-[#b8860b] font-semibold mb-3">
+              Why Choose Us
+            </p>
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#140e0a] mb-4">
+              Trusted for Celebrations That Matter
+            </h2>
+            <p className="mx-auto max-w-2xl font-sans text-base leading-relaxed text-[#514a40]">
+              A perfect blend of traditional flavors, hygiene-first preparation, and dependable service for weddings, corporate events, and private gatherings.
+            </p>
+          </ScrollReveal>
+
+          <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+            {[
+              {
+                icon: ShieldCheck,
+                title: "Hygienic Preparation",
+                description: "Clean kitchens, fresh ingredients, and careful handling for every event.",
+              },
+              {
+                icon: Sparkles,
+                title: "Authentic Flavors",
+                description: "Classic recipes, rich spice balance, and memorable regional taste.",
+              },
+              {
+                icon: Wallet,
+                title: "Affordable Pricing",
+                description: "Flexible packages that fit your celebration without compromising quality.",
+              },
+              {
+                icon: Award,
+                title: "25+ Years Experience",
+                description: "Trusted by generations of families and event hosts across Chennai.",
+              },
+            ].map((item, index) => {
+              const Icon = item.icon;
+              return (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.55, delay: index * 0.08 }}
+                  whileHover={{ y: -6, scale: 1.01 }}
+                  className="rounded-[1.2rem] border border-[#e7d9c8] bg-[hsl(45,40%,97%)] p-6 shadow-[0_20px_60px_-40px_rgba(20,14,10,0.4)]"
+                >
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#c87b3f]/10 text-[#c87b3f]">
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="font-serif text-2xl font-semibold text-[#140e0a] mb-3">
+                    {item.title}
+                  </h3>
+                  <p className="font-sans text-sm leading-relaxed text-[#5f554d]">
+                    {item.description}
+                  </p>
+                </motion.div>
+              );
+            })}
+          </div>
         </div>
       </section>
 
@@ -1548,22 +1713,36 @@ const Home = () => {
                     placeholder="your@email.com"
                   />
                 </div>
-                <div>
-                  <label htmlFor="home-event-type" className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Event Type</label>
-                  <select
-                    id="home-event-type"
-                    name="eventType"
-                    value={formData.eventType}
-                    onChange={handleChange}
-                    disabled={isSubmitting}
-                    className="w-full px-4 py-3 bg-white border border-[hsl(40,20%,85%)] focus:border-[hsl(43,76%,58%)] focus:outline-none transition-colors disabled:opacity-50"
-                  >
-                    <option value="">Select event type</option>
-                    <option value="wedding">Wedding</option>
-                    <option value="birthday">Birthday</option>
-                    <option value="corporate">Corporate Event</option>
-                    <option value="other">Other</option>
-                  </select>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div>
+                    <label htmlFor="home-event-type" className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Event Type</label>
+                    <select
+                      id="home-event-type"
+                      name="eventType"
+                      value={formData.eventType}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 bg-white border border-[hsl(40,20%,85%)] focus:border-[hsl(43,76%,58%)] focus:outline-none transition-colors disabled:opacity-50"
+                    >
+                      <option value="">Select event type</option>
+                      <option value="wedding">Wedding</option>
+                      <option value="birthday">Birthday</option>
+                      <option value="corporate">Corporate Event</option>
+                      <option value="other">Other</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label htmlFor="home-date" className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Event Date</label>
+                    <input
+                      id="home-date"
+                      type="date"
+                      name="eventDate"
+                      value={formData.eventDate}
+                      onChange={handleChange}
+                      disabled={isSubmitting}
+                      className="w-full px-4 py-3 bg-white border border-[hsl(40,20%,85%)] focus:border-[hsl(43,76%,58%)] focus:outline-none transition-colors disabled:opacity-50"
+                    />
+                  </div>
                 </div>
                 <div>
                   <label htmlFor="home-message" className="block text-sm uppercase tracking-wider text-[hsl(30,20%,15%)] mb-2">Message</label>
@@ -1651,6 +1830,25 @@ const Home = () => {
 
       <Footer />
       <WhatsAppButton />
+
+      <div className="fixed bottom-4 right-4 z-[60] flex flex-col gap-3 md:hidden">
+        <a
+          href="tel:+919445435102"
+          className="flex items-center gap-2 rounded-full bg-[#c87b3f] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-[#c87b3f]/30 transition-transform duration-300 hover:scale-105"
+        >
+          <Phone className="h-4 w-4" />
+          Call Now
+        </a>
+        <a
+          href="https://wa.me/919445435102?text=Hello%20Rebekha%20Catering%2C%20I%20would%20like%20to%20enquire%20about%20your%20services."
+          target="_blank"
+          rel="noreferrer"
+          className="flex items-center gap-2 rounded-full bg-[#25D366] px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-[#25D366]/30 transition-transform duration-300 hover:scale-105"
+        >
+          <MessageCircle className="h-4 w-4" />
+          WhatsApp
+        </a>
+      </div>
     </div>
   );
 };
