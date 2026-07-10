@@ -37,6 +37,8 @@ import legacyStoryImage from "@/assets/stories/legacy-story.png";
 import reelOneVideo from "@/assets/stories/reel-1.mp4";
 import reelTwoVideo from "@/assets/stories/reel-2.mp4";
 import reelThreeVideo from "@/assets/stories/reel-3.mp4";
+import businessBannerImage from "@/assets/business-banner.jpg";
+import muttonShopBannerImage from "@/assets/mutton-shop-banner.jpg";
 
 const homeFoodSelectorItems: InteractiveSelectorItem[] = [
   {
@@ -231,6 +233,16 @@ const HomeHero = () => {
   const shouldReduceMotion = useReducedMotion();
   const isMobile = useIsMobile();
   const disableHeroMotion = shouldReduceMotion || isMobile;
+  const [greetingIndex, setGreetingIndex] = React.useState(0);
+  
+  const greetings = ["Welcome to Rebekha Catering", "Namaste!", "Vanakkam!"];
+
+  React.useEffect(() => {
+    const interval = setInterval(() => {
+      setGreetingIndex((prev) => (prev + 1) % greetings.length);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [greetings.length]);
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -279,60 +291,64 @@ const HomeHero = () => {
 
           <div className="relative z-10 flex min-h-[100svh] items-center">
             <div className="container px-5 pb-10 pt-24 sm:px-6 sm:pb-12 sm:pt-28 md:pb-14 md:pt-32">
-              <div className="grid items-end gap-10 md:gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(340px,0.95fr)]">
+              <div className="grid items-center gap-10 md:gap-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(340px,1fr)]">
                 <motion.div
                   style={contentStyle}
                   className="mx-auto max-w-2xl text-center lg:mx-0 lg:text-left"
                 >
+                  {/* Animated rotating greeting */}
                   <ScrollReveal>
-                    <p className="font-sans text-sm uppercase tracking-widest text-[#f0ddc9]">
-                      Professional Catering Services
-                    </p>
+                    <div className="relative h-8 overflow-hidden mb-4">
+                      <motion.div
+                        key={greetingIndex}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -20 }}
+                        transition={{ duration: 0.6 }}
+                        className="absolute left-0 font-sans text-sm uppercase tracking-widest text-[#f0ddc9]"
+                      >
+                        {greetings[greetingIndex]}
+                      </motion.div>
+                    </div>
                   </ScrollReveal>
 
                   <ScrollReveal delay={0.08}>
                     <motion.h1
-                      style={headingStyle}
-                      className="font-serif mt-6 text-[clamp(3.5rem,10vw,6rem)] font-bold leading-tight text-[#f8f1e6]"
+                      style={{ scale: headingScale } as unknown as React.CSSProperties}
+                      className="font-serif mt-6 text-[clamp(2.5rem,8vw,5.5rem)] font-bold leading-tight text-[#f8f1e6]"
                     >
-                      Elegance
+                      Premium Catering
                       <br />
-                      on Every Plate
+                      That Celebrates Life
                     </motion.h1>
                   </ScrollReveal>
 
-                  <ScrollReveal delay={0.14}>
-                    <p className="mx-auto mt-4 max-w-xl font-serif text-lg italic text-[#f1d4a8] lg:mx-0">
-                      25 years of trusted taste
+                  <ScrollReveal delay={0.12}>
+                    <p className="mx-auto mt-6 max-w-xl font-sans text-base leading-relaxed text-[#f6ede1] md:text-lg lg:mx-0">
+                      Award-winning vegetarian and non-vegetarian catering for weddings, corporate events, and private celebrations. Serving Chennai with culinary excellence since 1998.
                     </p>
                   </ScrollReveal>
 
                   <ScrollReveal delay={0.16}>
-                    <p className="mx-auto mt-6 max-w-xl font-sans text-base leading-relaxed text-[#f6ede1] md:text-lg lg:mx-0">
-                      Premium vegetarian and non-vegetarian catering for weddings, corporate events, birthdays, and private celebrations. Serving Chennai with culinary excellence since 1998.
-                    </p>
-                  </ScrollReveal>
-
-                  <ScrollReveal delay={0.2}>
                     <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
                       <Link to="/contact" className="w-full sm:w-auto">
-                        <button className="font-sans inline-flex w-full items-center justify-center gap-2 border-2 border-[#f6eee2] bg-[#f6eee2] px-8 py-4 font-semibold text-[#140e0a] transition-all duration-300 hover:bg-white hover:border-white sm:w-auto">
+                        <button className="font-sans inline-flex w-full items-center justify-center gap-2 border-2 border-white/30 bg-transparent px-8 py-4 font-semibold text-[#fbf4ea] transition-all duration-300 hover:bg-white/20 hover:border-white/60 sm:w-auto">
                           Get Your Quote
                           <ArrowRight className="h-4 w-4" />
                         </button>
                       </Link>
                       <Link to="/menu" className="w-full sm:w-auto">
-                        <button className="font-sans inline-flex w-full items-center justify-center gap-2 border-2 border-white/40 bg-transparent px-8 py-4 font-semibold text-[#fbf4ea] transition-all duration-300 hover:bg-white/10 hover:border-white/60 sm:w-auto">
+                        <button className="font-sans inline-flex w-full items-center justify-center gap-2 border-2 border-white/30 bg-transparent px-8 py-4 font-semibold text-[#fbf4ea] transition-all duration-300 hover:bg-white/20 hover:border-white/60 sm:w-auto">
                           View Our Menus
                         </button>
                       </Link>
                     </div>
                   </ScrollReveal>
 
-                  <div className="mt-12 grid gap-6 sm:grid-cols-2">
-                    {heroHighlights.map((item, index) => (
-                      <ScrollReveal key={item.label} delay={0.26 + index * 0.06}>
-                        <div className="border border-white/20 bg-white/10 p-6 backdrop-blur-md hover:bg-white/15 transition-all duration-300">
+                  <ScrollReveal delay={0.2} className="mt-12 hidden md:block">
+                    <div className="grid gap-6 sm:grid-cols-2">
+                      {heroHighlights.map((item, index) => (
+                        <div key={item.label} className="border border-white/20 bg-white/10 p-5 backdrop-blur-md hover:bg-white/15 transition-all duration-300">
                           <p className="font-sans text-xs uppercase tracking-widest text-[#f1d4a8] font-semibold">
                             {item.label}
                           </p>
@@ -340,12 +356,12 @@ const HomeHero = () => {
                             {item.copy}
                           </p>
                         </div>
-                      </ScrollReveal>
-                    ))}
-                  </div>
+                      ))}
+                    </div>
+                  </ScrollReveal>
 
                   <ScrollReveal delay={0.3} className="mt-12 mx-auto w-full max-w-sm lg:hidden">
-                    <div className="overflow-hidden border border-white/12 bg-black/35 p-3 backdrop-blur-sm">
+                    <div className="overflow-hidden border border-white/12 bg-black/35 p-3 backdrop-blur-sm rounded-lg">
                       <motion.img
                         src={weddingCateringImage}
                         alt="Wedding catering table by Rebekha Caterers"
@@ -353,13 +369,14 @@ const HomeHero = () => {
                         style={primaryImageStyle}
                       />
                       <div className="mt-4 flex items-center justify-between text-[0.7rem] uppercase tracking-[0.28em] text-[#f2e3cf]">
-                        <span className="font-outliers-sans">Wedding spreads</span>
-                        <span className="font-outliers-sans">01</span>
+                        <span className="font-sans">Wedding spreads</span>
+                        <span className="font-sans">01</span>
                       </div>
                     </div>
                   </ScrollReveal>
                 </motion.div>
 
+                {/* Desktop Image Cards */}
                 <div className="relative hidden min-h-[620px] lg:block">
                   <motion.div className="absolute right-0 top-0 w-[70%]" style={primaryCardStyle}>
                     <div className="overflow-hidden border border-white/18 bg-black/42 p-3 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.85)] backdrop-blur-sm">
@@ -596,6 +613,130 @@ const Home = () => {
 
       <HomeHero />
 
+      {/* Promotional Business Banner Section */}
+      <section className="py-12 md:py-16 px-5 sm:px-6 bg-[#f4efe7]">
+        <div className="container">
+          <ScrollReveal>
+            <div className="relative overflow-hidden rounded-xl shadow-[0_32px_80px_-44px_rgba(18,13,10,0.65)]">
+              <img 
+                src={businessBannerImage}
+                alt="Rebekha Catering - Event and Biryani Catering Specialist" 
+                className="w-full h-auto object-cover block"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/10" />
+            </div>
+          </ScrollReveal>
+          
+          {/* Business Info Cards Below Banner */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+            <ScrollReveal delay={0}>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-[#e8d7c3]">
+                <p className="font-sans text-xs uppercase tracking-widest text-[#b8860b] font-semibold mb-2">
+                  Contact Us
+                </p>
+                <h3 className="font-serif text-lg font-bold text-[#140e0a] mb-3">Phone</h3>
+                <p className="font-sans text-sm text-[#514a40] mb-2">📞 +91 944543 5102</p>
+                <p className="font-sans text-sm text-[#514a40]">📞 +91 892547 7007</p>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.1}>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-[#e8d7c3]">
+                <p className="font-sans text-xs uppercase tracking-widest text-[#b8860b] font-semibold mb-2">
+                  Location
+                </p>
+                <h3 className="font-serif text-lg font-bold text-[#140e0a] mb-3">Address</h3>
+                <p className="font-sans text-sm text-[#514a40]">No. 19, Perumal Kavil Street, Irumbuliyur, Tambaram West, Chennai - 600045</p>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal delay={0.2}>
+              <div className="bg-white rounded-lg p-6 shadow-md border border-[#e8d7c3]">
+                <p className="font-sans text-xs uppercase tracking-widest text-[#b8860b] font-semibold mb-2">
+                  License
+                </p>
+                <h3 className="font-serif text-lg font-bold text-[#140e0a] mb-3">Business Details</h3>
+                <p className="font-sans text-sm text-[#514a40] mb-1">License No: 009/2017/0000483</p>
+                <p className="font-sans text-sm text-[#514a40]">Proprietor: Rebekha Raj</p>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
+      {/* About Section with Statistics */}
+      <section className="py-20 md:py-32 bg-gradient-to-b from-[#f4efe7] to-white">
+        <div className="container">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            {/* Left side - Images */}
+            <ScrollReveal className="hidden md:block">
+              <div className="grid grid-cols-2 gap-4">
+                <div className="overflow-hidden rounded-lg">
+                  <img 
+                    src={weddingCateringImage} 
+                    alt="Wedding catering by Rebekha" 
+                    className="w-full h-64 object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="overflow-hidden rounded-lg mt-8">
+                  <img 
+                    src={corporateCateringImage} 
+                    alt="Corporate catering by Rebekha" 
+                    className="w-full h-64 object-cover hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Right side - Content */}
+            <ScrollReveal>
+              <div>
+                <p className="font-sans text-xs uppercase tracking-widest text-[#b8860b] font-semibold mb-3">
+                  Since 1998
+                </p>
+                <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#140e0a] leading-tight mb-6">
+                  Elevating Your Events with Exceptional Food
+                </h2>
+                <p className="font-sans text-base leading-relaxed text-[#514a40] mb-8">
+                  Rebekha Catering is where food is celebrated and memories are made. We love to create unforgettable culinary experiences that bring families and friends together.
+                </p>
+
+                {/* Statistics Cards */}
+                <div className="grid grid-cols-3 gap-4">
+                  <div className="bg-white rounded-lg p-6 shadow-sm border border-[#e8d7c3] text-center hover:shadow-md transition-shadow">
+                    <p className="font-sans text-xs uppercase tracking-widest text-[#b8860b] font-semibold mb-2">
+                      Experience
+                    </p>
+                    <h3 className="font-serif text-3xl md:text-4xl font-bold text-[#140e0a]">
+                      25
+                    </h3>
+                    <p className="font-sans text-xs text-[#6e5e4f] mt-2">Years of Service</p>
+                  </div>
+                  <div className="bg-white rounded-lg p-6 shadow-sm border border-[#e8d7c3] text-center hover:shadow-md transition-shadow">
+                    <p className="font-sans text-xs uppercase tracking-widest text-[#b8860b] font-semibold mb-2">
+                      Events
+                    </p>
+                    <h3 className="font-serif text-3xl md:text-4xl font-bold text-[#140e0a]">
+                      2000+
+                    </h3>
+                    <p className="font-sans text-xs text-[#6e5e4f] mt-2">Successful Weddings</p>
+                  </div>
+                  <div className="bg-white rounded-lg p-6 shadow-sm border border-[#e8d7c3] text-center hover:shadow-md transition-shadow">
+                    <p className="font-sans text-xs uppercase tracking-widest text-[#b8860b] font-semibold mb-2">
+                      Loyalty
+                    </p>
+                    <h3 className="font-serif text-3xl md:text-4xl font-bold text-[#140e0a]">
+                      98%
+                    </h3>
+                    <p className="font-sans text-xs text-[#6e5e4f] mt-2">Repeat Customers</p>
+                  </div>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+        </div>
+      </section>
+
       {/* Before / After Compare */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
@@ -622,6 +763,120 @@ const Home = () => {
           >
             <CompareDemo />
           </motion.div>
+        </div>
+      </section>
+
+      {/* What We Do - Services Section (Venus Style) */}
+      <section className="py-20 md:py-32 bg-white">
+        <div className="container mx-auto px-6">
+          <ScrollReveal className="text-center mb-16">
+            <p className="font-sans text-xs uppercase tracking-widest text-[#b8860b] font-semibold mb-3">
+              Our Services
+            </p>
+            <h2 className="font-serif text-4xl md:text-5xl font-bold text-[#140e0a] mb-6">
+              Premium Catering Services
+            </h2>
+          </ScrollReveal>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {/* Service Card 1 - Wedding */}
+            <ScrollReveal delay={0}>
+              <motion.div 
+                className="group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                whileHover={{ y: -8 }}
+              >
+                <div className="relative overflow-hidden h-64">
+                  <img 
+                    src={weddingCateringImage} 
+                    alt="Wedding Catering" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#140e0a]/80 to-transparent" />
+                </div>
+                <div className="p-6 bg-white">
+                  <h3 className="font-serif text-2xl font-bold text-[#140e0a] mb-3">
+                    Wedding Events
+                  </h3>
+                  <p className="font-sans text-sm text-[#6e5e4f] leading-relaxed">
+                    Full-course vegetarian and non-vegetarian buffet spreads designed for elegant guest service and unforgettable celebrations.
+                  </p>
+                </div>
+              </motion.div>
+            </ScrollReveal>
+
+            {/* Service Card 2 - Corporate */}
+            <ScrollReveal delay={0.1}>
+              <motion.div 
+                className="group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                whileHover={{ y: -8 }}
+              >
+                <div className="relative overflow-hidden h-64">
+                  <img 
+                    src={corporateCateringImage} 
+                    alt="Corporate Catering" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#140e0a]/80 to-transparent" />
+                </div>
+                <div className="p-6 bg-white">
+                  <h3 className="font-serif text-2xl font-bold text-[#140e0a] mb-3">
+                    Corporate Events
+                  </h3>
+                  <p className="font-sans text-sm text-[#6e5e4f] leading-relaxed">
+                    Professional catering for business occasions, milestone celebrations, and corporate gatherings with customized menus.
+                  </p>
+                </div>
+              </motion.div>
+            </ScrollReveal>
+
+            {/* Service Card 3 - Birthday/Celebration */}
+            <ScrollReveal delay={0.2}>
+              <motion.div 
+                className="group overflow-hidden rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                whileHover={{ y: -8 }}
+              >
+                <div className="relative overflow-hidden h-64">
+                  <img 
+                    src={privateDinnerImage} 
+                    alt="Birthday Catering" 
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#140e0a]/80 to-transparent" />
+                </div>
+                <div className="p-6 bg-white">
+                  <h3 className="font-serif text-2xl font-bold text-[#140e0a] mb-3">
+                    Birthday & Private Celebrations
+                  </h3>
+                  <p className="font-sans text-sm text-[#6e5e4f] leading-relaxed">
+                    Make every celebration memorable with our customized menus and attentive service for intimate to large gatherings.
+                  </p>
+                </div>
+              </motion.div>
+            </ScrollReveal>
+          </div>
+
+          <ScrollReveal delay={0.3} className="text-center mt-12">
+            <Link to="/services">
+              <button className="px-10 py-4 text-sm font-medium tracking-widest uppercase bg-[#140e0a] text-white border-2 border-[#140e0a] hover:bg-transparent hover:text-[#140e0a] transition-all duration-300 rounded">
+                View All Services
+              </button>
+            </Link>
+          </ScrollReveal>
+        </div>
+      </section>
+
+      {/* Mutton & Chicken Shop Banner Section */}
+      <section className="py-12 md:py-16 px-5 sm:px-6 bg-white">
+        <div className="container">
+          <ScrollReveal>
+            <div className="relative overflow-hidden rounded-xl shadow-[0_32px_80px_-44px_rgba(18,13,10,0.65)]">
+              <img 
+                src={muttonShopBannerImage}
+                alt="Rebekha Mutton & Chicken Shop - Event and Biryani Catering" 
+                className="w-full h-auto object-cover block"
+              />
+            </div>
+          </ScrollReveal>
         </div>
       </section>
 
@@ -820,12 +1075,12 @@ const Home = () => {
             </h2>
             <div className="w-16 h-1 bg-[hsl(43,76%,58%)] mb-8" />
 
-            <p className="text-lg text-[hsl(30,10%,35%)] leading-relaxed mb-6 font-sans text-base">
+            <p className="text-base text-[hsl(30,10%,35%)] leading-relaxed mb-6 font-sans">
               Rebekha Caterers is one of Chennai's most trusted catering services,
               providing fresh, authentic and delicious food since 1998.
             </p>
 
-            <p className="text-lg text-[hsl(30,10%,35%)] leading-relaxed mb-8 font-sans text-base">
+            <p className="text-base text-[hsl(30,10%,35%)] leading-relaxed mb-8 font-sans">
               Founded by Christopher Durairaj & Nancy Navaneetham, we bring
               traditional recipes passed through generations to your celebrations.
               Be it a wedding for 1000 or a birthday for 50, we have the experience
