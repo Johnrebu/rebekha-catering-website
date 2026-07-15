@@ -10,6 +10,8 @@ import app from "@/config/firebase";
 import { getFirestore } from "firebase/firestore";
 
 const db = getFirestore(app);
+const FIRESTORE_SUBMIT_TIMEOUT_MS = 15000;
+const OPTIONAL_REQUEST_TIMEOUT_MS = 5000;
 
 export interface InquiryData {
   name: string;
@@ -26,21 +28,50 @@ export interface InquiryData {
  */
 export const submitInquiry = async (data: InquiryData): Promise<string> => {
   try {
-    // Add inquiry to Firestore
-    const docRef = await addDoc(collection(db, "inquiries"), {
-      ...data,
-      createdAt: serverTimestamp(),
-      status: "new",
-      ipAddress: await getClientIp(),
-    });
+    const ipAddress = await getClientIp();
 
-    // Send email notification via webhook
-    await sendEmailNotification(data, docRef.id);
+    // Add inquiry to Firestore
+    const docRef = await withTimeout(
+      addDoc(collection(db, "inquiries"), {
+        ...data,
+        createdAt: serverTimestamp(),
+        status: "new",
+        ipAddress,
+      }),
+      FIRESTORE_SUBMIT_TIMEOUT_MS,
+      "Could not connect to Firestore. Please check your connection and Firestore rules."
+    );
+
+    // Send email notification via webhook without blocking the user-facing success state.
+    void sendEmailNotification(data, docRef.id);
 
     return docRef.id;
   } catch (error) {
     console.error("Error submitting inquiry:", error);
-    throw new Error("Failed to submit inquiry. Please try again.");
+    throw new Error(
+      error instanceof Error
+        ? error.message
+        : "Failed to submit inquiry. Please try again."
+    );
+  }
+};
+
+const withTimeout = async <T>(
+  promise: Promise<T>,
+  timeoutMs: number,
+  message: string
+): Promise<T> => {
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+  const timeoutPromise = new Promise<never>((_, reject) => {
+    timeoutId = setTimeout(() => reject(new Error(message)), timeoutMs);
+  });
+
+  try {
+    return await Promise.race([promise, timeoutPromise]);
+  } finally {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+    }
   }
 };
 
@@ -70,14 +101,18 @@ const sendEmailNotification = async (data: InquiryData, inquiryId: string): Prom
       adminSubject: `New Inquiry from ${data.name} - Rebekha Catering`,
     };
 
-    await fetch(webhookUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${import.meta.env.VITE_EMAIL_WEBHOOK_SECRET || ""}`,
+    await fetchWithTimeout(
+      webhookUrl,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${import.meta.env.VITE_EMAIL_WEBHOOK_SECRET || ""}`,
+        },
+        body: JSON.stringify(emailPayload),
       },
-      body: JSON.stringify(emailPayload),
-    });
+      OPTIONAL_REQUEST_TIMEOUT_MS
+    );
   } catch (error) {
     console.error("Error sending email notification:", error);
     // Don't throw - inquiry is already saved in Firestore
@@ -89,11 +124,33 @@ const sendEmailNotification = async (data: InquiryData, inquiryId: string): Prom
  */
 const getClientIp = async (): Promise<string> => {
   try {
-    const response = await fetch("https://api.ipify.org?format=json");
+    const response = await fetchWithTimeout(
+      "https://api.ipify.org?format=json",
+      {},
+      OPTIONAL_REQUEST_TIMEOUT_MS
+    );
     const data = await response.json();
     return data.ip || "unknown";
   } catch {
     return "unknown";
+  }
+};
+
+const fetchWithTimeout = async (
+  input: RequestInfo | URL,
+  init: RequestInit,
+  timeoutMs: number
+): Promise<Response> => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+  try {
+    return await fetch(input, {
+      ...init,
+      signal: controller.signal,
+    });
+  } finally {
+    clearTimeout(timeoutId);
   }
 };
 

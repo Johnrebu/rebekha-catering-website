@@ -628,7 +628,11 @@ const Home = () => {
       }, 5000);
     } catch (err) {
       console.error("Form submission error:", err);
-      setError("Failed to submit form. Please try again or contact us directly.");
+      setError(
+        err instanceof Error
+          ? err.message
+          : "Failed to submit form. Please try again or contact us directly."
+      );
     } finally {
       setIsSubmitting(false);
     }
