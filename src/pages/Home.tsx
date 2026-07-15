@@ -27,6 +27,7 @@ import FAQBlock from "@/components/ui/faq-block";
 import InteractiveSelector, { type InteractiveSelectorItem } from "@/components/ui/interactive-selector";
 import { GlowCard } from "@/components/ui/spotlight-card";
 import TestimonialsDemo from "@/components/ui/testimonials-demo";
+import { submitInquiry, validateInquiryData } from "@/services/formService";
 import heroCateringImage from "@/assets/hero-catering.jpg";
 import weddingCateringImage from "@/assets/wedding-catering.jpg";
 import corporateCateringImage from "@/assets/corporate-catering.jpg";
@@ -547,8 +548,6 @@ const useCounter = (end: number, duration: number = 2000) => {
 };
 
 const Home = () => {
-  const inquiryReceiverEmail = "reburr94@gmail.com";
-
   const yearsCounter = useCounter(25, 2000);
   const eventsCounter = useCounter(10000, 2500);
   const dishesCounter = useCounter(200, 2000);
@@ -595,31 +594,24 @@ const Home = () => {
     setError("");
 
     try {
-      const response = await fetch(
-        `https://formsubmit.co/ajax/${inquiryReceiverEmail}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            _subject: "New Inquiry - Home Page",
-            _captcha: "false",
-            source_page: window.location.href,
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            event_type: formData.eventType,
-            event_date: formData.eventDate,
-            message: formData.message,
-          }),
-        }
-      );
+      const inquiryData = {
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        eventType: formData.eventType,
+        guestCount: "",
+        date: formData.eventDate,
+        message: formData.message,
+      };
 
-      if (!response.ok) {
-        throw new Error("Failed to submit form");
+      const validation = validateInquiryData(inquiryData);
+      if (!validation.valid) {
+        setError(validation.errors[0]);
+        return;
       }
+
+      const inquiryId = await submitInquiry(inquiryData);
+      console.log("Inquiry submitted successfully:", inquiryId);
 
       setSubmitted(true);
 
