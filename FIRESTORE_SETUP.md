@@ -5,23 +5,29 @@ This project uses Firestore for storing inquiries and needs an email webhook ser
 ## Setup Options
 
 ### Option 1: Firebase Cloud Functions (Recommended)
+
 Set up a Cloud Function to listen for new documents in the `inquiries` collection and send emails via SendGrid or another service.
 
 ### Option 2: Vercel Serverless Functions (If using Vercel)
+
 Create a serverless function endpoint and add to `.env.local`:
-```
+
+```bash
 VITE_EMAIL_WEBHOOK_URL=https://your-domain.vercel.app/api/send-inquiry-email
 VITE_EMAIL_WEBHOOK_SECRET=your-secret-key
 ```
 
 ### Option 3: External Service (Zapier, Make.com)
+
 1. Set up a webhook in Zapier/Make.com
 2. Create an automation to send emails when a new document is added to Firestore
 3. Add the webhook URL to `.env.local`
 
 ### Option 4: Custom Backend
+
 Set up your own backend (Node.js, Python, etc.) to handle emails:
-```
+
+```bash
 VITE_EMAIL_WEBHOOK_URL=https://your-backend.com/api/send-inquiry-email
 VITE_EMAIL_WEBHOOK_SECRET=your-api-key
 ```
@@ -82,21 +88,22 @@ service cloud.firestore {
 }
 ```
 
-3. Click **Publish** to activate the rules
+1. Click **Publish** to activate the rules
 
-**⚠️ Important:** Disallowing `read` access on the `inquiries` collection ensures that public users cannot browse other people's submitted messages.
+**Important:** Disallowing `read` access on the `inquiries` collection ensures that public users cannot browse other people's submitted messages.
 
 ### Step 3: Verify Setup
 
 Once published, your backend is ready! Test by:
+
 1. Running your dev server locally
 2. Filling out the contact form
-3. Checking Firestore Database → `inquiries` collection to see the new submission
+3. Checking Firestore Database -> `inquiries` collection to see the new submission
 
 ## Testing
 
 1. The form will now save submissions to Firestore
-2. Check Firebase Console → Firestore → `inquiries` collection to see submissions
+2. Check Firebase Console -> Firestore -> `inquiries` collection to see submissions
 3. Emails will only send if you configure a webhook URL
 4. Without webhook, submissions are still stored and you can access them in Firebase Console
 
@@ -135,4 +142,4 @@ exports.sendInquiryEmail = functions.firestore
 
 ## Support
 
-For questions about Firestore setup, visit: https://firebase.google.com/docs/firestore
+For questions about Firestore setup, visit the [Firestore documentation](https://firebase.google.com/docs/firestore).
