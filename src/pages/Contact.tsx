@@ -7,6 +7,7 @@ import { AdvancedMap, type CircleData, type MarkerData } from "@/components/ui/i
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import { Phone, Mail, MapPin, MessageCircle, Clock, Send, Check } from "lucide-react";
+import { submitInquiry, validateInquiryData } from "@/services/formService";
 
 const Contact = () => {
   const inquiryReceiverEmail = "reburr94@gmail.com";
@@ -62,35 +63,21 @@ const Contact = () => {
     setError("");
 
     try {
-      const response = await fetch(
-        `https://formsubmit.co/ajax/${inquiryReceiverEmail}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            _subject: "New Inquiry - Contact Page",
-            _captcha: "false",
-            source_page: window.location.href,
-            name: formData.name,
-            email: formData.email,
-            phone: formData.phone,
-            event_type: formData.eventType,
-            guest_count: formData.guestCount,
-            event_date: formData.date,
-            message: formData.message,
-          }),
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to submit form");
+      // Validate form data
+      const validation = validateInquiryData(formData);
+      if (!validation.valid) {
+        setError(validation.errors[0]);
+        setIsSubmitting(false);
+        return;
       }
+
+      // Submit to Firestore backend
+      const inquiryId = await submitInquiry(formData);
+      console.log("Inquiry submitted successfully:", inquiryId);
 
       setSubmitted(true);
 
+      // Reset form after 5 seconds
       setTimeout(() => {
         setSubmitted(false);
         setFormData({
@@ -105,7 +92,11 @@ const Contact = () => {
       }, 5000);
     } catch (err) {
       console.error("Form submission error:", err);
-      setError("Failed to submit form. Please try again or contact us directly.");
+      setError(
+        err instanceof Error 
+          ? err.message 
+          : "Failed to submit form. Please try again or contact us directly."
+      );
     } finally {
       setIsSubmitting(false);
     }
