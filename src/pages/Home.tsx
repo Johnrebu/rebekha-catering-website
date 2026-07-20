@@ -42,8 +42,6 @@ import legacyStoryImage from "@/assets/stories/legacy-story.png";
 import reelOneVideo from "@/assets/stories/reel-1.mp4";
 import reelTwoVideo from "@/assets/stories/reel-2.mp4";
 import reelThreeVideo from "@/assets/stories/reel-3.mp4";
-import businessBannerImage from "@/assets/business-banner.jpg";
-import muttonShopBannerImage from "@/assets/mutton-shop-banner.jpg";
 
 const homeFoodSelectorItems: InteractiveSelectorItem[] = [
   {
@@ -681,24 +679,12 @@ const Home = () => {
 
       <HomeHero />
 
-      {/* Promotional Business Banner Section */}
+      {/* Business Info Cards Section */}
       <section className="py-12 md:py-16 px-5 sm:px-6 bg-[#f4efe7]">
         <div className="container">
-          <ScrollReveal>
-            <div className="relative overflow-hidden rounded-xl shadow-[0_32px_80px_-44px_rgba(18,13,10,0.65)]">
-              <img 
-                src={businessBannerImage}
-                alt="Rebekha Catering - Event and Biryani Catering Specialist" 
-                className="w-full h-auto object-cover block"
-              />
-              <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/10" />
-            </div>
-          </ScrollReveal>
-          
-          {/* Business Info Cards Below Banner */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             <ScrollReveal delay={0}>
-              <div className="bg-white rounded-lg p-6 shadow-md border border-[#e8d7c3]">
+              <div className="bg-white rounded-xl p-6 shadow-md border border-[#e8d7c3]">
                 <p className="font-sans text-xs uppercase tracking-widest text-[#b8860b] font-semibold mb-2">
                   Contact Us
                 </p>
@@ -709,7 +695,7 @@ const Home = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={0.1}>
-              <div className="bg-white rounded-lg p-6 shadow-md border border-[#e8d7c3]">
+              <div className="bg-white rounded-xl p-6 shadow-md border border-[#e8d7c3]">
                 <p className="font-sans text-xs uppercase tracking-widest text-[#b8860b] font-semibold mb-2">
                   Location
                 </p>
@@ -719,7 +705,7 @@ const Home = () => {
             </ScrollReveal>
 
             <ScrollReveal delay={0.2}>
-              <div className="bg-white rounded-lg p-6 shadow-md border border-[#e8d7c3]">
+              <div className="bg-white rounded-xl p-6 shadow-md border border-[#e8d7c3]">
                 <p className="font-sans text-xs uppercase tracking-widest text-[#b8860b] font-semibold mb-2">
                   License
                 </p>
@@ -987,20 +973,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Mutton & Chicken Shop Banner Section */}
-      <section className="py-12 md:py-16 px-5 sm:px-6 bg-white">
-        <div className="container">
-          <ScrollReveal>
-            <div className="relative overflow-hidden rounded-xl shadow-[0_32px_80px_-44px_rgba(18,13,10,0.65)]">
-              <img 
-                src={muttonShopBannerImage}
-                alt="Rebekha Mutton & Chicken Shop - Event and Biryani Catering" 
-                className="w-full h-auto object-cover block"
-              />
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
 
       {/* Why Choose Us Section */}
       <section className="bg-white py-20 md:py-24">

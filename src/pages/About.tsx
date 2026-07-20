@@ -5,6 +5,8 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import { Heart, Users, Utensils, Award, Shield, Sparkles, ChefHat, Clock, CheckCircle2 } from "lucide-react";
+import businessBannerImage from "@/assets/business-banner.jpg";
+import muttonShopBannerImage from "@/assets/mutton-shop-banner.jpg";
 
 const About = () => {
   const values = [
@@ -456,6 +458,86 @@ const About = () => {
               ))}
             </div>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Official Business License & Quality Sourcing Banners */}
+      <section className="py-20 bg-[hsl(45,40%,94%)] border-t border-[hsl(40,20%,85%)]">
+        <div className="container mx-auto px-6">
+          <motion.div
+            className="text-center mb-14"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+          >
+            <p className="font-sans text-xs uppercase tracking-[0.25em] text-[hsl(43,76%,40%)] font-bold mb-2">
+              Verified Credentials & Quality Sourcing
+            </p>
+            <h2 className="heading-script text-5xl text-[hsl(30,20%,15%)] mb-4">
+              Official Licensing & In-House Quality
+            </h2>
+            <div className="w-16 h-0.5 bg-[hsl(43,76%,58%)] mx-auto" />
+            <p className="text-base text-[hsl(30,10%,35%)] max-w-2xl mx-auto mt-4 font-sans">
+              We operate with official government licensing and manage our own meat outlets to guarantee uncompromised hygiene and freshness for every celebration.
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="overflow-hidden rounded-2xl border border-[hsl(40,20%,85%)] bg-white p-4 shadow-xl"
+            >
+              <div className="overflow-hidden rounded-xl">
+                <img
+                  src={businessBannerImage}
+                  alt="Rebekha Catering License and Business Contact Banner"
+                  className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-5 text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(43,76%,58%)]/15 text-[hsl(38,70%,45%)] text-xs font-bold uppercase tracking-wider mb-2">
+                  <Shield className="h-3.5 w-3.5" />
+                  Government License No: 009/2017/0000483
+                </div>
+                <h3 className="text-2xl font-bold text-[hsl(30,20%,15%)] mb-2 [font-family:'Cormorant_Garamond',serif]">
+                  Rebekha Catering Services
+                </h3>
+                <p className="text-sm text-[hsl(30,10%,35%)] leading-relaxed">
+                  Official business operation based at No. 19, Perumal Kovil Street, West Tambaram, Chennai. Catering specialist for large-format weddings, biryani feasts, and executive corporate dining.
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.1 }}
+              className="overflow-hidden rounded-2xl border border-[hsl(40,20%,85%)] bg-white p-4 shadow-xl"
+            >
+              <div className="overflow-hidden rounded-xl">
+                <img
+                  src={muttonShopBannerImage}
+                  alt="Rebekha Mutton and Chicken Shop Quality Meat Sourcing"
+                  className="w-full h-auto object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-5 text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[hsl(43,76%,58%)]/15 text-[hsl(38,70%,45%)] text-xs font-bold uppercase tracking-wider mb-2">
+                  <Utensils className="h-3.5 w-3.5" />
+                  100% In-House Fresh Meat Sourcing
+                </div>
+                <h3 className="text-2xl font-bold text-[hsl(30,20%,15%)] mb-2 [font-family:'Cormorant_Garamond',serif]">
+                  Rebekha Mutton & Chicken Shop
+                </h3>
+                <p className="text-sm text-[hsl(30,10%,35%)] leading-relaxed">
+                  Our dedicated meat supply outlet ensures fresh cut, hygienically processed mutton and chicken for all our catering spreads, maintaining strict quality from farm to feast.
+                </p>
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
