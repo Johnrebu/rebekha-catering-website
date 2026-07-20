@@ -1,17 +1,6 @@
-import { 
-  collection, 
-  addDoc, 
-  serverTimestamp,
-  query,
-  where,
-  getDocs 
-} from "firebase/firestore";
-import app from "@/config/firebase";
-import { getFirestore } from "firebase/firestore";
-
-const db = getFirestore(app);
-const FIRESTORE_SUBMIT_TIMEOUT_MS = 15000;
-const OPTIONAL_REQUEST_TIMEOUT_MS = 5000;
+const FORM_SUBMIT_EMAIL = import.meta.env.VITE_FORM_SUBMIT_EMAIL || "reburr94@gmail.com";
+const FORM_SUBMIT_DISPATCH_DELAY_MS = 800;
+const SHOULD_OPEN_FORM_SUBMIT_PAGE = import.meta.env.DEV;
 
 export interface InquiryData {
   name: string;
@@ -24,28 +13,29 @@ export interface InquiryData {
 }
 
 /**
- * Submits an inquiry to Firestore and sends email notification
+ * Submits an inquiry through FormSubmit's free HTML form endpoint.
  */
 export const submitInquiry = async (data: InquiryData): Promise<string> => {
   try {
-    const ipAddress = await getClientIp();
+    const inquiryId = `inquiry-${Date.now()}`;
 
-    // Add inquiry to Firestore
-    const docRef = await withTimeout(
-      addDoc(collection(db, "inquiries"), {
-        ...data,
-        createdAt: serverTimestamp(),
-        status: "new",
-        ipAddress,
-      }),
-      FIRESTORE_SUBMIT_TIMEOUT_MS,
-      "Could not connect to Firestore. Please check your connection and Firestore rules."
-    );
+    await submitToFormSubmit({
+      _subject: `New Inquiry from ${data.name} - Rebekha Catering`,
+      _captcha: "false",
+      _template: "table",
+      _next: window.location.href,
+      inquiry_id: inquiryId,
+      source_page: window.location.href,
+      name: data.name,
+      email: data.email,
+      phone: data.phone,
+      event_type: data.eventType,
+      guest_count: data.guestCount || "Not specified",
+      event_date: data.date,
+      message: data.message,
+    });
 
-    // Send email notification via webhook without blocking the user-facing success state.
-    void sendEmailNotification(data, docRef.id);
-
-    return docRef.id;
+    return inquiryId;
   } catch (error) {
     console.error("Error submitting inquiry:", error);
     throw new Error(
@@ -56,123 +46,58 @@ export const submitInquiry = async (data: InquiryData): Promise<string> => {
   }
 };
 
-const withTimeout = async <T>(
-  promise: Promise<T>,
-  timeoutMs: number,
-  message: string
-): Promise<T> => {
-  let timeoutId: ReturnType<typeof setTimeout> | undefined;
-  const timeoutPromise = new Promise<never>((_, reject) => {
-    timeoutId = setTimeout(() => reject(new Error(message)), timeoutMs);
+const submitToFormSubmit = async (fields: Record<string, string>): Promise<void> => {
+  if (typeof document === "undefined") {
+    throw new Error("Form submission is only available in the browser.");
+  }
+
+  const endpoint = `https://formsubmit.co/${FORM_SUBMIT_EMAIL}`;
+  const frameName = `formsubmit-frame-${Date.now()}`;
+  const iframe = document.createElement("iframe");
+  const form = document.createElement("form");
+
+  iframe.name = frameName;
+  iframe.title = "Form submission";
+  iframe.style.display = "none";
+
+  form.action = endpoint;
+  form.method = "POST";
+  form.target = SHOULD_OPEN_FORM_SUBMIT_PAGE ? "_blank" : frameName;
+  form.style.display = "none";
+
+  Object.entries(fields).forEach(([name, value]) => {
+    const input = document.createElement("input");
+    input.type = "hidden";
+    input.name = name;
+    input.value = value;
+    form.appendChild(input);
   });
 
-  try {
-    return await Promise.race([promise, timeoutPromise]);
-  } finally {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
-    }
+  if (!SHOULD_OPEN_FORM_SUBMIT_PAGE) {
+    document.body.appendChild(iframe);
+  }
+  document.body.appendChild(form);
+
+  form.submit();
+
+  await new Promise((resolve) => window.setTimeout(resolve, FORM_SUBMIT_DISPATCH_DELAY_MS));
+
+  form.remove();
+  if (!SHOULD_OPEN_FORM_SUBMIT_PAGE) {
+    window.setTimeout(() => iframe.remove(), 5000);
   }
 };
 
 /**
- * Sends email notification to admin and customer
+ * Retrieves inquiries for a specific email.
+ *
+ * FormSubmit delivers inquiries by email and does not expose a free client-side
+ * retrieval API, so this returns an empty list for compatibility.
  */
-const sendEmailNotification = async (data: InquiryData, inquiryId: string): Promise<void> => {
-  try {
-    // Using a webhook endpoint for email notifications
-    // You can replace this with SendGrid, Resend, or another email service
-    const webhookUrl = import.meta.env.VITE_EMAIL_WEBHOOK_URL;
-
-    if (!webhookUrl) {
-      console.warn("Email webhook not configured. Inquiry saved but email not sent.");
-      return;
-    }
-
-    const emailPayload = {
-      to: data.email,
-      adminEmail: "reburr94@gmail.com",
-      subject: "We Received Your Catering Inquiry - Rebekha Catering Services",
-      customerName: data.name,
-      inquiryDetails: {
-        ...data,
-        inquiryId,
-      },
-      adminSubject: `New Inquiry from ${data.name} - Rebekha Catering`,
-    };
-
-    await fetchWithTimeout(
-      webhookUrl,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_EMAIL_WEBHOOK_SECRET || ""}`,
-        },
-        body: JSON.stringify(emailPayload),
-      },
-      OPTIONAL_REQUEST_TIMEOUT_MS
-    );
-  } catch (error) {
-    console.error("Error sending email notification:", error);
-    // Don't throw - inquiry is already saved in Firestore
-  }
-};
+export const getInquiriesByEmail = async (): Promise<InquiryData[]> => [];
 
 /**
- * Gets client IP address
- */
-const getClientIp = async (): Promise<string> => {
-  try {
-    const response = await fetchWithTimeout(
-      "https://api.ipify.org?format=json",
-      {},
-      OPTIONAL_REQUEST_TIMEOUT_MS
-    );
-    const data = await response.json();
-    return data.ip || "unknown";
-  } catch {
-    return "unknown";
-  }
-};
-
-const fetchWithTimeout = async (
-  input: RequestInfo | URL,
-  init: RequestInit,
-  timeoutMs: number
-): Promise<Response> => {
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
-
-  try {
-    return await fetch(input, {
-      ...init,
-      signal: controller.signal,
-    });
-  } finally {
-    clearTimeout(timeoutId);
-  }
-};
-
-/**
- * Retrieves inquiries for a specific email (for customer reference)
- */
-export const getInquiriesByEmail = async (email: string): Promise<InquiryData[]> => {
-  try {
-    const q = query(collection(db, "inquiries"), where("email", "==", email));
-    const snapshot = await getDocs(q);
-    return snapshot.docs.map((doc) => ({
-      ...doc.data(),
-      id: doc.id,
-    })) as InquiryData[];
-  } catch (error) {
-    console.error("Error retrieving inquiries:", error);
-    return [];
-  }
-};
-
-/**
- * Validates inquiry data before submission
+ * Validates inquiry data before submission.
  */
 export const validateInquiryData = (data: InquiryData): { valid: boolean; errors: string[] } => {
   const errors: string[] = [];

@@ -265,7 +265,7 @@ const Services = () => {
                 <div className="w-20 h-20 mx-auto mb-4 overflow-hidden rounded-full">
                   <img src={service.image} alt={service.title} className="w-full h-full object-cover" />
                 </div>
-                <h3 className="text-lg font-medium text-[hsl(30,20%,15%)] mb-4 uppercase tracking-wide text-sm">
+                <h3 className="text-lg font-medium text-[hsl(30,20%,15%)] mb-4 uppercase tracking-wide">
                   {service.title}
                 </h3>
                 <ul className="space-y-2">

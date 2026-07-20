@@ -211,12 +211,12 @@ const revealEase = [0.22, 1, 0.36, 1] as const;
 
 const heroHighlights = [
   {
-    label: "Since 1998",
-    copy: "Large-format wedding spreads and smaller private dinners handled with the same disciplined service flow.",
+    label: "25+ Years Legacy",
+    copy: "Grand wedding banquets and intimate private dining served with perfection and disciplined service flow.",
   },
   {
-    label: "Custom menus",
-    copy: "Vegetarian, non-vegetarian, and mixed event menus shaped around guest count, venue rhythm, and budget.",
+    label: "Bespoke Menus",
+    copy: "Authentic South Indian & multi-cuisine spreads shaped around your guest count, venue rhythm, and budget.",
   },
 ];
 
@@ -279,12 +279,12 @@ const HomeHero = () => {
   const disableHeroMotion = shouldReduceMotion || isMobile;
   const [greetingIndex, setGreetingIndex] = React.useState(0);
   
-  const greetings = ["Welcome to Rebekha Catering", "Namaste!", "Vanakkam!"];
+  const greetings = ["NAMASTE & WELCOME", "AUTHENTIC FLAVOURS SINCE 1998", "VANAKKAM! WELCOME TO REBEKHA"];
 
   React.useEffect(() => {
     const interval = setInterval(() => {
       setGreetingIndex((prev) => (prev + 1) % greetings.length);
-    }, 3000);
+    }, 3200);
     return () => clearInterval(interval);
   }, [greetings.length]);
 
@@ -317,86 +317,90 @@ const HomeHero = () => {
   const scrollHintStyle = disableHeroMotion ? undefined : { opacity: scrollHintOpacity };
 
   return (
-    <section ref={heroRef} className="relative overflow-hidden bg-[#f4efe7]">
+    <section ref={heroRef} className="relative overflow-hidden bg-[#0e0906]">
       <div className="relative">
-        <div className="relative min-h-[100svh] overflow-hidden bg-[#120d0a] md:min-h-screen">
+        <div className="relative min-h-[100svh] overflow-hidden bg-[#0e0906] md:min-h-screen">
           <motion.div className="absolute inset-0" style={backgroundStyle}>
             <img
               src={heroCateringImage}
-              alt="Rebekha catering service with an elegant event spread"
-              className="h-full w-full object-cover object-center"
+              alt="Rebekha catering grand luxury buffet hall"
+              className="h-full w-full object-cover object-center brightness-95 contrast-105"
             />
           </motion.div>
 
-          <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(10,8,6,0.92)_12%,rgba(10,8,6,0.58)_46%,rgba(10,8,6,0.84)_100%)]" />
-          <div className="absolute inset-y-0 left-0 w-full bg-[radial-gradient(circle_at_18%_42%,rgba(0,0,0,0.34),transparent_30%),linear-gradient(90deg,rgba(8,6,4,0.78)_0%,rgba(8,6,4,0.5)_34%,rgba(8,6,4,0.16)_58%,transparent_72%)]" />
-          <div className="hero-grain absolute inset-0 opacity-80" />
-          <div className="absolute inset-x-0 top-0 h-32 bg-[linear-gradient(180deg,rgba(0,0,0,0.35),transparent)]" />
+          {/* Premium Gradient Overlays */}
+          <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(14,9,6,0.94)_10%,rgba(14,9,6,0.65)_48%,rgba(14,9,6,0.88)_100%)]" />
+          <div className="absolute inset-y-0 left-0 w-full bg-[radial-gradient(circle_at_20%_40%,rgba(212,175,55,0.12),transparent_45%),linear-gradient(90deg,rgba(14,9,6,0.85)_0%,rgba(14,9,6,0.55)_36%,rgba(14,9,6,0.2)_62%,transparent_78%)]" />
+          <div className="hero-grain absolute inset-0 opacity-60" />
+          <div className="absolute inset-x-0 top-0 h-36 bg-[linear-gradient(180deg,rgba(0,0,0,0.5),transparent)]" />
 
           <div className="relative z-10 flex min-h-[100svh] items-center">
-            <div className="container px-5 pb-10 pt-24 sm:px-6 sm:pb-12 sm:pt-28 md:pb-14 md:pt-32">
-              <div className="grid items-center gap-10 md:gap-14 lg:grid-cols-[minmax(0,1.1fr)_minmax(340px,1fr)]">
+            <div className="container px-5 pb-12 pt-24 sm:px-6 sm:pb-14 sm:pt-28 md:pb-16 md:pt-32">
+              <div className="grid items-center gap-10 md:gap-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(360px,1fr)]">
                 <motion.div
                   style={contentStyle}
                   className="mx-auto max-w-2xl text-center lg:mx-0 lg:text-left"
                 >
-                  {/* Animated rotating greeting */}
+                  {/* Animated rotating greeting badge */}
                   <ScrollReveal>
-                    <div className="relative h-8 overflow-hidden mb-4">
-                      <motion.div
-                        key={greetingIndex}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.6 }}
-                        className="absolute left-0 font-sans text-sm uppercase tracking-widest text-[#f0ddc9]"
-                      >
-                        {greetings[greetingIndex]}
-                      </motion.div>
+                    <div className="inline-flex items-center gap-2 rounded-full border border-[#d4af37]/40 bg-[#d4af37]/10 px-4 py-1.5 backdrop-blur-md">
+                      <Sparkles className="h-4 w-4 text-[#e6c667] animate-pulse" />
+                      <div className="relative h-5 overflow-hidden min-w-[210px]">
+                        <motion.div
+                          key={greetingIndex}
+                          initial={{ opacity: 0, y: 15 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -15 }}
+                          transition={{ duration: 0.5 }}
+                          className="absolute left-0 top-0 font-sans text-xs uppercase font-bold tracking-[0.2em] text-[#e6c667]"
+                        >
+                          {greetings[greetingIndex]}
+                        </motion.div>
+                      </div>
                     </div>
                   </ScrollReveal>
 
                   <ScrollReveal delay={0.08}>
                     <motion.h1
                       style={{ scale: headingScale } as unknown as React.CSSProperties}
-                      className="font-serif mt-6 text-[clamp(2.5rem,8vw,5.5rem)] font-bold leading-tight text-[#f8f1e6]"
+                      className="font-serif mt-5 text-[clamp(2.5rem,7vw,5.25rem)] font-extrabold leading-[1.08] tracking-tight text-[#FAF6F0]"
                     >
-                      Premium Catering
+                      Crafting <span className="bg-gradient-to-r from-[#F3E5AB] via-[#E2C376] to-[#C89B3C] bg-clip-text text-transparent italic font-normal">Grand Feasts</span>
                       <br />
-                      That Celebrates Life
+                      That Celebrate Life
                     </motion.h1>
                   </ScrollReveal>
 
                   <ScrollReveal delay={0.12}>
-                    <p className="mx-auto mt-6 max-w-xl font-sans text-base leading-relaxed text-[#f6ede1] md:text-lg lg:mx-0">
-                      Award-winning vegetarian and non-vegetarian catering for weddings, corporate events, and private celebrations. Serving Chennai with culinary excellence since 1998.
+                    <p className="mx-auto mt-6 max-w-xl font-sans text-base leading-relaxed text-[#E5DAC8] md:text-lg lg:mx-0 font-normal">
+                      Award-winning South Indian & multi-cuisine catering for grand weddings, corporate galas, and intimate family celebrations across Chennai. Serving excellence since 1998.
                     </p>
                   </ScrollReveal>
 
                   <ScrollReveal delay={0.16}>
-                    <div className="mt-10 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
-                      <Link to="/contact" className="w-full sm:w-auto">
-                        <button className="font-sans inline-flex w-full items-center justify-center gap-2 border-2 border-white/30 bg-transparent px-8 py-4 font-semibold text-[#fbf4ea] transition-all duration-300 hover:bg-white/20 hover:border-white/60 sm:w-auto">
-                          Get Your Quote
-                          <ArrowRight className="h-4 w-4" />
+                    <div className="mt-9 flex flex-col gap-4 sm:flex-row sm:justify-center lg:justify-start">
+                      <Link to="/contact" className="w-full sm:w-auto group">
+                        <button className="font-sans inline-flex w-full items-center justify-center gap-2.5 rounded-full border border-[#e6c667]/40 bg-gradient-to-r from-[#d4af37] via-[#e6c667] to-[#c59b27] px-8 py-4 text-sm font-bold tracking-wide text-[#120d0a] shadow-[0_10px_30px_-10px_rgba(212,175,55,0.5)] transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_15px_35px_-8px_rgba(212,175,55,0.7)] sm:w-auto">
+                          <span>Get Your Quote</span>
+                          <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                         </button>
                       </Link>
                       <Link to="/menu" className="w-full sm:w-auto">
-                        <button className="font-sans inline-flex w-full items-center justify-center gap-2 border-2 border-white/30 bg-transparent px-8 py-4 font-semibold text-[#fbf4ea] transition-all duration-300 hover:bg-white/20 hover:border-white/60 sm:w-auto">
-                          View Our Menus
+                        <button className="font-sans inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-white/10 px-8 py-4 text-sm font-semibold tracking-wide text-[#FAF6F0] backdrop-blur-md transition-all duration-300 hover:border-white/50 hover:bg-white/20 sm:w-auto">
+                          <span>View Our Menus</span>
                         </button>
                       </Link>
                     </div>
                   </ScrollReveal>
 
                   <ScrollReveal delay={0.2} className="mt-12 hidden md:block">
-                    <div className="grid gap-6 sm:grid-cols-2">
-                      {heroHighlights.map((item, index) => (
-                        <div key={item.label} className="border border-white/20 bg-white/10 p-5 backdrop-blur-md hover:bg-white/15 transition-all duration-300">
-                          <p className="font-sans text-xs uppercase tracking-widest text-[#f1d4a8] font-semibold">
+                    <div className="grid gap-5 sm:grid-cols-2">
+                      {heroHighlights.map((item) => (
+                        <div key={item.label} className="group rounded-xl border border-[#d4af37]/25 bg-gradient-to-br from-white/12 to-white/5 p-5 backdrop-blur-md transition-all duration-300 hover:border-[#d4af37]/50 hover:bg-white/15">
+                          <p className="font-sans text-xs uppercase tracking-[0.18em] text-[#e6c667] font-bold">
                             {item.label}
                           </p>
-                          <p className="font-sans mt-3 text-sm leading-relaxed text-[#f7efe5]">
+                          <p className="font-sans mt-2.5 text-sm leading-relaxed text-[#F0E6D8] font-normal">
                             {item.copy}
                           </p>
                         </div>
@@ -405,67 +409,83 @@ const HomeHero = () => {
                   </ScrollReveal>
 
                   <ScrollReveal delay={0.3} className="mt-12 mx-auto w-full max-w-sm lg:hidden">
-                    <div className="overflow-hidden border border-white/12 bg-black/35 p-3 backdrop-blur-sm rounded-lg">
+                    <div className="overflow-hidden rounded-2xl border border-[#d4af37]/30 bg-[#120d0a]/80 p-3.5 backdrop-blur-md shadow-2xl">
                       <motion.img
                         src={weddingCateringImage}
-                        alt="Wedding catering table by Rebekha Caterers"
-                        className="aspect-[4/5] w-full object-cover"
+                        alt="Royal wedding catering feast spread by Rebekha Caterers"
+                        className="aspect-[4/3] w-full object-cover rounded-xl"
                         style={primaryImageStyle}
                       />
-                      <div className="mt-4 flex items-center justify-between text-[0.7rem] uppercase tracking-[0.28em] text-[#f2e3cf]">
-                        <span className="font-sans">Wedding spreads</span>
-                        <span className="font-sans">01</span>
+                      <div className="mt-3.5 flex items-center justify-between text-xs font-semibold tracking-wider text-[#e6c667]">
+                        <span className="font-sans font-bold">01 | ROYAL WEDDING SPREADS</span>
+                        <span className="font-sans text-[0.65rem] px-2 py-0.5 rounded border border-[#d4af37]/40 bg-[#d4af37]/10">VEG & NON-VEG</span>
                       </div>
                     </div>
                   </ScrollReveal>
                 </motion.div>
 
                 {/* Desktop Image Cards */}
-                <div className="relative hidden min-h-[620px] lg:block">
-                  <motion.div className="absolute right-0 top-0 w-[70%]" style={primaryCardStyle}>
-                    <div className="overflow-hidden border border-white/18 bg-black/42 p-3 shadow-[0_40px_90px_-40px_rgba(0,0,0,0.85)] backdrop-blur-sm">
-                      <motion.img
-                        src={weddingCateringImage}
-                        alt="Wedding catering table by Rebekha Caterers"
-                        className="aspect-[4/5] w-full object-cover"
-                        style={primaryImageStyle}
-                      />
-                      <div className="mt-4 flex items-center justify-between text-xs uppercase tracking-widest text-[#f2e3cf]">
-                        <span className="font-sans font-semibold">Wedding spreads</span>
-                        <span className="font-sans">01</span>
+                <div className="relative hidden min-h-[640px] lg:block">
+                  <motion.div className="absolute right-0 top-0 w-[68%]" style={primaryCardStyle}>
+                    <div className="group overflow-hidden rounded-2xl border border-[#d4af37]/35 bg-[#120d0a]/75 p-3.5 shadow-[0_30px_90px_-30px_rgba(0,0,0,0.9)] backdrop-blur-md transition-all duration-500 hover:border-[#d4af37]/60">
+                      <div className="relative overflow-hidden rounded-xl">
+                        <motion.img
+                          src={weddingCateringImage}
+                          alt="Royal South Indian wedding catering table by Rebekha Caterers"
+                          className="aspect-[4/5] w-full object-cover"
+                          style={primaryImageStyle}
+                        />
+                        <div className="absolute top-3 left-3 rounded-full bg-[#120d0a]/80 border border-[#d4af37]/40 px-3 py-1 text-[0.68rem] font-bold uppercase tracking-widest text-[#e6c667] backdrop-blur-md">
+                          Grand Weddings
+                        </div>
+                      </div>
+                      <div className="mt-3.5 flex items-center justify-between text-xs tracking-wider text-[#F5EBDC]">
+                        <span className="font-sans font-bold text-[#FAF6F0]">Royal Banquet Spreads</span>
+                        <span className="font-sans font-extrabold text-[#e6c667]">01</span>
                       </div>
                     </div>
                   </motion.div>
 
-                  <motion.div className="absolute left-0 top-[18%] w-[38%]" style={secondaryCardStyle}>
-                    <div className="overflow-hidden border border-[#ead8c6] bg-[#f6eee4] p-3 shadow-[0_36px_80px_-42px_rgba(0,0,0,0.72)]">
-                      <motion.img
-                        src={corporateCateringImage}
-                        alt="Corporate catering setup by Rebekha Caterers"
-                        className="aspect-[3/4] w-full object-cover"
-                        style={secondaryImageStyle}
-                      />
-                      <p className="font-sans mt-4 text-xs uppercase tracking-widest text-[#43362a] font-semibold">
-                        Corporate Events
-                      </p>
+                  <motion.div className="absolute left-0 top-[20%] w-[42%] z-10" style={secondaryCardStyle}>
+                    <div className="group overflow-hidden rounded-2xl border border-white/20 bg-[#1a130d]/85 p-3.5 shadow-[0_25px_80px_-30px_rgba(0,0,0,0.8)] backdrop-blur-md transition-all duration-500 hover:border-[#d4af37]/40">
+                      <div className="relative overflow-hidden rounded-xl">
+                        <motion.img
+                          src={corporateCateringImage}
+                          alt="Corporate catering service setup by Rebekha Caterers"
+                          className="aspect-[3/4] w-full object-cover"
+                          style={secondaryImageStyle}
+                        />
+                        <div className="absolute top-2.5 left-2.5 rounded-full bg-[#120d0a]/80 border border-white/20 px-2.5 py-0.5 text-[0.65rem] font-bold uppercase tracking-widest text-[#F5EBDC] backdrop-blur-md">
+                          Live Counters
+                        </div>
+                      </div>
+                      <div className="mt-3 flex items-center justify-between text-xs tracking-wider text-[#F5EBDC]">
+                        <span className="font-sans font-semibold">Corporate Events</span>
+                        <span className="font-sans font-bold text-[#e6c667]">02</span>
+                      </div>
                     </div>
                   </motion.div>
 
-                  <motion.div className="absolute bottom-0 left-[14%] w-[52%]" style={tertiaryCardStyle}>
-                    <div className="overflow-hidden border border-white/18 bg-black/42 p-3 shadow-[0_34px_80px_-42px_rgba(0,0,0,0.72)] backdrop-blur-sm">
-                      <motion.img
-                        src={privateDinnerImage}
-                        alt="Private dinner table setting by Rebekha Caterers"
-                        className="aspect-[5/3] w-full object-cover"
-                        style={tertiaryImageStyle}
-                      />
-                      <div className="mt-4 flex items-center justify-between gap-4">
-                        <p className="font-serif text-2xl font-bold text-[#f8f1e6]">
-                          Private Dinners
-                        </p>
-                        <p className="font-sans text-xs uppercase tracking-widest text-[#eedecd]">
-                          Intimate Gatherings
-                        </p>
+                  <motion.div className="absolute bottom-2 left-[18%] w-[58%] z-20" style={tertiaryCardStyle}>
+                    <div className="group overflow-hidden rounded-2xl border border-[#d4af37]/35 bg-[#120d0a]/85 p-3.5 shadow-[0_30px_80px_-35px_rgba(0,0,0,0.9)] backdrop-blur-md transition-all duration-500 hover:border-[#d4af37]/60">
+                      <div className="relative overflow-hidden rounded-xl">
+                        <motion.img
+                          src={privateDinnerImage}
+                          alt="Private dinner table setting by Rebekha Caterers"
+                          className="aspect-[16/9] w-full object-cover"
+                          style={tertiaryImageStyle}
+                        />
+                      </div>
+                      <div className="mt-3 flex items-center justify-between gap-4 px-1">
+                        <div>
+                          <p className="font-serif text-lg font-bold text-[#FAF6F0]">
+                            Private Dinners
+                          </p>
+                          <p className="font-sans text-[0.7rem] uppercase tracking-widest text-[#e6c667] font-semibold">
+                            Intimate Gatherings
+                          </p>
+                        </div>
+                        <span className="font-sans font-extrabold text-sm text-[#e6c667] border border-[#d4af37]/30 rounded-full h-7 w-7 flex items-center justify-center bg-[#d4af37]/10">03</span>
                       </div>
                     </div>
                   </motion.div>
@@ -478,39 +498,45 @@ const HomeHero = () => {
             className="absolute bottom-8 left-1/2 z-10 hidden -translate-x-1/2 items-center gap-3 lg:flex"
             style={scrollHintStyle}
           >
-            <span className="font-sans text-xs uppercase tracking-widest text-[#eadbc7]">
+            <span className="font-sans text-xs uppercase tracking-[0.2em] text-[#e6c667] font-semibold">
               Scroll To Explore
             </span>
-            <span className="h-px w-20 bg-[#eadbc7]/40" />
+            <span className="h-px w-20 bg-gradient-to-r from-[#e6c667] to-transparent" />
           </motion.div>
         </div>
       </div>
 
+      {/* Feature Cards Section */}
       <div className="relative z-20 -mt-10 px-5 pb-12 sm:-mt-16 sm:px-6 md:-mt-24 md:pb-16">
         <div className="container">
           <ScrollReveal amount={0.24}>
-            <div className="grid gap-6 border border-[#dac8b6] bg-[#f4ece1] p-5 shadow-[0_32px_80px_-44px_rgba(18,13,10,0.65)] sm:p-6 md:grid-cols-3 md:p-8">
+            <div className="grid gap-6 rounded-2xl border border-[#d4af37]/25 bg-[#FAF6F0] p-6 shadow-[0_35px_90px_-40px_rgba(14,9,6,0.7)] sm:p-8 md:grid-cols-3">
               {heroFeatureCards.map(({ icon: Icon, title, description, glowColor }, index) => (
                 <GlowCard
                   key={title}
                   customSize
                   glowColor={glowColor}
-                  className="h-full min-h-[250px] w-full rounded-lg bg-[#f6eee4]/88 p-5 text-center shadow-[0_28px_70px_-46px_rgba(18,13,10,0.7)] backdrop-blur-xl sm:p-6 md:p-7 md:text-left"
+                  className="h-full min-h-[250px] w-full rounded-xl bg-white p-6 text-center shadow-[0_15px_45px_-20px_rgba(14,9,6,0.12)] border border-[#e8ded0] transition-all duration-300 hover:shadow-[0_20px_50px_-15px_rgba(212,175,55,0.25)] sm:p-7 md:text-left"
                 >
                   <div className="flex flex-col items-center gap-4 md:items-start">
-                    <div className="mx-auto flex h-11 w-11 items-center justify-center rounded-full border border-[#1a130d]/10 bg-white text-[#1a130d] md:mx-0">
-                      <Icon className="h-5 w-5" />
+                    <div className="flex w-full items-center justify-between">
+                      <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-[#d4af37]/30 bg-gradient-to-br from-[#FAF6F0] to-[#F3E6D0] text-[#1a130d] shadow-sm">
+                        <Icon className="h-6 w-6 text-[#C89B3C]" />
+                      </div>
+                      <span className="font-serif text-2xl font-extrabold text-[#d4af37]/40">
+                        {`0${index + 1}`}
+                      </span>
                     </div>
                     <div>
-                      <p className="font-sans text-xs uppercase tracking-widest text-[#6e5e4f] font-semibold">
-                        {`0${index + 1}`}
+                      <p className="font-sans text-xs uppercase tracking-[0.18em] text-[#9E8255] font-bold">
+                        Feature 0{index + 1}
                       </p>
-                      <h2 className="font-serif mt-3 text-2xl font-bold leading-snug text-[#140e0a]">
+                      <h2 className="font-serif mt-2 text-2xl font-bold leading-snug text-[#1A130D]">
                         {title}
                       </h2>
                     </div>
                   </div>
-                  <p className="font-sans text-sm leading-relaxed text-[#514a40]">
+                  <p className="font-sans mt-3 text-sm leading-relaxed text-[#4A4237]">
                     {description}
                   </p>
                 </GlowCard>
