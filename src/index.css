@@ -193,6 +193,7 @@
     flex-direction: column;
     gap: 0.15rem;
     line-height: 1;
+    -webkit-user-select: none;
     user-select: none;
   }
 
@@ -365,11 +366,13 @@
 
 @layer utilities {
   .text-balance {
+  @supports (text-wrap: balance) {
     text-wrap: balance;
   }
-
-  /* Eden gold text */
-  .text-eden-gold {
+  @supports not (text-wrap: balance) {
+    /* fallback for browsers without text-wrap support */
+  }
+}.text-eden-gold {
     color: hsl(var(--eden-gold));
   }
 

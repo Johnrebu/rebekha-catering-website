@@ -126,6 +126,42 @@ const KNOWLEDGE_BASE: KnowledgeEntry[] = [
     keywords: ["menu", "dish", "food", "biryani", "raitha", "dessert", "ice cream", "items"],
     followUp: "I can suggest the best package once you share expected guest count.",
   },
+    {
+      id: "wedding-feast",
+      intent: "menu",
+      title: "Wedding Feast (Non-Veg)",
+      content: [
+        "Pricing: Mutton Biryani Rs. 500 per plate, Chicken Biryani Rs. 400 per plate.",
+        "Menu Items: Biryani (Mutton/Chicken), Chicken 65 / Chicken Gravy, Onion Raita, Brinjal Gravy, Sweet (Pineapple Pudding, Bread Halwa, Dry Gulab Jamun), Ice Cream, Welcome Drink, Popcorn, Beeda, Fruit Mixture, Paper Roll / Tissue, Water Bottle (300 ml), Banana Leaf.",
+        "Note: Service charge and transportation included within Tambaram Corporation limits."
+      ],
+      keywords: ["wedding","feast","nonveg","biryani","menu"],
+      followUp: "Let me know your guest count to estimate pricing."
+    },
+    {
+      id: "hotel-nonveg",
+      intent: "menu",
+      title: "Hotel Supply (Non-Veg)",
+      content: [
+        "Pricing: Mutton Biryani Rs. 450 per plate, Chicken Biryani Rs. 350 per plate.",
+        "Menu Items: Biryani (Mutton/Chicken), Chicken 65 (or Chicken Gravy), Onion Raita, Brinjal Gravy, Sweet (Pineapple Pudding, Bread Halwa, Dry Gulab Jamun), Ice Cream, Water Bottle (300 ml), Banana Leaf (or Arekha Plate for Chicken), Paper Roll / Tissue.",
+        "Note: Service charge and transportation included within Tambaram Corporation limits."
+      ],
+      keywords: ["hotel","nonveg","biryani","menu"],
+      followUp: "Tell me the number of guests for an estimate."
+    },
+    {
+      id: "hotel-veg",
+      intent: "menu",
+      title: "Hotel Supply (Vegetarian)",
+      content: [
+        "Pricing: Rs. 300 per plate.",
+        "Menu Items: White Rice, Sambar, Rasam, Vattral Kuzhambu, Chapathi, Payasam (Pal / Paruppu), Pappad, Poriyal (1 variety), Kootu (2 varieties), Buttermilk, Pickle, Vadai, Paper Roll, Banana Leaf, Water Bottle (300 ml).",
+        "Note: Service charge and transportation included within Tambaram Corporation limits."
+      ],
+      keywords: ["hotel","veg","menu"],
+      followUp: "Provide guest count for pricing."
+    },
   {
     id: "pricing-standard",
     intent: "pricing",

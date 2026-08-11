@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import SEO from "@/components/SEO";
 import StructuredData from "@/components/StructuredData";
 import { Calculator, Drumstick, IndianRupee, Leaf, Users } from "lucide-react";
+import Packages from "@/components/Packages";
 
 type DietaryTag = "Jain" | "Vegan";
 
@@ -276,6 +277,9 @@ const Menu = () => {
           </div>
         </div>
       </section>
+
+      {/* Official Packages */}
+      <Packages />
 
       {/* Price tiers */}
       <section className="py-16 bg-[hsl(45,40%,94%)]">
