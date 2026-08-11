@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Check, IndianRupee, Info } from "lucide-react";
+import { Check, Download, IndianRupee, Info, Loader2 } from "lucide-react";
+import { downloadMenuPDF } from "@/utils/menuPdfDownload";
 
 type PackageType = "wedding-non-veg" | "hotel-non-veg" | "hotel-veg";
 type BiryaniType = "mutton" | "chicken";
@@ -79,22 +80,54 @@ const Packages = () => {
   const [activeTab, setActiveTab] = useState<PackageType>("wedding-non-veg");
   const [weddingBiryani, setWeddingBiryani] = useState<BiryaniType>("mutton");
   const [hotelBiryani, setHotelBiryani] = useState<BiryaniType>("mutton");
+  const [isDownloading, setIsDownloading] = useState(false);
 
-  const currentPackage = packagesData[activeTab];
-  
   let currentPrice = 0;
   let items: string[] = [];
-  
+
   if (activeTab === "wedding-non-veg") {
-    currentPrice = currentPackage.options![weddingBiryani].price;
-    items = currentPackage.menuItems(weddingBiryani);
+    const pkg = packagesData["wedding-non-veg"];
+    currentPrice = pkg.options[weddingBiryani].price;
+    items = pkg.menuItems(weddingBiryani);
   } else if (activeTab === "hotel-non-veg") {
-    currentPrice = currentPackage.options![hotelBiryani].price;
-    items = currentPackage.menuItems(hotelBiryani);
+    const pkg = packagesData["hotel-non-veg"];
+    currentPrice = pkg.options[hotelBiryani].price;
+    items = pkg.menuItems(hotelBiryani);
   } else {
-    currentPrice = currentPackage.price!;
-    items = currentPackage.menuItems("mutton");
+    const pkg = packagesData["hotel-veg"];
+    currentPrice = pkg.price;
+    items = pkg.menuItems();
   }
+
+  const currentPackage = packagesData[activeTab];
+
+  const handleDownload = () => {
+    setIsDownloading(true);
+    setTimeout(() => {
+      try {
+        let subtitle = "";
+        let packageType: "veg" | "nonveg" = "nonveg";
+        if (activeTab === "wedding-non-veg") {
+          subtitle = weddingBiryani === "mutton" ? "Mutton Biryani Menu" : "Chicken Biryani Menu";
+        } else if (activeTab === "hotel-non-veg") {
+          subtitle = hotelBiryani === "mutton" ? "Mutton Biryani Menu" : "Chicken Biryani Menu";
+        } else {
+          packageType = "veg";
+        }
+        downloadMenuPDF({
+          title: currentPackage.title,
+          subtitle,
+          price: currentPrice,
+          priceLabel: "per plate",
+          items,
+          note: currentPackage.note ?? "",
+          packageType,
+        });
+      } finally {
+        setIsDownloading(false);
+      }
+    }, 200);
+  };
 
   return (
     <section className="py-16 bg-white">
@@ -149,7 +182,7 @@ const Packages = () => {
               className="bg-[hsl(45,40%,94%)] border border-[hsl(40,20%,85%)] p-6 md:p-10 shadow-lg"
             >
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6 border-b border-[hsl(40,20%,85%)] pb-8">
-                <div>
+                <div className="flex-1">
                   <h3 className="text-3xl text-[hsl(30,20%,15%)] mb-2" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
                     {currentPackage.title}
                   </h3>
@@ -183,13 +216,49 @@ const Packages = () => {
                   )}
                 </div>
 
-                <div className="bg-[hsl(30,20%,15%)] text-white px-8 py-6 text-center min-w-[200px] border-b-4 border-[hsl(43,76%,58%)] rounded-sm shadow-md">
-                  <div className="text-sm uppercase tracking-widest text-[hsl(43,76%,58%)] mb-1">Price</div>
-                  <div className="flex items-center justify-center text-4xl font-bold" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
-                    <IndianRupee className="h-6 w-6 mr-1" />
-                    {currentPrice}
+                <div className="flex flex-col items-center gap-4">
+                  <div className="bg-[hsl(30,20%,15%)] text-white px-8 py-6 text-center min-w-[200px] border-b-4 border-[hsl(43,76%,58%)] rounded-sm shadow-md">
+                    <div className="text-sm uppercase tracking-widest text-[hsl(43,76%,58%)] mb-1">Price</div>
+                    <div className="flex items-center justify-center text-4xl font-bold" style={{ fontFamily: "'Cormorant Garamond', serif" }}>
+                      <IndianRupee className="h-6 w-6 mr-1" />
+                      {currentPrice}
+                    </div>
+                    <div className="text-xs font-light mt-1 text-gray-300">per plate</div>
                   </div>
-                  <div className="text-xs font-light mt-1 text-gray-300">per plate</div>
+
+                  {/* ── Premium Download Button ── */}
+                  <motion.button
+                    onClick={handleDownload}
+                    disabled={isDownloading}
+                    whileHover={{ scale: 1.04 }}
+                    whileTap={{ scale: 0.97 }}
+                    className="
+                      w-full flex items-center justify-center gap-2
+                      px-6 py-3 rounded-sm
+                      bg-gradient-to-r from-[hsl(38,70%,45%)] to-[hsl(43,76%,58%)]
+                      text-[hsl(30,20%,10%)] font-semibold text-sm
+                      uppercase tracking-widest
+                      shadow-md hover:shadow-lg
+                      border border-[hsl(43,76%,58%)]
+                      transition-all duration-200
+                      disabled:opacity-60 disabled:cursor-not-allowed
+                    "
+                  >
+                    {isDownloading ? (
+                      <>
+                        <Loader2 className="h-4 w-4 animate-spin" />
+                        <span>Generating...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Download className="h-4 w-4" />
+                        <span>Download Menu</span>
+                      </>
+                    )}
+                  </motion.button>
+                  <p className="text-[10px] text-[hsl(30,10%,50%)] text-center">
+                    Downloads as a premium PDF
+                  </p>
                 </div>
               </div>
 
