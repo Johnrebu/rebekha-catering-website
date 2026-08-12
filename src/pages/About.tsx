@@ -208,7 +208,6 @@ const About = () => {
       >
         {/* Parallax background */}
         <motion.div
-          style={{ y: heroY }}
           className="absolute inset-0 scale-110 bg-cover bg-center"
           style={{
             backgroundImage:
