@@ -121,10 +121,15 @@ export function downloadMenuPDF(data: MenuPackageData): void {
   setTextColor(doc, C.creamDark);
   doc.setFont("helvetica", "normal");
   doc.setFontSize(7.5);
-  doc.text(
-    "📞 94454 35102  |  94454 35103     ✉  rebekhacaterers@gmail.com     📍 West Tambaram, Chennai – 600 045",
-    PW / 2, 36, { align: "center" }
-  );
+  // Contact strip — three plain-text segments (no emoji) to avoid glyph issues
+  const contactY = 36;
+  doc.text("Ph: 94454 35102  |  94454 35103", PW / 2 - 60, contactY, { align: "left" });
+  setTextColor(doc, C.gold);
+  doc.text("*", PW / 2 - 3, contactY, { align: "center" });
+  doc.text("*", PW / 2 + 40, contactY, { align: "center" });
+  setTextColor(doc, C.creamDark);
+  doc.text("rebekhacaterers@gmail.com", PW / 2 + 2, contactY, { align: "left" });
+  doc.text("West Tambaram, Chennai - 600 045", PW / 2 + 44, contactY, { align: "left" });
 
   // Header subtitle: "OFFICIAL MENU CARD"
   setTextColor(doc, C.goldLight);
@@ -185,7 +190,8 @@ export function downloadMenuPDF(data: MenuPackageData): void {
   setTextColor(doc, C.white);
   doc.setFont("times", "bold");
   doc.setFontSize(20);
-  doc.text(`₹ ${data.price}`, PW / 2, curY + 17, { align: "center" });
+  // Use "Rs." instead of "₹" – the rupee symbol renders as "1" in jsPDF's built-in fonts
+  doc.text(`Rs. ${data.price}`, PW / 2, curY + 17, { align: "center" });
 
   curY += badgeH + 8;
 
@@ -254,7 +260,8 @@ export function downloadMenuPDF(data: MenuPackageData): void {
   setTextColor(doc, C.gold);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(7);
-  doc.text("✦  INCLUSIVE NOTE  ✦", PW / 2, curY + 5.5, { align: "center" });
+  // Replace ✦ with ASCII star — emoji/special chars cause blank glyphs in jsPDF
+  doc.text("*  INCLUSIVE NOTE  *", PW / 2, curY + 5.5, { align: "center" });
 
   setTextColor(doc, C.creamDark);
   doc.setFont("helvetica", "normal");
@@ -266,12 +273,17 @@ export function downloadMenuPDF(data: MenuPackageData): void {
   // ── 10. Package type badge (Veg / Non-Veg) ────────────────────────────────
   const isVeg = data.packageType === "veg";
   const badgeColor: [number, number, number] = isVeg ? C.green : C.red;
+  // Wider badge (44 mm) so "NON-VEGETARIAN" text fits; replace emoji with plain prefix
+  const vegBadgeW = 44;
   setFill(doc, badgeColor);
-  doc.roundedRect(PW / 2 - 18, curY, 36, 8, 2, 2, "F");
+  doc.roundedRect(PW / 2 - vegBadgeW / 2, curY, vegBadgeW, 8, 2, 2, "F");
   setTextColor(doc, C.white);
   doc.setFont("helvetica", "bold");
   doc.setFontSize(7);
-  doc.text(isVeg ? "🟢  VEGETARIAN" : "🔴  NON-VEGETARIAN", PW / 2, curY + 5.5, { align: "center" });
+  doc.text(
+    isVeg ? "[VEG]  VEGETARIAN" : "[NON-VEG]  NON-VEGETARIAN",
+    PW / 2, curY + 5.5, { align: "center" }
+  );
 
   curY += 14;
 
@@ -286,9 +298,9 @@ export function downloadMenuPDF(data: MenuPackageData): void {
   curY += 5;
 
   const packages = [
-    { name: "Wedding Feast (Non-Veg)", mutton: "₹500/plate", chicken: "₹400/plate" },
-    { name: "Hotel Supply (Non-Veg)", mutton: "₹450/plate", chicken: "₹350/plate" },
-    { name: "Hotel Supply (Veg)", price: "₹300/plate" },
+    { name: "Wedding Feast (Non-Veg)", mutton: "Rs.500/plate", chicken: "Rs.400/plate" },
+    { name: "Hotel Supply (Non-Veg)", mutton: "Rs.450/plate", chicken: "Rs.350/plate" },
+    { name: "Hotel Supply (Veg)", price: "Rs.300/plate" },
   ];
 
   const pkgW = (IW - 8) / 3;
@@ -334,7 +346,7 @@ export function downloadMenuPDF(data: MenuPackageData): void {
   doc.setFont("helvetica", "normal");
   doc.setFontSize(6.5);
   doc.text(
-    "#19, Perumal Koil Street, Irumbuliyur, Tambaram (W), Chennai – 600 045  |  rebekhacaterers.online",
+    "#19, Perumal Koil Street, Irumbuliyur, Tambaram (W), Chennai - 600 045  |  rebekhacaterers.online",
     PW / 2, PH - 5.5, { align: "center" }
   );
 
