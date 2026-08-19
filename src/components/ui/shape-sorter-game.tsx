@@ -1,13 +1,19 @@
 import { useState, useCallback, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { useElonGameAudio } from "./elon-games/ElonGameAudioContext";
+import { useElonGameProgress } from "./elon-games/useElonGameProgress";
+import { ElonGameCompletion } from "./elon-games/ElonGameCompletion";
 
-/* ─── shapes ─── */
 interface Shape {
   id: string;
   type: "circle" | "square" | "triangle" | "star" | "heart";
   color: string;
   emoji: string;
   placed: boolean;
+}
+
+interface ShapeSorterGameProps {
+  onExit?: () => void;
 }
 
 const SHAPE_DEFS: Omit<Shape, "id" | "placed">[] = [
@@ -33,7 +39,6 @@ function buildLevel(count: number): Shape[] {
     .map((s, i) => ({ ...s, id: `shape-${i}`, placed: false }));
 }
 
-/* ─── shape SVGs ─── */
 function ShapeSVG({
   type,
   color,
@@ -46,7 +51,7 @@ function ShapeSVG({
   outline?: boolean;
 }) {
   const style = outline
-    ? { fill: "none", stroke: color, strokeWidth: 3, strokeDasharray: "6 4", opacity: 0.5 }
+    ? { fill: "none", stroke: color, strokeWidth: 3, strokeDasharray: "6 4", opacity: 0.6 }
     : { fill: color, stroke: "none" };
 
   switch (type) {
@@ -91,8 +96,10 @@ function ShapeSVG({
   }
 }
 
-/* ─── main ─── */
-export default function ShapeSorterGame() {
+export default function ShapeSorterGame({ onExit }: ShapeSorterGameProps) {
+  const { playSound, speakWord } = useElonGameAudio();
+  const { saveResult, getRecord } = useElonGameProgress();
+
   const [level, setLevel] = useState(1);
   const shapeCount = Math.min(2 + level, 5);
   const [shapes, setShapes] = useState<Shape[]>(() => buildLevel(shapeCount));
@@ -102,23 +109,28 @@ export default function ShapeSorterGame() {
   const [lastWrong, setLastWrong] = useState<string | null>(null);
   const [won, setWon] = useState(false);
   const [score, setScore] = useState(0);
+
   const containerRef = useRef<HTMLDivElement>(null);
   const holeRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const bestRecord = getRecord("shape-sorter");
 
   const allPlaced = shapes.every((s) => s.placed);
 
   useEffect(() => {
     if (allPlaced && !won) {
+      const stars = level >= 3 ? 3 : level >= 2 ? 2 : 1;
+      saveResult("shape-sorter", stars, score);
       setTimeout(() => setWon(true), 500);
     }
-  }, [allPlaced, won]);
+  }, [allPlaced, won, level, saveResult, score]);
 
   const handleDragStart = useCallback(
     (id: string, clientX: number, clientY: number) => {
+      playSound("click");
       setDragging(id);
       setDragPos({ x: clientX, y: clientY });
     },
-    []
+    [playSound]
   );
 
   const handleDragMove = useCallback(
@@ -138,7 +150,6 @@ export default function ShapeSorterGame() {
       return;
     }
 
-    // Check if over a hole
     let matched = false;
     holeRefs.current.forEach((el, type) => {
       const rect = el.getBoundingClientRect();
@@ -147,32 +158,26 @@ export default function ShapeSorterGame() {
 
       if (inX && inY) {
         if (draggedShape.type === type && !draggedShape.placed) {
-          // Correct!
           matched = true;
+          playSound("correct");
+          speakWord(type);
           setShapes((prev) =>
-            prev.map((s) =>
-              s.id === dragging ? { ...s, placed: true } : s
-            )
+            prev.map((s) => (s.id === dragging ? { ...s, placed: true } : s))
           );
           setScore((sc) => sc + 10);
           setLastCorrect(type);
           setTimeout(() => setLastCorrect(null), 600);
         } else if (draggedShape.type !== type) {
-          // Wrong hole
+          playSound("wrong");
           setLastWrong(type);
           setTimeout(() => setLastWrong(null), 500);
         }
       }
     });
 
-    if (!matched) {
-      // Bounce back (nothing needed since we re-render)
-    }
-
     setDragging(null);
-  }, [dragging, shapes, dragPos]);
+  }, [dragging, shapes, dragPos, playSound, speakWord]);
 
-  // Mouse / Touch handlers on container
   useEffect(() => {
     const onMove = (e: MouseEvent) => handleDragMove(e.clientX, e.clientY);
     const onUp = () => handleDragEnd();
@@ -205,70 +210,62 @@ export default function ShapeSorterGame() {
     setLastWrong(null);
   }, [level]);
 
-  const holeOrder = shuffle(shapes.map((s) => s.type));
+  const holeOrder = shapes.map((s) => s.type);
 
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 bg-gradient-to-br from-amber-950 via-orange-950 to-red-950 flex flex-col items-center select-none touch-none overflow-hidden"
+      className="fixed inset-0 bg-gradient-to-br from-amber-950 via-orange-950 to-red-950 flex flex-col items-center select-none touch-none overflow-hidden pt-12"
+      style={{ touchAction: "none" }}
     >
       {/* Header */}
-      <div className="w-full max-w-lg px-4 pt-6 pb-2 z-10">
+      <div className="w-full max-w-lg px-4 pt-4 pb-2 z-10">
         <h2 className="text-3xl font-black text-white text-center mb-1">
           🔷 Shape Sorter
         </h2>
-        <p className="text-orange-300/60 text-sm text-center mb-3">
+        <p className="text-orange-300/70 text-sm text-center mb-3">
           Drag each shape to its matching hole!
         </p>
         <div className="flex justify-center gap-4 text-sm">
-          <div className="px-3 py-1.5 rounded-lg bg-white/10 text-orange-200">
+          <div className="px-3.5 py-1.5 rounded-xl bg-white/10 text-orange-200 font-semibold">
             ⭐ {score}
           </div>
-          <div className="px-3 py-1.5 rounded-lg bg-white/10 text-orange-200">
+          <div className="px-3.5 py-1.5 rounded-xl bg-white/10 text-orange-200 font-semibold">
             📐 Level {level}
           </div>
         </div>
       </div>
 
       {/* Shapes to drag (top area) */}
-      <div className="relative z-10 flex flex-wrap justify-center gap-4 px-4 py-8">
+      <div className="relative z-10 flex flex-wrap justify-center gap-4 px-4 py-6">
         {shapes
           .filter((s) => !s.placed)
           .map((shape) => (
             <motion.div
               key={shape.id}
-              className="w-20 h-20 rounded-2xl bg-white/10 border-2 border-white/20 flex items-center justify-center cursor-grab active:cursor-grabbing"
+              className="w-20 h-20 rounded-2xl bg-white/10 border-2 border-white/30 flex items-center justify-center cursor-grab active:cursor-grabbing shadow-lg"
               whileTap={{ scale: 1.1 }}
-              onMouseDown={(e) =>
-                handleDragStart(shape.id, e.clientX, e.clientY)
-              }
+              onMouseDown={(e) => handleDragStart(shape.id, e.clientX, e.clientY)}
               onTouchStart={(e) => {
                 if (e.touches[0])
-                  handleDragStart(
-                    shape.id,
-                    e.touches[0].clientX,
-                    e.touches[0].clientY
-                  );
+                  handleDragStart(shape.id, e.touches[0].clientX, e.touches[0].clientY);
               }}
-              style={
-                dragging === shape.id
-                  ? { opacity: 0.3 }
-                  : {}
-              }
+              style={dragging === shape.id ? { opacity: 0.3 } : {}}
+              aria-label={`Draggable ${shape.type}`}
             >
               <ShapeSVG type={shape.type} color={shape.color} size={52} />
             </motion.div>
           ))}
       </div>
 
-      {/* Arrow */}
-      <div className="text-white/20 text-3xl my-2">⬇️</div>
+      {/* Indicator */}
+      <div className="text-white/30 text-2xl my-1">⬇️</div>
 
       {/* Holes (bottom area) */}
-      <div className="relative z-10 flex flex-wrap justify-center gap-4 px-4 py-6">
+      <div className="relative z-10 flex flex-wrap justify-center gap-4 px-4 py-4">
         {holeOrder.map((type) => {
           const shapeDef = shapes.find((s) => s.type === type)!;
-          const isPlaced = shapeDef.placed;
+          const isPlaced = shapeDef?.placed;
 
           return (
             <motion.div
@@ -276,38 +273,34 @@ export default function ShapeSorterGame() {
               ref={(el) => {
                 if (el) holeRefs.current.set(type, el);
               }}
-              className={`w-24 h-24 rounded-2xl border-2 flex items-center justify-center transition-all duration-300 ${
+              className={`w-24 h-24 rounded-2xl border-2 flex items-center justify-center transition-all duration-200 shadow-md ${
                 lastCorrect === type
-                  ? "bg-emerald-500/20 border-emerald-400/50"
+                  ? "bg-emerald-500/30 border-emerald-400/70"
                   : lastWrong === type
-                    ? "bg-red-500/20 border-red-400/50"
+                    ? "bg-red-500/30 border-red-400/70"
                     : isPlaced
-                      ? "bg-white/10 border-white/20"
-                      : "bg-white/5 border-dashed border-white/20"
+                      ? "bg-white/15 border-white/30"
+                      : "bg-white/5 border-dashed border-white/30"
               }`}
               animate={
                 lastCorrect === type
-                  ? { scale: [1, 1.1, 1] }
+                  ? { scale: [1, 1.15, 1] }
                   : lastWrong === type
                     ? { x: [0, -5, 5, -3, 3, 0] }
                     : {}
               }
+              aria-label={`Target hole for ${type}`}
             >
               {isPlaced ? (
                 <motion.div
                   initial={{ scale: 0, rotate: -180 }}
                   animate={{ scale: 1, rotate: 0 }}
-                  transition={{ type: "spring", damping: 10 }}
+                  transition={{ type: "spring", damping: 12 }}
                 >
                   <ShapeSVG type={type} color={shapeDef.color} size={56} />
                 </motion.div>
               ) : (
-                <ShapeSVG
-                  type={type}
-                  color={shapeDef.color}
-                  size={56}
-                  outline
-                />
+                <ShapeSVG type={type} color={shapeDef?.color || "#ffffff"} size={56} outline />
               )}
             </motion.div>
           );
@@ -323,7 +316,7 @@ export default function ShapeSorterGame() {
             top: dragPos.y - 40,
           }}
         >
-          <div className="w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-sm border-2 border-white/40 flex items-center justify-center shadow-2xl">
+          <div className="w-20 h-20 rounded-2xl bg-white/30 backdrop-blur-md border-2 border-white/50 flex items-center justify-center shadow-2xl">
             <ShapeSVG
               type={shapes.find((s) => s.id === dragging)!.type}
               color={shapes.find((s) => s.id === dragging)!.color}
@@ -333,37 +326,17 @@ export default function ShapeSorterGame() {
         </div>
       )}
 
-      {/* Win overlay */}
-      <AnimatePresence>
-        {won && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-40"
-          >
-            <motion.div
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring", damping: 15 }}
-              className="bg-gradient-to-br from-orange-900/95 to-amber-900/95 border border-orange-400/30 rounded-3xl p-8 text-center max-w-sm mx-4"
-            >
-              <div className="text-6xl mb-3">🎉</div>
-              <h3 className="text-3xl font-black text-white mb-2">
-                Well Done, Elon!
-              </h3>
-              <p className="text-orange-200/60 mb-6">
-                All shapes sorted perfectly!
-              </p>
-              <button
-                onClick={nextLevel}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold hover:from-emerald-400 hover:to-cyan-400 transition-all"
-              >
-                Next Level ⭐
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Completion Modal */}
+      <ElonGameCompletion
+        isOpen={won}
+        gameTitle="Shape Sorter"
+        stars={level >= 3 ? 3 : 2}
+        score={score}
+        bestScore={bestRecord?.bestScore}
+        message="All shapes sorted accurately! Great motor skills!"
+        onPlayAgain={nextLevel}
+        onExit={onExit || (() => {})}
+      />
     </div>
   );
 }

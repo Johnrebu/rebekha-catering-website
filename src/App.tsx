@@ -48,8 +48,8 @@ const App = () => {
           <TooltipProvider>
             <Toaster />
             <Sonner />
-            <ChatBot />
             <BrowserRouter>
+              <ChatBot />
               <Analytics />
               <Suspense fallback={<PageLoader />}>
                 <Routes>

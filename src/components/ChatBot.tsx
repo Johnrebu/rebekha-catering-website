@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { Loader2, MessageCircle, Send, X } from "lucide-react";
 
 interface Message {
@@ -475,7 +476,14 @@ const generateResponse = (userInput: string, context: ChatContext): { message: s
 };
 
 const ChatBot: React.FC = () => {
+  const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+
+  // Robust route guard: do not render chatbot on Elon Games page to prevent overlapping controls/gameplay
+  const isElonGames =
+    location.pathname.toLowerCase() === "/elon-games" ||
+    location.pathname.toLowerCase().startsWith("/elon-games/") ||
+    location.pathname.toLowerCase().startsWith("/elon-games");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -529,6 +537,10 @@ const ChatBot: React.FC = () => {
     if (isLoading) return;
     pushUserMessage(prompt);
   };
+
+  if (isElonGames) {
+    return null;
+  }
 
   return (
     <>

@@ -1,24 +1,44 @@
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef } from "react";
 import { motion } from "framer-motion";
+import { useElonGameAudio } from "./elon-games/ElonGameAudioContext";
+import { useElonGameProgress } from "./elon-games/useElonGameProgress";
+import { ElonGameCompletion } from "./elon-games/ElonGameCompletion";
 
-/* ─── sound generation via Web Audio API ─── */
+interface Pad {
+  id: string;
+  label: string;
+  emoji: string;
+  color: string;
+  action: (audioCtx: AudioContext | null) => void;
+}
+
+interface MusicMakerGameProps {
+  onExit?: () => void;
+}
+
 const audioCtxRef: { current: AudioContext | null } = { current: null };
 
-function getAudioCtx(): AudioContext {
+function getAudioCtx(): AudioContext | null {
+  if (typeof window === "undefined") return null;
   if (!audioCtxRef.current) {
-    audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
+    const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
+    if (AudioCtx) audioCtxRef.current = new AudioCtx();
+  }
+  if (audioCtxRef.current && audioCtxRef.current.state === "suspended") {
+    audioCtxRef.current.resume().catch(() => {});
   }
   return audioCtxRef.current;
 }
 
 function playTone(freq: number, duration = 0.3, type: OscillatorType = "sine") {
   const ctx = getAudioCtx();
+  if (!ctx) return;
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
 
   osc.type = type;
   osc.frequency.setValueAtTime(freq, ctx.currentTime);
-  gain.gain.setValueAtTime(0.3, ctx.currentTime);
+  gain.gain.setValueAtTime(0.35, ctx.currentTime);
   gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
 
   osc.connect(gain);
@@ -29,6 +49,7 @@ function playTone(freq: number, duration = 0.3, type: OscillatorType = "sine") {
 
 function playDrum(type: "kick" | "snare" | "hihat") {
   const ctx = getAudioCtx();
+  if (!ctx) return;
   const osc = ctx.createOscillator();
   const gain = ctx.createGain();
   const noise = ctx.createBufferSource();
@@ -58,15 +79,6 @@ function playDrum(type: "kick" | "snare" | "hihat") {
     noiseGain.connect(ctx.destination);
     noise.start();
   }
-}
-
-/* ─── pad definitions ─── */
-interface Pad {
-  id: string;
-  label: string;
-  emoji: string;
-  color: string;
-  action: () => void;
 }
 
 const NOTES: Pad[] = [
@@ -108,22 +120,37 @@ const CATEGORIES = [
   { id: "drums", label: "🥁 Drums", pads: DRUMS },
 ];
 
-/* ─── main ─── */
-export default function MusicMakerGame() {
+export default function MusicMakerGame({ onExit }: MusicMakerGameProps) {
+  const { soundEnabled } = useElonGameAudio();
+  const { saveResult, getRecord } = useElonGameProgress();
+
   const [category, setCategory] = useState("notes");
   const [activePad, setActivePad] = useState<string | null>(null);
   const [recording, setRecording] = useState(false);
   const [recorded, setRecorded] = useState<{ id: string; time: number }[]>([]);
   const [playing, setPlaying] = useState(false);
-  const startTimeRef = useRef(0);
+  const [tapCount, setTapCount] = useState(0);
+  const [showCompletion, setShowCompletion] = useState(false);
 
+  const startTimeRef = useRef(0);
+  const bestRecord = getRecord("music-maker");
   const currentPads = CATEGORIES.find((c) => c.id === category)?.pads ?? NOTES;
 
   const handlePadPress = useCallback(
     (pad: Pad) => {
-      pad.action();
+      if (soundEnabled) {
+        pad.action(getAudioCtx());
+      }
       setActivePad(pad.id);
       setTimeout(() => setActivePad(null), 200);
+
+      setTapCount((c) => {
+        const next = c + 1;
+        if (next === 20) {
+          saveResult("music-maker", 3, 200);
+        }
+        return next;
+      });
 
       if (recording) {
         setRecorded((prev) => [
@@ -132,7 +159,7 @@ export default function MusicMakerGame() {
         ]);
       }
     },
-    [recording]
+    [recording, soundEnabled, saveResult]
   );
 
   const startRecording = useCallback(() => {
@@ -143,7 +170,10 @@ export default function MusicMakerGame() {
 
   const stopRecording = useCallback(() => {
     setRecording(false);
-  }, []);
+    if (recorded.length > 0) {
+      saveResult("music-maker", 3, recorded.length * 10);
+    }
+  }, [recorded.length, saveResult]);
 
   const playRecording = useCallback(() => {
     if (recorded.length === 0 || playing) return;
@@ -152,8 +182,8 @@ export default function MusicMakerGame() {
     recorded.forEach(({ id, time }) => {
       setTimeout(() => {
         const pad = currentPads.find((p) => p.id === id);
-        if (pad) {
-          pad.action();
+        if (pad && soundEnabled) {
+          pad.action(getAudioCtx());
           setActivePad(id);
           setTimeout(() => setActivePad(null), 200);
         }
@@ -162,17 +192,17 @@ export default function MusicMakerGame() {
 
     const lastTime = recorded[recorded.length - 1]?.time ?? 0;
     setTimeout(() => setPlaying(false), lastTime + 500);
-  }, [recorded, currentPads, playing]);
+  }, [recorded, currentPads, playing, soundEnabled]);
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-fuchsia-950 via-purple-950 to-violet-950 flex flex-col items-center overflow-auto">
+    <div className="fixed inset-0 bg-gradient-to-br from-fuchsia-950 via-purple-950 to-violet-950 flex flex-col items-center overflow-auto select-none pt-12">
       {/* Header */}
-      <div className="w-full max-w-lg px-4 pt-6 z-10">
+      <div className="w-full max-w-lg px-4 pt-4 z-10">
         <h2 className="text-3xl font-black text-white text-center mb-1">
           🥁 Music Maker
         </h2>
-        <p className="text-purple-300/60 text-sm text-center mb-4">
-          Tap the pads to make music!
+        <p className="text-purple-300/70 text-sm text-center mb-4">
+          Tap the colorful pads to create your own music!
         </p>
 
         {/* Category tabs */}
@@ -181,10 +211,10 @@ export default function MusicMakerGame() {
             <button
               key={cat.id}
               onClick={() => setCategory(cat.id)}
-              className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
+              className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all focus:outline-none focus:ring-2 focus:ring-purple-400 ${
                 category === cat.id
-                  ? "bg-white/20 text-white border border-white/30"
-                  : "bg-white/5 text-white/50 border border-transparent hover:bg-white/10"
+                  ? "bg-white/25 text-white border border-white/40 shadow-lg"
+                  : "bg-white/5 text-white/60 border border-transparent hover:bg-white/10"
               }`}
             >
               {cat.label}
@@ -194,35 +224,23 @@ export default function MusicMakerGame() {
       </div>
 
       {/* Pads grid */}
-      <div className="flex-1 flex items-center justify-center px-4 z-10">
-        <div className="grid grid-cols-4 gap-3 max-w-md w-full">
+      <div className="flex-1 flex items-center justify-center px-4 z-10 w-full max-w-lg">
+        <div className="grid grid-cols-4 gap-3 w-full">
           {currentPads.map((pad) => (
             <motion.button
               key={pad.id}
               onClick={() => handlePadPress(pad)}
-              className="aspect-square rounded-2xl flex flex-col items-center justify-center gap-1 border-2 transition-all active:scale-95"
+              className="aspect-square rounded-2xl flex flex-col items-center justify-center gap-1 border-2 transition-all active:scale-95 shadow-md focus:outline-none focus:ring-2 focus:ring-purple-400"
               style={{
-                backgroundColor:
-                  activePad === pad.id ? pad.color + "40" : pad.color + "15",
-                borderColor:
-                  activePad === pad.id ? pad.color : pad.color + "30",
-                boxShadow:
-                  activePad === pad.id
-                    ? `0 0 25px ${pad.color}40`
-                    : "none",
+                backgroundColor: activePad === pad.id ? pad.color + "50" : pad.color + "20",
+                borderColor: activePad === pad.id ? pad.color : pad.color + "40",
+                boxShadow: activePad === pad.id ? `0 0 25px ${pad.color}60` : "none",
               }}
-              animate={
-                activePad === pad.id
-                  ? { scale: [1, 0.92, 1] }
-                  : {}
-              }
-              transition={{ duration: 0.15 }}
+              animate={activePad === pad.id ? { scale: [1, 0.9, 1] } : {}}
+              aria-label={`Play ${pad.label}`}
             >
-              <span className="text-3xl">{pad.emoji}</span>
-              <span
-                className="text-xs font-bold"
-                style={{ color: pad.color }}
-              >
+              <span className="text-3xl sm:text-4xl">{pad.emoji}</span>
+              <span className="text-[11px] font-black" style={{ color: pad.color }}>
                 {pad.label}
               </span>
             </motion.button>
@@ -236,18 +254,18 @@ export default function MusicMakerGame() {
           {!recording ? (
             <button
               onClick={startRecording}
-              className="px-6 py-3 rounded-xl bg-red-500/20 border border-red-400/30 text-red-300 font-medium text-sm hover:bg-red-500/30 transition-all flex items-center gap-2"
+              className="px-6 py-3 rounded-2xl bg-red-500/20 border border-red-400/40 text-red-300 font-bold text-sm hover:bg-red-500/30 transition-all flex items-center gap-2 shadow-lg active:scale-95"
             >
               <span className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
-              Record
+              Record Song
             </button>
           ) : (
             <button
               onClick={stopRecording}
-              className="px-6 py-3 rounded-xl bg-red-500/30 border border-red-400/50 text-red-200 font-medium text-sm hover:bg-red-500/40 transition-all flex items-center gap-2"
+              className="px-6 py-3 rounded-2xl bg-red-500/40 border border-red-400/70 text-red-100 font-bold text-sm hover:bg-red-500/50 transition-all flex items-center gap-2 shadow-lg active:scale-95"
             >
               <span className="w-3 h-3 rounded-sm bg-red-400" />
-              Stop
+              Stop Recording
             </button>
           )}
 
@@ -255,10 +273,10 @@ export default function MusicMakerGame() {
             <button
               onClick={playRecording}
               disabled={playing}
-              className={`px-6 py-3 rounded-xl border font-medium text-sm transition-all flex items-center gap-2 ${
+              className={`px-6 py-3 rounded-2xl border font-bold text-sm transition-all flex items-center gap-2 shadow-lg active:scale-95 ${
                 playing
-                  ? "bg-emerald-500/20 border-emerald-400/30 text-emerald-300"
-                  : "bg-white/10 border-white/20 text-white/70 hover:bg-white/15"
+                  ? "bg-emerald-500/30 border-emerald-400/50 text-emerald-300"
+                  : "bg-white/10 border-white/20 text-white/90 hover:bg-white/15"
               }`}
             >
               {playing ? "🎶 Playing..." : "▶️ Play Back"}
@@ -268,19 +286,45 @@ export default function MusicMakerGame() {
           {recorded.length > 0 && !recording && (
             <button
               onClick={() => setRecorded([])}
-              className="px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white/40 text-sm hover:bg-white/10 transition-all"
+              className="px-4 py-3 rounded-2xl bg-white/5 border border-white/15 text-white/50 text-sm hover:bg-white/10 transition-all active:scale-95"
+              title="Clear Recording"
+              aria-label="Clear recorded song"
             >
               🗑️
+            </button>
+          )}
+
+          {tapCount >= 10 && (
+            <button
+              onClick={() => {
+                saveResult("music-maker", 3, tapCount * 10);
+                setShowCompletion(true);
+              }}
+              className="px-4 py-3 rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold text-sm shadow-xl active:scale-95"
+            >
+              Finish ⭐
             </button>
           )}
         </div>
 
         {recording && (
-          <p className="text-center text-red-400/60 text-xs mt-2 animate-pulse">
-            🔴 Recording... tap pads to create your song!
+          <p className="text-center text-red-400/80 text-xs mt-2 font-medium animate-pulse">
+            🔴 Recording... tap pads to compose your song!
           </p>
         )}
       </div>
+
+      {/* Completion Modal */}
+      <ElonGameCompletion
+        isOpen={showCompletion}
+        gameTitle="Music Maker"
+        stars={3}
+        score={tapCount * 10}
+        bestScore={bestRecord?.bestScore}
+        message="You composed great music! Creative musical genius!"
+        onPlayAgain={() => setShowCompletion(false)}
+        onExit={onExit || (() => {})}
+      />
     </div>
   );
 }

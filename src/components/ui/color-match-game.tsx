@@ -1,11 +1,17 @@
 import { useState, useCallback, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
+import { useElonGameAudio } from "./elon-games/ElonGameAudioContext";
+import { useElonGameProgress } from "./elon-games/useElonGameProgress";
+import { ElonGameCompletion } from "./elon-games/ElonGameCompletion";
 
-/* ─── data ─── */
 interface ColorItem {
   emoji: string;
   color: string;
   name: string;
+}
+
+interface ColorMatchGameProps {
+  onExit?: () => void;
 }
 
 const COLOR_MAP: Record<string, { items: ColorItem[]; bg: string; text: string }> = {
@@ -115,8 +121,10 @@ function buildRound(
   return { items, target };
 }
 
-/* ─── main ─── */
-export default function ColorMatchGame() {
+export default function ColorMatchGame({ onExit }: ColorMatchGameProps) {
+  const { playSound, speakWord } = useElonGameAudio();
+  const { saveResult, getRecord } = useElonGameProgress();
+
   const [level, setLevel] = useState(1);
   const [round, setRound] = useState(() => {
     const color = ALL_COLORS[Math.floor(Math.random() * ALL_COLORS.length)];
@@ -129,20 +137,25 @@ export default function ColorMatchGame() {
   const [roundComplete, setRoundComplete] = useState(false);
   const [timeLeft, setTimeLeft] = useState(20);
 
-  const correctCount = round.items.filter(
-    (it) => it.color === round.target
-  ).length;
+  const bestRecord = getRecord("color-match");
+  const correctCount = round.items.filter((it) => it.color === round.target).length;
+
+  useEffect(() => {
+    speakWord(`Find all ${round.target} things`);
+  }, [round.target, speakWord]);
 
   // Timer
   useEffect(() => {
     if (roundComplete) return;
     if (timeLeft <= 0) {
       setRoundComplete(true);
+      const stars = score >= 100 ? 3 : score >= 50 ? 2 : 1;
+      saveResult("color-match", stars, score);
       return;
     }
     const t = setTimeout(() => setTimeLeft((t) => t - 1), 1000);
     return () => clearTimeout(t);
-  }, [timeLeft, roundComplete]);
+  }, [timeLeft, roundComplete, score, saveResult]);
 
   const handleTap = useCallback(
     (index: number) => {
@@ -151,22 +164,27 @@ export default function ColorMatchGame() {
 
       const item = round.items[index];
       if (item.color === round.target) {
+        playSound("correct");
         const newFound = new Set(found);
         newFound.add(index);
         setFound(newFound);
-        setScore((s) => s + 10 + streak * 5);
+        const newScore = score + 10 + streak * 5;
+        setScore(newScore);
         setStreak((s) => s + 1);
 
         if (newFound.size === correctCount) {
           setRoundComplete(true);
+          const stars = level >= 4 ? 3 : level >= 2 ? 2 : 1;
+          saveResult("color-match", stars, newScore);
         }
       } else {
+        playSound("wrong");
         setWrong(index);
         setStreak(0);
         setTimeout(() => setWrong(null), 500);
       }
     },
-    [round, found, correctCount, roundComplete, streak]
+    [round, found, correctCount, roundComplete, streak, playSound, score, level, saveResult]
   );
 
   const nextRound = useCallback(() => {
@@ -185,51 +203,47 @@ export default function ColorMatchGame() {
   const allFound = found.size === correctCount;
 
   return (
-    <div className="fixed inset-0 bg-gradient-to-br from-slate-950 via-zinc-950 to-neutral-950 flex flex-col items-center overflow-auto">
+    <div className="fixed inset-0 bg-gradient-to-br from-slate-950 via-zinc-950 to-neutral-950 flex flex-col items-center overflow-auto select-none pt-12">
       {/* Header */}
-      <div className="w-full max-w-lg px-4 pt-6 pb-2 z-10">
+      <div className="w-full max-w-lg px-4 pt-4 pb-2 z-10">
         <div className="text-center mb-3">
           <h2 className="text-3xl font-black text-white mb-1">🎨 Color Match</h2>
           <div
-            className={`inline-block px-5 py-2 rounded-xl bg-gradient-to-r ${targetData.bg} border border-white/10 mt-2`}
+            className={`inline-block px-5 py-2 rounded-2xl bg-gradient-to-r ${targetData.bg} border border-white/20 mt-2 shadow-lg`}
           >
-            <span className="text-white/60 text-sm">Find all </span>
-            <span
-              className="text-2xl font-black"
-              style={{ color: targetData.text }}
-            >
+            <span className="text-white/80 text-sm font-medium">Find all </span>
+            <span className="text-2xl font-black" style={{ color: targetData.text }}>
               {round.target}
             </span>
-            <span className="text-white/60 text-sm"> things!</span>
+            <span className="text-white/80 text-sm font-medium"> things!</span>
           </div>
         </div>
 
         {/* Stats bar */}
         <div className="flex justify-between items-center gap-3 mb-2">
-          <div className="px-3 py-1.5 rounded-lg bg-white/10 text-white/70 text-sm">
+          <div className="px-3.5 py-1.5 rounded-xl bg-white/10 text-white font-bold text-sm">
             ⭐ {score}
           </div>
           <div className="flex-1">
-            <div className="h-2 rounded-full bg-white/10 overflow-hidden">
+            <div className="h-2.5 rounded-full bg-white/10 overflow-hidden">
               <motion.div
                 className="h-full rounded-full"
                 style={{
-                  backgroundColor:
-                    timeLeft > 5 ? "#22c55e" : "#ef4444",
+                  backgroundColor: timeLeft > 5 ? "#22c55e" : "#ef4444",
                 }}
                 animate={{ width: `${(timeLeft / 20) * 100}%` }}
                 transition={{ duration: 0.3 }}
               />
             </div>
           </div>
-          <div className="px-3 py-1.5 rounded-lg bg-white/10 text-white/70 text-sm">
+          <div className="px-3.5 py-1.5 rounded-xl bg-white/10 text-white font-bold text-sm">
             🎯 {found.size}/{correctCount}
           </div>
         </div>
       </div>
 
       {/* Grid */}
-      <div className="flex-1 flex items-center justify-center px-4 pb-6">
+      <div className="flex-1 flex items-center justify-center px-4 pb-8 w-full">
         <div className="grid grid-cols-3 sm:grid-cols-4 gap-3 max-w-md w-full">
           {round.items.map((item, i) => {
             const isFound = found.has(i);
@@ -239,12 +253,12 @@ export default function ColorMatchGame() {
               <motion.button
                 key={`${level}-${i}`}
                 onClick={() => handleTap(i)}
-                className={`aspect-square rounded-2xl flex flex-col items-center justify-center text-5xl transition-all duration-200 border-2 ${
+                className={`aspect-square rounded-2xl flex flex-col items-center justify-center text-4xl sm:text-5xl transition-all duration-200 border-2 focus:outline-none focus:ring-2 focus:ring-emerald-400 ${
                   isFound
-                    ? "bg-emerald-500/20 border-emerald-400/50 scale-95"
+                    ? "bg-emerald-500/30 border-emerald-400/60 scale-95 shadow-[0_0_15px_rgba(16,185,129,0.3)]"
                     : isWrong
-                      ? "bg-red-500/20 border-red-400/50"
-                      : "bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 active:scale-95"
+                      ? "bg-red-500/30 border-red-400/60"
+                      : "bg-white/5 border-white/10 hover:bg-white/15 hover:border-white/25 active:scale-95 shadow-md"
                 }`}
                 animate={
                   isWrong
@@ -253,13 +267,14 @@ export default function ColorMatchGame() {
                       ? { scale: [1, 1.15, 1] }
                       : {}
                 }
-                transition={{ duration: 0.4 }}
+                transition={{ duration: 0.35 }}
+                aria-label={`${item.name} (${item.color})`}
               >
                 <span className={isFound ? "animate-bounce" : ""}>
                   {item.emoji}
                 </span>
                 {isFound && (
-                  <span className="text-xs text-emerald-400 mt-1">✓</span>
+                  <span className="text-[10px] text-emerald-400 font-bold mt-0.5">✓</span>
                 )}
               </motion.button>
             );
@@ -267,45 +282,17 @@ export default function ColorMatchGame() {
         </div>
       </div>
 
-      {/* Round complete overlay */}
-      <AnimatePresence>
-        {roundComplete && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-40"
-          >
-            <motion.div
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
-              transition={{ type: "spring", damping: 15 }}
-              className="bg-gradient-to-br from-zinc-900/95 to-slate-900/95 border border-white/10 rounded-3xl p-8 text-center max-w-sm mx-4"
-            >
-              <div className="text-6xl mb-3">
-                {allFound ? "🎉" : "⏰"}
-              </div>
-              <h3 className="text-2xl font-black text-white mb-1">
-                {allFound ? "Amazing, Elon!" : "Time's Up!"}
-              </h3>
-              <p className="text-white/50 mb-4">
-                {allFound
-                  ? `You found all ${correctCount} ${round.target} things!`
-                  : `You found ${found.size} of ${correctCount}`}
-              </p>
-              <p className="text-yellow-400 font-bold text-lg mb-6">
-                Score: {score}
-              </p>
-              <button
-                onClick={nextRound}
-                className="w-full py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold hover:from-emerald-400 hover:to-cyan-400 transition-all"
-              >
-                {allFound ? "Next Round ⭐" : "Try Again 🔄"}
-              </button>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Completion Modal */}
+      <ElonGameCompletion
+        isOpen={roundComplete}
+        gameTitle="Color Match"
+        stars={allFound ? (level >= 3 ? 3 : 2) : 1}
+        score={score}
+        bestScore={bestRecord?.bestScore}
+        message={allFound ? `Found all ${round.target} items in round ${level}!` : "Time's up! Great effort!"}
+        onPlayAgain={nextRound}
+        onExit={onExit || (() => {})}
+      />
     </div>
   );
 }

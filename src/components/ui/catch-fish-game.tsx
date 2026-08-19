@@ -1,6 +1,8 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
+import { useElonGameAudio } from "./elon-games/ElonGameAudioContext";
+import { useElonGameProgress } from "./elon-games/useElonGameProgress";
+import { ElonGameCompletion } from "./elon-games/ElonGameCompletion";
 
-/* ─── types ─── */
 interface Fish {
   x: number;
   y: number;
@@ -28,14 +30,36 @@ interface Splash {
   particles: { x: number; y: number; vx: number; vy: number; r: number; opacity: number }[];
 }
 
-const FISH_EMOJIS = ["🐟", "🐠", "🐡", "🦈", "🐙", "🦐", "🦑", "🐳", "🦞", "🐢"];
-const FISH_SIZES = [32, 36, 40, 28, 44];
+interface CatchFishGameProps {
+  onExit?: () => void;
+}
 
-export default function CatchFishGame() {
+const FISH_EMOJIS = ["🐟", "🐠", "🐡", "🦈", "🐙", "🦐", "🦑", "🐳", "🦞", "🐢"];
+const FISH_SIZES = [34, 38, 42, 30, 46];
+
+export default function CatchFishGame({ onExit }: CatchFishGameProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
+  const { playSound, speakWord } = useElonGameAudio();
+  const { saveResult, getRecord } = useElonGameProgress();
+
   const [score, setScore] = useState(0);
   const [milestone, setMilestone] = useState<string | null>(null);
+  const [showCompletion, setShowCompletion] = useState(false);
   const scoreRef = useRef(0);
+  const bestRecord = getRecord("catch-fish");
+
+  const handleFinish = useCallback(() => {
+    const finalScore = scoreRef.current;
+    const stars = finalScore >= 15 ? 3 : finalScore >= 8 ? 2 : 1;
+    saveResult("catch-fish", stars, finalScore);
+    setShowCompletion(true);
+  }, [saveResult]);
+
+  const resetGame = useCallback(() => {
+    scoreRef.current = 0;
+    setScore(0);
+    setShowCompletion(false);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -57,17 +81,16 @@ export default function CatchFishGame() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
 
-    // Fish
     const fishes: Fish[] = [];
     const bubbles: Bubble[] = [];
     const splashes: Splash[] = [];
 
     const spawnFish = (): Fish => {
       const dir = Math.random() > 0.5 ? 1 : -1;
-      const speed = 0.5 + Math.random() * 1.5 + scoreRef.current * 0.05;
+      const speed = 0.6 + Math.random() * 1.4 + scoreRef.current * 0.04;
       return {
         x: dir === 1 ? -60 : w + 60,
-        y: 80 + Math.random() * (h - 180),
+        y: 90 + Math.random() * (h - 200),
         speed: speed * dir,
         size: FISH_SIZES[Math.floor(Math.random() * FISH_SIZES.length)],
         emoji: FISH_EMOJIS[Math.floor(Math.random() * FISH_EMOJIS.length)],
@@ -79,28 +102,25 @@ export default function CatchFishGame() {
       };
     };
 
-    // Init fish
     for (let i = 0; i < 8; i++) {
       const f = spawnFish();
       f.x = Math.random() * w;
       fishes.push(f);
     }
 
-    // Init bubbles
-    for (let i = 0; i < 15; i++) {
+    for (let i = 0; i < 16; i++) {
       bubbles.push({
         x: Math.random() * w,
         y: Math.random() * h,
-        r: 1 + Math.random() * 3,
-        speed: 0.3 + Math.random() * 0.5,
-        opacity: 0.1 + Math.random() * 0.2,
+        r: 1.5 + Math.random() * 3,
+        speed: 0.4 + Math.random() * 0.5,
+        opacity: 0.15 + Math.random() * 0.25,
       });
     }
 
-    // Seaweed positions
     const seaweeds = Array.from({ length: 8 }, () => ({
       x: Math.random() * w,
-      height: 60 + Math.random() * 80,
+      height: 70 + Math.random() * 90,
       phase: Math.random() * Math.PI * 2,
     }));
 
@@ -108,45 +128,48 @@ export default function CatchFishGame() {
     let frame = 0;
 
     const createSplash = (x: number, y: number) => {
-      const particles = Array.from({ length: 10 }, () => ({
-        x, y,
-        vx: (Math.random() - 0.5) * 6,
-        vy: (Math.random() - 0.5) * 6,
-        r: 2 + Math.random() * 3,
+      const particles = Array.from({ length: 12 }, () => ({
+        x,
+        y,
+        vx: (Math.random() - 0.5) * 7,
+        vy: (Math.random() - 0.5) * 7,
+        r: 2 + Math.random() * 3.5,
         opacity: 1,
       }));
       splashes.push({ x, y, particles });
     };
 
-    const handleClick = (e: MouseEvent | TouchEvent) => {
-      let cx: number, cy: number;
-      if ("touches" in e) {
-        cx = e.touches[0]?.clientX ?? (e as TouchEvent).changedTouches[0]?.clientX ?? 0;
-        cy = e.touches[0]?.clientY ?? (e as TouchEvent).changedTouches[0]?.clientY ?? 0;
-      } else {
-        cx = e.clientX;
-        cy = e.clientY;
-      }
+    const onPointerDown = (e: PointerEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      const cx = e.clientX - rect.left;
+      const cy = e.clientY - rect.top;
 
       for (const f of fishes) {
         if (f.caught) continue;
         const dx = f.x - cx;
         const dy = f.y - cy;
-        if (Math.sqrt(dx * dx + dy * dy) < f.size + 15) {
+        if (Math.sqrt(dx * dx + dy * dy) < f.size + 18) {
           f.caught = true;
           f.catchTimer = 30;
+          playSound("splash");
           createSplash(f.x, f.y);
-          scoreRef.current += 1;
-          setScore(scoreRef.current);
 
-          // Milestones
-          if (scoreRef.current === 5) {
+          scoreRef.current += 1;
+          const nextScore = scoreRef.current;
+          setScore(nextScore);
+
+          if (nextScore === 5) {
+            playSound("correct");
+            speakWord("Dolphin appears!");
             setMilestone("🐬 Dolphin appears!");
             setTimeout(() => setMilestone(null), 2000);
-          } else if (scoreRef.current === 10) {
+          } else if (nextScore === 10) {
+            playSound("celebration");
+            speakWord("Whale spotted!");
             setMilestone("🐋 Whale spotted!");
             setTimeout(() => setMilestone(null), 2000);
-          } else if (scoreRef.current % 15 === 0) {
+          } else if (nextScore % 15 === 0) {
+            playSound("star");
             setMilestone("🌟 Amazing catch!");
             setTimeout(() => setMilestone(null), 2000);
           }
@@ -177,7 +200,7 @@ export default function CatchFishGame() {
         ctx.lineTo(rx - 40, h);
         ctx.lineTo(rx + 40, h);
         ctx.closePath();
-        ctx.fillStyle = `rgba(255,255,255,${0.01 + Math.sin(frame * 0.005 + i) * 0.005})`;
+        ctx.fillStyle = `rgba(255,255,255,${0.015 + Math.sin(frame * 0.005 + i) * 0.006})`;
         ctx.fill();
       }
       ctx.restore();
@@ -187,14 +210,9 @@ export default function CatchFishGame() {
         ctx.save();
         ctx.beginPath();
         ctx.moveTo(sw.x, h);
-        const sway = Math.sin(frame * 0.02 + sw.phase) * 10;
-        ctx.quadraticCurveTo(
-          sw.x + sway,
-          h - sw.height / 2,
-          sw.x + sway * 1.5,
-          h - sw.height
-        );
-        ctx.strokeStyle = "rgba(34,197,94,0.3)";
+        const sway = Math.sin(frame * 0.02 + sw.phase) * 12;
+        ctx.quadraticCurveTo(sw.x + sway, h - sw.height / 2, sw.x + sway * 1.5, h - sw.height);
+        ctx.strokeStyle = "rgba(34,197,94,0.35)";
         ctx.lineWidth = 4;
         ctx.lineCap = "round";
         ctx.stroke();
@@ -204,7 +222,7 @@ export default function CatchFishGame() {
       // Bubbles
       for (const b of bubbles) {
         b.y -= b.speed;
-        b.x += Math.sin(frame * 0.02 + b.y * 0.01) * 0.3;
+        b.x += Math.sin(frame * 0.02 + b.y * 0.01) * 0.35;
         if (b.y < -10) {
           b.y = h + 10;
           b.x = Math.random() * w;
@@ -221,7 +239,7 @@ export default function CatchFishGame() {
 
         if (f.caught) {
           f.catchTimer--;
-          f.y -= 2;
+          f.y -= 2.5;
           ctx.save();
           ctx.globalAlpha = f.catchTimer / 30;
           ctx.font = `${f.size}px serif`;
@@ -238,9 +256,8 @@ export default function CatchFishGame() {
 
         f.x += f.speed;
         f.wobble += f.wobbleSpeed;
-        f.y += Math.sin(f.wobble) * 0.5;
+        f.y += Math.sin(f.wobble) * 0.6;
 
-        // Off screen? Reset
         if (f.direction === 1 && f.x > w + 80) {
           fishes[i] = spawnFish();
           continue;
@@ -280,50 +297,70 @@ export default function CatchFishGame() {
         if (!alive) splashes.splice(i, 1);
       }
 
-      // Spawn more fish as needed
-      const activeFish = fishes.filter((f) => !f.caught).length;
-      if (activeFish < 6 + Math.floor(scoreRef.current / 5)) {
-        fishes.push(spawnFish());
-      }
-
       animId = requestAnimationFrame(animate);
     };
 
     resize();
     window.addEventListener("resize", resize);
-    canvas.addEventListener("click", handleClick);
-    canvas.addEventListener("touchstart", handleClick, { passive: true });
+    canvas.addEventListener("pointerdown", onPointerDown);
 
     animate();
 
     return () => {
       cancelAnimationFrame(animId);
       window.removeEventListener("resize", resize);
-      canvas.removeEventListener("click", handleClick);
-      canvas.removeEventListener("touchstart", handleClick);
+      canvas.removeEventListener("pointerdown", onPointerDown);
     };
-  }, []);
+  }, [playSound, speakWord]);
 
   return (
-    <div className="fixed inset-0 overflow-hidden">
-      <canvas ref={canvasRef} className="block w-full h-full" />
+    <div className="fixed inset-0 overflow-hidden select-none touch-none pt-12">
+      <canvas
+        ref={canvasRef}
+        className="block w-full h-full touch-none"
+        style={{ touchAction: "none" }}
+      />
 
       {/* HUD */}
-      <div className="fixed top-4 left-1/2 -translate-x-1/2 z-10 px-5 py-2 rounded-xl bg-white/10 backdrop-blur-md border border-white/20">
-        <span className="text-white font-black text-xl">🐟 {score}</span>
+      <div className="fixed top-14 left-1/2 -translate-x-1/2 z-10 flex items-center gap-3">
+        <div className="px-5 py-2 rounded-2xl bg-black/60 backdrop-blur-md border border-white/20 shadow-xl flex items-center gap-2">
+          <span className="text-white font-black text-xl">🐟 {score}</span>
+          <span className="text-white/60 text-xs">Caught</span>
+        </div>
+
+        {score >= 8 && (
+          <button
+            onClick={handleFinish}
+            className="px-4 py-2 rounded-2xl bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold text-sm shadow-xl hover:scale-105 active:scale-95 transition-all"
+          >
+            Finish ⭐
+          </button>
+        )}
       </div>
 
       {/* Milestone */}
       {milestone && (
-        <div className="fixed top-1/3 left-1/2 -translate-x-1/2 z-20 px-6 py-3 rounded-2xl bg-cyan-500/20 backdrop-blur-md border border-cyan-400/30 text-cyan-200 text-xl font-bold animate-bounce">
+        <div className="fixed top-1/3 left-1/2 -translate-x-1/2 z-20 px-6 py-3 rounded-2xl bg-cyan-500/30 backdrop-blur-md border border-cyan-400/50 text-cyan-200 text-xl font-bold animate-bounce shadow-2xl">
           {milestone}
         </div>
       )}
 
       {/* Instructions */}
-      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-10 px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/10">
-        <span className="text-white/50 text-xs">Tap the fish to catch them! 🎣</span>
+      <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-10 px-4 py-2 rounded-full bg-black/50 backdrop-blur-md border border-white/10 pointer-events-none">
+        <span className="text-white/70 text-xs">Tap the swimming fish to catch them! 🎣</span>
       </div>
+
+      {/* Completion Modal */}
+      <ElonGameCompletion
+        isOpen={showCompletion}
+        gameTitle="Catch the Fish"
+        stars={score >= 15 ? 3 : 2}
+        score={score}
+        bestScore={bestRecord?.bestScore}
+        message={`Caught ${score} colorful sea creatures! Outstanding hand-eye coordination!`}
+        onPlayAgain={resetGame}
+        onExit={onExit || (() => {})}
+      />
     </div>
   );
 }
