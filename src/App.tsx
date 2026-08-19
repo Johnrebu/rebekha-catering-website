@@ -23,6 +23,7 @@ const FAQ = lazy(() => import("./pages/FAQ"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogPost = lazy(() => import("./pages/BlogPost"));
 const NotFound = lazy(() => import("./pages/NotFound"));
+const ElonGames = lazy(() => import("./pages/ElonGames"));
 
 // Authentication pages
 const Login = lazy(() => import("./pages/Login"));
@@ -78,6 +79,9 @@ const App = () => {
                       </ProtectedRoute>
                     }
                   />
+
+                  {/* Elon Games */}
+                  <Route path="/elon-games" element={<ElonGames />} />
 
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />

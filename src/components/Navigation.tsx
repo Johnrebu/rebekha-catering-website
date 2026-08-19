@@ -26,6 +26,7 @@ const Navigation = () => {
     { path: "/gallery", label: "Gallery" },
     { path: "/testimonials", label: "Testimonials" },
     { path: "/contact", label: "Enquire" },
+    { path: "/elon-games", label: "Elon Games 🎮" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
